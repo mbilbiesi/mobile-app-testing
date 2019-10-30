@@ -9,11 +9,14 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class Homepage {
-    public Homepage(AndroidDriver<MobileElement> driver){
+public class Restaurant {
+    public Restaurant(AndroidDriver<MobileElement> driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/BtnRestaurants")
-    public WebElement btnSearchForRestaurants;
+    @AndroidFindBy(className = "android.view.ViewGroup")
+    public List<WebElement> eleMenuItems;
+
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
+    public WebElement btnAddMenuItem;
 }

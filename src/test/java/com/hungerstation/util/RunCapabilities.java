@@ -25,7 +25,7 @@ public class RunCapabilities {
         String device = (String) properties.get("device");
 
         File app;
-        File appDir = new File("apps");
+        File appDir = new File(System.getProperty("user.dir") +"\\src\\test\\resources\\apps");
         app = new File(appDir, (String) properties.get(appInfo));
 
         DesiredCapabilities capabilities = new DesiredCapabilities();

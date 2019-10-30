@@ -9,11 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class Homepage {
-    public Homepage(AndroidDriver<MobileElement> driver){
+public class Alerts {
+    public Alerts(AndroidDriver<MobileElement> driver){
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/BtnRestaurants")
-    public WebElement btnSearchForRestaurants;
+    @AndroidFindBy(id = "com.android.packageinstaller:id/permission_allow_button")
+    public List<WebElement> btnLocationAlert;
 }
