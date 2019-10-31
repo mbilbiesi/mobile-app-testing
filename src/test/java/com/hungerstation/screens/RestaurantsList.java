@@ -10,10 +10,10 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class RestaurantsList {
-    public RestaurantsList(AndroidDriver<MobileElement> driver){
+    public RestaurantsList(AndroidDriver<MobileElement> driver) {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    @AndroidFindBy(id = "android.view.ViewGroup")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/constrain_parent")
     public List<WebElement> eleRestaurant;
 }

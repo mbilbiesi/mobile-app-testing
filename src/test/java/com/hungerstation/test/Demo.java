@@ -12,6 +12,7 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -22,8 +23,15 @@ import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class Demo extends RunCapabilities {
+
+   /* @BeforeTest
+    public void killAllNodes() throws IOException {//Kill all the nodes, then it starts execution freshly
+        Runtime.getRuntime().exec("taskklill /F /IM node.exe");
+    }*/
+
     @Test
-    public void fullScenario() throws IOException {
+    public void fullScenario() throws IOException, InterruptedException {
+        service = startServer();
         AndroidDriver<MobileElement> driver = capabilities("hsApp");
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
@@ -35,7 +43,7 @@ public class Demo extends RunCapabilities {
 
         WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.alertIsPresent());
-        alerts = new Alerts(driver);
+        //alerts = new Alerts(driver);
         hp = new Homepage(driver);
         locations = new Locations(driver);
         restaurantsList = new RestaurantsList(driver);
@@ -52,7 +60,7 @@ public class Demo extends RunCapabilities {
 
         locations.txtSearch.sendKeys("riyadh");
 
-        touchAction.tap(tapOptions().withElement(element(locations.itemAreas.get(1)))).perform();
+        touchAction.tap(tapOptions().withElement(element(locations.itemAreas.get(2)))).perform();
 
         touchAction.tap(tapOptions().withElement(element(locations.btnSelectAddress))).perform();
 
@@ -68,5 +76,7 @@ public class Demo extends RunCapabilities {
 
         touchAction.tap(tapOptions().withElement(element(restaurant.eleMenuItems.get(1)))).perform();
         touchAction.tap(tapOptions().withElement(element(restaurant.btnAddMenuItem))).perform();
+
+        service.stop();
     }
 }

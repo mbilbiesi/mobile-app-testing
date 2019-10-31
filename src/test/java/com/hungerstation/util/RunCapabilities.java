@@ -2,20 +2,70 @@ package com.hungerstation.util;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class RunCapabilities {
 
-    public static AndroidDriver<MobileElement> capabilities(String appInfo) throws IOException {
+    protected static AppiumDriverLocalService service;
+    private AndroidDriver<AndroidElement> driver;
+
+    //Following method to make Appium server run automatically
+    protected AppiumDriverLocalService startServer(){
+
+        //System.setProperty(AppiumServiceBuilder.NODE_PATH,"c:\\Program Files\\nodejs\\node_modules\\npm\\bin" +
+                //"\\npm-cli.js");
+        //System.setProperty(AppiumServiceBuilder.APPIUM_PATH,":\\Program Files\\nodejs\\node_modules\\npm\\bin\\node_modules\\npm\\bin" +
+                //"\\npm-cli.js")
+
+        boolean isServerRunning;
+
+        isServerRunning = checkIfServerIsRunning(7234);
+
+        if(!isServerRunning){
+            service = AppiumDriverLocalService.buildDefaultService();
+            service.start();
+        }
+
+        return service;
+    }
+
+    //
+    private static boolean checkIfServerIsRunning(int port){
+        boolean isServerRunning = false;
+        ServerSocket serverSocket;
+        try {
+            serverSocket = new ServerSocket(port);
+            serverSocket.close();
+        } catch (IOException e){//If it comes to here, this means that the server is already running
+            isServerRunning = true;
+        }
+
+        return isServerRunning;
+    }
+
+    private static void startEmulator() throws IOException, InterruptedException {
+        Runtime.getRuntime().exec(System.getProperty("user.dir") +
+                "\\src\\test\\resources\\startEmulator.bat");
+        Thread.sleep(6000);
+    }
+
+    protected static AndroidDriver<MobileElement> capabilities(String appInfo) throws IOException, InterruptedException {
+
 
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir") +
                 "\\src\\test\\resources\\global.properties");
@@ -29,6 +79,9 @@ public class RunCapabilities {
         app = new File(appDir, (String) properties.get(appInfo));
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
+        if(device.toLowerCase().contains("emulator")){
+            startEmulator();
+        }
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device);
 
         capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
@@ -42,5 +95,11 @@ public class RunCapabilities {
 
         return androidDriver;
 
+    }
+
+    void getScreenshot(String testName) throws IOException {
+        File scrfile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrfile,new File(System.getProperty("user.dir")+
+                "\\src\\test\\resources\\screenshots\\"+testName+".png"));
     }
 }

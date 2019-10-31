@@ -14,7 +14,7 @@ public class Restaurant {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    @AndroidFindBy(className = "android.view.ViewGroup")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
     public List<WebElement> eleMenuItems;
 
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")

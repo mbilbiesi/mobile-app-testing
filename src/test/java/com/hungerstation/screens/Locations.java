@@ -20,7 +20,7 @@ public class Locations {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_edit_text")
     public WebElement txtSearch;
 
-    @AndroidFindBy(className = "android.widget.RelativeLayout")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_prediction_primary_text")
     public List<WebElement> itemAreas;
 
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/BtnAddAddress")
