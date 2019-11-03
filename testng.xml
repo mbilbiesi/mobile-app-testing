@@ -3,6 +3,7 @@
 <suite name="All Test Suite">
     <listeners>
         <listener class-name="com.hungerstation.util.Listeners"/>
+        <listener class-name="com.hungerstation.util.ExtentReporterNG"/>
     </listeners>
     <test name="Demo Test">
         <classes>
