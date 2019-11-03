@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a0723003-73a8-4eef-8962-d00426cbfbbc" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\Discovery1\Desktop\mobile-apps-testing\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1SmwiZ8Hbi6tvNVV6WHP3C5XY1t" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/app/android" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Discovery1\Desktop\mobile-apps-testing\src\main\resources\app\android" />
+      <recent name="C:\Users\Discovery1\Desktop\mobile-apps-testing\src\test\java\com\hungerstation\util" />
+      <recent name="C:\Users\Discovery1\Desktop\mobile-apps-testing\src\test\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.hungerstation.screens" />
+      <recent name="com.hungerstation.test" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Discovery1\Desktop\mobile-apps-testing\src\test\resources\apps" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvnDebug clean compile test" />
+      <command value="mvn clean compile test" />
+      <command value="mvn test -DdeviceName=Abdulla_Pixel_3_Emulator" />
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="TestNG.C:/Users/Discovery1/Desktop/mobile-apps-testing/testng.xml">
+    <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.hungerstation.test.Demo" />
+      <module name="mobile-apps-testing" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hungerstation.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="C:/Users/Discovery1/Desktop/mobile-apps-testing/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="mobile-apps-testing" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Demo" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="mobile-apps-testing" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hungerstation.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hungerstation.test" />
+      <option name="MAIN_CLASS_NAME" value="com.hungerstation.test.Demo" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="TestNG.C:/Users/Discovery1/Desktop/mobile-apps-testing/testng.xml" />
+        <item itemvalue="TestNG.Demo" />
+        <item itemvalue="Application.Demo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a0723003-73a8-4eef-8962-d00426cbfbbc" name="Default Changelist" comment="" />
+      <created>1572182206703</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572182206703</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Making Appium Server, and the emulator start programatically throughout the code&#10;Defining the ability to take screenshots (Not ready yet)&#10;Note: Demo isn't finalized yet, it still needs more work to do.">
+      <created>1572531561764</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1572531561764</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Integration with extent reports">
+      <created>1572779562628</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1572779562628</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Finalizing demo steps until clicking the 'Add to Cart' button">
+      <created>1572784768410</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1572784768410</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Making Appium Server, and the emulator start programatically throughout the code&#10;Defining the ability to take screenshots (Not ready yet)&#10;Note: Demo isn't finalized yet, it still needs more work to do." />
+    <MESSAGE value="Integration with extent reports" />
+    <MESSAGE value="Finalizing demo steps until clicking the 'Add to Cart' button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalizing demo steps until clicking the 'Add to Cart' button" />
+  </component>
+</project>
