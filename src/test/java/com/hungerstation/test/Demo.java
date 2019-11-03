@@ -74,8 +74,7 @@ public class Demo extends RunCapabilities {
 
         touchAction.tap(tapOptions().withElement(element(restaurant.btnAddMenuItem))).perform();
 
-        touchAction.tap(tapOptions().withElement(element(restaurant.eleMenuItems.get(1)))).perform();
-        touchAction.tap(tapOptions().withElement(element(restaurant.btnAddMenuItem))).perform();
+        touchAction.tap(tapOptions().withElement(element(restaurant.btnCart))).perform();
 
         service.stop();
     }

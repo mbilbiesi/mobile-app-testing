@@ -19,4 +19,7 @@ public class Restaurant {
 
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
     public WebElement btnAddMenuItem;
+
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
+    public WebElement btnCart;
 }
