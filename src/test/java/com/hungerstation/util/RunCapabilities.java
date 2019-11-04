@@ -25,7 +25,7 @@ public class RunCapabilities {
     private AndroidDriver<AndroidElement> driver;
 
     //Following method to make Appium server run automatically
-    protected AppiumDriverLocalService startServer(){
+    protected static AppiumDriverLocalService startServer(){
 
         boolean isServerRunning;
 
