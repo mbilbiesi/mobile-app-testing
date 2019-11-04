@@ -9,4 +9,5 @@ com\hungerstation\test\HungerstationBasics.class
 com\hungerstation\test\Demo.class
 com\hungerstation\util\Listeners.class
 com\hungerstation\util\ExtentReporterNG.class
+com\hungerstation\screens\AccountVerification.class
 com\hungerstation\screens\Alerts.class
