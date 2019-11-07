@@ -3,6 +3,7 @@ package com.hungerstation.util;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
@@ -25,14 +26,16 @@ public class RunCapabilities {
     private AndroidDriver<AndroidElement> driver;
 
     //Following method to make Appium server run automatically
-    protected static AppiumDriverLocalService startServer(){
+    protected static AppiumDriverLocalService startServer() {
 
         boolean isServerRunning;
 
-        isServerRunning = checkIfServerIsRunning(7234);
+        isServerRunning = checkIfServerIsRunning(4723);
 
-        if(!isServerRunning){
-            service = AppiumDriverLocalService.buildDefaultService();
+        if (!isServerRunning) {
+//            service = AppiumDriverLocalService.buildDefaultService();
+            AppiumServiceBuilder builder = new AppiumServiceBuilder().withIPAddress("127.0.0.1");
+            service = AppiumDriverLocalService.buildService(builder);
             service.start();
         }
 
@@ -40,13 +43,13 @@ public class RunCapabilities {
     }
 
     //
-    private static boolean checkIfServerIsRunning(int port){
+    private static boolean checkIfServerIsRunning(int port) {
         boolean isServerRunning = false;
         ServerSocket serverSocket;
         try {
             serverSocket = new ServerSocket(port);
             serverSocket.close();
-        } catch (IOException e){//If it comes to here, this means that the server is already running
+        } catch (IOException e) {//If it comes to here, this means that the server is already running
             isServerRunning = true;
         }
 
@@ -54,9 +57,11 @@ public class RunCapabilities {
     }
 
     private static void startEmulator() throws IOException, InterruptedException {
-        Runtime.getRuntime().exec(System.getProperty("user.dir") +
-                "\\src\\test\\resources\\startEmulator.bat");
-        Thread.sleep(6000);
+//        Runtime.getRuntime().exec(System.getProperty("user.dir") +
+//                "\\src\\test\\resources\\startEmulator.bat");
+//        Thread.sleep(6000);
+        Runtime.getRuntime().exec("cmd /c cmd.exe /K " +
+                "\"cd /d C:\\Users\\LENOVO\\AppData\\Local\\Android\\Sdk\\emulator && emulator -avd Pixel3Emulator\"");
     }
 
     protected static AndroidDriver<MobileElement> capabilities(String appInfo) throws IOException, InterruptedException {
@@ -67,21 +72,26 @@ public class RunCapabilities {
         properties.load(fis);
 
         //String device = (String) properties.get("device");
-        String device = System.getProperty("deviceName"); //We get the device name from a runtime variable
+//        String device = System.getProperty("deviceName"); //We get the device name from a runtime variable
+        String device = properties.getProperty("deviceName");
 
         File app;
-        File appDir = new File(System.getProperty("user.dir") +"\\src\\test\\resources\\apps");
+        File appDir = new File(System.getProperty("user.dir") + "\\src\\test\\resources\\apps");
         app = new File(appDir, (String) properties.get(appInfo));
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        if(device.toLowerCase().contains("emulator")){
-            startEmulator();
-        }
+//        if (device.toLowerCase().contains("emulator")) {
+        startEmulator();
+//        }
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device);
 
         capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
         capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 14);
+
+        capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
+        capabilities.setCapability(MobileCapabilityType.FULL_RESET, false);
+        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
 
         AndroidDriver<MobileElement> androidDriver =
                 new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
@@ -93,8 +103,8 @@ public class RunCapabilities {
     }
 
     void getScreenshot(String testName) throws IOException {
-        File scrfile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrfile,new File(System.getProperty("user.dir")+
-                "\\src\\test\\resources\\screenshots\\"+testName+".png"));
+        File scrfile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrfile, new File(System.getProperty("user.dir") +
+                "\\src\\test\\resources\\screenshots\\" + testName + ".png"));
     }
 }
