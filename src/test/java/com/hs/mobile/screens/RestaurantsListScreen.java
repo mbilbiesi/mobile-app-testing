@@ -1,13 +1,10 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -20,9 +17,8 @@ public class RestaurantsListScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/constrain_parent")
     private List<WebElement> restaurantList;
 
-    public RestaurantsListScreen(AndroidDriver<MobileElement> driver, TouchAction touchAction) {
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        this.touchAction = touchAction;
+    public RestaurantsListScreen(AppiumDriver driver, TouchAction touchAction) {
+        super(driver, touchAction);
     }
 
     public void selectRestaurant(int index) {

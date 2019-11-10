@@ -4,11 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import java.time.Duration;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
@@ -44,8 +40,7 @@ public class HomeScreen extends AbstractScreen {
     private MobileElement moreItem;
 
     public HomeScreen(AppiumDriver driver, TouchAction touchAction) {
-        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
-        this.touchAction = touchAction;
+        super(driver, touchAction);
     }
 
     public boolean isUseMyCurrentLocationTextDisplayed() {

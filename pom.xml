@@ -23,6 +23,7 @@
         <alluremaven.version>2.9</alluremaven.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <allure-maven.version>2.8</allure-maven.version>
+        <org.testobject.version>0.2.7</org.testobject.version>
         <skipITs>false</skipITs>
     </properties>
 
@@ -71,6 +72,16 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
             <version>${allure.version}</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.testobject</groupId>-->
+        <!--            <artifactId>testobject-appium-java-api</artifactId>-->
+        <!--            <version>${org.testobject.version}</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.0-jre</version>
         </dependency>
     </dependencies>
     <build>

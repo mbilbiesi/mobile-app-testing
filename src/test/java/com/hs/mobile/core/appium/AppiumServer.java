@@ -10,17 +10,17 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.ServerSocket;
 
-public class AppiumRunner {
-    protected static final Logger LOG = LoggerFactory.getLogger(AppiumRunner.class);
+public abstract class AppiumServer {
+    protected static final Logger LOG = LoggerFactory.getLogger(AppiumServer.class);
 
     private static final String LOCAL_IP_ADDRESS = "127.0.0.1";
     public static final int APPIUM_PORT = 4723; //todo: generate random available port
 
-    private AppiumDriverLocalService service;
-    private AppiumServiceBuilder builder;
-    private DesiredCapabilities capabilities;
+    private static AppiumDriverLocalService service;
+    private static AppiumServiceBuilder builder;
+    private static DesiredCapabilities capabilities;
 
-    public void startAppiumServer() {
+    public static void startServer() {
         capabilities = new DesiredCapabilities();
         capabilities.setCapability("noReset", "false");
 
@@ -35,11 +35,11 @@ public class AppiumRunner {
         service.start();
     }
 
-    public void stopServer() {
+    public static void stopServer() {
         service.stop();
     }
 
-    public boolean checkIfServerIsRunnning(int port) {
+    public static boolean checkIfServerIsRunnning(int port) {
         boolean isServerRunning = false;
         ServerSocket serverSocket;
         try {
@@ -51,5 +51,9 @@ public class AppiumRunner {
             serverSocket = null;
         }
         return isServerRunning;
+    }
+
+    public static String getAppiumServerUrl() {
+        return service.getUrl().toString();
     }
 }
