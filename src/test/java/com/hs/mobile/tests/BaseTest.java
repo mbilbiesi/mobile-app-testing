@@ -1,33 +1,40 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.appium.AppiumController;
-import com.hs.mobile.core.appium.AppiumServer;
+import com.hs.mobile.screens.HomeScreen;
+import com.hs.mobile.screens.LocationsScreen;
+import com.hs.mobile.screens.RestaurantScreen;
+import com.hs.mobile.screens.RestaurantsListScreen;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
-public class BaseTest {
-
-    AppiumController appiumController = new AppiumController();
+public class BaseTest extends AppiumController {
+    static HomeScreen homeScreen;
+    static LocationsScreen locationsScreen;
+    static RestaurantsListScreen restaurantsListScreen;
+    static RestaurantScreen restaurantScreen;
 
     @BeforeAll
     static void startAppiumServer() {
-        AppiumServer.startServer();
+        platform = OperatingSystem.valueOf("android".toUpperCase());
+
+        if (platform.equals(OperatingSystem.ANDROID)) {
+            udid = "emulator-5554";
+            automationName = "UiAutomator2";
+        } else if (platform.equals(OperatingSystem.IOS)) {
+            automationName = "XCUITest";
+        }
+
+        startAppium();
+
+        homeScreen = new HomeScreen(driver, touchAction);
+        locationsScreen = new LocationsScreen(driver, touchAction);
+        restaurantsListScreen = new RestaurantsListScreen(driver, touchAction);
+        restaurantScreen = new RestaurantScreen(driver, touchAction);
     }
 
     @AfterAll
-    static void stopAppiumServer() {
-        AppiumServer.startServer();
-    }
-
-    @BeforeEach()
-    void startAppium() {
-        appiumController.startAppium();
-    }
-
-    @AfterEach
-    void closeApp() {
-        appiumController.stopAppium();
+    static void closeApp() {
+        stopAppium();
     }
 }

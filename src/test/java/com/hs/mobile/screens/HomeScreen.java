@@ -5,6 +5,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.qameta.allure.Step;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
@@ -64,6 +65,7 @@ public class HomeScreen extends AbstractScreen {
     }
 
     public boolean isOffersItemDisplayed() {
+        takeScreenshot();
         return offersItem.isDisplayed();
     }
 
@@ -71,7 +73,9 @@ public class HomeScreen extends AbstractScreen {
         return moreItem.isDisplayed();
     }
 
+    @Step("Find restaurants")
     public void findRestaurants() {
         touchAction.tap(tapOptions().withElement(element(findRestaurantsButton))).perform();
+        takeScreenshot();
     }
 }
