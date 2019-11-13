@@ -16,7 +16,10 @@ import java.util.concurrent.TimeUnit;
 
 public class AppiumController extends AppiumServer {
     private static final Logger LOG = LoggerFactory.getLogger(AppiumController.class);
-    private static final String ANDROID_FILE_PATH = Resources.getResource("apps/hs-app.apk").getPath();
+    //private static final String ANDROID_FILE_PATH = Resources.getResource("apps/hs-app.apk").getPath();
+    private static final String ANDROID_FILE_PATH = "src/test/resources/apps/hs-app.apk";
+//    private static final String ANDROID_FILE_PATH = "C:\\Users\\Discovery1\\Desktop\\mobile-apps-testing\\src\\test\\resources\\apps\\hs" +
+//            "-app.apk";
     private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
 
     protected static AppiumDriver driver;
@@ -47,10 +50,10 @@ public class AppiumController extends AppiumServer {
 
             case ANDROID:
                 capabilities = new DesiredCapabilities();
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Samsung Nexus API 29");
-                capabilities.setCapability(MobileCapabilityType.UDID, udid);
+                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Abdulla_Pixel_3_Emulator");
+                //capabilities.setCapability(MobileCapabilityType.UDID, udid);
                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-                capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
+                //capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
                 capabilities.setCapability(MobileCapabilityType.APP, ANDROID_FILE_PATH);
                 capabilities.setCapability("autoGrantPermissions", true);
                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
