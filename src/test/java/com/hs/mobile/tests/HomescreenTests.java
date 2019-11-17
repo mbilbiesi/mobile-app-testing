@@ -25,9 +25,26 @@ class HomescreenTests extends BaseTest {
     @Story("Open the application with a new user")
     @Description("We need to verify that all page elements are present, " +
             "and the delivery place equals current location")
-    @Issue("https://hungerstation.atlassian.net/browse/HSAP-168")
+    //@Issue("https://hungerstation.atlassian.net/browse/HSAP-168")
     @Severity(SeverityLevel.CRITICAL)
     void verifyThatAllHomeScreenElementsAreDisplayed(TestInfo testInfo) {
+        homescreenSteps.verifyThatAllHomeElementsDisplayed();
+    }
+
+    @Test
+    @Story("Open the application with an already registered user without any saved place")
+    @Description("Login with an existing customer who doesnt have a saved address, and " +
+            "verify that all home screen elements are present")
+    //@Issue("https://hungerstation.atlassian.net/browse/HSAP-169")
+    @Severity(SeverityLevel.CRITICAL)
+    void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers(TestInfo testInfo){
+        homescreenSteps.clickMyOrdersButton();
+        ordersSteps.clickVerifyButton();
+        verifyAccountSteps.insertMobileNumber("503263813");
+        verifyAccountSteps.clickNextButton();
+        pinCodeVerificationSteps.insertVerificationCode("395406");
+        addReferalCodeSteps.clickCloseButton();
+        ordersSteps.navigateToRestaurants();
         homescreenSteps.verifyThatAllHomeElementsDisplayed();
     }
 }

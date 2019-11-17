@@ -2,6 +2,7 @@ package com.hs.mobile.steps;
 
 import com.hs.mobile.screens.HomeScreen;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -12,6 +13,9 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
@@ -21,7 +25,9 @@ public class HomescreenSteps extends HomeScreen {
         super(driver, touchAction);
     }
 
-    @Step
+    TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
+
+    @Step("Verify that all Homescreen elements are displayed correctly")
     public void verifyThatAllHomeElementsDisplayed() {
         assertAll(
                 () -> assertThat(isUseMyCurrentLocationTextDisplayed())
@@ -39,5 +45,15 @@ public class HomescreenSteps extends HomeScreen {
                 () -> assertThat(isMoreItemDisplayed())
                         .as("More item is not displayed.").isTrue()
         );
+    }
+
+    @Step("Click the \"My Orders\" button")
+    public void clickMyOrdersButton() {
+        touchAction.tap(tapOptions().withElement(element(getOrdersItem()))).perform();
+    }
+
+    @Step("Click the \"Find Restaurants\" button")
+    public void clickFindRestaurantsButton() {
+        touchAction.tap(tapOptions().withElement(element(getFindRestaurantsButton()))).perform();
     }
 }

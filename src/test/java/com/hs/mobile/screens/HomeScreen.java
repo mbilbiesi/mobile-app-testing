@@ -73,6 +73,14 @@ public class HomeScreen extends AbstractScreen {
         return moreItem.isDisplayed();
     }
 
+    public MobileElement getOrdersItem(){
+        return ordersItem;
+    }
+
+    public MobileElement getFindRestaurantsButton(){
+        return findRestaurantsButton;
+    }
+
     @Step("Find restaurants")
     public void findRestaurants() {
         touchAction.tap(tapOptions().withElement(element(findRestaurantsButton))).perform();
