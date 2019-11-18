@@ -75,4 +75,9 @@ public class LocationsScreen extends AbstractScreen {
     public void selectLocationType(int index) {
         tap(locationTypes.get(index));
     }
+
+    public boolean isSubmitButtonEnabled() {
+        String enabled = selectAddressButton.getAttribute("enabled");
+        return "true".equals(enabled);
+    }
 }

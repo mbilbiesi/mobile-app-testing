@@ -17,6 +17,25 @@ public class LocationTests extends BaseTest {
         verifyNewlyAddedLocations();
     }
 
+    @Story("Location")
+    @Description("Use an out of range location")
+    @Severity(SeverityLevel.CRITICAL)
+    @Issue("HSAP-174")
+    @Test
+    public void useAnOutOfRangeLocation() {
+        deleteExistingLocations();
+        searchForAnOutOfRangeLocation();
+        Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
+                .as("Submit button should be disabled for out of range locations.").isFalse();
+    }
+
+    private void searchForAnOutOfRangeLocation(){
+        homeScreen.findRestaurants();
+        locationsScreen.searchForRestaurants();
+        locationsScreen.insertLocation("Amman");
+        locationsScreen.selectItemArea(0);
+    }
+
     private void verifyNewlyAddedLocations() {
         homeScreen.viewSavedLocations();
         Assertions.assertThat(savedLocationsScreen.getSavedLocations().size())
