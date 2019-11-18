@@ -5,6 +5,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -79,5 +80,9 @@ public class LocationsScreen extends AbstractScreen {
     public boolean isSubmitButtonEnabled() {
         String enabled = selectAddressButton.getAttribute("enabled");
         return "true".equals(enabled);
+    }
+
+    public void clearDescription() {
+        addressDescriptionTextBox.clear();
     }
 }

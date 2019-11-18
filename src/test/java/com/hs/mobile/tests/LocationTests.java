@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class LocationTests extends BaseTest {
 
+    private static final String VALID_LOCATION = "Riyadh";
+
     @Story("Location")
     @Description("Add locations for all available location types")
     @Severity(SeverityLevel.CRITICAL)
@@ -30,6 +32,18 @@ public class LocationTests extends BaseTest {
     }
 
     @Story("Location")
+    @Description("Save without description")
+    @Severity(SeverityLevel.CRITICAL)
+    @Issue("HSAP-172")
+    @Test
+    public void saveWithoutDescription() {
+        deleteExistingLocations();
+        saveALocationWithoutDescription();
+        Assertions.assertThat(savedLocationsScreen.getSavedLocations().size())
+                .as("Description is not mandatory.").isEqualTo(1);
+    }
+
+    @Story("Location")
     @Description("Use an out of range location")
     @Severity(SeverityLevel.CRITICAL)
     @Issue("HSAP-174")
@@ -39,6 +53,20 @@ public class LocationTests extends BaseTest {
         searchForAnOutOfRangeLocation();
         Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
                 .as("Submit button should be disabled for out of range locations.").isFalse();
+    }
+
+    private void saveALocationWithoutDescription(){
+        homeScreen.findRestaurants();
+        locationsScreen.searchForRestaurants();
+        locationsScreen.insertLocation(VALID_LOCATION);
+        locationsScreen.selectItemArea(0);
+        locationsScreen.submitAddress();
+        locationsScreen.clearDescription();
+        locationsScreen.saveForLater();
+        locationsScreen.submitAddress();
+        restaurantsListScreen.waitUnitRestaurantsAreLoaded();
+        driver.navigate().back();
+        homeScreen.viewSavedLocations();
     }
 
     private void searchForALandmark(){
@@ -69,7 +97,7 @@ public class LocationTests extends BaseTest {
                 savedLocationsScreen.addNewLocation();
             }
             locationsScreen.searchForRestaurants();
-            locationsScreen.insertLocation("Riyadh");
+            locationsScreen.insertLocation(VALID_LOCATION);
             locationsScreen.selectItemArea(0);
             locationsScreen.submitAddress();
             locationsScreen.saveForLater();
