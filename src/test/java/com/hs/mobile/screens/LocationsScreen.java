@@ -65,8 +65,8 @@ public class LocationsScreen extends AbstractScreen {
         touchAction.tap(tapOptions().withElement(element(selectAddressButton))).perform();
     }
 
-    public void insertAddressDescription(String title) {
-        addressDescriptionTextBox.sendKeys(title);
+    public void insertAddressDescription(String description) {
+        addressDescriptionTextBox.sendKeys(description);
     }
 
     public void saveForLater() {
@@ -84,5 +84,9 @@ public class LocationsScreen extends AbstractScreen {
 
     public void clearDescription() {
         addressDescriptionTextBox.clear();
+    }
+
+    public String getDescription() {
+        return addressDescriptionTextBox.getAttribute("text");
     }
 }

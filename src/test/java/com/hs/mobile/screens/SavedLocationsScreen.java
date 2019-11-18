@@ -31,6 +31,10 @@ public class SavedLocationsScreen extends AbstractScreen {
     private WebElement more;
 
     @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/edt_img")
+    private WebElement edit;
+
+    @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delete_img")
     private WebElement delete;
 
@@ -48,5 +52,10 @@ public class SavedLocationsScreen extends AbstractScreen {
 
     public List<WebElement> getSavedLocations() {
         return savedLocations;
+    }
+
+    public void editLocation() {
+        tap(more);
+        tap(edit);
     }
 }
