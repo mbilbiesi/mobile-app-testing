@@ -18,6 +18,18 @@ public class LocationTests extends BaseTest {
     }
 
     @Story("Location")
+    @Description("Search by landmark")
+    @Severity(SeverityLevel.CRITICAL)
+    @Issue("HSAP-171")
+    @Test
+    public void searchByLandmark() {
+        deleteExistingLocations();
+        searchForALandmark();
+        Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
+                .as("Submit button should be enabled for valid landmarks.").isTrue();
+    }
+
+    @Story("Location")
     @Description("Use an out of range location")
     @Severity(SeverityLevel.CRITICAL)
     @Issue("HSAP-174")
@@ -27,6 +39,13 @@ public class LocationTests extends BaseTest {
         searchForAnOutOfRangeLocation();
         Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
                 .as("Submit button should be disabled for out of range locations.").isFalse();
+    }
+
+    private void searchForALandmark(){
+        homeScreen.findRestaurants();
+        locationsScreen.searchForRestaurants();
+        locationsScreen.insertLocation("hayah mall");
+        locationsScreen.selectItemArea(0);
     }
 
     private void searchForAnOutOfRangeLocation(){
