@@ -78,4 +78,8 @@ public class HomeScreen extends AbstractScreen {
         touchAction.tap(tapOptions().withElement(element(findRestaurantsButton))).perform();
         takeScreenshot();
     }
+
+    public void viewSavedLocations() {
+        tap(useMyCurrentLocationText);
+    }
 }

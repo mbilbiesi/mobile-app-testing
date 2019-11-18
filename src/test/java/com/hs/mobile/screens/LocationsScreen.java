@@ -33,6 +33,14 @@ public class LocationsScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/editDescription")
     private WebElement addressDescriptionTextBox;
 
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/save_location_switch")
+    private WebElement saveForLaterToggleButton;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(xpath = "//android.widget.RadioGroup[@resource-id='com.hungerstation.android.web.debug:id/save_location_radio_group']/*")
+    private List<WebElement> locationTypes;
+
     public LocationsScreen(AppiumDriver driver, TouchAction touchAction) {
         super(driver, touchAction);
     }
@@ -58,5 +66,13 @@ public class LocationsScreen extends AbstractScreen {
 
     public void insertAddressDescription(String title) {
         addressDescriptionTextBox.sendKeys(title);
+    }
+
+    public void saveForLater() {
+        tap(saveForLaterToggleButton);
+    }
+
+    public void selectLocationType(int index) {
+        tap(locationTypes.get(index));
     }
 }

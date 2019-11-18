@@ -9,9 +9,13 @@ import io.appium.java_client.remote.HideKeyboardStrategy;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import java.time.Duration;
+
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 class AbstractScreen {
     protected final TouchAction touchAction;
@@ -44,5 +48,9 @@ class AbstractScreen {
     @Attachment(value = "screenshot", type = "image/png")
     public byte[] takeScreenshot() {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    void tap(WebElement element) {
+        touchAction.tap(tapOptions().withElement(element(element))).perform();
     }
 }
