@@ -23,7 +23,7 @@ public class RestaurantsListScreen extends AbstractScreen {
         super(driver, touchAction);
     }
 
-    public void waitUnitRestaurantsAreLoaded() {
+    public void waitUntilRestaurantsAreLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         restaurantList = wait.until(ExpectedConditions.visibilityOfAllElements(restaurantList));
     }

@@ -1,14 +1,24 @@
 package com.hs.mobile.tests;
 
 import io.qameta.allure.*;
-import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.AfterAll;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class LocationTests extends BaseTest {
 
-    private static final String VALID_LOCATION = "Riyadh";
-    private static SoftAssertions assertions = new SoftAssertions();
+    @BeforeEach
+    public void startApp() {
+        startAppiumServer();
+    }
+
+    @AfterEach
+    public void closeApplication() {
+        if (driver != null) {
+            driver.closeApp();
+        }
+    }
 
     @Story("Location")
     @Description("Add locations for all available location types")
@@ -29,9 +39,8 @@ public class LocationTests extends BaseTest {
     public void searchByLandmark() {
         deleteExistingLocations();
         searchForALandmark();
-        assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
+        Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
                 .as("Submit button should be enabled for valid landmarks.").isTrue();
-        driver.navigate().back();
     }
 
     @Story("Location")
@@ -41,10 +50,24 @@ public class LocationTests extends BaseTest {
     @Test
     public void saveWithoutDescription() {
         deleteExistingLocations();
-        saveALocationWithoutDescription();
-        assertions.assertThat(savedLocationsScreen.getSavedLocations().size())
+        saveLocation(null);
+        homeScreen.viewSavedLocations();
+        Assertions.assertThat(savedLocationsScreen.getSavedLocations().size())
                 .as("Description is not mandatory.").isEqualTo(1);
-        driver.navigate().back();
+    }
+
+    @Story("Location")
+    @Description("Edit location")
+    @Severity(SeverityLevel.CRITICAL)
+    @Issue("HSAP-173")
+    @Test
+    public void editLocation() {
+        deleteExistingLocations();
+        saveLocation("test");
+        homeScreen.viewSavedLocations();
+        savedLocationsScreen.editLocation();
+        Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
+                .as("User should be directed to the saved location.").isTrue();
     }
 
     @Story("Location")
@@ -55,9 +78,8 @@ public class LocationTests extends BaseTest {
     public void useAnOutOfRangeLocation() {
         deleteExistingLocations();
         searchForAnOutOfRangeLocation();
-        assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
+        Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
                 .as("Submit button should be disabled for out of range locations.").isFalse();
-        driver.navigate().back();
     }
 
     @Story("Location")
@@ -67,28 +89,37 @@ public class LocationTests extends BaseTest {
     @Test
     public void editDescriptionWithDifferentCharacters() {
         deleteExistingLocations();
-        saveALocationWithoutDescription();
+        saveLocation(null);
         String description = "% 5";
         updateDescription(description);
         verifyUpdatedDescription(description);
     }
 
-    @AfterAll
-    static void assertAll() {
-        assertions.assertAll();
+    @Story("Location")
+    @Description("Delete all locations")
+    @Severity(SeverityLevel.CRITICAL)
+    @Issue("HSAP-176")
+    @Test
+    public void deleteAllLocations() {
+        deleteExistingLocations();
+        saveLocation(null);
+        deleteExistingLocations();
+        homeScreen.viewSavedLocations();
+        Assertions.assertThat(locationsScreen.isSearchButtonDisplayed())
+                .as("User should be redirected to locations screen.").isEqualTo(true);
     }
 
     private void verifyUpdatedDescription(String description) {
         savedLocationsScreen.editLocation();
         locationsScreen.submitAddress();
-        assertions.assertThat(locationsScreen.getDescription())
+        Assertions.assertThat(locationsScreen.getDescription())
                 .as("Actual updated description does not match expected one.").isEqualTo(description);
         locationsScreen.submitAddress();
-        driver.navigate().back();
-        driver.navigate().back();
+        savedLocationsScreen.waitUntilNewLocationButtonDisplays();
     }
 
     private void updateDescription(String description) {
+        homeScreen.viewSavedLocations();
         savedLocationsScreen.editLocation();
         locationsScreen.submitAddress();
         locationsScreen.clearDescription();
@@ -96,18 +127,20 @@ public class LocationTests extends BaseTest {
         locationsScreen.submitAddress();
     }
 
-    private void saveALocationWithoutDescription() {
+    private void saveLocation(String description) {
         homeScreen.findRestaurants();
         locationsScreen.searchForRestaurants();
-        locationsScreen.insertLocation(VALID_LOCATION);
+        locationsScreen.insertLocation("Riyadh");
         locationsScreen.selectItemArea(0);
         locationsScreen.submitAddress();
         locationsScreen.clearDescription();
+        if (description != null && !description.isBlank()) {
+            locationsScreen.insertAddressDescription(description);
+        }
         locationsScreen.saveForLater();
         locationsScreen.submitAddress();
-        restaurantsListScreen.waitUnitRestaurantsAreLoaded();
+        restaurantsListScreen.waitUntilRestaurantsAreLoaded();
         driver.navigate().back();
-        homeScreen.viewSavedLocations();
     }
 
     private void searchForALandmark() {
@@ -126,9 +159,8 @@ public class LocationTests extends BaseTest {
 
     private void verifyNewlyAddedLocations() {
         homeScreen.viewSavedLocations();
-        assertions.assertThat(savedLocationsScreen.getSavedLocations().size())
+        Assertions.assertThat(savedLocationsScreen.getSavedLocations().size())
                 .as("Number of saved locations should be 4.").isEqualTo(4);
-        driver.navigate().back();
     }
 
     private void addNewLocations() {
@@ -139,20 +171,26 @@ public class LocationTests extends BaseTest {
                 savedLocationsScreen.addNewLocation();
             }
             locationsScreen.searchForRestaurants();
-            locationsScreen.insertLocation(VALID_LOCATION);
+            locationsScreen.insertLocation("Riyadh");
             locationsScreen.selectItemArea(0);
             locationsScreen.submitAddress();
             locationsScreen.saveForLater();
             locationsScreen.selectLocationType(i);
             locationsScreen.submitAddress();
-            restaurantsListScreen.waitUnitRestaurantsAreLoaded();
+            restaurantsListScreen.waitUntilRestaurantsAreLoaded();
             driver.navigate().back();
         }
     }
 
     private void deleteExistingLocations() {
         homeScreen.viewSavedLocations();
-        savedLocationsScreen.deleteSavedLocations();
-        driver.navigate().back();
+        try {
+            locationsScreen.isSearchButtonDisplayed();
+        } catch (Exception e) {
+            savedLocationsScreen.deleteSavedLocations();
+            savedLocationsScreen.waitUntilNewLocationButtonDisplays();
+        } finally {
+            driver.navigate().back();
+        }
     }
 }
