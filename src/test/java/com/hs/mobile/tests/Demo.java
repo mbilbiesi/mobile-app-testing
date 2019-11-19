@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 @Epic("Smoke Tests")
 @Feature("Homescreen Tests")
 @Execution(ExecutionMode.CONCURRENT)
-class Demo extends BaseTest {
+public class Demo extends BaseTest {
 
     @Test
     @Story("Homescreen verification")

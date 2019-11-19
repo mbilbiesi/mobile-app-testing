@@ -1,21 +1,7 @@
 package com.hs.mobile.core.appium;
 
-import com.google.common.io.Resources;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
-
 public class AppiumController extends AppiumServer {
-    private static final Logger LOG = LoggerFactory.getLogger(AppiumController.class);
+   /* private static final Logger LOG = LoggerFactory.getLogger(AppiumController.class);
     private static final String ANDROID_FILE_PATH = Resources.getResource("apps/hs-app.apk").getPath();
     private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
 
@@ -75,5 +61,5 @@ public class AppiumController extends AppiumServer {
                 LOG.error("unable to stop appium", e);
             }
         }
-    }
+    }*/
 }
