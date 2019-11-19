@@ -54,6 +54,7 @@ public class AppiumController extends AppiumServer {
                 capabilities.setCapability(MobileCapabilityType.APP, ANDROID_FILE_PATH);
                 capabilities.setCapability("autoGrantPermissions", true);
                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+                capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 3600);
 
                 try {
                     driver = new AndroidDriver<MobileElement>(new URL(APPIUM_URL), capabilities);
