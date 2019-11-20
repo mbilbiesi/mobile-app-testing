@@ -1,10 +1,15 @@
 package com.hs.mobile.tests;
 
 import com.google.common.io.Resources;
+import com.hs.mobile.screens.AddReferalCodeScreen;
 import com.hs.mobile.screens.HomeScreen;
 import com.hs.mobile.screens.LocationsScreen;
+import com.hs.mobile.screens.OrdersScreen;
+import com.hs.mobile.screens.PinCodeVerificationScreen;
 import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.screens.RestaurantsListScreen;
+import com.hs.mobile.screens.SavedLocationsScreen;
+import com.hs.mobile.screens.VerifyAccountScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -33,6 +38,11 @@ public class BaseTest {
     static LocationsScreen locationsScreen;
     static RestaurantsListScreen restaurantsListScreen;
     static RestaurantScreen restaurantScreen;
+    static SavedLocationsScreen savedLocationsScreen;
+    static OrdersScreen ordersScreen;
+    static VerifyAccountScreen verifyAccountScreen;
+    static PinCodeVerificationScreen pinCodeVerificationScreen;
+    static AddReferalCodeScreen addReferalCodeScreen;
 
     private AppiumDriver driver;
     private TouchAction touchAction;
@@ -68,6 +78,11 @@ public class BaseTest {
         locationsScreen = new LocationsScreen(driver, touchAction);
         restaurantsListScreen = new RestaurantsListScreen(driver, touchAction);
         restaurantScreen = new RestaurantScreen(driver, touchAction);
+        ordersScreen = new OrdersScreen(driver, touchAction);
+        verifyAccountScreen = new VerifyAccountScreen(driver, touchAction);
+        pinCodeVerificationScreen = new PinCodeVerificationScreen(driver, touchAction);
+        addReferalCodeScreen = new AddReferalCodeScreen(driver, touchAction);
+        savedLocationsScreen = new SavedLocationsScreen(driver, touchAction);
     }
 
     @AfterEach

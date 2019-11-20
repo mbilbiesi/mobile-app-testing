@@ -4,6 +4,7 @@ public class AppiumController extends AppiumServer {
    /* private static final Logger LOG = LoggerFactory.getLogger(AppiumController.class);
     private static final String ANDROID_FILE_PATH = Resources.getResource("apps/hs-app.apk").getPath();
     private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
+    private static final int NEW_COMMAND_TIMEOUT = 3600;
 
     protected static AppiumDriver driver;
     protected static TouchAction touchAction;
@@ -40,6 +41,7 @@ public class AppiumController extends AppiumServer {
                 capabilities.setCapability(MobileCapabilityType.APP, ANDROID_FILE_PATH);
                 capabilities.setCapability("autoGrantPermissions", true);
                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+                capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, NEW_COMMAND_TIMEOUT);
 
                 try {
                     driver = new AndroidDriver<MobileElement>(new URL(APPIUM_URL), capabilities);
