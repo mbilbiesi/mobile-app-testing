@@ -61,20 +61,20 @@ public class HomeScreen extends AbstractScreen {
         return findRestaurantsButton.isDisplayed();
     }
 
-    public boolean isRestaurantsItemDisplayed() {
+    public boolean isRestaurantsIconDisplayed() {
         return restaurantsItem.isDisplayed();
     }
 
-    public boolean isOrdersItemDisplayed() {
+    public boolean isOrdersIconDisplayed() {
         return ordersItem.isDisplayed();
     }
 
-    public boolean isOffersItemDisplayed() {
+    public boolean isOffersIconDisplayed() {
         takeScreenshot();
         return offersItem.isDisplayed();
     }
 
-    public boolean isMoreItemDisplayed() {
+    public boolean isMoreIconDisplayed() {
         return moreItem.isDisplayed();
     }
 
@@ -106,14 +106,14 @@ public class HomeScreen extends AbstractScreen {
                         "Use my current location image is not displayed.").isTrue(),
                 () -> assertThat(isFindRestaurantsButtonDisplayed()).as(
                         "Find restaurant button is not displayed.").isTrue(),
-                () -> assertThat(isRestaurantsItemDisplayed())
-                        .as("Restaurants item is not displayed.").isTrue(),
-                () -> assertThat(isOrdersItemDisplayed())
-                        .as("Orders item is not displayed.").isTrue(),
-                () -> assertThat(isOffersItemDisplayed())
-                        .as("Offers item is not displayed.").isTrue(),
-                () -> assertThat(isMoreItemDisplayed())
-                        .as("More item is not displayed.").isTrue()
+                () -> assertThat(isRestaurantsIconDisplayed())
+                        .as("Restaurants icon is not displayed.").isTrue(),
+                () -> assertThat(isOrdersIconDisplayed())
+                        .as("Orders icon is not displayed.").isTrue(),
+                () -> assertThat(isOffersIconDisplayed())
+                        .as("Offers icon is not displayed.").isTrue(),
+                () -> assertThat(isMoreIconDisplayed())
+                        .as("More icon is not displayed.").isTrue()
         );
     }
 
