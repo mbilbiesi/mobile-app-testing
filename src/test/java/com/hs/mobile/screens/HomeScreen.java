@@ -78,11 +78,11 @@ public class HomeScreen extends AbstractScreen {
         return moreItem.isDisplayed();
     }
 
-    public MobileElement getOrdersItem(){
+    public MobileElement getOrdersItem() {
         return ordersItem;
     }
 
-    public MobileElement getFindRestaurantsButton(){
+    public MobileElement getFindRestaurantsButton() {
         return findRestaurantsButton;
     }
 
@@ -90,6 +90,11 @@ public class HomeScreen extends AbstractScreen {
     public void findRestaurants() {
         touchAction.tap(tapOptions().withElement(element(findRestaurantsButton))).perform();
         takeScreenshot();
+    }
+
+    @Step("View saved locations")
+    public void viewSavedLocations() {
+        tap(useMyCurrentLocationText);
     }
 
     @Step("Verify that all Homescreen elements are displayed correctly")

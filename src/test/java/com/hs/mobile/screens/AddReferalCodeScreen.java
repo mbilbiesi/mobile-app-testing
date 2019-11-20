@@ -40,23 +40,23 @@ public class AddReferalCodeScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_verify")
     private MobileElement btnVerifyReferralCode;
 
-    public boolean isBtnCloseDisplayed(){
+    public boolean isBtnCloseDisplayed() {
         return btnClose.isDisplayed();
     }
 
-    public boolean isImgReferralCodeDisplayed(){
+    public boolean isImgReferralCodeDisplayed() {
         return imgReferralCode.isDisplayed();
     }
 
-    public boolean isLblReferralCodeDisplayed(){
+    public boolean isLblReferralCodeDisplayed() {
         return lblReferralCode.isDisplayed();
     }
 
-    public boolean isTxtReferralCodeDisplayed(){
+    public boolean isTxtReferralCodeDisplayed() {
         return txtReferralCode.isDisplayed();
     }
 
-    public boolean isBtnVerifyReferralCodeDisplayed(){
+    public boolean isBtnVerifyReferralCodeDisplayed() {
         return btnVerifyReferralCode.isDisplayed();
     }
 
