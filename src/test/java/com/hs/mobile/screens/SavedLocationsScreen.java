@@ -46,7 +46,7 @@ public class SavedLocationsScreen extends AbstractScreen {
 
     public void deleteSavedLocations() {
         int numberOfLocations = savedLocations.size();
-        for (int i = 0; i < numberOfLocations; i++) {
+        for(WebElement loc : savedLocations){
             tap(more);
             tap(delete);
         }

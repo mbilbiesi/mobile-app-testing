@@ -5,13 +5,12 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+import static com.hs.mobile.enumeration.ElementAttribute.ENABLED;
+import static com.hs.mobile.enumeration.ElementAttribute.TEXT;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
@@ -67,31 +66,37 @@ public class LocationsScreen extends AbstractScreen {
         touchAction.tap(tapOptions().withElement(element(selectAddressButton))).perform();
     }
 
+    @Step("Insert {description} address description")
     public void insertAddressDescription(String description) {
         addressDescriptionTextBox.sendKeys(description);
     }
 
+    @Step("Toggle save for later button")
     public void saveForLater() {
         tap(saveForLaterToggleButton);
     }
 
+    @Step("Select {index} location type")
     public void selectLocationType(int index) {
         tap(locationTypes.get(index));
     }
 
+    @Step("Check if the submit button is enabled")
     public boolean isSubmitButtonEnabled() {
-        String enabled = selectAddressButton.getAttribute("enabled");
-        return "true".equals(enabled);
+        return Boolean.parseBoolean(getElementAttributeValue(selectAddressButton, ENABLED));
     }
 
+    @Step("Clear description text box")
     public void clearDescription() {
         addressDescriptionTextBox.clear();
     }
 
+    @Step("Get the current address description")
     public String getDescription() {
-        return addressDescriptionTextBox.getAttribute("text");
+        return getElementAttributeValue(addressDescriptionTextBox, TEXT);
     }
 
+    @Step("Check if the search button is displayed")
     public boolean isSearchButtonDisplayed() {
         return searchButton.isDisplayed();
     }

@@ -1,16 +1,20 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.appium.AppiumController;
-import com.hs.mobile.screens.*;
+import com.hs.mobile.screens.HomeScreen;
+import com.hs.mobile.screens.LocationsScreen;
+import com.hs.mobile.screens.RestaurantScreen;
+import com.hs.mobile.screens.RestaurantsListScreen;
+import com.hs.mobile.screens.SavedLocationsScreen;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
 public class BaseTest extends AppiumController {
-    static HomeScreen homeScreen;
-    static LocationsScreen locationsScreen;
-    static RestaurantsListScreen restaurantsListScreen;
-    static RestaurantScreen restaurantScreen;
-    static SavedLocationsScreen savedLocationsScreen;
+    protected static HomeScreen homeScreen;
+    protected static LocationsScreen locationsScreen;
+    protected static RestaurantsListScreen restaurantsListScreen;
+    protected static RestaurantScreen restaurantScreen;
+    protected static SavedLocationsScreen savedLocationsScreen;
 
     @BeforeAll
     static void startAppiumServer() {

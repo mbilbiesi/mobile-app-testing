@@ -1,5 +1,6 @@
 package com.hs.mobile.screens;
 
+import com.hs.mobile.enumeration.ElementAttribute;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -52,5 +53,9 @@ class AbstractScreen {
 
     void tap(WebElement element) {
         touchAction.tap(tapOptions().withElement(element(element))).perform();
+    }
+
+    String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
+        return element.getAttribute(attribute.getName());
     }
 }

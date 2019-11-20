@@ -79,6 +79,7 @@ public class HomeScreen extends AbstractScreen {
         takeScreenshot();
     }
 
+    @Step("View saved locations")
     public void viewSavedLocations() {
         tap(useMyCurrentLocationText);
     }
