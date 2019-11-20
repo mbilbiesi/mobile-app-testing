@@ -1,8 +1,12 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.appium.AppiumController;
+import com.hs.mobile.screens.AddReferalCodeScreen;
 import com.hs.mobile.screens.HomeScreen;
 import com.hs.mobile.screens.LocationsScreen;
+import com.hs.mobile.screens.VerifyAccountScreen;
+import com.hs.mobile.screens.OrdersScreen;
+import com.hs.mobile.screens.PinCodeVerificationScreen;
 import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.screens.RestaurantsListScreen;
 import org.junit.jupiter.api.AfterAll;
@@ -13,6 +17,10 @@ public class BaseTest extends AppiumController {
     static LocationsScreen locationsScreen;
     static RestaurantsListScreen restaurantsListScreen;
     static RestaurantScreen restaurantScreen;
+    static OrdersScreen ordersScreen;
+    static VerifyAccountScreen verifyAccountScreen;
+    static PinCodeVerificationScreen pinCodeVerificationScreen;
+    static AddReferalCodeScreen addReferalCodeScreen;
 
     @BeforeAll
     static void startAppiumServer() {
@@ -31,6 +39,10 @@ public class BaseTest extends AppiumController {
         locationsScreen = new LocationsScreen(driver, touchAction);
         restaurantsListScreen = new RestaurantsListScreen(driver, touchAction);
         restaurantScreen = new RestaurantScreen(driver, touchAction);
+        ordersScreen = new OrdersScreen(driver, touchAction);
+        verifyAccountScreen = new VerifyAccountScreen(driver, touchAction);
+        pinCodeVerificationScreen = new PinCodeVerificationScreen(driver, touchAction);
+        addReferalCodeScreen = new AddReferalCodeScreen(driver, touchAction);
     }
 
     @AfterAll
