@@ -22,33 +22,37 @@ import org.junit.jupiter.params.provider.CsvSource;
 class HomescreenTests extends BaseTest {
 
     @Test
+    @Issue("HSAP-168")
     @Story("Open the application with a new user")
     @Description("We need to verify that all page elements are present, " +
             "and the delivery place equals current location")
     @Severity(SeverityLevel.CRITICAL)
     void verifyThatAllHomeScreenElementsAreDisplayed(TestInfo testInfo) {
-
-        homescreenSteps.verifyThatAllHomeElementsDisplayed();
+        //GIVEN, WHEN for this test case are defined in the BaseTest as BeforeAll
+        //Then verify that all homescreen elements are showing up
+        homeScreen.verifyThatAllHomeElementsDisplayed();
     }
 
     @ParameterizedTest
     @CsvSource({"503263813,395406"})
+    @Issue("HSAP-169")
     @Story("Open the application with an already registered user without any saved place")
     @Description("Login with an existing customer who doesnt have a saved address, and " +
             "verify that all home screen elements are present")
     @Severity(SeverityLevel.CRITICAL)
     void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers(String phoneNum, String verificationCode) {
-        String mobileNum, verification;
-        mobileNum = phoneNum;
+        //When customer logs in
+        homeScreen.clickMyOrdersButton();
+        ordersScreen.clickVerifyButton();
+        verifyAccountScreen.insertMobileNumber(phoneNum);
+        verifyAccountScreen.clickNextButton();
+        pinCodeVerificationScreen.insertVerificationCode(verificationCode);
+        addReferalCodeScreen.clickCloseButton();
 
-        verification = verificationCode;
-        homescreenSteps.clickMyOrdersButton();
-        ordersSteps.clickVerifyButton();
-        verifyAccountSteps.insertMobileNumber(mobileNum);
-        verifyAccountSteps.clickNextButton();
-        pinCodeVerificationSteps.insertVerificationCode(verification);
-        addReferalCodeSteps.clickCloseButton();
-        ordersSteps.navigateToRestaurants();
-        homescreenSteps.verifyThatAllHomeElementsDisplayed();
+        //And navigates to homescreen
+        ordersScreen.navigateToRestaurants();
+
+        //Then verify that all homescreen elements are displayed
+        homeScreen.verifyThatAllHomeElementsDisplayed();
     }
 }

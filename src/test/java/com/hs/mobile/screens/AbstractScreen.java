@@ -23,9 +23,7 @@ class AbstractScreen {
         PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
     }
 
-
     public void hideKeyboard() {
-
         if (isAndroid()) {
             driver.hideKeyboard();
         } else {
