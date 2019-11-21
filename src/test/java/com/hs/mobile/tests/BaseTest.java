@@ -6,6 +6,7 @@ import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.screens.RestaurantsListScreen;
 import com.hs.mobile.screens.SavedLocationsScreen;
+import io.appium.java_client.TouchAction;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -28,6 +29,8 @@ public class BaseTest extends AppiumController {
         }
 
         startAppium();
+
+        touchAction = new TouchAction(driver);
 
         homeScreen = new HomeScreen(driver, touchAction);
         locationsScreen = new LocationsScreen(driver, touchAction);
