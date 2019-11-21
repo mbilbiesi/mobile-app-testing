@@ -15,7 +15,7 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 @Epic("Smoke Tests")
 @Feature("Homescreen")
 @Execution(ExecutionMode.CONCURRENT)
-class Homescreen extends BaseTest {
+class HomescreenTests extends BaseTest {
 
     @Test
     @Issue("HSAP-168")
