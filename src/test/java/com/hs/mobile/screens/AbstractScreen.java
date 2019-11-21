@@ -29,7 +29,6 @@ class AbstractScreen {
     }
 
     public void hideKeyboard() {
-
         if (isAndroid()) {
             driver.hideKeyboard();
         } else {
