@@ -4,11 +4,9 @@ import com.hs.mobile.enumeration.LocationType;
 import com.hs.mobile.tests.BaseTest;
 import io.qameta.allure.Step;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.data.Index;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class LocationSteps extends BaseTest {
     @Step("Verify {description} updated description")
@@ -72,7 +70,7 @@ public class LocationSteps extends BaseTest {
     }
 
     @Step("Add all types of locations")
-    public void addAllTypesOfLocations(){
+    public void addAllTypesOfLocations() {
         List<LocationType> allLocationTypes = Arrays.asList(LocationType.values());
         addNewLocations(allLocationTypes);
     }

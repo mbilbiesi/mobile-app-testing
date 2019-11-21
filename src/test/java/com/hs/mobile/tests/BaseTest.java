@@ -10,19 +10,20 @@ import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.screens.RestaurantsListScreen;
 import com.hs.mobile.screens.SavedLocationsScreen;
 import com.hs.mobile.screens.VerifyAccountScreen;
+import io.appium.java_client.TouchAction;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
 public class BaseTest extends AppiumController {
-    static HomeScreen homeScreen;
-    static LocationsScreen locationsScreen;
-    static RestaurantsListScreen restaurantsListScreen;
-    static RestaurantScreen restaurantScreen;
-    static SavedLocationsScreen savedLocationsScreen;
-    static OrdersScreen ordersScreen;
-    static VerifyAccountScreen verifyAccountScreen;
-    static PinCodeVerificationScreen pinCodeVerificationScreen;
-    static AddReferalCodeScreen addReferalCodeScreen;
+    protected static HomeScreen homeScreen;
+    protected static LocationsScreen locationsScreen;
+    protected static RestaurantsListScreen restaurantsListScreen;
+    protected static RestaurantScreen restaurantScreen;
+    protected static SavedLocationsScreen savedLocationsScreen;
+    protected static OrdersScreen ordersScreen;
+    protected static VerifyAccountScreen verifyAccountScreen;
+    protected static PinCodeVerificationScreen pinCodeVerificationScreen;
+    protected static AddReferalCodeScreen addReferalCodeScreen;
 
     @BeforeAll
     static void startAppiumServer() {
@@ -36,6 +37,8 @@ public class BaseTest extends AppiumController {
         }
 
         startAppium();
+
+        touchAction = new TouchAction(driver);
 
         homeScreen = new HomeScreen(driver, touchAction);
         locationsScreen = new LocationsScreen(driver, touchAction);
