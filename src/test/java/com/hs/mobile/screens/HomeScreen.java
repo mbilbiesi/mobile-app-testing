@@ -49,6 +49,7 @@ public class HomeScreen extends AbstractScreen {
         super(driver, touchAction);
     }
 
+    @Step("Is 'Use my current location'")
     public boolean isUseMyCurrentLocationTextDisplayed() {
         return useMyCurrentLocationText.isDisplayed();
     }
@@ -117,12 +118,12 @@ public class HomeScreen extends AbstractScreen {
         );
     }
 
-    @Step("Click the \"My Orders\" button")
+    @Step("Click the 'My Orders' button")
     public void clickMyOrdersButton() {
         touchAction.tap(tapOptions().withElement(element(getOrdersItem()))).perform();
     }
 
-    @Step("Click the \"Find Restaurants\" button")
+    @Step("Click the 'Find Restaurants' button")
     public void clickFindRestaurantsButton() {
         touchAction.tap(tapOptions().withElement(element(getFindRestaurantsButton()))).perform();
     }

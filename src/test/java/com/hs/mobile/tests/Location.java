@@ -11,13 +11,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LocationTests extends BaseTest {
+public class Location extends BaseTest {
 
     LocationSteps steps = new LocationSteps();
 
     @BeforeEach
     public void startApp() {
-        startAppiumServer();
+        // startAppiumServer();
         //Given
         steps.deleteExistingLocations();
     }

@@ -18,9 +18,7 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,38 +32,38 @@ public class BaseTest {
     private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
     private static final String ANDROID_FILE_PATH = Resources.getResource("apps/hs-app.apk").getPath();
     private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
-    static HomeScreen homeScreen;
-    static LocationsScreen locationsScreen;
-    static RestaurantsListScreen restaurantsListScreen;
+    protected static HomeScreen homeScreen;
+    protected static LocationsScreen locationsScreen;
+    protected static RestaurantsListScreen restaurantsListScreen;
     static RestaurantScreen restaurantScreen;
-    static SavedLocationsScreen savedLocationsScreen;
+    protected static SavedLocationsScreen savedLocationsScreen;
     static OrdersScreen ordersScreen;
     static VerifyAccountScreen verifyAccountScreen;
     static PinCodeVerificationScreen pinCodeVerificationScreen;
     static AddReferalCodeScreen addReferalCodeScreen;
 
-    private AppiumDriver driver;
+    protected AppiumDriver driver;
     private TouchAction touchAction;
 
     //@BeforeTest(alwaysRun = true)
     //@Parameters({"platform", "udid", "systemPort"})
     @BeforeEach
-    @ParameterizedTest
-    @MethodSource("deviceProvider")
-    void startAppiumServer(String platform, String udid, String systemPort) {
-        String[] platformInfo = platform.split(" ");
-        String platformName = platformInfo[0];
-        String platformVersion = platformInfo[1];
+    // @ParameterizedTest
+    // @MethodSource("deviceProvider")
+    void startAppiumServer() {
+        // String[] platformInfo = platform.split(" ");
+        //  String platformName = platformInfo[0];
+        //  String platformVersion = platformInfo[1];
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Smaz");
-        capabilities.setCapability(MobileCapabilityType.UDID, udid);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformName);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
+        capabilities.setCapability(MobileCapabilityType.UDID, "emulator-5554");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "10.0");
         capabilities.setCapability(MobileCapabilityType.APP, ANDROID_FILE_PATH);
         capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
+        capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, "8200");
 
         try {
             driver = new AndroidDriver<MobileElement>(new URL(APPIUM_URL), capabilities);
