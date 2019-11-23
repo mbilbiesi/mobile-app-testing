@@ -2,7 +2,6 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
@@ -42,7 +41,7 @@ public class HomeScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/more_item")
     private MobileElement moreItem;
 
-    public HomeScreen(AppiumDriver driver, TouchAction touchAction) {
+    public HomeScreen(AppiumDriver driver) {
         super(driver);
     }
 

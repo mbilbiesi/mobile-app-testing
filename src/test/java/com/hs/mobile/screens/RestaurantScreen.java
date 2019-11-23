@@ -24,7 +24,7 @@ public class RestaurantScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
     private WebElement cartButton;
 
-    public RestaurantScreen(AppiumDriver driver, TouchAction touchAction) {
+    public RestaurantScreen(AppiumDriver driver) {
         super(driver);
     }
 

@@ -22,7 +22,7 @@ public class VerifyAccountScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_login")
     private MobileElement btnNext;
 
-    public VerifyAccountScreen(AppiumDriver driver, TouchAction touchAction) {
+    public VerifyAccountScreen(AppiumDriver driver) {
         super(driver);
     }
 

@@ -48,7 +48,7 @@ public class OrdersScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/restaurants_item")
     private MobileElement btnRestaurants;
 
-    public OrdersScreen(AppiumDriver driver, TouchAction touchAction) {
+    public OrdersScreen(AppiumDriver driver) {
         super(driver);
     }
 

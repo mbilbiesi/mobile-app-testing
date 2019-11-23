@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class AddReferalCodeScreen extends AbstractScreen {
-    public AddReferalCodeScreen(AppiumDriver driver, TouchAction touchAction) {
+    public AddReferalCodeScreen(AppiumDriver driver) {
         super(driver);
     }
 

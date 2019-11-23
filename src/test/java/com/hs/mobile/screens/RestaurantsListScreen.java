@@ -19,7 +19,7 @@ public class RestaurantsListScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/constrain_parent")
     private List<WebElement> restaurantList;
 
-    public RestaurantsListScreen(AppiumDriver driver, TouchAction touchAction) {
+    public RestaurantsListScreen(AppiumDriver driver) {
         super(driver);
     }
 

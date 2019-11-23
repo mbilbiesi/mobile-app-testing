@@ -32,7 +32,7 @@ public class SavedLocationsScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delete_img")
     private WebElement delete;
 
-    public SavedLocationsScreen(AppiumDriver driver, TouchAction touchAction) {
+    public SavedLocationsScreen(AppiumDriver driver) {
         super(driver);
     }
 

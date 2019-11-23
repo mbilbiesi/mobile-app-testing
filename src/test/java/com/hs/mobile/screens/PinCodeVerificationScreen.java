@@ -34,7 +34,7 @@ public class PinCodeVerificationScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_login")
     private MobileElement btnVerifyNumber;
 
-    public PinCodeVerificationScreen(AppiumDriver driver, TouchAction touchAction) {
+    public PinCodeVerificationScreen(AppiumDriver driver) {
         super(driver);
     }
 

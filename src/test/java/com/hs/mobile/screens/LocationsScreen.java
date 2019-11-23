@@ -43,7 +43,7 @@ public class LocationsScreen extends AbstractScreen {
     @AndroidFindBy(xpath = "//android.widget.RadioGroup[@resource-id='com.hungerstation.android.web.debug:id/save_location_radio_group']/*")
     private List<WebElement> locationTypes;
 
-    public LocationsScreen(AppiumDriver driver, TouchAction touchAction) {
+    public LocationsScreen(AppiumDriver driver) {
         super(driver);
     }
 
