@@ -20,7 +20,7 @@ public class RestaurantsListScreen extends AbstractScreen {
     private List<WebElement> restaurantList;
 
     public RestaurantsListScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
+        super(driver);
     }
 
     public void waitUntilRestaurantsAreLoaded() {

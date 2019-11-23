@@ -22,9 +22,9 @@ class AbstractScreen {
     protected final TouchAction touchAction;
     protected final AppiumDriver driver;
 
-    public AbstractScreen(AppiumDriver driver, TouchAction touchAction) {
+    public AbstractScreen(AppiumDriver driver) {
         this.driver = driver;
-        this.touchAction = touchAction;
+        this.touchAction = new TouchAction(driver);
         PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
     }
 
@@ -45,16 +45,16 @@ class AbstractScreen {
         return driver instanceof IOSDriver;
     }
 
-    @Attachment(value = "screenshot", type = "image/png")
-    public byte[] takeScreenshot() {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }
-
     void tap(WebElement element) {
         touchAction.tap(tapOptions().withElement(element(element))).perform();
     }
 
     String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
         return element.getAttribute(attribute.getName());
+    }
+
+    @Attachment(value = "screenshot", type = "image/png")
+    public byte[] takeScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }

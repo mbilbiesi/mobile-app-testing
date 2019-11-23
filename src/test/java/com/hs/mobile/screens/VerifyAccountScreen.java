@@ -2,7 +2,6 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -14,11 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class VerifyAccountScreen extends AbstractScreen {
-    public VerifyAccountScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
-    }
-
-    TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/phone_number")
@@ -27,6 +21,10 @@ public class VerifyAccountScreen extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_login")
     private MobileElement btnNext;
+
+    public VerifyAccountScreen(AppiumDriver driver, TouchAction touchAction) {
+        super(driver);
+    }
 
     public boolean isTxtPhoneNumberDisplayed() {
         return txtPhoneNumber.isDisplayed();

@@ -2,7 +2,6 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -14,8 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class HomeScreen extends AbstractScreen {
-
-    TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/main_location_text")
@@ -46,7 +43,7 @@ public class HomeScreen extends AbstractScreen {
     private MobileElement moreItem;
 
     public HomeScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
+        super(driver);
     }
 
     @Step("Is 'Use my current location'")
@@ -126,5 +123,10 @@ public class HomeScreen extends AbstractScreen {
     @Step("Click the 'Find Restaurants' button")
     public void clickFindRestaurantsButton() {
         touchAction.tap(tapOptions().withElement(element(getFindRestaurantsButton()))).perform();
+    }
+
+    @Step("Click on restaurant icon")
+    public void clickOnResturantIcon() {
+        touchAction.tap(tapOptions().withElement(element(restaurantsItem))).perform();
     }
 }

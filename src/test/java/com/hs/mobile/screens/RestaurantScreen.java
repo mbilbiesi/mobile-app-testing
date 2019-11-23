@@ -25,7 +25,7 @@ public class RestaurantScreen extends AbstractScreen {
     private WebElement cartButton;
 
     public RestaurantScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
+        super(driver);
     }
 
     public void selectMenuItem(int index) {

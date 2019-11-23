@@ -2,7 +2,6 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -15,10 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class AddReferalCodeScreen extends AbstractScreen {
     public AddReferalCodeScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
+        super(driver);
     }
-
-    TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
 
     @iOSXCUITFindBy(className = "")
     @AndroidFindBy(className = "android.widget.ImageButton")

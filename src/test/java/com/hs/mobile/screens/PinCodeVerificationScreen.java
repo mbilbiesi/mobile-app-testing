@@ -2,7 +2,6 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -14,11 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class PinCodeVerificationScreen extends AbstractScreen {
-    public PinCodeVerificationScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
-    }
-
-    TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/state_description")
@@ -39,6 +33,10 @@ public class PinCodeVerificationScreen extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_login")
     private MobileElement btnVerifyNumber;
+
+    public PinCodeVerificationScreen(AppiumDriver driver, TouchAction touchAction) {
+        super(driver);
+    }
 
     public boolean isEleCustomerPhoneNumberDisplayed() {
         return eleCustomerPhoneNumber.isDisplayed();
@@ -102,7 +100,7 @@ public class PinCodeVerificationScreen extends AbstractScreen {
         getVerificationCode().sendKeys(number);
     }
 
-    @Step("Click \"Verify Number\" button")
+    @Step("Click 'Verify Number' button")
     public void clickVerifyNumberButton() {
         touchAction.tap(tapOptions().withElement(element(getVerifyNumberButton()))).perform();
     }

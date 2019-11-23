@@ -44,7 +44,7 @@ public class LocationsScreen extends AbstractScreen {
     private List<WebElement> locationTypes;
 
     public LocationsScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
+        super(driver);
     }
 
     @Step("search for restaurants")
