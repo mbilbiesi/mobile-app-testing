@@ -12,7 +12,7 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 @Feature("Homescreen smoke test")
 @Story("Verify Homescreen")
 @Issue("HSAP-168")
-@Execution(ExecutionMode.CONCURRENT)
+@Execution(ExecutionMode.SAME_THREAD)
 public class HomescreenTests extends BaseTest {
 
     @Test
