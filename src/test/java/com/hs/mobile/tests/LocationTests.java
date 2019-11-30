@@ -6,11 +6,8 @@ import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,10 +15,9 @@ import java.util.List;
 @Feature("Location Smoke Tes")
 @Story("Verify functionalities of add/removing/updating locations")
 @Issue("HSAP-170")
-@Execution(ExecutionMode.CONCURRENT)
 public class LocationTests extends BaseTest {
 
-    @BeforeEach
+    @BeforeTest
     public void startApp() {
         homeScreen.clickMyOrdersButton();
         ordersScreen.clickVerifyButton();
@@ -34,8 +30,7 @@ public class LocationTests extends BaseTest {
         deleteExistingLocations();
     }
 
-    @Test
-    @DisplayName("Add locations for all available location types")
+    @Test(description = "Add locations for all available location types")
     void addLocationsForAllAvailableLocationTypes() {
         //When
         addAllTypesOfLocations();
@@ -44,8 +39,7 @@ public class LocationTests extends BaseTest {
         verifyNewlyAddedLocations();
     }
 
-    @Test
-    @DisplayName("Search by landmark")
+    @Test(description = "Search by landmark")
     void searchByLandmark() {
         //When
         searchForALandmark();
@@ -55,8 +49,7 @@ public class LocationTests extends BaseTest {
                 .as("Submit button should be enabled for valid landmarks.").isTrue();
     }
 
-    @Test
-    @DisplayName("Save without description")
+    @Test(description = "SSave without description")
     void saveWithoutDescription() {
         //When
         saveLocation(null);
@@ -67,8 +60,7 @@ public class LocationTests extends BaseTest {
                 .as("Description is not mandatory.").isEqualTo(1);
     }
 
-    @Test
-    @DisplayName("Edit location")
+    @Test(description = "Edit location")
     void editLocation() {
         //When
         saveLocation("test");
@@ -80,8 +72,7 @@ public class LocationTests extends BaseTest {
                 .as("User should be directed to the saved location.").isTrue();
     }
 
-    @Test
-    @DisplayName("Use an out of range location")
+    @Test(description = "Use an out of range location")
     void useAnOutOfRangeLocation() {
         //When
         searchForAnOutOfRangeLocation();
@@ -91,8 +82,7 @@ public class LocationTests extends BaseTest {
                 .as("Submit button should be disabled for out of range locations.").isFalse();
     }
 
-    @Test
-    @DisplayName("Edit description with different characters")
+    @Test(description = "Edit description with different characters")
     void editDescriptionWithDifferentCharacters() {
         //When
         saveLocation(null);
@@ -103,8 +93,7 @@ public class LocationTests extends BaseTest {
         verifyUpdatedDescription(description);
     }
 
-    @Test
-    @DisplayName("Delete all locations")
+    @Test(description = "Delete all locations")
     void deleteAllLocations() {
         //When
         saveLocation(null);
