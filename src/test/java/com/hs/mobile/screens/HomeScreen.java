@@ -5,11 +5,10 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class HomeScreen extends AbstractScreen {
 
@@ -67,7 +66,6 @@ public class HomeScreen extends AbstractScreen {
     }
 
     public boolean isOffersIconDisplayed() {
-        takeScreenshot();
         return offersItem.isDisplayed();
     }
 
@@ -86,7 +84,6 @@ public class HomeScreen extends AbstractScreen {
     @Step("Find restaurants")
     public void findRestaurants() {
         touchAction.tap(tapOptions().withElement(element(findRestaurantsButton))).perform();
-        takeScreenshot();
     }
 
     @Step("View saved locations")
@@ -96,22 +93,22 @@ public class HomeScreen extends AbstractScreen {
 
     @Step("Verify that all Homescreen elements are displayed correctly")
     public void verifyThatAllHomeElementsDisplayed() {
-        assertAll(
-                () -> assertThat(isUseMyCurrentLocationTextDisplayed())
-                        .as("Use my current location text is not displayed.").isTrue(),
-                () -> assertThat(isUseMyCurrentLocationImageDisplayed()).as(
-                        "Use my current location image is not displayed.").isTrue(),
-                () -> assertThat(isFindRestaurantsButtonDisplayed()).as(
-                        "Find restaurant button is not displayed.").isTrue(),
-                () -> assertThat(isRestaurantsIconDisplayed())
-                        .as("Restaurants icon is not displayed.").isTrue(),
-                () -> assertThat(isOrdersIconDisplayed())
-                        .as("Orders icon is not displayed.").isTrue(),
-                () -> assertThat(isOffersIconDisplayed())
-                        .as("Offers icon is not displayed.").isTrue(),
-                () -> assertThat(isMoreIconDisplayed())
-                        .as("More icon is not displayed.").isTrue()
-        );
+        SoftAssertions soft = new SoftAssertions();
+        soft.assertThat(isUseMyCurrentLocationTextDisplayed())
+                .as("Use my current location text is not displayed.").isTrue();
+        soft.assertThat(isUseMyCurrentLocationImageDisplayed()).as(
+                "Use my current location image is not displayed.").isTrue();
+        soft.assertThat(isFindRestaurantsButtonDisplayed()).as(
+                "Find restaurant button is not displayed.").isTrue();
+        soft.assertThat(isRestaurantsIconDisplayed())
+                .as("Restaurants icon is not displayed.").isTrue();
+        soft.assertThat(isOrdersIconDisplayed())
+                .as("Orders icon is not displayed.").isTrue();
+        soft.assertThat(isOffersIconDisplayed())
+                .as("Offers icon is not displayed.").isTrue();
+        soft.assertThat(isMoreIconDisplayed())
+                .as("More icon is not displayed.").isTrue();
+        soft.assertAll();
     }
 
     @Step("Click the 'My Orders' button")

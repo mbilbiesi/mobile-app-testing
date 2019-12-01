@@ -1,12 +1,14 @@
 package com.hs.mobile.tests;
 
-import com.hs.mobile.enumeration.LocationType;
+import com.hs.mobile.core.listener.TestListener;
+import com.hs.mobile.data.LocationType;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.assertj.core.api.Assertions;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -15,9 +17,10 @@ import java.util.List;
 @Feature("Location Smoke Tes")
 @Story("Verify functionalities of add/removing/updating locations")
 @Issue("HSAP-170")
+@Listeners(TestListener.class)
 public class LocationTests extends BaseTest {
 
-    @BeforeTest
+    @BeforeMethod
     public void startApp() {
         homeScreen.clickMyOrdersButton();
         ordersScreen.clickVerifyButton();

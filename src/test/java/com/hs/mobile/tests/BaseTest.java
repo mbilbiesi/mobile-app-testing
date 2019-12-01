@@ -1,8 +1,6 @@
 package com.hs.mobile.tests;
 
 import com.google.common.io.Resources;
-import com.hs.mobile.core.configuration.DeviceCapabilities;
-import com.hs.mobile.core.configuration.DeviceParameterResolver;
 import com.hs.mobile.screens.AddReferalCodeScreen;
 import com.hs.mobile.screens.HomeScreen;
 import com.hs.mobile.screens.LocationsScreen;
@@ -17,37 +15,47 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import java.net.URL;
 
-@ExtendWith(DeviceParameterResolver.class)
+
 public class BaseTest {
+
     private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
     protected static final String ANDROID_FILE_PATH = Resources.getResource("apps/hs-app.apk").getPath();
     private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
     protected HomeScreen homeScreen;
     protected LocationsScreen locationsScreen;
-    protected RestaurantsListScreen restaurantsListScreen;
+    RestaurantsListScreen restaurantsListScreen;
     RestaurantScreen restaurantScreen;
-    protected SavedLocationsScreen savedLocationsScreen;
+    SavedLocationsScreen savedLocationsScreen;
     OrdersScreen ordersScreen;
     VerifyAccountScreen verifyAccountScreen;
     PinCodeVerificationScreen pinCodeVerificationScreen;
     AddReferalCodeScreen addReferalCodeScreen;
 
-    protected static AppiumDriver driver;
+    protected AppiumDriver driver;
 
+    @BeforeMethod
+    @Parameters({"platform", "udid", "systemPort"})
+    void startAppiumServer(String platform, String udid, String systemPort) {
+        String[] platformInfo = platform.split(" ");
 
-    @BeforeEach
-    void startAppiumServer(DeviceCapabilities device) {
-        Capabilities capabilities = getCapabilities(device);
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "DeviceName");
+        capabilities.setCapability(MobileCapabilityType.UDID, udid);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformInfo[0]);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformInfo[1]);
+        capabilities.setCapability(MobileCapabilityType.APP, ANDROID_FILE_PATH);
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
 
         try {
             driver = new AndroidDriver<MobileElement>(new URL(APPIUM_URL), capabilities);
@@ -66,27 +74,10 @@ public class BaseTest {
         savedLocationsScreen = new SavedLocationsScreen(driver);
     }
 
-    public DesiredCapabilities getCapabilities(DeviceCapabilities device) {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Smaz");
-        capabilities.setCapability(MobileCapabilityType.UDID, device.udid());
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, device.platformName());
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, device.platformVersion());
-        capabilities.setCapability(MobileCapabilityType.APP, ANDROID_FILE_PATH);
-        capabilities.setCapability("autoGrantPermissions", true);
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, device.systemPort());
-        return capabilities;
-    }
-
-    @AfterEach
-    void closeApp() {
+    @AfterMethod
+    public void teardown() {
         if (driver != null) {
-            try {
-                driver.quit();
-            } catch (Exception e) {
-                LOG.error("unable to stop appium", e);
-            }
+            driver.quit();
         }
     }
 }

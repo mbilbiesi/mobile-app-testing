@@ -1,4 +1,4 @@
-package com.hs.mobile.enumeration;
+package com.hs.mobile.data;
 
 public enum LocationType {
     HOME,

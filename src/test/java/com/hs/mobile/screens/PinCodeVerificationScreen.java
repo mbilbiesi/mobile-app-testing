@@ -2,15 +2,13 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class PinCodeVerificationScreen extends AbstractScreen {
 
@@ -80,18 +78,18 @@ public class PinCodeVerificationScreen extends AbstractScreen {
 
     @Step("Make sure that all Pin code verification screen elements are showing up")
     public void verifyThatAllPinCodeVerificationScreenElementsIsDisplayed() {
-        assertAll(
-                () -> assertThat(isEleCustomerPhoneNumberDisplayed())
-                        .as("Customer's mobile number is not displayed.").isTrue(),
-                () -> assertThat(isTxtVerificationCodeDisplayed()).as(
-                        "Verification code text box is not displayed.").isTrue(),
-                () -> assertThat(isLnkResendPinDisplayed()).as(
-                        "Resend Pin link is not displayed.").isTrue(),
-                () -> assertThat(isLnkResendPinCallDisplayed()).as(
-                        "Call to Resend Pin link is not displayed.").isTrue(),
-                () -> assertThat(isBtnVerifyNumberDisplayed()).as(
-                        "Verify My Number button is not displayed.").isTrue()
-        );
+        SoftAssertions soft = new SoftAssertions();
+        soft.assertThat(isEleCustomerPhoneNumberDisplayed())
+                .as("Customer's mobile number is not displayed.").isTrue();
+        soft.assertThat(isTxtVerificationCodeDisplayed()).as(
+                "Verification code text box is not displayed.").isTrue();
+        soft.assertThat(isLnkResendPinDisplayed()).as(
+                "Resend Pin link is not displayed.").isTrue();
+        soft.assertThat(isLnkResendPinCallDisplayed()).as(
+                "Call to Resend Pin link is not displayed.").isTrue();
+        soft.assertThat(isBtnVerifyNumberDisplayed()).as(
+                "Verify My Number button is not displayed.").isTrue();
+        soft.assertAll();
     }
 
     @Step("Insert Verification Code")

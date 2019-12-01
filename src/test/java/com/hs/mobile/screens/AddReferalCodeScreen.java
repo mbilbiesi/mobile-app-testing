@@ -2,15 +2,13 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class AddReferalCodeScreen extends AbstractScreen {
     public AddReferalCodeScreen(AppiumDriver driver) {
@@ -79,18 +77,18 @@ public class AddReferalCodeScreen extends AbstractScreen {
 
     @Step("Make sure that all Add Referal Code screen elements are displayed")
     public void verifyThatAllAddReferalCodeScreenElementsIsDisplayed() {
-        assertAll(
-                () -> assertThat(isBtnCloseDisplayed())
-                        .as("Close button is not displayed.").isTrue(),
-                () -> assertThat(isImgReferralCodeDisplayed())
-                        .as("Referral Code Image is not displayed.").isTrue(),
-                () -> assertThat(isLblReferralCodeDisplayed())
-                        .as("Referral Code Label is not displayed.").isTrue(),
-                () -> assertThat(isTxtReferralCodeDisplayed())
-                        .as("Referral Code Text is not displayed.").isTrue(),
-                () -> assertThat(isBtnVerifyReferralCodeDisplayed()).as(
-                        "Verify Referral Code button is not displayed.").isTrue()
-        );
+        SoftAssertions soft = new SoftAssertions();
+        soft.assertThat(isBtnCloseDisplayed())
+                .as("Close button is not displayed.").isTrue();
+        soft.assertThat(isImgReferralCodeDisplayed())
+                .as("Referral Code Image is not displayed.").isTrue();
+        soft.assertThat(isLblReferralCodeDisplayed())
+                .as("Referral Code Label is not displayed.").isTrue();
+        soft.assertThat(isTxtReferralCodeDisplayed())
+                .as("Referral Code Text is not displayed.").isTrue();
+        soft.assertThat(isBtnVerifyReferralCodeDisplayed()).as(
+                "Verify Referral Code button is not displayed.").isTrue();
+        soft.assertAll();
     }
 
     @Step("Click the Close button")
