@@ -25,7 +25,11 @@ class RestaurantsListTests extends BaseTest {
     @Description("Make sure that all Restaurant List objects are displayed correctly")
     @Severity(SeverityLevel.CRITICAL)
     public void checkRestaurantsListLayout(TestInfo testInfo){
-
+        homeScreen.clickFindRestaurantsButton();
+        /*
+        Location steps
+         */
+        restaurantsListScreen.verifyRestaurantsListLayout();
     }
 
 }
