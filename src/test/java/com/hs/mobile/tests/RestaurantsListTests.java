@@ -1,5 +1,6 @@
 package com.hs.mobile.tests;
 
+import com.hs.mobile.steps.LocationSteps;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -19,6 +20,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 @Execution(ExecutionMode.CONCURRENT)
 class RestaurantsListTests extends BaseTest {
 
+    LocationSteps locationSteps = new LocationSteps();
+
     @Test
     @Issue("HSAP-180")
     @Story("Check Restaurants List Screen Layout")
@@ -26,9 +29,9 @@ class RestaurantsListTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void checkRestaurantsListLayout(TestInfo testInfo){
         homeScreen.clickFindRestaurantsButton();
-        /*
-        Location steps
-         */
+        locationSteps.searchForALandmark();
+        locationsScreen.insertAddressDescription("description");
+        locationsScreen.submitAddress();
         restaurantsListScreen.verifyRestaurantsListLayout();
     }
 
