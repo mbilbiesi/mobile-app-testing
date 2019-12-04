@@ -125,4 +125,10 @@ public class HomeScreen extends AbstractScreen {
     public void clickOnResturantIcon() {
         touchAction.tap(tapOptions().withElement(element(restaurantsItem))).perform();
     }
+
+    @Step("Click on more")
+    public HomeScreenSideMenu clickOnMore() {
+        tap(moreItem);
+        return new HomeScreenSideMenu(driver);
+    }
 }

@@ -3,9 +3,11 @@ package com.hs.mobile.tests;
 import com.google.common.io.Resources;
 import com.hs.mobile.screens.AddReferalCodeScreen;
 import com.hs.mobile.screens.HomeScreen;
+import com.hs.mobile.screens.InvoicesScreen;
 import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.OrdersScreen;
 import com.hs.mobile.screens.PinCodeVerificationScreen;
+import com.hs.mobile.screens.ProfileScreen;
 import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.screens.RestaurantsListScreen;
 import com.hs.mobile.screens.SavedLocationsScreen;
@@ -18,11 +20,15 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
 import java.net.URL;
+
+import static io.appium.java_client.remote.MobileCapabilityType.FULL_RESET;
+import static io.appium.java_client.remote.MobileCapabilityType.NEW_COMMAND_TIMEOUT;
+import static io.appium.java_client.remote.MobileCapabilityType.NO_RESET;
 
 
 public class BaseTest {
@@ -39,16 +45,18 @@ public class BaseTest {
     VerifyAccountScreen verifyAccountScreen;
     PinCodeVerificationScreen pinCodeVerificationScreen;
     AddReferalCodeScreen addReferalCodeScreen;
+    ProfileScreen profileScreen;
+    InvoicesScreen invoicesScreen;
 
     protected AppiumDriver driver;
 
-    @BeforeMethod
+    @BeforeClass
     @Parameters({"platform", "udid", "systemPort"})
     void startAppiumServer(String platform, String udid, String systemPort) {
         String[] platformInfo = platform.split(" ");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "DeviceName");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel2Emulator");
         capabilities.setCapability(MobileCapabilityType.UDID, udid);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformInfo[0]);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformInfo[1]);
@@ -60,7 +68,7 @@ public class BaseTest {
         try {
             driver = new AndroidDriver<MobileElement>(new URL(APPIUM_URL), capabilities);
         } catch (Exception e) {
-            LOG.error("unable to initiate Android driver", e);
+            System.out.println(e.getMessage());
         }
 
         homeScreen = new HomeScreen(driver);
@@ -72,9 +80,11 @@ public class BaseTest {
         pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
         addReferalCodeScreen = new AddReferalCodeScreen(driver);
         savedLocationsScreen = new SavedLocationsScreen(driver);
+        profileScreen = new ProfileScreen(driver);
+        invoicesScreen = new InvoicesScreen(driver);
     }
 
-    @AfterMethod
+    @AfterClass
     public void teardown() {
         if (driver != null) {
             driver.quit();
