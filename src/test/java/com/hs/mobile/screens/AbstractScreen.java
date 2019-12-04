@@ -1,15 +1,12 @@
 package com.hs.mobile.screens;
 
-import com.hs.mobile.enumeration.ElementAttribute;
+import com.hs.mobile.data.ElementAttribute;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.remote.HideKeyboardStrategy;
-import io.qameta.allure.Attachment;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -22,9 +19,9 @@ class AbstractScreen {
     protected final TouchAction touchAction;
     protected final AppiumDriver driver;
 
-    public AbstractScreen(AppiumDriver driver, TouchAction touchAction) {
+    public AbstractScreen(AppiumDriver driver) {
         this.driver = driver;
-        this.touchAction = touchAction;
+        this.touchAction = new TouchAction(driver);
         PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
     }
 
@@ -43,11 +40,6 @@ class AbstractScreen {
 
     public boolean isIOS() {
         return driver instanceof IOSDriver;
-    }
-
-    @Attachment(value = "screenshot", type = "image/png")
-    public byte[] takeScreenshot() {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     void tap(WebElement element) {

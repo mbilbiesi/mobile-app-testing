@@ -2,23 +2,15 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class VerifyAccountScreen extends AbstractScreen {
-    public VerifyAccountScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
-    }
-
-    TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/phone_number")
@@ -27,6 +19,10 @@ public class VerifyAccountScreen extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_login")
     private MobileElement btnNext;
+
+    public VerifyAccountScreen(AppiumDriver driver) {
+        super(driver);
+    }
 
     public boolean isTxtPhoneNumberDisplayed() {
         return txtPhoneNumber.isDisplayed();
@@ -46,12 +42,12 @@ public class VerifyAccountScreen extends AbstractScreen {
 
     @Step("Make sure that all orders details are displayed if customer isn't logged in")
     public void verifyThatAllMyOrdersElementsIsDisplayed() {
-        assertAll(
-                () -> assertThat(isTxtPhoneNumberDisplayed())
-                        .as("Mobile number text box is not displayed.").isTrue(),
-                () -> assertThat(isBtnNextDisplayed()).as(
-                        "Next button is not displayed.").isTrue()
-        );
+        SoftAssertions soft = new SoftAssertions();
+        soft.assertThat(isTxtPhoneNumberDisplayed())
+                .as("Mobile number text box is not displayed.").isTrue();
+        soft.assertThat(isBtnNextDisplayed()).as(
+                "Next button is not displayed.").isTrue();
+        soft.assertAll();
     }
 
     @Step("Insert mobile number")

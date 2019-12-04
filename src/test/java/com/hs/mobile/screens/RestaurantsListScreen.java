@@ -1,10 +1,10 @@
 package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,12 +15,11 @@ import java.util.List;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class RestaurantsListScreen extends AbstractScreen {
 
-    public RestaurantsListScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
+    public RestaurantsListScreen(AppiumDriver driver) {
+        super(driver);
     }
 
     @iOSXCUITFindBy(id = "")
@@ -136,7 +135,7 @@ public class RestaurantsListScreen extends AbstractScreen {
         return imgLocationIcon;
     }
 
-    public boolean isLocationIconDisplayed(){
+    public boolean isLocationIconDisplayed() {
         return getLocationIcon().isDisplayed();
     }
 
@@ -144,7 +143,7 @@ public class RestaurantsListScreen extends AbstractScreen {
         return eleLocationValue;
     }
 
-    public boolean isLocationValueDisplayed(){
+    public boolean isLocationValueDisplayed() {
         return getLocationValue().isDisplayed();
     }
 
@@ -152,7 +151,7 @@ public class RestaurantsListScreen extends AbstractScreen {
         return txtSearchRestaurants;
     }
 
-    public boolean isSearchTextboxDisplayed(){
+    public boolean isSearchTextboxDisplayed() {
         return getSearchRestaurants().isDisplayed();
     }
 
@@ -160,7 +159,7 @@ public class RestaurantsListScreen extends AbstractScreen {
         return imgSearchIcon;
     }
 
-    public boolean isSearchIconDisplayed(){
+    public boolean isSearchIconDisplayed() {
         return getSearchIcon().isDisplayed();
     }
 
@@ -318,7 +317,7 @@ public class RestaurantsListScreen extends AbstractScreen {
 
     public boolean isRecommendedBadgeDisplayed(int i) {
         boolean displayed = false;
-        if(getRecommendedBadge().size() > 0) {
+        if (getRecommendedBadge().size() > 0) {
             displayed = getRecommendedBadge().get(i).isDisplayed();
         }
         return displayed;
@@ -343,65 +342,62 @@ public class RestaurantsListScreen extends AbstractScreen {
     }
 
     @Step("Verify that all restaurants list screen objects are displayed correctly")
-    public void verifyRestaurantsListLayout(){
-
+    public void verifyRestaurantsListLayout() {
         int restaurantCount = getRestaurantsCount();
-
-        assertAll(
-                () -> assertThat(isLocationValueDisplayed())
-                        .as("The location text is not displayed").isTrue(),
-                () -> assertThat(isLocationIconDisplayed()).as(
-                        "The location icon is not displayed.").isTrue(),
-                () -> assertThat(isSearchTextboxDisplayed()).as(
-                        "Search restaurants textbox is not displayed.").isTrue(),
-                () -> assertThat(isSearchIconDisplayed())
-                        .as("Search icon is not displayed.").isTrue(),
-                () -> assertThat(isOffersContainerDisplayed())
-                        .as("Offers container is not displayed.").isTrue(),
-                () -> assertThat(isOfferWidgetDisplayed())
-                        .as("Offer widgets are not displayed.").isTrue(),
-                () -> assertThat(isCampaignContainerDisplayed())
-                        .as("Campaings container is not displayed.").isTrue(),
-                () -> assertThat(isCampaignBannersDisplayed())
-                        .as("Campaign banners are not displayed").isTrue(),
-                () -> assertThat(isFiltersWidgetDisplayed())
-                        .as("Filters widget is not displayed").isTrue(),
-                () -> assertThat(isFilterButtonsDisplayed())
-                        .as("Filters are not displayed").isTrue(),
-                () -> assertThat(isFiltersNamesDisplayed())
-                        .as("Filter names are not displayed").isTrue(),
-                () -> assertThat(isFiltersIconsDisplayed())
-                        .as("Filter icons are not displayed").isTrue(),
-                () -> assertThat(isRestaurantsListDisplayed())
-                        .as("Restaurants list widget is not displayed").isTrue(),
-                () -> assertThat(isRestaurantWidgetDisplayed())
-                        .as("Restaurants widgets are not displayed").isTrue(),
-                () -> assertThat(isRestaurantTitleDisplayed(restaurantCount))
-                        .as("Restaurants titles are not displayed for some " +
-                                "or all of the restaurants").isTrue(),
-                () -> assertThat(isRestaurantTypesDisplayed(restaurantCount))
-                        .as("Restaurant type is not displayed for some " +
-                                "or all of the restaurants").isTrue(),
-                () -> assertThat(isRestaurantDistanceDisplayed(restaurantCount))
-                        .as("Restaurant distance is not displayed for some " +
-                                "or all of the restaurants").isTrue(),
-                () -> assertThat(isDeliveryTextDisplayed(restaurantCount))
-                        .as("Delivery text is not displayed for some " +
-                                "or all of the restaurants").isTrue(),
-                () -> assertThat(isDeliveryFeeValueDisplayed(restaurantCount))
-                        .as("Delivery fee value is not displayed for some " +
-                                "or all of the restaurants").isTrue(),
-                () -> assertThat(isDeliveryFeeCurrencyDisplayed(restaurantCount))
-                        .as("Delivery fee currency is not displayed for some " +
-                                "or all of the restaurants").isTrue(),
-                () -> assertThat(isRestaurantDeliveryInfoDisplayed(restaurantCount))
-                        .as("Restaurant delivery info is not displayed for some " +
-                                "or all of the restaurants").isTrue(),
-                () -> assertThat(isRestaurantDeliveryInfoIconDisplayed(restaurantCount))
-                        .as("Restaurant delivery info icon is not displayed for some " +
-                                "or all of the restaurants").isTrue()
-        );
-
+        SoftAssertions soft = new SoftAssertions();
+        soft.assertThat(isLocationValueDisplayed())
+                .as("The location text is not displayed").isTrue();
+        soft.assertThat(isLocationIconDisplayed()).as(
+                "The location icon is not displayed.").isTrue();
+        soft.assertThat(isSearchTextboxDisplayed()).as(
+                "Search restaurants textbox is not displayed.").isTrue();
+        soft.assertThat(isSearchIconDisplayed())
+                .as("Search icon is not displayed.").isTrue();
+        soft.assertThat(isOffersContainerDisplayed())
+                .as("Offers container is not displayed.").isTrue();
+        soft.assertThat(isOfferWidgetDisplayed())
+                .as("Offer widgets are not displayed.").isTrue();
+        soft.assertThat(isCampaignContainerDisplayed())
+                .as("Campaings container is not displayed.").isTrue();
+        soft.assertThat(isCampaignBannersDisplayed())
+                .as("Campaign banners are not displayed").isTrue();
+        soft.assertThat(isFiltersWidgetDisplayed())
+                .as("Filters widget is not displayed").isTrue();
+        soft.assertThat(isFilterButtonsDisplayed())
+                .as("Filters are not displayed").isTrue();
+        soft.assertThat(isFiltersNamesDisplayed())
+                .as("Filter names are not displayed").isTrue();
+        soft.assertThat(isFiltersIconsDisplayed())
+                .as("Filter icons are not displayed").isTrue();
+        soft.assertThat(isRestaurantsListDisplayed())
+                .as("Restaurants list widget is not displayed").isTrue();
+        soft.assertThat(isRestaurantWidgetDisplayed())
+                .as("Restaurants widgets are not displayed").isTrue();
+        soft.assertThat(isRestaurantTitleDisplayed(restaurantCount))
+                .as("Restaurants titles are not displayed for some " +
+                        "or all of the restaurants").isTrue();
+        soft.assertThat(isRestaurantTypesDisplayed(restaurantCount))
+                .as("Restaurant type is not displayed for some " +
+                        "or all of the restaurants").isTrue();
+        soft.assertThat(isRestaurantDistanceDisplayed(restaurantCount))
+                .as("Restaurant distance is not displayed for some " +
+                        "or all of the restaurants").isTrue();
+        soft.assertThat(isDeliveryTextDisplayed(restaurantCount))
+                .as("Delivery text is not displayed for some " +
+                        "or all of the restaurants").isTrue();
+        soft.assertThat(isDeliveryFeeValueDisplayed(restaurantCount))
+                .as("Delivery fee value is not displayed for some " +
+                        "or all of the restaurants").isTrue();
+        soft.assertThat(isDeliveryFeeCurrencyDisplayed(restaurantCount))
+                .as("Delivery fee currency is not displayed for some " +
+                        "or all of the restaurants").isTrue();
+        soft.assertThat(isRestaurantDeliveryInfoDisplayed(restaurantCount))
+                .as("Restaurant delivery info is not displayed for some " +
+                        "or all of the restaurants").isTrue();
+        soft.assertThat(isRestaurantDeliveryInfoIconDisplayed(restaurantCount))
+                .as("Restaurant delivery info icon is not displayed for some " +
+                        "or all of the restaurants").isTrue();
+        soft.assertAll();
     }
 
     @Step("Search for a restaurant")
@@ -419,7 +415,7 @@ public class RestaurantsListScreen extends AbstractScreen {
 
         assertThat(restaurantCountAfterSearch != 0).as("No restaurants match the search criteria")
                 .isTrue();
-        for(int i=0;i<restaurantCountAfterSearch;i++){
+        for (int i = 0; i < restaurantCountAfterSearch; i++) {
             restaurantTitle = getRestaurantTitle().get(i).getText();
             assertThat(restaurantTitle.contains(keyword)).as("The restaurant: "
                     + restaurantTitle + " doesnt match the search criteria with the keyword: " + keyword)
@@ -433,8 +429,7 @@ public class RestaurantsListScreen extends AbstractScreen {
         try {
             tap(getClearSearchResultButton());
             restaurantsCountAfterClearingSearch = getRestaurantsCount();
-        }
-        catch (NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
 
@@ -451,19 +446,17 @@ public class RestaurantsListScreen extends AbstractScreen {
     public void checkRecommendedBadge(boolean isRestaurantRecommended) {
         int restaurantCount = getRestaurantsCount();
         int i = 0;
-        if(isRestaurantRecommended) {
-            for(i=0;i<restaurantCount;i++) {
-            assertThat(isRecommendedBadgeDisplayed(i))
-                    .as("Recommended badge is not displayed for this restaurant").isTrue();
+        if (isRestaurantRecommended) {
+            for (i = 0; i < restaurantCount; i++) {
+                assertThat(isRecommendedBadgeDisplayed(i))
+                        .as("Recommended badge is not displayed for this restaurant").isTrue();
             }
-        }
-        else {
-            for (i=0;i<restaurantCount;i++) {
+        } else {
+            for (i = 0; i < restaurantCount; i++) {
                 assertThat(isRecommendedBadgeDisplayed(i))
                         .as("Recommended badge is displayed even though the restaurant is not recommended")
                         .isFalse();
             }
         }
     }
-
 }
