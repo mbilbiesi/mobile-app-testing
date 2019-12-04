@@ -1,7 +1,6 @@
 package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
@@ -9,8 +8,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.hs.mobile.enumeration.ElementAttribute.ENABLED;
-import static com.hs.mobile.enumeration.ElementAttribute.TEXT;
+import static com.hs.mobile.data.ElementAttribute.ENABLED;
+import static com.hs.mobile.data.ElementAttribute.TEXT;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
@@ -43,8 +42,8 @@ public class LocationsScreen extends AbstractScreen {
     @AndroidFindBy(xpath = "//android.widget.RadioGroup[@resource-id='com.hungerstation.android.web.debug:id/save_location_radio_group']/*")
     private List<WebElement> locationTypes;
 
-    public LocationsScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
+    public LocationsScreen(AppiumDriver driver) {
+        super(driver);
     }
 
     @Step("search for restaurants")

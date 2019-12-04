@@ -12,10 +12,6 @@ import java.util.List;
 
 public class SavedLocationsScreen extends AbstractScreen {
 
-    public SavedLocationsScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
-    }
-
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.hungerstation.android.web.debug:id/my_addresses_recycler']/*")
     private List<WebElement> savedLocations;
@@ -35,6 +31,10 @@ public class SavedLocationsScreen extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delete_img")
     private WebElement delete;
+
+    public SavedLocationsScreen(AppiumDriver driver) {
+        super(driver);
+    }
 
     public void addNewLocation() {
         tap(newLocation);

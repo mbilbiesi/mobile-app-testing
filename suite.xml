@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="HS Android Smoke Test" verbose="1" parallel="tests"
+       thread-count="2" configfailurepolicy="continue">
+    <test name="Pixel 2">
+        <parameter name="platform" value="Android 10.0"/>
+        <parameter name="udid" value="emulator-5556"/>
+        <parameter name="systemPort" value="8200"/>
+        <classes>
+            <class name="com.hs.mobile.tests.HomescreenTests"/>
+            <class name="com.hs.mobile.tests.LocationTests"/>
+        </classes>
+    </test>
+    <test name="Galaxy Nexus">
+        <parameter name="platform" value="Android 10.0"/>
+        <parameter name="udid" value="emulator-5554"/>
+        <parameter name="systemPort" value="8201"/>
+        <classes>
+            <class name="com.hs.mobile.tests.HomescreenTests"/>
+            <class name="com.hs.mobile.tests.LocationTests"/>
+        </classes>
+    </test>
+</suite>
