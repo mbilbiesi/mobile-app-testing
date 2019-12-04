@@ -5,6 +5,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -115,14 +116,21 @@ public class RestaurantsListScreen extends AbstractScreen {
     private List<WebElement> restaurantDeliveryInfoIcon;
 
     @iOSXCUITFindBy(xpath = "")
-    @AndroidFindBy(xpath = "//*[@id='com.hungerstation.android.web.debug:id/value" +
-            " and (@text='يوصى به' or @text='recommended')]")
+    @AndroidFindBy(xpath = "//*[@text='يوصى به' or @text='recommended']")
     private List<WebElement> recommendedBadge;
 
     @iOSXCUITFindBy(xpath = "")
     @AndroidFindBy(xpath = "//*[@id='com.hungerstation.android.web.debug:id/value'" +
             " and not(@text='يوصى به' or @text='recommended')]")
     private WebElement branchStatusBadge;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon_end")
+    private WebElement btnClearSearchResult;
+
+    public WebElement getClearSearchResultButton() {
+        return btnClearSearchResult;
+    }
 
     public WebElement getLocationIcon() {
         return imgLocationIcon;
@@ -308,6 +316,14 @@ public class RestaurantsListScreen extends AbstractScreen {
         return recommendedBadge;
     }
 
+    public boolean isRecommendedBadgeDisplayed(int i) {
+        boolean displayed = false;
+        if(getRecommendedBadge().size() > 0) {
+            displayed = getRecommendedBadge().get(i).isDisplayed();
+        }
+        return displayed;
+    }
+
     public WebElement getBranchStatusBadge() {
         return branchStatusBadge;
     }
@@ -322,10 +338,11 @@ public class RestaurantsListScreen extends AbstractScreen {
     }
 
     public int getRestaurantsCount() {
+        waitUntilRestaurantsAreLoaded();
         return getRestaurantWidgets().size();
     }
 
-    @Step
+    @Step("Verify that all restaurants list screen objects are displayed correctly")
     public void verifyRestaurantsListLayout(){
 
         int restaurantCount = getRestaurantsCount();
@@ -384,5 +401,69 @@ public class RestaurantsListScreen extends AbstractScreen {
                         .as("Restaurant delivery info icon is not displayed for some " +
                                 "or all of the restaurants").isTrue()
         );
+
     }
+
+    @Step("Search for a restaurant")
+    public String searchForRestaurant(String keyword) {
+        getSearchRestaurants().sendKeys(keyword);
+        hideKeyboard();
+        return keyword;
+    }
+
+    @Step("Verify that the restaurants that match the search criteria are returned")
+    public void verifyReturnedRestaurants(String keyword) {
+        int restaurantCountAfterSearch;
+        String restaurantTitle;
+        restaurantCountAfterSearch = getRestaurantsCount();
+
+        assertThat(restaurantCountAfterSearch != 0).as("No restaurants match the search criteria")
+                .isTrue();
+        for(int i=0;i<restaurantCountAfterSearch;i++){
+            restaurantTitle = getRestaurantTitle().get(i).getText();
+            assertThat(restaurantTitle.contains(keyword)).as("The restaurant: "
+                    + restaurantTitle + " doesnt match the search criteria with the keyword: " + keyword)
+                    .isTrue();
+        }
+    }
+
+    @Step("Clear the search criteria")
+    public int clearSearchCriteria() {
+        int restaurantsCountAfterClearingSearch = 0;
+        try {
+            tap(getClearSearchResultButton());
+            restaurantsCountAfterClearingSearch = getRestaurantsCount();
+        }
+        catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
+
+        return restaurantsCountAfterClearingSearch;
+    }
+
+    @Step("Verify that all restaurants are returned after clearing the search criteria")
+    public void verifyAllRestaurantsAreReturned(int allRestaurantsCount, int searchRestaurantCount) {
+        assertThat(allRestaurantsCount == searchRestaurantCount)
+                .as("Not all restaurants are returned after clearing search criteria").isTrue();
+    }
+
+    @Step("Verify that recommended badge is showing next to a recommended restaurant")
+    public void checkRecommendedBadge(boolean isRestaurantRecommended) {
+        int restaurantCount = getRestaurantsCount();
+        int i = 0;
+        if(isRestaurantRecommended) {
+            for(i=0;i<restaurantCount;i++) {
+            assertThat(isRecommendedBadgeDisplayed(i))
+                    .as("Recommended badge is not displayed for this restaurant").isTrue();
+            }
+        }
+        else {
+            for (i=0;i<restaurantCount;i++) {
+                assertThat(isRecommendedBadgeDisplayed(i))
+                        .as("Recommended badge is displayed even though the restaurant is not recommended")
+                        .isFalse();
+            }
+        }
+    }
+
 }

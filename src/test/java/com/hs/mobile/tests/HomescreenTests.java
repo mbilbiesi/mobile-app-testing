@@ -38,7 +38,7 @@ class HomescreenTests extends BaseTest {
     @Description("Login with an existing customer who doesnt have a saved address, and " +
             "verify that all home screen elements are present")
     @Severity(SeverityLevel.CRITICAL)
-    void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers(String phoneNum, String verificationCode) {
+    void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers(String phoneNum, String verificationCode, TestInfo testInfo) {
         //When customer logs in
         homeScreen.clickMyOrdersButton();
         ordersScreen.clickVerifyButton();

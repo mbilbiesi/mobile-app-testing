@@ -7,6 +7,7 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.openqa.selenium.WebElement;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
@@ -44,6 +45,10 @@ public class HomeScreen extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/more_item")
     private MobileElement moreItem;
+
+    @iOSXCUITFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='TBD']")
+    private WebElement lnkSkipPromotion;
 
     public HomeScreen(AppiumDriver driver, TouchAction touchAction) {
         super(driver, touchAction);

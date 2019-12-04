@@ -57,4 +57,6 @@ class AbstractScreen {
     String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
         return element.getAttribute(attribute.getName());
     }
+
+    //ToDo: Implement a method for scrolling down a page.
 }
