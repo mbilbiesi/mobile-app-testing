@@ -18,7 +18,7 @@ import static com.hs.mobile.data.Language.ARABIC;
 import static com.hs.mobile.data.Language.ENGLISH;
 
 @Feature("Settings Smoke Test")
-@Story("Verify settings screen functionality")
+@Story("Verify updates of language and notifications on the settings screen")
 @Issue("HSAP-183")
 @Listeners(TestListener.class)
 public class SettingsTests extends BaseTest {
