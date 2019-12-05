@@ -1,11 +1,11 @@
 package com.hs.mobile.screens;
 
+import com.hs.mobile.core.annotation.AssertElementVisibility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
-import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
@@ -15,30 +15,37 @@ public class HomeScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/main_location_text")
+    @AssertElementVisibility
     private MobileElement useMyCurrentLocationText;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/imgloc")
+    @AssertElementVisibility
     private MobileElement useMyCurrentLocationImage;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/BtnRestaurants")
+    @AssertElementVisibility
     private MobileElement findRestaurantsButton;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/restaurants_item")
+    @AssertElementVisibility
     private MobileElement restaurantsItem;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/orders_item")
+    @AssertElementVisibility
     private MobileElement ordersItem;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/offers_item")
+    @AssertElementVisibility
     private MobileElement offersItem;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/more_item")
+    @AssertElementVisibility
     private MobileElement moreItem;
 
     @iOSXCUITFindBy(xpath = "")
@@ -49,34 +56,6 @@ public class HomeScreen extends AbstractScreen {
         super(driver);
     }
 
-    @Step("Is 'Use my current location'")
-    public boolean isUseMyCurrentLocationTextDisplayed() {
-        return useMyCurrentLocationText.isDisplayed();
-    }
-
-    public boolean isUseMyCurrentLocationImageDisplayed() {
-        return useMyCurrentLocationImage.isDisplayed();
-    }
-
-    public boolean isFindRestaurantsButtonDisplayed() {
-        return findRestaurantsButton.isDisplayed();
-    }
-
-    public boolean isRestaurantsIconDisplayed() {
-        return restaurantsItem.isDisplayed();
-    }
-
-    public boolean isOrdersIconDisplayed() {
-        return ordersItem.isDisplayed();
-    }
-
-    public boolean isOffersIconDisplayed() {
-        return offersItem.isDisplayed();
-    }
-
-    public boolean isMoreIconDisplayed() {
-        return moreItem.isDisplayed();
-    }
 
     public MobileElement getOrdersItem() {
         return ordersItem;
@@ -98,22 +77,7 @@ public class HomeScreen extends AbstractScreen {
 
     @Step("Verify that all Homescreen elements are displayed correctly")
     public void verifyThatAllHomeElementsDisplayed() {
-        SoftAssertions soft = new SoftAssertions();
-        soft.assertThat(isUseMyCurrentLocationTextDisplayed())
-                .as("Use my current location text is not displayed.").isTrue();
-        soft.assertThat(isUseMyCurrentLocationImageDisplayed()).as(
-                "Use my current location image is not displayed.").isTrue();
-        soft.assertThat(isFindRestaurantsButtonDisplayed()).as(
-                "Find restaurant button is not displayed.").isTrue();
-        soft.assertThat(isRestaurantsIconDisplayed())
-                .as("Restaurants icon is not displayed.").isTrue();
-        soft.assertThat(isOrdersIconDisplayed())
-                .as("Orders icon is not displayed.").isTrue();
-        soft.assertThat(isOffersIconDisplayed())
-                .as("Offers icon is not displayed.").isTrue();
-        soft.assertThat(isMoreIconDisplayed())
-                .as("More icon is not displayed.").isTrue();
-        soft.assertAll();
+        verifyScreenElements();
     }
 
     @Step("Click the 'My Orders' button")
