@@ -11,6 +11,7 @@ import com.hs.mobile.screens.ProfileScreen;
 import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.screens.RestaurantsListScreen;
 import com.hs.mobile.screens.SavedLocationsScreen;
+import com.hs.mobile.screens.SettingsScreen;
 import com.hs.mobile.screens.VerifyAccountScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -47,6 +48,7 @@ public class BaseTest {
     AddReferalCodeScreen addReferalCodeScreen;
     ProfileScreen profileScreen;
     InvoicesScreen invoicesScreen;
+    SettingsScreen settingsScreen;
 
     protected AppiumDriver driver;
 
@@ -82,6 +84,7 @@ public class BaseTest {
         savedLocationsScreen = new SavedLocationsScreen(driver);
         profileScreen = new ProfileScreen(driver);
         invoicesScreen = new InvoicesScreen(driver);
+        settingsScreen = new SettingsScreen(driver);
     }
 
     @AfterClass

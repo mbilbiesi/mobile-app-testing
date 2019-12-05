@@ -14,6 +14,9 @@ public class HomeScreenSideMenu extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='3']")
     private WebElement invoices;
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='6']")
+    private WebElement settings;
 
     public HomeScreenSideMenu(AppiumDriver driver) {
         super(driver);
@@ -27,5 +30,10 @@ public class HomeScreenSideMenu extends AbstractScreen {
     @Step("Go to profile page")
     public void goToInvoices() {
         tap(invoices);
+    }
+
+    @Step("Go to settings page")
+    public void goToSettings() {
+        tap(settings);
     }
 }
