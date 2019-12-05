@@ -68,7 +68,7 @@ class AbstractScreen {
                         WebElement element = (WebElement) field.get(this);
                         soft.assertThat(element.isDisplayed())
                                 .as(field.getName() + " is not displayed")
-                                .isFalse();
+                                .isTrue();
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
