@@ -23,7 +23,7 @@ class RestaurantsListTests extends BaseTest {
     String recommendedRestaurant = "ماكدونالد";
     String notReadyRecommendedRestaurant = "ليمونة";
 
-    @Test
+    @Test(priority = 1)
     @Issue("HSAP-185")
     @Story("Check Restaurants List Screen Layout")
     @Description("Make sure that all Restaurant List objects are displayed correctly")
@@ -43,7 +43,7 @@ class RestaurantsListTests extends BaseTest {
         restaurantsListScreen.verifyRestaurantsListLayout();
     }
 
-    @Test
+    @Test(priority = 2)
     @Issue("HSAP-186")
     @Story("Search for a specific restaurant")
     @Description("Make sure that all restaurants meet the search criteria are returned correctly")
@@ -59,7 +59,7 @@ class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
 
         //And clicks "Search for Restaurants" button
-        restaurantCount = restaurantsListScreen.getRestaurantsCount();
+        restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
 
         //And searches for specific restaurants
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
@@ -75,7 +75,7 @@ class RestaurantsListTests extends BaseTest {
 
     }
 
-    @Test
+    @Test(priority = 3)
     @Issue("HSAP-188")
     @Story("Check if recommended flag appears on the restaurants list")
     @Description("Make sure that the recommended badge shows next to the recommended restaurants")
@@ -100,7 +100,7 @@ class RestaurantsListTests extends BaseTest {
         restaurantsListScreen.clearSearchCriteria();
     }
 
-    @Test
+    @Test(priority = 4)
     @Issue("HSAP-189")
     @Story("Check if recommended flag appears for non-ready restaurants")
     @Description("Make sure that the recommended badge doesn't show for recommended " +
@@ -126,8 +126,7 @@ class RestaurantsListTests extends BaseTest {
         restaurantsListScreen.clearSearchCriteria();
     }
 
-    @Test
-    @Order(5)
+    @Test(priority = 5)
     @Issue("HSAP-190")
     @Story("Check if user can see restaurants stored by distance")
     @Description("Make sure that restaurants are sorted according their distance from the searched location")

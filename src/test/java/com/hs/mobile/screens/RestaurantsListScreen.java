@@ -1,5 +1,6 @@
 package com.hs.mobile.screens;
 
+import com.hs.mobile.core.annotation.AssertElementVisibility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -26,38 +27,47 @@ public class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_icon")
+    @AssertElementVisibility
     private WebElement imgLocationIcon;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_value")
+    @AssertElementVisibility
     private WebElement eleLocationValue;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/input")
+    @AssertElementVisibility
     private WebElement txtSearchRestaurants;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon_start")
+    @AssertElementVisibility
     private WebElement imgSearchIcon;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/viewpager")
+    @AssertElementVisibility
     private WebElement eleOffersContainer;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/image")
+    @AssertElementVisibility
     private List<WebElement> offerWidgets;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/campaign_container")
+    @AssertElementVisibility
     private WebElement campaignContainer;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/campaign_banner")
+    @AssertElementVisibility
     private List<WebElement> campainBanners;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_component")
+    @AssertElementVisibility
     private WebElement filtersWidget;
 
     @iOSXCUITFindBy(id = "")
@@ -66,14 +76,17 @@ public class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_name")
+    @AssertElementVisibility
     private List<WebElement> filtersNames;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_icon")
+    @AssertElementVisibility
     private List<WebElement> filtersIcons;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/RestListView")
+    @AssertElementVisibility
     private WebElement restaurantsListWidget;
 
     @iOSXCUITFindBy(id = "")
@@ -82,6 +95,7 @@ public class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/constrain_parent")
+    @AssertElementVisibility
     private List<WebElement> restaurantWidgets;
 
     @iOSXCUITFindBy(id = "")
@@ -137,104 +151,55 @@ public class RestaurantsListScreen extends AbstractScreen {
         return imgLocationIcon;
     }
 
-    public boolean isLocationIconDisplayed() {
-        return getLocationIcon().isDisplayed();
-    }
-
     public WebElement getLocationValue() {
         return eleLocationValue;
     }
 
-    public boolean isLocationValueDisplayed() {
-        return getLocationValue().isDisplayed();
-    }
 
     public WebElement getSearchRestaurants() {
         return txtSearchRestaurants;
-    }
-
-    public boolean isSearchTextboxDisplayed() {
-        return getSearchRestaurants().isDisplayed();
     }
 
     public WebElement getSearchIcon() {
         return imgSearchIcon;
     }
 
-    public boolean isSearchIconDisplayed() {
-        return getSearchIcon().isDisplayed();
-    }
-
     public WebElement getOffersContainer() {
         return eleOffersContainer;
-    }
-
-    public boolean isOffersContainerDisplayed() {
-        return getOffersContainer().isDisplayed();
     }
 
     public List<WebElement> getOfferWidgets() {
         return offerWidgets;
     }
 
-    public boolean isOfferWidgetDisplayed() {
-        return getOfferWidgets().size() > 0;
-    }
-
     public WebElement getCampaignContainer() {
         return campaignContainer;
-    }
-
-    public boolean isCampaignContainerDisplayed() {
-        return getCampaignContainer().isDisplayed();
     }
 
     public List<WebElement> getCampainBanners() {
         return campainBanners;
     }
 
-    public boolean isCampaignBannersDisplayed() {
-        return getCampainBanners().size() > 0;
-    }
-
     public WebElement getFiltersWidget() {
         return filtersWidget;
-    }
-
-    public boolean isFiltersWidgetDisplayed() {
-        return getFiltersWidget().isDisplayed();
     }
 
     public List<WebElement> getFilterButtons() {
         return btnFilter;
     }
 
-    public boolean isFilterButtonsDisplayed() {
-        return getFilterButtons().size() > 0;
-    }
-
     public List<WebElement> getFiltersNames() {
         return filtersNames;
     }
 
-    public boolean isFiltersNamesDisplayed() {
-        return getFiltersNames().size() > 0;
-    }
 
     public List<WebElement> getFiltersIcons() {
         return filtersIcons;
     }
 
-    public boolean isFiltersIconsDisplayed() {
-        return getFiltersIcons().size() > 0;
-    }
 
     public WebElement getRestaurantsListWidget() {
         return restaurantsListWidget;
-    }
-
-    public boolean isRestaurantsListDisplayed() {
-        return getRestaurantsListWidget().isDisplayed();
     }
 
     public List<WebElement> getRestaurantList() {
@@ -243,10 +208,6 @@ public class RestaurantsListScreen extends AbstractScreen {
 
     public List<WebElement> getRestaurantWidgets() {
         return restaurantWidgets;
-    }
-
-    public boolean isRestaurantWidgetDisplayed() {
-        return getRestaurantWidgets().size() > 0;
     }
 
     public List<WebElement> getRestaurantTitle() {
@@ -378,36 +339,11 @@ public class RestaurantsListScreen extends AbstractScreen {
 
     @Step("Verify that all restaurants list screen objects are displayed correctly")
     public void verifyRestaurantsListLayout() {
-        int restaurantCount = getRestaurantsCount();
+        int restaurantCount = getRestaurantsCount(true);
         SoftAssertions soft = new SoftAssertions();
-        soft.assertThat(isLocationValueDisplayed())
-                .as("The location text is not displayed").isTrue();
-        soft.assertThat(isLocationIconDisplayed()).as(
-                "The location icon is not displayed.").isTrue();
-        soft.assertThat(isSearchTextboxDisplayed()).as(
-                "Search restaurants textbox is not displayed.").isTrue();
-        soft.assertThat(isSearchIconDisplayed())
-                .as("Search icon is not displayed.").isTrue();
-        soft.assertThat(isOffersContainerDisplayed())
-                .as("Offers container is not displayed.").isTrue();
-        soft.assertThat(isOfferWidgetDisplayed())
-                .as("Offer widgets are not displayed.").isTrue();
-        soft.assertThat(isCampaignContainerDisplayed())
-                .as("Campaings container is not displayed.").isTrue();
-        soft.assertThat(isCampaignBannersDisplayed())
-                .as("Campaign banners are not displayed").isTrue();
-        soft.assertThat(isFiltersWidgetDisplayed())
-                .as("Filters widget is not displayed").isTrue();
-        soft.assertThat(isFilterButtonsDisplayed())
-                .as("Filters are not displayed").isTrue();
-        soft.assertThat(isFiltersNamesDisplayed())
-                .as("Filter names are not displayed").isTrue();
-        soft.assertThat(isFiltersIconsDisplayed())
-                .as("Filter icons are not displayed").isTrue();
-        soft.assertThat(isRestaurantsListDisplayed())
-                .as("Restaurants list widget is not displayed").isTrue();
-        soft.assertThat(isRestaurantWidgetDisplayed())
-                .as("Restaurants widgets are not displayed").isTrue();
+
+        verifyScreenElements();
+
         soft.assertThat(isRestaurantTitleDisplayed(restaurantCount))
                 .as("Restaurants titles are not displayed for some " +
                         "or all of the restaurants").isTrue();
@@ -463,7 +399,7 @@ public class RestaurantsListScreen extends AbstractScreen {
         int restaurantsCountAfterClearingSearch = 0;
         try {
             tap(getClearSearchResultButton());
-            restaurantsCountAfterClearingSearch = getRestaurantsCount();
+            restaurantsCountAfterClearingSearch = getRestaurantsCount(true);
         } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
