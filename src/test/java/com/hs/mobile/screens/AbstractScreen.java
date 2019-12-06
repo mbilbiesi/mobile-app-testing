@@ -1,7 +1,9 @@
 package com.hs.mobile.screens;
 
-import com.hs.mobile.enumeration.ElementAttribute;
+import com.hs.mobile.core.annotation.AssertElementVisibility;
+import com.hs.mobile.data.ElementAttribute;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -9,6 +11,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.remote.HideKeyboardStrategy;
+import org.assertj.core.api.SoftAssertions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Attachment;
@@ -19,6 +22,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
+import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.List;
 
@@ -33,6 +37,7 @@ class AbstractScreen {
     protected final TouchAction touchAction;
     protected final AppiumDriver driver;
 
+    public AbstractScreen(AppiumDriver driver) {
     @iOSXCUITFindBy(xpath = "")
     @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='TBD']")
     private List<WebElement> lnkSkipPromotion;
@@ -45,8 +50,8 @@ class AbstractScreen {
 
     public AbstractScreen(AppiumDriver driver, TouchAction touchAction) {
         this.driver = driver;
-        this.touchAction = touchAction;
-        PageFactory.initElements(new AppiumFieldDecorator(driver, ofSeconds(15)), this);
+        this.touchAction = new TouchAction(driver);
+        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
     }
 
     public void hideKeyboard() {
@@ -66,11 +71,6 @@ class AbstractScreen {
         return driver instanceof IOSDriver;
     }
 
-    @Attachment(value = "screenshot", type = "image/png")
-    public byte[] takeScreenshot() {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }
-
     void tap(WebElement element) {
         touchAction.tap(tapOptions().withElement(element(element))).perform();
     }
@@ -80,6 +80,29 @@ class AbstractScreen {
     }
 
     //ToDo: Implement a method for scrolling down a page.
+
+    void verifyScreenElements() {
+        SoftAssertions soft = new SoftAssertions();
+
+        Class<?> clazz = this.getClass();
+        for (Field field : clazz.getDeclaredFields()) {
+            if (field.isAnnotationPresent(AssertElementVisibility.class)) {
+                if (field.getType().isAssignableFrom(MobileElement.class)) {
+                    try {
+                        field.setAccessible(true);
+                        WebElement element = (WebElement) field.get(this);
+                        soft.assertThat(element.isDisplayed())
+                                .as(field.getName() + " is not displayed")
+                                .isTrue();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        soft.assertAll();
+    }
     public void scrollDown1(int swipeTimes, int durationForSwipe) {
         Dimension dimension = driver.manage().window().getSize();
 

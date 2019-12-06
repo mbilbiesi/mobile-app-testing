@@ -1,6 +1,6 @@
 package com.hs.mobile.tests;
 
-import com.hs.mobile.steps.LocationSteps;
+import com.hs.mobile.core.listener.TestListener;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -8,23 +8,14 @@ import io.qameta.allure.Issue;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInfo;
-import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.parallel.Execution;
-import org.junit.jupiter.api.parallel.ExecutionMode;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
 @Epic("Smoke Tests")
 @Feature("Restaurants List Tests")
-@Execution(ExecutionMode.CONCURRENT)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Listeners(TestListener.class)
 class RestaurantsListTests extends BaseTest {
 
-    LocationSteps locationSteps = new LocationSteps();
     int restaurantCount = 0;
     int afterSearchRestaurantCount = 0;
     String keyword = null;
@@ -33,12 +24,10 @@ class RestaurantsListTests extends BaseTest {
     String notReadyRecommendedRestaurant = "ليمونة";
 
     @Test
-    @Order(1)
     @Issue("HSAP-185")
     @Story("Check Restaurants List Screen Layout")
     @Description("Make sure that all Restaurant List objects are displayed correctly")
-    @Severity(SeverityLevel.CRITICAL)
-    public void checkRestaurantsListLayout(TestInfo testInfo){
+    public void checkRestaurantsListLayout() {
         //When customer selects an address
         homeScreen.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
@@ -55,23 +44,22 @@ class RestaurantsListTests extends BaseTest {
     }
 
     @Test
-    @Order(2)
     @Issue("HSAP-186")
     @Story("Search for a specific restaurant")
     @Description("Make sure that all restaurants meet the search criteria are returned correctly")
     @Severity(SeverityLevel.NORMAL)
     public void searchForASpecificRestaurant(){
         //When customer selects an address
-//        homeScreen.clickFindRestaurantsButton();
-//        locationsScreen.searchForRestaurants();
-//        locationsScreen.insertLocation("riyadh");
-//        locationsScreen.selectItemArea(3);
-//        locationsScreen.submitAddress();
-//        locationsScreen.insertAddressDescription("desc");
-//
-//        //And clicks "Search for Restaurants" button
-//        locationsScreen.submitAddress();
-        restaurantCount = restaurantsListScreen.getRestaurantsCount(true);
+        homeScreen.clickFindRestaurantsButton();
+        locationsScreen.searchForRestaurants();
+        locationsScreen.insertLocation("riyadh");
+        locationsScreen.selectItemArea(3);
+        locationsScreen.submitAddress();
+        locationsScreen.insertAddressDescription("desc");
+        locationsScreen.submitAddress();
+
+        //And clicks "Search for Restaurants" button
+        restaurantCount = restaurantsListScreen.getRestaurantsCount();
 
         //And searches for specific restaurants
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
@@ -88,22 +76,21 @@ class RestaurantsListTests extends BaseTest {
     }
 
     @Test
-    @Order(3)
     @Issue("HSAP-188")
     @Story("Check if recommended flag appears on the restaurants list")
     @Description("Make sure that the recommended badge shows next to the recommended restaurants")
     @Severity(SeverityLevel.NORMAL)
     public void checkRecommendedRestaurantsBadge() {
         //When customer selects an address
-//        homeScreen.clickFindRestaurantsButton();
-//        locationsScreen.searchForRestaurants();
-//        locationsScreen.insertLocation("riyadh");
-//        locationsScreen.selectItemArea(3);
-//        locationsScreen.submitAddress();
-//        locationsScreen.insertAddressDescription("desc");
-//
-//        //And clicks "Search for Restaurants'
-//        locationsScreen.submitAddress();
+        homeScreen.clickFindRestaurantsButton();
+        locationsScreen.searchForRestaurants();
+        locationsScreen.insertLocation("riyadh");
+        locationsScreen.selectItemArea(3);
+        locationsScreen.submitAddress();
+        locationsScreen.insertAddressDescription("desc");
+
+        //And clicks "Search for Restaurants'
+        locationsScreen.submitAddress();
 
         //And searches for a recommended restaurant
         restaurantsListScreen.searchForRestaurant(recommendedRestaurant);
@@ -114,7 +101,6 @@ class RestaurantsListTests extends BaseTest {
     }
 
     @Test
-    @Order(4)
     @Issue("HSAP-189")
     @Story("Check if recommended flag appears for non-ready restaurants")
     @Description("Make sure that the recommended badge doesn't show for recommended " +
@@ -122,15 +108,15 @@ class RestaurantsListTests extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void checkRecommendedRestaurantsBadgeNotReady() {
         //When customer selects an
-//        homeScreen.clickFindRestaurantsButton();
-//        locationsScreen.searchForRestaurants();
-//        locationsScreen.insertLocation("riyadh");
-//        locationsScreen.selectItemArea(3);
-//        locationsScreen.submitAddress();
-//        locationsScreen.insertAddressDescription("desc");
-//
-//        //And clicks "Search for Restaurants"
-//        locationsScreen.submitAddress();
+        homeScreen.clickFindRestaurantsButton();
+        locationsScreen.searchForRestaurants();
+        locationsScreen.insertLocation("riyadh");
+        locationsScreen.selectItemArea(3);
+        locationsScreen.submitAddress();
+        locationsScreen.insertAddressDescription("desc");
+
+        //And clicks "Search for Restaurants"
+        locationsScreen.submitAddress();
 
         //And searches for a recommended restaurant which is not with a 'Ready' status
         restaurantsListScreen.searchForRestaurant(notReadyRecommendedRestaurant);

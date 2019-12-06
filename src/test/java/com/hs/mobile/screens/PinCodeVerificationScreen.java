@@ -2,23 +2,15 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class PinCodeVerificationScreen extends AbstractScreen {
-    public PinCodeVerificationScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
-    }
-
-    TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/state_description")
@@ -39,6 +31,10 @@ public class PinCodeVerificationScreen extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_login")
     private MobileElement btnVerifyNumber;
+
+    public PinCodeVerificationScreen(AppiumDriver driver) {
+        super(driver);
+    }
 
     public boolean isEleCustomerPhoneNumberDisplayed() {
         return eleCustomerPhoneNumber.isDisplayed();
@@ -82,18 +78,18 @@ public class PinCodeVerificationScreen extends AbstractScreen {
 
     @Step("Make sure that all Pin code verification screen elements are showing up")
     public void verifyThatAllPinCodeVerificationScreenElementsIsDisplayed() {
-        assertAll(
-                () -> assertThat(isEleCustomerPhoneNumberDisplayed())
-                        .as("Customer's mobile number is not displayed.").isTrue(),
-                () -> assertThat(isTxtVerificationCodeDisplayed()).as(
-                        "Verification code text box is not displayed.").isTrue(),
-                () -> assertThat(isLnkResendPinDisplayed()).as(
-                        "Resend Pin link is not displayed.").isTrue(),
-                () -> assertThat(isLnkResendPinCallDisplayed()).as(
-                        "Call to Resend Pin link is not displayed.").isTrue(),
-                () -> assertThat(isBtnVerifyNumberDisplayed()).as(
-                        "Verify My Number button is not displayed.").isTrue()
-        );
+        SoftAssertions soft = new SoftAssertions();
+        soft.assertThat(isEleCustomerPhoneNumberDisplayed())
+                .as("Customer's mobile number is not displayed.").isTrue();
+        soft.assertThat(isTxtVerificationCodeDisplayed()).as(
+                "Verification code text box is not displayed.").isTrue();
+        soft.assertThat(isLnkResendPinDisplayed()).as(
+                "Resend Pin link is not displayed.").isTrue();
+        soft.assertThat(isLnkResendPinCallDisplayed()).as(
+                "Call to Resend Pin link is not displayed.").isTrue();
+        soft.assertThat(isBtnVerifyNumberDisplayed()).as(
+                "Verify My Number button is not displayed.").isTrue();
+        soft.assertAll();
     }
 
     @Step("Insert Verification Code")
@@ -102,7 +98,7 @@ public class PinCodeVerificationScreen extends AbstractScreen {
         getVerificationCode().sendKeys(number);
     }
 
-    @Step("Click \"Verify Number\" button")
+    @Step("Click 'Verify Number' button")
     public void clickVerifyNumberButton() {
         touchAction.tap(tapOptions().withElement(element(getVerifyNumberButton()))).perform();
     }

@@ -2,25 +2,18 @@ package com.hs.mobile.screens;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 
 import java.util.List;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class OrdersScreen extends AbstractScreen {
-    public OrdersScreen(AppiumDriver driver, TouchAction touchAction) {
-        super(driver, touchAction);
-    }
-
-    TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btnaction")
@@ -53,6 +46,10 @@ public class OrdersScreen extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/restaurants_item")
     private MobileElement btnRestaurants;
+
+    public OrdersScreen(AppiumDriver driver) {
+        super(driver);
+    }
 
     public MobileElement getBtnRestaurants() {
         return btnRestaurants;
@@ -116,31 +113,29 @@ public class OrdersScreen extends AbstractScreen {
 
     @Step("Make sure that \"Verify Mobile Number\" button if customer is not logged in")
     public void verifyThatVerifyMobileButtonIsDisplayed() {
-        assertAll(
-                () -> assertThat(isBtnVerifyDisplayed())
-                        .as("Verify mobile number button is not displayed.").isTrue()
-        );
+        assertThat(isBtnVerifyDisplayed())
+                .as("Verify mobile number button is not displayed.").isTrue();
     }
 
     @Step("Make sure that all orders details are displayed if customer is logged in")
     public void verifyThatAllOrdersElementsIsDisplayed() {
-        assertAll(
-                () -> assertThat(isEleOrdersDisplayed())
-                        .as("Customer orders are not displayed.").isTrue(),
-                () -> assertThat(isEleOrderTitlesDisplayed()).as(
-                        "Customer order titles are not displayed.").isTrue(),
-                () -> assertThat(isEleOrderPriceDisplayed()).as(
-                        "Order prices are not displayed.").isTrue(),
-                () -> assertThat(isEleOrderStatusDisplayed())
-                        .as("Orders statuses are not displayed.").isTrue(),
-                () -> assertThat(isEleOrderDateDisplayed())
-                        .as("Orders item is not displayed.").isTrue(),
-                () -> assertThat(isEleOrderDateDisplayed())
-                        .as("Orders dates are not displayed.").isTrue()
-        );
+        SoftAssertions soft = new SoftAssertions();
+        soft.assertThat(isEleOrdersDisplayed())
+                .as("Customer orders are not displayed.").isTrue();
+        soft.assertThat(isEleOrderTitlesDisplayed()).as(
+                "Customer order titles are not displayed.").isTrue();
+        soft.assertThat(isEleOrderPriceDisplayed()).as(
+                "Order prices are not displayed.").isTrue();
+        soft.assertThat(isEleOrderStatusDisplayed())
+                .as("Orders statuses are not displayed.").isTrue();
+        soft.assertThat(isEleOrderDateDisplayed())
+                .as("Orders item is not displayed.").isTrue();
+        soft.assertThat(isEleOrderDateDisplayed())
+                .as("Orders dates are not displayed.").isTrue();
+        soft.assertAll();
     }
 
-    @Step("Click the \"Verify\" button")
+    @Step("Click the 'Verify' button")
     public void clickVerifyButton() {
         touchAction.tap(tapOptions().withElement(element(getVerifyButton()))).perform();
     }
