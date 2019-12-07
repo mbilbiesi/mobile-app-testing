@@ -6,6 +6,7 @@ import com.hs.mobile.screens.HomeScreen;
 import com.hs.mobile.screens.InvoicesScreen;
 import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.OrdersScreen;
+import com.hs.mobile.screens.PaymentOptionsScreen;
 import com.hs.mobile.screens.PinCodeVerificationScreen;
 import com.hs.mobile.screens.ProfileScreen;
 import com.hs.mobile.screens.RestaurantScreen;
@@ -13,6 +14,7 @@ import com.hs.mobile.screens.RestaurantsListScreen;
 import com.hs.mobile.screens.SavedLocationsScreen;
 import com.hs.mobile.screens.SettingsScreen;
 import com.hs.mobile.screens.VerifyAccountScreen;
+import com.hs.mobile.screens.WalletScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -26,10 +28,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
 import java.net.URL;
-
-import static io.appium.java_client.remote.MobileCapabilityType.FULL_RESET;
-import static io.appium.java_client.remote.MobileCapabilityType.NEW_COMMAND_TIMEOUT;
-import static io.appium.java_client.remote.MobileCapabilityType.NO_RESET;
 
 
 public class BaseTest {
@@ -49,6 +47,8 @@ public class BaseTest {
     ProfileScreen profileScreen;
     InvoicesScreen invoicesScreen;
     SettingsScreen settingsScreen;
+    PaymentOptionsScreen paymentOptionsScreen;
+    WalletScreen walletScreen;
 
     protected AppiumDriver driver;
 
@@ -85,6 +85,8 @@ public class BaseTest {
         profileScreen = new ProfileScreen(driver);
         invoicesScreen = new InvoicesScreen(driver);
         settingsScreen = new SettingsScreen(driver);
+        paymentOptionsScreen = new PaymentOptionsScreen(driver);
+        walletScreen = new WalletScreen(driver);
     }
 
     @AfterClass

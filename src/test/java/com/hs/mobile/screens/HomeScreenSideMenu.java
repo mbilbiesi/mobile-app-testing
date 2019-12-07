@@ -15,6 +15,9 @@ public class HomeScreenSideMenu extends AbstractScreen {
     @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='3']")
     private WebElement invoices;
     @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='4']")
+    private WebElement paymentOptions;
+    @iOSXCUITFindBy(id = "")
     @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='6']")
     private WebElement settings;
 
@@ -22,18 +25,23 @@ public class HomeScreenSideMenu extends AbstractScreen {
         super(driver);
     }
 
-    @Step("Go to profile page")
+    @Step("Go to profile screen")
     public void goToProfile() {
         tap(profile);
     }
 
-    @Step("Go to profile page")
+    @Step("Go to profile screen")
     public void goToInvoices() {
         tap(invoices);
     }
 
-    @Step("Go to settings page")
+    @Step("Go to settings screen")
     public void goToSettings() {
         tap(settings);
+    }
+
+    @Step("Go to payment options screen")
+    public void goToPaymentOptions() {
+        tap(paymentOptions);
     }
 }
