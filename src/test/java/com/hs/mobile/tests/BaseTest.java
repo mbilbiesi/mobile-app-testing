@@ -2,14 +2,14 @@ package com.hs.mobile.tests;
 
 import com.google.common.io.Resources;
 import com.hs.mobile.screens.AddReferalCodeScreen;
-import com.hs.mobile.screens.HomeScreen;
 import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.OrdersScreen;
 import com.hs.mobile.screens.PinCodeVerificationScreen;
 import com.hs.mobile.screens.RestaurantScreen;
-import com.hs.mobile.screens.RestaurantsListScreen;
 import com.hs.mobile.screens.SavedLocationsScreen;
 import com.hs.mobile.screens.VerifyAccountScreen;
+import com.hs.mobile.steps.HomeScreenSteps;
+import com.hs.mobile.steps.RestaurantListScreenSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -24,15 +24,14 @@ import org.testng.annotations.Parameters;
 
 import java.net.URL;
 
-
 public class BaseTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
     protected static final String ANDROID_FILE_PATH = Resources.getResource("apps/hs-app.apk").getPath();
     private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
-    protected HomeScreen homeScreen;
+    protected HomeScreenSteps homeScreen;
     protected LocationsScreen locationsScreen;
-    RestaurantsListScreen restaurantsListScreen;
+    RestaurantListScreenSteps restaurantsListScreen;
     RestaurantScreen restaurantScreen;
     SavedLocationsScreen savedLocationsScreen;
     OrdersScreen ordersScreen;
@@ -63,9 +62,9 @@ public class BaseTest {
             LOG.error("unable to initiate Android driver", e);
         }
 
-        homeScreen = new HomeScreen(driver);
+        homeScreen = new HomeScreenSteps(driver);
         locationsScreen = new LocationsScreen(driver);
-        restaurantsListScreen = new RestaurantsListScreen(driver);
+        restaurantsListScreen = new RestaurantListScreenSteps(driver);
         restaurantScreen = new RestaurantScreen(driver);
         ordersScreen = new OrdersScreen(driver);
         verifyAccountScreen = new VerifyAccountScreen(driver);
