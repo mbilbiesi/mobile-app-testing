@@ -21,10 +21,9 @@ class RestaurantsListTests extends BaseTest {
     String recommendedRestaurant = "ماكدونالد";
     String notReadyRecommendedRestaurant = "ليمونة";
 
-    @Test
+    @Test(priority = 1, description = "Make sure that all Restaurant List objects are displayed correctly")
     @Issue("HSAP-185")
     @Story("Check Restaurants List Screen Layout")
-    @Description("Make sure that all Restaurant List objects are displayed correctly")
     public void checkRestaurantsListLayout() {
         //Given
         homeScreen.clickFindRestaurantsButton();
@@ -41,8 +40,9 @@ class RestaurantsListTests extends BaseTest {
         restaurantsListScreen.verifyRestaurantsListLayout();
     }
 
+
     @Issue("HSAP-186")
-    @Test(description = "Make sure that all restaurants meet the search criteria are returned correctly")
+    @Test(priority = 2, description = "Make sure that all restaurants meet the search criteria are returned correctly")
     @Story("Search for a specific restaurant")
     public void searchForASpecificRestaurant() {
         //Given
@@ -70,10 +70,9 @@ class RestaurantsListTests extends BaseTest {
         restaurantsListScreen.verifyAllRestaurantsAreReturned(restaurantCount, afterSearchRestaurantCount);
     }
 
-    @Test
+    @Test(priority = 3, description = "Make sure that the recommended badge shows next to the recommended restaurants")
     @Issue("HSAP-188")
     @Story("Check if recommended flag appears on the restaurants list")
-    @Description("Make sure that the recommended badge shows next to the recommended restaurants")
     public void checkRecommendedRestaurantsBadge() {
         //When customer selects an address
         homeScreen.clickFindRestaurantsButton();
@@ -91,13 +90,12 @@ class RestaurantsListTests extends BaseTest {
 
         //Then "Recommended" badge should display next to the recommended restaurants
         restaurantsListScreen.checkRecommendedBadge(true);
+        restaurantsListScreen.clearSearchCriteria();
     }
 
-    @Test
+    @Test(priority = 4, description = "Make sure that the recommended badge doesn't show for recommended restaurants with a status other than ready")
     @Issue("HSAP-189")
     @Story("Check if recommended flag appears for non-ready restaurants")
-    @Description("Make sure that the recommended badge doesn't show for recommended " +
-            "restaurants with a status other than ready")
     public void checkRecommendedRestaurantsBadgeNotReady() {
         //When customer selects an
         homeScreen.clickFindRestaurantsButton();
@@ -115,5 +113,29 @@ class RestaurantsListTests extends BaseTest {
 
         //Then verify that the "Recommended" badge doesn't show next to the restaurant
         restaurantsListScreen.checkRecommendedBadge(false);
+        restaurantsListScreen.clearSearchCriteria();
+    }
+
+    @Test(priority = 5)
+    @Issue("HSAP-190")
+    @Story("Check if user can see restaurants stored by distance")
+    @Description("Make sure that restaurants are sorted according their distance from the searched location")
+    public void verifyRestaurantsSortedByDistance() {
+        //When customer selects an
+//        homeScreen.clickFindRestaurantsButton();
+//        locationsScreen.searchForRestaurants();
+//        locationsScreen.insertLocation("riyadh");
+//        locationsScreen.selectItemArea(3);
+//        locationsScreen.submitAddress();
+//        locationsScreen.insertAddressDescription("desc");
+//
+//        //And clicks "Search for Restaurants"
+//        locationsScreen.submitAddress();
+
+        //And scrolls down the restaurants list to get more restaurants displayed
+        //restaurantsListScreen.scrollDownRestaurantsList();
+
+        //Then, verify that restaurants are sorted by their distance
+        restaurantsListScreen.checkIfRestaurantsSortedByDistance();
     }
 }

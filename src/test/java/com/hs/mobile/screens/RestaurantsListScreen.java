@@ -49,7 +49,6 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/campaign_banner")
-    //@AssertElementVisibility
     private List<WebElement> campainBanners;
 
     @iOSXCUITFindBy(id = "")
@@ -67,7 +66,6 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_icon")
-    @AssertElementVisibility
     private List<WebElement> filtersIcons;
 
     @iOSXCUITFindBy(id = "")

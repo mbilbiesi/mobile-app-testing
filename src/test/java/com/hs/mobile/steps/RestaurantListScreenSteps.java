@@ -9,7 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -79,6 +81,30 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
                     .as("Recommended badge is not displayed for this restaurant")
                     .isEqualTo(isRestaurantRecommended);
         }
+    }
+
+    public ArrayList<Double> getDistanceOfDisplayedRestaurants(int restaurantCount) {
+        ArrayList<Double> restaurantDistance = new ArrayList<>();
+        String[] distaceText;
+        double distance;
+
+        for (int i = 0; i < restaurantCount; i++) {
+            distaceText = getRestaurantDistance().get(i).getText().split(" ");
+            distance = Double.parseDouble(distaceText[0]);
+            restaurantDistance.add(distance);
+        }
+
+        return restaurantDistance;
+    }
+
+    @Step("Verify that restaurants are sorted by their distance from the customer")
+    public void checkIfRestaurantsSortedByDistance() {
+        int restaurantCount = getRestaurantsCount();
+        boolean listSorted = false;
+        ArrayList<Double> restaurantDistance = getDistanceOfDisplayedRestaurants(restaurantCount);
+        listSorted = restaurantDistance.stream().sorted().collect(Collectors.toList()).equals(restaurantDistance);
+        assertThat(listSorted).as("Restaurants are not sorted according their distance" +
+                "from customer's location").isTrue();
     }
 
     public int getRestaurantsCount() {

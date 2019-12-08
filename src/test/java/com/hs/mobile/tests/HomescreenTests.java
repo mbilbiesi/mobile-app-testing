@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class HomescreenTests extends BaseTest {
 
-    @Test(description = "Open the application with a new user")
+    @Test(enabled = false, description = "Open the application with a new user")
     void navigateToHomeScreen_allHomeScreenElementsAreDisplayed() {
         //Then
         homeScreen.verifyThatAllHomeElementsDisplayed();
