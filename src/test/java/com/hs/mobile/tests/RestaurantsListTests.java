@@ -28,7 +28,7 @@ class RestaurantsListTests extends BaseTest {
     @Story("Check Restaurants List Screen Layout")
     @Description("Make sure that all Restaurant List objects are displayed correctly")
     public void checkRestaurantsListLayout() {
-        //When customer selects an address
+        //When
         homeScreen.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("riyadh");
@@ -36,10 +36,10 @@ class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
         locationsScreen.insertAddressDescription("desc");
 
-        //And searches for restaurants
+        //And
         locationsScreen.submitAddress();
 
-        //Then verify that all restaurant list elements are displayed correctly
+        //Then
         restaurantsListScreen.verifyRestaurantsListLayout();
     }
 
@@ -49,28 +49,22 @@ class RestaurantsListTests extends BaseTest {
     @Description("Make sure that all restaurants meet the search criteria are returned correctly")
     @Severity(SeverityLevel.NORMAL)
     public void searchForASpecificRestaurant(){
-        //When customer selects an address
-        homeScreen.clickFindRestaurantsButton();
-        locationsScreen.searchForRestaurants();
-        locationsScreen.insertLocation("riyadh");
-        locationsScreen.selectItemArea(3);
-        locationsScreen.submitAddress();
-        locationsScreen.insertAddressDescription("desc");
-        locationsScreen.submitAddress();
+        //When
+        //Already executed in the previous test case
 
-        //And clicks "Search for Restaurants" button
+        //And
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
 
-        //And searches for specific restaurants
+        //And
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
 
-        //Then verify that the returned restaurants match the search criteria
+        //Then
         restaurantsListScreen.verifyReturnedRestaurants(keyword);
 
-        //When: customer clears search criteria
+        //When
         afterSearchRestaurantCount = restaurantsListScreen.clearSearchCriteria();
 
-        //Then verify that all restaurants are returned
+        //Then
         restaurantsListScreen.verifyAllRestaurantsAreReturned(restaurantCount, afterSearchRestaurantCount);
 
     }
@@ -81,21 +75,13 @@ class RestaurantsListTests extends BaseTest {
     @Description("Make sure that the recommended badge shows next to the recommended restaurants")
     @Severity(SeverityLevel.NORMAL)
     public void checkRecommendedRestaurantsBadge() {
-        //When customer selects an address
-        homeScreen.clickFindRestaurantsButton();
-        locationsScreen.searchForRestaurants();
-        locationsScreen.insertLocation("riyadh");
-        locationsScreen.selectItemArea(3);
-        locationsScreen.submitAddress();
-        locationsScreen.insertAddressDescription("desc");
+        //When
+        //Already executed in the previous test case
 
-        //And clicks "Search for Restaurants'
-        locationsScreen.submitAddress();
-
-        //And searches for a recommended restaurant
+        //And
         restaurantsListScreen.searchForRestaurant(recommendedRestaurant);
 
-        //Then "Recommended" badge should display next to the recommended restaurants
+        //Then
         restaurantsListScreen.checkRecommendedBadge(true);
         restaurantsListScreen.clearSearchCriteria();
     }
@@ -107,21 +93,13 @@ class RestaurantsListTests extends BaseTest {
             "restaurants with a status other than ready")
     @Severity(SeverityLevel.NORMAL)
     public void checkRecommendedRestaurantsBadgeNotReady() {
-        //When customer selects an
-        homeScreen.clickFindRestaurantsButton();
-        locationsScreen.searchForRestaurants();
-        locationsScreen.insertLocation("riyadh");
-        locationsScreen.selectItemArea(3);
-        locationsScreen.submitAddress();
-        locationsScreen.insertAddressDescription("desc");
+        //When
+        //Already executed in the previous test case
 
-        //And clicks "Search for Restaurants"
-        locationsScreen.submitAddress();
-
-        //And searches for a recommended restaurant which is not with a 'Ready' status
+        //And
         restaurantsListScreen.searchForRestaurant(notReadyRecommendedRestaurant);
 
-        //Then verify that the "Recommended" badge doesn't show next to the restaurant
+        //Then
         restaurantsListScreen.checkRecommendedBadge(false);
         restaurantsListScreen.clearSearchCriteria();
     }
@@ -132,16 +110,9 @@ class RestaurantsListTests extends BaseTest {
     @Description("Make sure that restaurants are sorted according their distance from the searched location")
     @Severity(SeverityLevel.NORMAL)
     public void verifyRestaurantsSortedByDistance() {
-        //When customer selects an
-//        homeScreen.clickFindRestaurantsButton();
-//        locationsScreen.searchForRestaurants();
-//        locationsScreen.insertLocation("riyadh");
-//        locationsScreen.selectItemArea(3);
-//        locationsScreen.submitAddress();
-//        locationsScreen.insertAddressDescription("desc");
-//
-//        //And clicks "Search for Restaurants"
-//        locationsScreen.submitAddress();
+
+        //When
+        //Already executed in the previous test case
 
         //And scrolls down the restaurants list to get more restaurants displayed
         restaurantsListScreen.scrollDownRestaurantsList();

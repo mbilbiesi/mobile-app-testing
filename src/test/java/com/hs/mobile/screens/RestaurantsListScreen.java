@@ -25,6 +25,8 @@ public class RestaurantsListScreen extends AbstractScreen {
         super(driver);
     }
 
+    SoftAssertions soft = new SoftAssertions();
+
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_icon")
     @AssertElementVisibility
@@ -155,7 +157,6 @@ public class RestaurantsListScreen extends AbstractScreen {
         return eleLocationValue;
     }
 
-
     public WebElement getSearchRestaurants() {
         return txtSearchRestaurants;
     }
@@ -192,11 +193,9 @@ public class RestaurantsListScreen extends AbstractScreen {
         return filtersNames;
     }
 
-
     public List<WebElement> getFiltersIcons() {
         return filtersIcons;
     }
-
 
     public WebElement getRestaurantsListWidget() {
         return restaurantsListWidget;
@@ -302,17 +301,15 @@ public class RestaurantsListScreen extends AbstractScreen {
         touchAction.tap(tapOptions().withElement(element(restaurantList.get(index)))).perform();
     }
 
-    /**
-     * gets the count of restaurants that are currently displayed on screen
-     * Note: appium recognizes only the items that are actually displaying on screen
-     * so if the list actually contains 10 items, and the screen shows only 6, then
-     * only 6 items will be recognized by appium.
-     *
-     * @param verifiableElements, if it's true, we'll decrease 1 from the total restaurants returned
-     *                            if the restaurants count > 2, because we need all restaurants elements
-     *                            to be visible when we are verifying page elements.
-     * @return restaurants count
-     */
+    // gets the count of restaurants that are currently displayed on screen
+    // Note: appium recognizes only the items that are actually displaying on screen
+    // so if the list actually contains 10 items, and the screen shows only 6, then
+    // only 6 items will be recognized by appium.
+    //
+    // @param verifiableElements, if it's true, we'll decrease 1 from the total restaurants returned
+    //                            if the restaurants count > 2, because we need all restaurants elements
+    //                            to be visible when we are verifying page elements.
+    // @return restaurants count
     public int getRestaurantsCount(boolean verifiableElements) {
         int restaurantCount;
         waitUntilRestaurantsAreLoaded();
@@ -325,22 +322,15 @@ public class RestaurantsListScreen extends AbstractScreen {
         return restaurantCount;
     }
 
-    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/action_bar_root")
-    private WebElement scrollable;
-
     @Step("Scroll down restaurants list")
     public void scrollDownRestaurantsList() {
         waitUntilRestaurantsAreLoaded();
-        //scrollByElement(restaurantDeliveryInfo.get(0));
         scrollByElement(restaurantsListWidget);
-//        scrollByElement(restaurantTitle.get(0));
-        //scrollByElement(scrollable);
     }
 
     @Step("Verify that all restaurants list screen objects are displayed correctly")
     public void verifyRestaurantsListLayout() {
         int restaurantCount = getRestaurantsCount(true);
-        SoftAssertions soft = new SoftAssertions();
 
         verifyScreenElements();
 
@@ -381,16 +371,17 @@ public class RestaurantsListScreen extends AbstractScreen {
     @Step("Verify that the restaurants that match the search criteria are returned")
     public void verifyReturnedRestaurants(String keyword) {
         int restaurantCountAfterSearch;
-        String restaurantTitle;
+        String title;
         restaurantCountAfterSearch = getRestaurantsCount(false);
+        List<WebElement> restaurantTitles = getRestaurantTitle();
 
-        assertThat(restaurantCountAfterSearch != 0).as("No restaurants match the search criteria")
-                .isTrue();
-        for (int i = 0; i < restaurantCountAfterSearch; i++) {
-            restaurantTitle = getRestaurantTitle().get(i).getText();
-            assertThat(restaurantTitle.contains(keyword)).as("The restaurant: "
-                    + restaurantTitle + " doesnt match the search criteria with the keyword: " + keyword)
-                    .isTrue();
+        soft.assertThat(restaurantCountAfterSearch != 0).as("No restaurants match the search " +
+                "criteria with keyword: " + keyword).isTrue();
+        for (WebElement restaurantTitle : restaurantTitles) {
+            title = restaurantTitle.getText();
+            soft.assertThat(title.contains(keyword))
+                    .as("The restaurant: " + title + " does not match the search criteria with" +
+                            " the keyword: " + keyword).isTrue();
         }
     }
 
@@ -409,7 +400,7 @@ public class RestaurantsListScreen extends AbstractScreen {
 
     @Step("Verify that all restaurants are returned after clearing the search criteria")
     public void verifyAllRestaurantsAreReturned(int allRestaurantsCount, int searchRestaurantCount) {
-        assertThat(allRestaurantsCount == searchRestaurantCount)
+        soft.assertThat(allRestaurantsCount == searchRestaurantCount)
                 .as("Not all restaurants are returned after clearing search criteria").isTrue();
     }
 
@@ -417,14 +408,13 @@ public class RestaurantsListScreen extends AbstractScreen {
     public void checkRecommendedBadge(boolean isRestaurantRecommended) {
         int restaurantCount = getRestaurantsCount(true);
         int i = 0;
-        if (isRestaurantRecommended) {
-            for (i = 0; i < restaurantCount; i++) {
-                assertThat(isRecommendedBadgeDisplayed(i))
+
+        for (i = 0; i < restaurantCount; i++) {
+            if (isRestaurantRecommended) {
+                soft.assertThat(isRecommendedBadgeDisplayed(i))
                         .as("Recommended badge is not displayed for this restaurant").isTrue();
-            }
-        } else {
-            for (i = 0; i < restaurantCount; i++) {
-                assertThat(isRecommendedBadgeDisplayed(i))
+            } else {
+                soft.assertThat(isRecommendedBadgeDisplayed(i))
                         .as("Recommended badge is displayed even though the restaurant is not recommended")
                         .isFalse();
             }
@@ -451,7 +441,7 @@ public class RestaurantsListScreen extends AbstractScreen {
         boolean listSorted = false;
         ArrayList<Double> restaurantDistance = getDistanceOfDisplayedRestaurants(restaurantCount);
         listSorted = restaurantDistance.stream().sorted().collect(Collectors.toList()).equals(restaurantDistance);
-        assertThat(listSorted).as("Restaurants are not sorted according their distance" +
+        soft.assertThat(listSorted).as("Restaurants are not sorted according their distance" +
                 "from customer's location").isTrue();
     }
 }
