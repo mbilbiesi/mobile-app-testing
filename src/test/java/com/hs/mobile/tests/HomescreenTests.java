@@ -13,13 +13,13 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class HomescreenTests extends BaseTest {
 
-    @Test(enabled = false, description = "Open the application with a new user")
+    @Test(description = "Open the application with a new user")
     void navigateToHomeScreen_allHomeScreenElementsAreDisplayed() {
-        //Then
+        //Given
         homeScreen.verifyThatAllHomeElementsDisplayed();
     }
 
-    @Test(description = "Open the application with an already registered user without any saved place")
+    @Test(enabled = true, description = "Open the application with an already registered user without any saved place")
     void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
         //Given
         homeScreen.clickMyOrdersButton();

@@ -26,12 +26,13 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
 
-public class AbstractScreen {
+class AbstractScreen {
     protected final TouchAction touchAction;
     protected final AppiumDriver driver;
 
+    //ToDo: find the locator of the skip promotion link in english
     @iOSXCUITFindBy(xpath = "")
-    @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='TBD']")
+    @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='textInEnglish']")
     private List<WebElement> lnkSkipPromotion;
 
     public AbstractScreen(AppiumDriver driver) {
@@ -46,11 +47,6 @@ public class AbstractScreen {
         }
     }
 
-    public AbstractScreen(AppiumDriver driver, TouchAction touchAction) {
-        this.driver = driver;
-        this.touchAction = new TouchAction(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
-    }
 
     public void hideKeyboard() {
         if (isAndroid()) {
