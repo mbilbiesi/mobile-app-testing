@@ -1,14 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="HS Android Smoke Test" verbose="1" parallel="tests"
-       thread-count="3" configfailurepolicy="continue">
+       thread-count="2" configfailurepolicy="continue">
     <test name="Emulator - Pixel 2">
         <parameter name="platform" value="Android 10.0"/>
         <parameter name="udid" value="emulator-5556"/>
         <parameter name="systemPort" value="8200"/>
         <classes>
             <class name="com.hs.mobile.tests.HomescreenTests"/>
-            <class name="com.hs.mobile.tests.LocationTests"/>
+            <!--            <class name="com.hs.mobile.tests.LocationTests"/>-->
         </classes>
     </test>
     <test name="Emulator - Galaxy Nexus">
@@ -17,16 +17,17 @@
         <parameter name="systemPort" value="8201"/>
         <classes>
             <class name="com.hs.mobile.tests.HomescreenTests"/>
-            <class name="com.hs.mobile.tests.LocationTests"/>
+            <!--            <class name="com.hs.mobile.tests.LocationTests"/>-->
         </classes>
     </test>
-    <test name="Real Device - Huawei P10 Lite">
-        <parameter name="platform" value="Android 10.0"/>
-        <parameter name="udid" value="2XJDU17814004631"/>
-        <parameter name="systemPort" value="8203"/>
-        <classes>
-            <class name="com.hs.mobile.tests.HomescreenTests"/>
-            <class name="com.hs.mobile.tests.LocationTests"/>
-        </classes>
-    </test>
+    <!--    <test name="Real Device - Huawei P10 Lite">-->
+    <!--        <parameter name="platform" value="Android 10.0"/>-->
+    <!--        <parameter name="udid" value="2XJDU17814004631"/>-->
+    <!--        <parameter name="systemPort" value="8203"/>-->
+    <!--        <classes>-->
+    <!--            <class name="com.hs.mobile.tests.HomescreenTests"/>-->
+    <!--            <class name="com.hs.mobile.tests.LocationTests"/>-->
+    <!--            <class name="com.hs.mobile.tests.RestaurantsListTests"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 </suite>

@@ -24,7 +24,7 @@ class RestaurantsListTests extends BaseTest {
     @Test(priority = 1, description = "Make sure that all Restaurant List objects are displayed correctly")
     @Issue("HSAP-185")
     @Story("Check Restaurants List Screen Layout")
-    public void checkRestaurantsListLayout() {
+    public void navigateToRestaurantList_allElementAreDisplayed() {
         //Given
         homeScreen.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
