@@ -5,13 +5,11 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import io.qameta.allure.Step;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-
-public class HomeScreen extends AbstractScreen {
+@Getter
+public abstract class HomeScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/main_location_text")
@@ -54,44 +52,5 @@ public class HomeScreen extends AbstractScreen {
 
     public HomeScreen(AppiumDriver driver) {
         super(driver);
-    }
-
-
-    public MobileElement getOrdersItem() {
-        return ordersItem;
-    }
-
-    public MobileElement getFindRestaurantsButton() {
-        return findRestaurantsButton;
-    }
-
-    @Step("Find restaurants")
-    public void findRestaurants() {
-        touchAction.tap(tapOptions().withElement(element(findRestaurantsButton))).perform();
-    }
-
-    @Step("View saved locations")
-    public void viewSavedLocations() {
-        tap(useMyCurrentLocationText);
-    }
-
-    @Step("Verify that all Homescreen elements are displayed correctly")
-    public void verifyThatAllHomeElementsDisplayed() {
-        verifyScreenElements();
-    }
-
-    @Step("Click the 'My Orders' button")
-    public void clickMyOrdersButton() {
-        touchAction.tap(tapOptions().withElement(element(getOrdersItem()))).perform();
-    }
-
-    @Step("Click the 'Find Restaurants' button")
-    public void clickFindRestaurantsButton() {
-        touchAction.tap(tapOptions().withElement(element(getFindRestaurantsButton()))).perform();
-    }
-
-    @Step("Click on restaurant icon")
-    public void clickOnResturantIcon() {
-        touchAction.tap(tapOptions().withElement(element(restaurantsItem))).perform();
     }
 }

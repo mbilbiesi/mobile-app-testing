@@ -46,7 +46,7 @@ class AbstractScreen {
         return driver instanceof IOSDriver;
     }
 
-    void tap(WebElement element) {
+    public void tap(WebElement element) {
         touchAction.tap(tapOptions().withElement(element(element))).perform();
     }
 
@@ -56,7 +56,7 @@ class AbstractScreen {
 
     //ToDo: Implement a method for scrolling down a page.
 
-    void verifyScreenElements() {
+    public void verifyScreenElements() {
         SoftAssertions soft = new SoftAssertions();
 
         Class<?> clazz = this.getClass();

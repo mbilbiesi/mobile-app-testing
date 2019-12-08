@@ -5,8 +5,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -28,7 +26,7 @@ class RestaurantsListTests extends BaseTest {
     @Story("Check Restaurants List Screen Layout")
     @Description("Make sure that all Restaurant List objects are displayed correctly")
     public void checkRestaurantsListLayout() {
-        //When customer selects an address
+        //Given
         homeScreen.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("riyadh");
@@ -36,20 +34,18 @@ class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
         locationsScreen.insertAddressDescription("desc");
 
-        //And searches for restaurants
+        //When
         locationsScreen.submitAddress();
 
-        //Then verify that all restaurant list elements are displayed correctly
+        //Then
         restaurantsListScreen.verifyRestaurantsListLayout();
     }
 
-    @Test
     @Issue("HSAP-186")
+    @Test(description = "Make sure that all restaurants meet the search criteria are returned correctly")
     @Story("Search for a specific restaurant")
-    @Description("Make sure that all restaurants meet the search criteria are returned correctly")
-    @Severity(SeverityLevel.NORMAL)
-    public void searchForASpecificRestaurant(){
-        //When customer selects an address
+    public void searchForASpecificRestaurant() {
+        //Given
         homeScreen.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("riyadh");
@@ -72,14 +68,12 @@ class RestaurantsListTests extends BaseTest {
 
         //Then verify that all restaurants are returned
         restaurantsListScreen.verifyAllRestaurantsAreReturned(restaurantCount, afterSearchRestaurantCount);
-
     }
 
     @Test
     @Issue("HSAP-188")
     @Story("Check if recommended flag appears on the restaurants list")
     @Description("Make sure that the recommended badge shows next to the recommended restaurants")
-    @Severity(SeverityLevel.CRITICAL)
     public void checkRecommendedRestaurantsBadge() {
         //When customer selects an address
         homeScreen.clickFindRestaurantsButton();
@@ -104,7 +98,6 @@ class RestaurantsListTests extends BaseTest {
     @Story("Check if recommended flag appears for non-ready restaurants")
     @Description("Make sure that the recommended badge doesn't show for recommended " +
             "restaurants with a status other than ready")
-    @Severity(SeverityLevel.CRITICAL)
     public void checkRecommendedRestaurantsBadgeNotReady() {
         //When customer selects an
         homeScreen.clickFindRestaurantsButton();
@@ -123,5 +116,4 @@ class RestaurantsListTests extends BaseTest {
         //Then verify that the "Recommended" badge doesn't show next to the restaurant
         restaurantsListScreen.checkRecommendedBadge(false);
     }
-
 }

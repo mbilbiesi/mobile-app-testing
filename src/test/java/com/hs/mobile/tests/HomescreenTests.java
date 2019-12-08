@@ -15,11 +15,11 @@ public class HomescreenTests extends BaseTest {
 
     @Test(description = "Open the application with a new user")
     void navigateToHomeScreen_allHomeScreenElementsAreDisplayed() {
-        //Given
+        //Then
         homeScreen.verifyThatAllHomeElementsDisplayed();
     }
 
-    @Test(enabled = false, description = "Open the application with an already registered user without any saved place")
+    @Test(description = "Open the application with an already registered user without any saved place")
     void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
         //Given
         homeScreen.clickMyOrdersButton();

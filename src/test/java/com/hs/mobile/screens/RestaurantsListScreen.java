@@ -1,61 +1,60 @@
 package com.hs.mobile.screens;
 
+import com.hs.mobile.core.annotation.AssertElementVisibility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import io.qameta.allure.Step;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.NoSuchElementException;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class RestaurantsListScreen extends AbstractScreen {
-
-    public RestaurantsListScreen(AppiumDriver driver) {
-        super(driver);
-    }
+@Getter
+public abstract class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_icon")
+    @AssertElementVisibility
     private WebElement imgLocationIcon;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_value")
+    @AssertElementVisibility
     private WebElement eleLocationValue;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/input")
+    @AssertElementVisibility
     private WebElement txtSearchRestaurants;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon_start")
+    @AssertElementVisibility
     private WebElement imgSearchIcon;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/viewpager")
+    @AssertElementVisibility
     private WebElement eleOffersContainer;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/image")
+    @AssertElementVisibility
     private List<WebElement> offerWidgets;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/campaign_container")
+    @AssertElementVisibility
     private WebElement campaignContainer;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/campaign_banner")
+    //@AssertElementVisibility
     private List<WebElement> campainBanners;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_component")
+    @AssertElementVisibility
     private WebElement filtersWidget;
 
     @iOSXCUITFindBy(id = "")
@@ -68,10 +67,12 @@ public class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_icon")
+    @AssertElementVisibility
     private List<WebElement> filtersIcons;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/RestListView")
+    @AssertElementVisibility
     private WebElement restaurantsListWidget;
 
     @iOSXCUITFindBy(id = "")
@@ -127,336 +128,7 @@ public class RestaurantsListScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon_end")
     private WebElement btnClearSearchResult;
 
-    public WebElement getClearSearchResultButton() {
-        return btnClearSearchResult;
-    }
-
-    public WebElement getLocationIcon() {
-        return imgLocationIcon;
-    }
-
-    public boolean isLocationIconDisplayed() {
-        return getLocationIcon().isDisplayed();
-    }
-
-    public WebElement getLocationValue() {
-        return eleLocationValue;
-    }
-
-    public boolean isLocationValueDisplayed() {
-        return getLocationValue().isDisplayed();
-    }
-
-    public WebElement getSearchRestaurants() {
-        return txtSearchRestaurants;
-    }
-
-    public boolean isSearchTextboxDisplayed() {
-        return getSearchRestaurants().isDisplayed();
-    }
-
-    public WebElement getSearchIcon() {
-        return imgSearchIcon;
-    }
-
-    public boolean isSearchIconDisplayed() {
-        return getSearchIcon().isDisplayed();
-    }
-
-    public WebElement getOffersContainer() {
-        return eleOffersContainer;
-    }
-
-    public boolean isOffersContainerDisplayed() {
-        return getOffersContainer().isDisplayed();
-    }
-
-    public List<WebElement> getOfferWidgets() {
-        return offerWidgets;
-    }
-
-    public boolean isOfferWidgetDisplayed() {
-        return getOfferWidgets().size() > 0;
-    }
-
-    public WebElement getCampaignContainer() {
-        return campaignContainer;
-    }
-
-    public boolean isCampaignContainerDisplayed() {
-        return getCampaignContainer().isDisplayed();
-    }
-
-    public List<WebElement> getCampainBanners() {
-        return campainBanners;
-    }
-
-    public boolean isCampaignBannersDisplayed() {
-        return getCampainBanners().size() > 0;
-    }
-
-    public WebElement getFiltersWidget() {
-        return filtersWidget;
-    }
-
-    public boolean isFiltersWidgetDisplayed() {
-        return getFiltersWidget().isDisplayed();
-    }
-
-    public List<WebElement> getFilterButtons() {
-        return btnFilter;
-    }
-
-    public boolean isFilterButtonsDisplayed() {
-        return getFilterButtons().size() > 0;
-    }
-
-    public List<WebElement> getFiltersNames() {
-        return filtersNames;
-    }
-
-    public boolean isFiltersNamesDisplayed() {
-        return getFiltersNames().size() > 0;
-    }
-
-    public List<WebElement> getFiltersIcons() {
-        return filtersIcons;
-    }
-
-    public boolean isFiltersIconsDisplayed() {
-        return getFiltersIcons().size() > 0;
-    }
-
-    public WebElement getRestaurantsListWidget() {
-        return restaurantsListWidget;
-    }
-
-    public boolean isRestaurantsListDisplayed() {
-        return getRestaurantsListWidget().isDisplayed();
-    }
-
-    public List<WebElement> getRestaurantList() {
-        return restaurantList;
-    }
-
-    public List<WebElement> getRestaurantWidgets() {
-        return restaurantWidgets;
-    }
-
-    public boolean isRestaurantWidgetDisplayed() {
-        return getRestaurantWidgets().size() > 0;
-    }
-
-    public List<WebElement> getRestaurantTitle() {
-        return restaurantTitle;
-    }
-
-    public boolean isRestaurantTitleDisplayed(int restaurantsCount) {
-        return getRestaurantTitle().size() == restaurantsCount;
-    }
-
-    public List<WebElement> getRestaurantType() {
-        return restaurantType;
-    }
-
-    public boolean isRestaurantTypesDisplayed(int restaurantsCount) {
-        return getRestaurantType().size() == restaurantsCount;
-    }
-
-    public List<WebElement> getRestaurantDistance() {
-        return restaurantDistance;
-    }
-
-    public boolean isRestaurantDistanceDisplayed(int restaurantsCount) {
-        return getRestaurantDistance().size() == restaurantsCount;
-    }
-
-    public List<WebElement> getDeliveryText() {
-        return deliveryText;
-    }
-
-    public boolean isDeliveryTextDisplayed(int restaurantsCount) {
-        return getDeliveryText().size() == restaurantsCount;
-    }
-
-    public List<WebElement> getDeliveryFeeValue() {
-        return deliveryFeeValue;
-    }
-
-    public boolean isDeliveryFeeValueDisplayed(int restaurantsCount) {
-        return getDeliveryFeeValue().size() == restaurantsCount;
-    }
-
-    public List<WebElement> getDeliveryFeeCurrency() {
-        return deliveryFeeCurrency;
-    }
-
-    public boolean isDeliveryFeeCurrencyDisplayed(int restaurantsCount) {
-        return getDeliveryFeeCurrency().size() == restaurantsCount;
-    }
-
-    public List<WebElement> getRestaurantDeliveryInfo() {
-        return restaurantDeliveryInfo;
-    }
-
-    public boolean isRestaurantDeliveryInfoDisplayed(int restaurantsCount) {
-        return getRestaurantDeliveryInfo().size() == restaurantsCount;
-    }
-
-    public List<WebElement> getRestaurantDeliveryInfoIcon() {
-        return restaurantDeliveryInfoIcon;
-    }
-
-    public boolean isRestaurantDeliveryInfoIconDisplayed(int restaurantsCount) {
-        return getRestaurantDeliveryInfoIcon().size() == restaurantsCount;
-    }
-
-    public List<WebElement> getRecommendedBadge() {
-        return recommendedBadge;
-    }
-
-    public boolean isRecommendedBadgeDisplayed(int i) {
-        boolean displayed = false;
-        if (getRecommendedBadge().size() > 0) {
-            displayed = getRecommendedBadge().get(i).isDisplayed();
-        }
-        return displayed;
-    }
-
-    public WebElement getBranchStatusBadge() {
-        return branchStatusBadge;
-    }
-
-    public void waitUntilRestaurantsAreLoaded() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        restaurantList = wait.until(ExpectedConditions.visibilityOfAllElements(restaurantList));
-    }
-
-    public void selectRestaurant(int index) {
-        touchAction.tap(tapOptions().withElement(element(restaurantList.get(index)))).perform();
-    }
-
-    public int getRestaurantsCount() {
-        waitUntilRestaurantsAreLoaded();
-        return getRestaurantWidgets().size();
-    }
-
-    @Step("Verify that all restaurants list screen objects are displayed correctly")
-    public void verifyRestaurantsListLayout() {
-        int restaurantCount = getRestaurantsCount();
-        SoftAssertions soft = new SoftAssertions();
-        soft.assertThat(isLocationValueDisplayed())
-                .as("The location text is not displayed").isTrue();
-        soft.assertThat(isLocationIconDisplayed()).as(
-                "The location icon is not displayed.").isTrue();
-        soft.assertThat(isSearchTextboxDisplayed()).as(
-                "Search restaurants textbox is not displayed.").isTrue();
-        soft.assertThat(isSearchIconDisplayed())
-                .as("Search icon is not displayed.").isTrue();
-        soft.assertThat(isOffersContainerDisplayed())
-                .as("Offers container is not displayed.").isTrue();
-        soft.assertThat(isOfferWidgetDisplayed())
-                .as("Offer widgets are not displayed.").isTrue();
-        soft.assertThat(isCampaignContainerDisplayed())
-                .as("Campaings container is not displayed.").isTrue();
-        soft.assertThat(isCampaignBannersDisplayed())
-                .as("Campaign banners are not displayed").isTrue();
-        soft.assertThat(isFiltersWidgetDisplayed())
-                .as("Filters widget is not displayed").isTrue();
-        soft.assertThat(isFilterButtonsDisplayed())
-                .as("Filters are not displayed").isTrue();
-        soft.assertThat(isFiltersNamesDisplayed())
-                .as("Filter names are not displayed").isTrue();
-        soft.assertThat(isFiltersIconsDisplayed())
-                .as("Filter icons are not displayed").isTrue();
-        soft.assertThat(isRestaurantsListDisplayed())
-                .as("Restaurants list widget is not displayed").isTrue();
-        soft.assertThat(isRestaurantWidgetDisplayed())
-                .as("Restaurants widgets are not displayed").isTrue();
-        soft.assertThat(isRestaurantTitleDisplayed(restaurantCount))
-                .as("Restaurants titles are not displayed for some " +
-                        "or all of the restaurants").isTrue();
-        soft.assertThat(isRestaurantTypesDisplayed(restaurantCount))
-                .as("Restaurant type is not displayed for some " +
-                        "or all of the restaurants").isTrue();
-        soft.assertThat(isRestaurantDistanceDisplayed(restaurantCount))
-                .as("Restaurant distance is not displayed for some " +
-                        "or all of the restaurants").isTrue();
-        soft.assertThat(isDeliveryTextDisplayed(restaurantCount))
-                .as("Delivery text is not displayed for some " +
-                        "or all of the restaurants").isTrue();
-        soft.assertThat(isDeliveryFeeValueDisplayed(restaurantCount))
-                .as("Delivery fee value is not displayed for some " +
-                        "or all of the restaurants").isTrue();
-        soft.assertThat(isDeliveryFeeCurrencyDisplayed(restaurantCount))
-                .as("Delivery fee currency is not displayed for some " +
-                        "or all of the restaurants").isTrue();
-        soft.assertThat(isRestaurantDeliveryInfoDisplayed(restaurantCount))
-                .as("Restaurant delivery info is not displayed for some " +
-                        "or all of the restaurants").isTrue();
-        soft.assertThat(isRestaurantDeliveryInfoIconDisplayed(restaurantCount))
-                .as("Restaurant delivery info icon is not displayed for some " +
-                        "or all of the restaurants").isTrue();
-        soft.assertAll();
-    }
-
-    @Step("Search for a restaurant")
-    public String searchForRestaurant(String keyword) {
-        getSearchRestaurants().sendKeys(keyword);
-        hideKeyboard();
-        return keyword;
-    }
-
-    @Step("Verify that the restaurants that match the search criteria are returned")
-    public void verifyReturnedRestaurants(String keyword) {
-        int restaurantCountAfterSearch;
-        String restaurantTitle;
-        restaurantCountAfterSearch = getRestaurantsCount();
-
-        assertThat(restaurantCountAfterSearch != 0).as("No restaurants match the search criteria")
-                .isTrue();
-        for (int i = 0; i < restaurantCountAfterSearch; i++) {
-            restaurantTitle = getRestaurantTitle().get(i).getText();
-            assertThat(restaurantTitle.contains(keyword)).as("The restaurant: "
-                    + restaurantTitle + " doesnt match the search criteria with the keyword: " + keyword)
-                    .isTrue();
-        }
-    }
-
-    @Step("Clear the search criteria")
-    public int clearSearchCriteria() {
-        int restaurantsCountAfterClearingSearch = 0;
-        try {
-            tap(getClearSearchResultButton());
-            restaurantsCountAfterClearingSearch = getRestaurantsCount();
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-
-        return restaurantsCountAfterClearingSearch;
-    }
-
-    @Step("Verify that all restaurants are returned after clearing the search criteria")
-    public void verifyAllRestaurantsAreReturned(int allRestaurantsCount, int searchRestaurantCount) {
-        assertThat(allRestaurantsCount == searchRestaurantCount)
-                .as("Not all restaurants are returned after clearing search criteria").isTrue();
-    }
-
-    @Step("Verify that recommended badge is showing next to a recommended restaurant")
-    public void checkRecommendedBadge(boolean isRestaurantRecommended) {
-        int restaurantCount = getRestaurantsCount();
-        int i = 0;
-        if (isRestaurantRecommended) {
-            for (i = 0; i < restaurantCount; i++) {
-                assertThat(isRecommendedBadgeDisplayed(i))
-                        .as("Recommended badge is not displayed for this restaurant").isTrue();
-            }
-        } else {
-            for (i = 0; i < restaurantCount; i++) {
-                assertThat(isRecommendedBadgeDisplayed(i))
-                        .as("Recommended badge is displayed even though the restaurant is not recommended")
-                        .isFalse();
-            }
-        }
+    public RestaurantsListScreen(AppiumDriver driver) {
+        super(driver);
     }
 }
