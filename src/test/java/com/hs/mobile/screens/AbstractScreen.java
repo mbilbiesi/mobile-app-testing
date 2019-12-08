@@ -47,11 +47,6 @@ class AbstractScreen {
         }
     }
 
-    public AbstractScreen(AppiumDriver driver, TouchAction touchAction) {
-        this.driver = driver;
-        this.touchAction = new TouchAction(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
-    }
 
     public void hideKeyboard() {
         if (isAndroid()) {
@@ -70,7 +65,7 @@ class AbstractScreen {
         return driver instanceof IOSDriver;
     }
 
-    void tap(WebElement element) {
+    public void tap(WebElement element) {
         touchAction.tap(tapOptions().withElement(element(element))).perform();
     }
 
@@ -78,7 +73,7 @@ class AbstractScreen {
         return element.getAttribute(attribute.getName());
     }
 
-    void verifyScreenElements() {
+    public void verifyScreenElements() {
         SoftAssertions soft = new SoftAssertions();
 
         Class<?> clazz = this.getClass();
