@@ -313,10 +313,11 @@ public class RestaurantsListScreen extends AbstractScreen {
     public int getRestaurantsCount(boolean verifiableElements) {
         int restaurantCount;
         waitUntilRestaurantsAreLoaded();
-
         restaurantCount = getRestaurantWidgets().size();
-        if (restaurantCount > 2) {
-            restaurantCount = restaurantCount - 1;
+        if (verifiableElements) {
+            if (restaurantCount > 2) {
+                restaurantCount = restaurantCount - 1;
+            }
         }
 
         return restaurantCount;
