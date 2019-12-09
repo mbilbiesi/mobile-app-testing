@@ -76,18 +76,22 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/constrain_parent")
+    @AssertElementVisibility
     private List<WebElement> restaurantList;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/constrain_parent")
+    @AssertElementVisibility
     private List<WebElement> restaurantWidgets;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/title")
+    @AssertElementVisibility
     private List<WebElement> restaurantTitle;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/description")
+    @AssertElementVisibility
     private List<WebElement> restaurantType;
 
     @iOSXCUITFindBy(id = "")
@@ -96,22 +100,27 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_fee_title")
+    @AssertElementVisibility
     private List<WebElement> deliveryText;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_fee_value")
+    @AssertElementVisibility
     private List<WebElement> deliveryFeeValue;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_fee_currency")
+    @AssertElementVisibility
     private List<WebElement> deliveryFeeCurrency;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/label_desc")
+    @AssertElementVisibility
     private List<WebElement> restaurantDeliveryInfo;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon")
+    @AssertElementVisibility
     private List<WebElement> restaurantDeliveryInfoIcon;
 
     @iOSXCUITFindBy(xpath = "")
