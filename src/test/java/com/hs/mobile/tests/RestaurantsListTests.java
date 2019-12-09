@@ -1,9 +1,12 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -112,5 +115,22 @@ public class RestaurantsListTests extends BaseTest {
 
         //Then verify that the "Recommended" badge doesn't show next to the restaurant
         restaurantsListScreen.checkRecommendedBadge(false);
+    }
+
+    @Test(priority = 5)
+    @Issue("HSAP-190")
+    @Story("Check if user can see restaurants stored by distance")
+    @Description("Make sure that restaurants are sorted according their distance from the searched location")
+    @Severity(SeverityLevel.NORMAL)
+    public void verifyRestaurantsSortedByDistance() {
+
+        //When
+        //Already executed in the previous test case
+
+        //And scrolls down the restaurants list to get more restaurants displayed
+        restaurantsListScreen.scrollDownRestaurantsList();
+
+        //Then, verify that restaurants are sorted by their distance
+        restaurantsListScreen.checkIfRestaurantsSortedByDistance();
     }
 }
