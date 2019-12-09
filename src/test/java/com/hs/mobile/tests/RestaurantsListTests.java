@@ -75,7 +75,7 @@ public class RestaurantsListTests extends BaseTest {
     @Issue("HSAP-188")
     @Test(description = "Make sure that the recommended badge shows next to the recommended restaurants")
     @Story("Check if recommended flag appears on the restaurants list")
-    public void checkRecommendedRestaurantsBadge() {
+    public void navigateToRestaurantsListScreen_checkRecommendedRestaurantsBadge() {
         //When
         homeScreen.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
@@ -122,7 +122,7 @@ public class RestaurantsListTests extends BaseTest {
     @Story("Check if user can see restaurants stored by distance")
     @Description("Make sure that restaurants are sorted according their distance from the searched location")
     @Severity(SeverityLevel.NORMAL)
-    public void verifyRestaurantsSortedByDistance() {
+    public void navigateToRestaurantsListScreen_verifyRestaurantsSortedByDistance() {
 
         //When
         homeScreen.clickFindRestaurantsButton();
