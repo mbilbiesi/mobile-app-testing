@@ -57,7 +57,7 @@ public class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
 
         //And
-        restaurantCount = restaurantsListScreen.getRestaurantsCount();
+        restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
 
         //And
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
