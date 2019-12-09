@@ -111,11 +111,6 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         listSorted = restaurantDistance.stream().sorted().collect(Collectors.toList()).equals(restaurantDistance);
         assertThat(listSorted).as("Restaurants are not sorted according their distance " +
                 "from customer's location").isTrue();
-        if(!listSorted){
-            for(int i=0;i<=restaurantDistance.size();i++){
-                System.out.println("~~~List Element~~~ " + restaurantDistance.get(i));
-            }
-        }
     }
 
     public int getRestaurantsCount(boolean verifiableElements) {
