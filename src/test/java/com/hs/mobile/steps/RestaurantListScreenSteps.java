@@ -35,7 +35,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
     @Step("Verify the restaurants that match the search criteria are returned")
     public void verifyReturnedRestaurants(String keyword) {
-        int restaurantCountAfterSearch = getRestaurantsCount();
+        int restaurantCountAfterSearch = getRestaurantsCount(false);
 
         SoftAssertions soft = new SoftAssertions();
         soft.assertThat(restaurantCountAfterSearch > 0)
@@ -58,7 +58,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         int restaurantsCountAfterClearingSearch = 0;
         try {
             tap(getBtnClearSearchResult());
-            restaurantsCountAfterClearingSearch = getRestaurantsCount();
+            restaurantsCountAfterClearingSearch = getRestaurantsCount(false);
         } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
@@ -74,12 +74,18 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
     @Step("Verify that recommended badge is showing next to a recommended restaurant")
     public void checkRecommendedBadge(boolean isRestaurantRecommended) {
-        int restaurantCount = getRestaurantsCount();
+        int restaurantCount = getRestaurantsCount(true);
+        SoftAssertions soft = new SoftAssertions();
 
         for (int i = 0; i < restaurantCount; i++) {
-            assertThat(getRestaurantWidgets().get(i).isDisplayed())
-                    .as("Recommended badge is not displayed for this restaurant")
-                    .isEqualTo(isRestaurantRecommended);
+            if (isRestaurantRecommended) {
+                soft.assertThat(getRecommendedBadge().size() > 0)
+                        .as("Recommended badge is not displayed for this restaurant").isTrue();
+            } else {
+                soft.assertThat(getRecommendedBadge().size() > 0)
+                        .as("Recommended badge is displayed even though the restaurant is not recommended")
+                        .isFalse();
+            }
         }
     }
 
@@ -99,20 +105,35 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
     @Step("Verify that restaurants are sorted by their distance from the customer")
     public void checkIfRestaurantsSortedByDistance() {
-        int restaurantCount = getRestaurantsCount();
+        int restaurantCount = getRestaurantsCount(true);
         boolean listSorted = false;
         ArrayList<Double> restaurantDistance = getDistanceOfDisplayedRestaurants(restaurantCount);
         listSorted = restaurantDistance.stream().sorted().collect(Collectors.toList()).equals(restaurantDistance);
-        assertThat(listSorted).as("Restaurants are not sorted according their distance" +
+        assertThat(listSorted).as("Restaurants are not sorted according their distance " +
                 "from customer's location").isTrue();
     }
 
-    public int getRestaurantsCount() {
-        return getRestaurantWidgets().size();
+    public int getRestaurantsCount(boolean verifiableElements) {
+        int restaurantCount;
+        waitUntilRestaurantsAreLoaded();
+        restaurantCount = getRestaurantWidgets().size();
+        if (verifiableElements) {
+            if (restaurantCount > 2) {
+                restaurantCount = restaurantCount - 1;
+            }
+        }
+
+        return restaurantCount;
     }
 
     public void waitUntilRestaurantsAreLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfAllElements(getRestaurantList()));
+    }
+
+    @Step("Scroll down restaurants list")
+    public void scrollDownRestaurantsList() {
+        waitUntilRestaurantsAreLoaded();
+        scrollByElement(getRestaurantsListWidget());
     }
 }
