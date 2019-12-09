@@ -115,4 +115,10 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfAllElements(getRestaurantList()));
     }
+
+    @Step("Scroll down restaurants list")
+    public void scrollDownRestaurantsList() {
+        waitUntilRestaurantsAreLoaded();
+        scrollByElement(getRestaurantsListWidget());
+    }
 }
