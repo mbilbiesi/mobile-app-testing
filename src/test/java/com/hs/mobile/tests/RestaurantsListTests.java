@@ -1,9 +1,12 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -22,7 +25,7 @@ public class RestaurantsListTests extends BaseTest {
     String notReadyRecommendedRestaurant = "ليمونة";
 
     @Issue("HSAP-185")
-    @Test(priority = 1, description = "Make sure that all Restaurant List objects are displayed correctly")
+    @Test(description = "Make sure that all Restaurant List objects are displayed correctly")
     @Story("Check Restaurants List Screen Layout")
     void navigateToResturantListScreen_screenElementAreDisplayed() {
         //Given
@@ -40,7 +43,7 @@ public class RestaurantsListTests extends BaseTest {
         restaurantsListScreen.verifyRestaurantsListLayout();
     }
 
-    @Test(priority = 2, description = "Make sure that all restaurants meet the search criteria are returned correctly")
+    @Test(description = "Make sure that all restaurants meet the search criteria are returned correctly")
     @Issue("HSAP-186")
     @Story("Search for a specific restaurant")
     public void searchForRestaurant_resultsMatchedSearchCriteria() {
@@ -54,9 +57,9 @@ public class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
 
         //And
-        restaurantCount = restaurantsListScreen.getRestaurantsCount();
+        restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
 
-        //And
+        //When
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
 
         //Then
@@ -70,10 +73,10 @@ public class RestaurantsListTests extends BaseTest {
     }
 
     @Issue("HSAP-188")
-    @Test(priority = 3, description = "Make sure that the recommended badge shows next to the recommended restaurants")
+    @Test(description = "Make sure that the recommended badge shows next to the recommended restaurants")
     @Story("Check if recommended flag appears on the restaurants list")
     public void checkRecommendedRestaurantsBadge() {
-        //When customer selects an address
+        //When
         homeScreen.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("riyadh");
@@ -81,10 +84,10 @@ public class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
         locationsScreen.insertAddressDescription("desc");
 
-        //And clicks "Search for Restaurants'
+        //And
         locationsScreen.submitAddress();
 
-        //And searches for a recommended restaurant
+        //And
         restaurantsListScreen.searchForRestaurant(recommendedRestaurant);
 
         //Then
@@ -92,11 +95,11 @@ public class RestaurantsListTests extends BaseTest {
         restaurantsListScreen.clearSearchCriteria();
     }
 
-    @Test(priority = 4, description = "verify recommended badge is only displayed for restaurant with ready status only")
+    @Test(description = "verify recommended badge is only displayed for restaurant with ready status only")
     @Issue("HSAP-189")
     @Story("Check if recommended flag appears for non-ready restaurants")
     public void navigateToRestaurantList_recommnededBadgeDisplayOnlyForReadyRestaurant() {
-        //When customer selects an
+        //When
         homeScreen.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("riyadh");
@@ -104,13 +107,38 @@ public class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
         locationsScreen.insertAddressDescription("desc");
 
-        //And clicks "Search for Restaurants"
+        //And
         locationsScreen.submitAddress();
 
-        //And searches for a recommended restaurant which is not with a 'Ready' status
+        //And
         restaurantsListScreen.searchForRestaurant(notReadyRecommendedRestaurant);
 
-        //Then verify that the "Recommended" badge doesn't show next to the restaurant
+        //Then
         restaurantsListScreen.checkRecommendedBadge(false);
+    }
+
+    @Test
+    @Issue("HSAP-190")
+    @Story("Check if user can see restaurants stored by distance")
+    @Description("Make sure that restaurants are sorted according their distance from the searched location")
+    @Severity(SeverityLevel.NORMAL)
+    public void verifyRestaurantsSortedByDistance() {
+
+        //When
+        homeScreen.clickFindRestaurantsButton();
+        locationsScreen.searchForRestaurants();
+        locationsScreen.insertLocation("riyadh");
+        locationsScreen.selectItemArea(3);
+        locationsScreen.submitAddress();
+        locationsScreen.insertAddressDescription("desc");
+
+        //And
+        locationsScreen.submitAddress();
+
+        //And scrolls down the restaurants list to get more restaurants displayed
+        restaurantsListScreen.scrollDownRestaurantsList();
+
+        //Then, verify that restaurants are sorted by their distance
+        restaurantsListScreen.checkIfRestaurantsSortedByDistance();
     }
 }
