@@ -75,11 +75,17 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     @Step("Verify that recommended badge is showing next to a recommended restaurant")
     public void checkRecommendedBadge(boolean isRestaurantRecommended) {
         int restaurantCount = getRestaurantsCount(true);
+        SoftAssertions soft = new SoftAssertions();
 
         for (int i = 0; i < restaurantCount; i++) {
-            assertThat(getRestaurantWidgets().get(i).isDisplayed())
-                    .as("Recommended badge is not displayed for this restaurant")
-                    .isEqualTo(isRestaurantRecommended);
+            if (isRestaurantRecommended) {
+                soft.assertThat(getRecommendedBadge().size() > 0)
+                        .as("Recommended badge is not displayed for this restaurant").isTrue();
+            } else {
+                soft.assertThat(getRecommendedBadge().size() > 0)
+                        .as("Recommended badge is displayed even though the restaurant is not recommended")
+                        .isFalse();
+            }
         }
     }
 
@@ -103,8 +109,13 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         boolean listSorted = false;
         ArrayList<Double> restaurantDistance = getDistanceOfDisplayedRestaurants(restaurantCount);
         listSorted = restaurantDistance.stream().sorted().collect(Collectors.toList()).equals(restaurantDistance);
-        assertThat(listSorted).as("Restaurants are not sorted according their distance" +
+        assertThat(listSorted).as("Restaurants are not sorted according their distance " +
                 "from customer's location").isTrue();
+        if(!listSorted){
+            for(int i=0;i<=restaurantDistance.size();i++){
+                System.out.println("~~~List Element~~~ " + restaurantDistance.get(i));
+            }
+        }
     }
 
     public int getRestaurantsCount(boolean verifiableElements) {
