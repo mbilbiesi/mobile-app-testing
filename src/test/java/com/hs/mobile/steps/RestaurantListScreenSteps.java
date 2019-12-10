@@ -140,12 +140,14 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     }
 
     @Step("Verify promoted restaurants shows at the top")
-    public void verifyPromotedRestaurantsDisplayOnTop() {
+    public void verifyPromotedRestaurantsDisplayOnTop(boolean listHasPromotedRestaurants) {
         List<WebElement> promotedRestaurant;
         SoftAssertions soft = new SoftAssertions();
         promotedRestaurant = getRestaurantWidgets().get(0).findElements(By.xpath(getPromotedBadgeLocator()));
-        soft.assertThat(promotedRestaurant.size() > 0 && promotedRestaurant.get(0).isDisplayed())
-                .as("Promoted restaurants" +
-                        "are not displayed at the top of restaurants list").isTrue();
+        if (listHasPromotedRestaurants) {
+            soft.assertThat(promotedRestaurant.size() > 0 && promotedRestaurant.get(0).isDisplayed())
+                    .as("Promoted restaurants" +
+                            "are not displayed at the top of restaurants list").isTrue();
+        }
     }
 }
