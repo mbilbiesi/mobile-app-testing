@@ -112,6 +112,6 @@ public class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
 
         //Then
-        restaurantsListScreen.verifyPromotedRestaurantsDisplayOnTop();
+        restaurantsListScreen.verifyPromotedRestaurantsDisplayOnTop(true);
     }
 }
