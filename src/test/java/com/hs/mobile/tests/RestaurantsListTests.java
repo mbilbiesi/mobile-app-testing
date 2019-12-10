@@ -104,4 +104,14 @@ public class RestaurantsListTests extends BaseTest {
         //Then
         restaurantsListScreen.checkIfRestaurantsSortedByDistance();
     }
+
+    @Issue("HSAP-191")
+    @Test(description = "Verify promoted restaurants are displayed at the top of restaurants list", enabled = false)
+    public void navigateToRestaurantsListScreen_verifyPromotedRestaurantsDisplayOnTop() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyPromotedRestaurantsDisplayOnTop();
+    }
 }

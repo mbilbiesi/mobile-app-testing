@@ -4,6 +4,8 @@ import com.hs.mobile.screens.RestaurantsListScreen;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -135,5 +137,15 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     public void scrollDownRestaurantsList() {
         waitUntilRestaurantsAreLoaded();
         scrollByElement(getRestaurantsListWidget());
+    }
+
+    @Step("Verify promoted restaurants shows at the top")
+    public void verifyPromotedRestaurantsDisplayOnTop() {
+        List<WebElement> promotedRestaurant;
+        SoftAssertions soft = new SoftAssertions();
+        promotedRestaurant = getRestaurantWidgets().get(0).findElements(By.xpath(getPromotedBadgeLocator()));
+        soft.assertThat(promotedRestaurant.size() > 0 && promotedRestaurant.get(0).isDisplayed())
+                .as("Promoted restaurants" +
+                        "are not displayed at the top of restaurants list").isTrue();
     }
 }
