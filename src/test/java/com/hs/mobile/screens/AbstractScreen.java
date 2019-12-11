@@ -15,6 +15,8 @@ import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.Field;
 import java.time.Duration;
@@ -104,5 +106,13 @@ class AbstractScreen {
         int endY = (int) (dimension.getHeight() * 0.10);
         touchAction.press(point(x, startY)).waitAction(waitOptions(ofMillis(100)))
                 .moveTo(point(x, endY)).release().perform();
+    }
+    Boolean isElementActive(WebElement element) {
+        return element.isDisplayed() && element.isEnabled();
+    }
+
+    void waitUntilAnElementIsUpdated(WebElement element, ElementAttribute attribute, String expectedValue) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.attributeToBe(element, attribute.getName(), expectedValue));
     }
 }
