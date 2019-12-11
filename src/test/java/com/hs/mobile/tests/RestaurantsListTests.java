@@ -63,8 +63,6 @@ public class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
-
-        //When
         afterSearchRestaurantCount = restaurantsListScreen.clearSearchCriteria();
 
         //Then
@@ -113,7 +111,7 @@ public class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
 
         //Then
-        restaurantsListScreen.verifyPromotedRestaurantsDisplayOnTop(true);
+        restaurantsListScreen.verifyPromotedRestaurantsDisplayOnTop();
     }
 
     @Issue("HSAP-192")
