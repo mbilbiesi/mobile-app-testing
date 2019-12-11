@@ -112,4 +112,14 @@ public class RestaurantsListTests extends BaseTest {
         //Then
         restaurantsListScreen.verifyPromotedRestaurantsDisplayOnTop();
     }
+
+    @Issue("HSAP-192")
+    @Test(description = "Check if the filters section is displayed below the banners section")
+    public void navigateToRestaurantsListScreen_verifyKitchenTypeFiltersAreDisplayed() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyRestaurantFiltersAreDisplayed();
+    }
 }

@@ -149,4 +149,23 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
                 .as("Promoted restaurants" +
                         "are not displayed at the top of restaurants list").isTrue();
     }
+
+    public int getFiltersCount() {
+        return getBtnFilter().size();
+    }
+
+    @Step("Verify that restaurant filters are displayed")
+    public void verifyRestaurantFiltersAreDisplayed() {
+        int filtersCount;
+        SoftAssertions soft = new SoftAssertions();
+
+        filtersCount = getFiltersCount() - 1;
+
+        for (int i = 0; i < filtersCount; i++) {
+            soft.assertThat(getFiltersIcons().get(i).isDisplayed())
+                    .as("Filter icon isn't displayed for filter #" + (i + 1)).isTrue();
+            soft.assertThat(getFiltersNames().get(i).isDisplayed())
+                    .as("Filter name isn't displayed for filter #" + i + 1).isTrue();
+        }
+    }
 }
