@@ -219,4 +219,20 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         soft.assertThat(!filterTitleBeforeSwipe.equals(filterTitleAfterSwipe))
                 .as("Customer wasn't able to do swipe action on the filters list").isTrue();
     }
+
+    @Step("Verify that top banner image ration is 2:1")
+    public void verifyTopBannerImageRatio() {
+        Dimension topBannerSize;
+        double bannerHeight;
+        double bannerWidth;
+        SoftAssertions soft = new SoftAssertions();
+
+        topBannerSize = getOfferWidgets().get(0).getSize();
+        bannerHeight = topBannerSize.getHeight();
+        bannerWidth = topBannerSize.getWidth();
+
+        soft.assertThat(bannerWidth == bannerHeight*2)
+                .as("Top banner ratio is not 2:1").isTrue();
+
+    }
 }

@@ -145,4 +145,14 @@ public class RestaurantsListTests extends BaseTest {
         //Then
         restaurantsListScreen.verifyFiltersSwipedSuccessfully(firstFilterTitle);
     }
+
+    @Issue("HSAP-195")
+    @Test(description = "Check if the user is able to swipe left and right on the filters list")
+    public void navigateToRestaurantsListScreen_verifyTopBannerImgRatioIs2_1() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyTopBannerImageRatio();
+    }
 }
