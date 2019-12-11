@@ -152,9 +152,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     }
 
     public int getFiltersCount() {
-        int count;
-        count = getBtnFilter().size();
-        return count;
+        return getBtnFilter().size();
     }
 
     @Step("Verify that restaurant filters are displayed")
