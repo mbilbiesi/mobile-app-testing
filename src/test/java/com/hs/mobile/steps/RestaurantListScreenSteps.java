@@ -2,6 +2,7 @@ package com.hs.mobile.steps;
 
 import com.hs.mobile.screens.RestaurantsListScreen;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
@@ -170,5 +171,55 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
             soft.assertThat(getFiltersNames().get(i).isDisplayed())
                     .as("Filter name isn't displayed for filter #" + i + 1).isTrue();
         }
+    }
+
+    @Step("Verify that \"All\" filter is displayed")
+    public void verifyAllFiterIsDisplayed() {
+        SoftAssertions soft = new SoftAssertions();
+        soft.assertThat(isAllFilterDisplayed(getFiltersNames().get(0)))
+                .as("\"All\" filter is not displayed").isTrue();
+    }
+
+    @Step("Verify that \"All\" filter is selected")
+    public void verifyAllFiterIsSelectedAndColorIsYellow() {
+        String filterColor;
+        SoftAssertions soft = new SoftAssertions();
+
+        filterColor = getElementColor((MobileElement) getBtnFilter().get(0));
+
+        soft.assertThat(filterColor.equalsIgnoreCase("#ffd700"))
+                .as("The \"All\" filter isn't selected, and it's color isn't yellow");
+    }
+
+    public boolean isAllFilterDisplayed(WebElement allFilter) {
+        boolean isDisplayed = false;
+
+        if (allFilter.getText().equals("All") || allFilter.getText().equals("الكل")) {
+            isDisplayed = true;
+        }
+
+        return isDisplayed;
+    }
+
+    @Step("Swipe filters list")
+    public String swipeFiltersList() {
+        String firstFilterTitle;
+        int endElementIndex = getFiltersCount() - 1;
+        MobileElement startElement = (MobileElement) getBtnFilter().get(endElementIndex);
+        MobileElement endElement = (MobileElement) getBtnFilter().get(0);
+
+        firstFilterTitle = getFiltersNames().get(0).getText();
+        swipe(startElement, endElement);
+
+        return firstFilterTitle;
+    }
+
+    @Step("Verify that customer was able to swipe the filters list")
+    public void verifyFiltersSwipedSuccessfully(String filterTitleBeforeSwipe) {
+        SoftAssertions soft = new SoftAssertions();
+        String filterTitleAfterSwipe = getFiltersNames().get(0).getText();
+
+        soft.assertThat(!filterTitleBeforeSwipe.equals(filterTitleAfterSwipe))
+                .as("Customer wasn't able to do swipe action on the filters list").isTrue();
     }
 }

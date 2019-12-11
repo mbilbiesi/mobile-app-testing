@@ -21,6 +21,7 @@ public class RestaurantsListTests extends BaseTest {
     //ToDO: Find a way to retrieve different test data for restaurants dynamically:
     String recommendedRestaurant = "ماكدونالد";
     String notReadyRecommendedRestaurant = "ليمونة";
+    String firstFilterTitle;
 
     @BeforeMethod
     public void beforeEachTest() {
@@ -132,6 +133,18 @@ public class RestaurantsListTests extends BaseTest {
         locationsScreen.submitAddress();
 
         //Then
-        restaurantsListScreen.verifyRestaurantFiltersAreDisplayed();
+        restaurantsListScreen.verifyAllFiterIsDisplayed();
+        restaurantsListScreen.verifyAllFiterIsSelectedAndColorIsYellow();
+    }
+
+    @Issue("HSAP-194")
+    @Test(description = "Check if the user is able to swipe left and right on the filters list")
+    public void navigateToRestaurantsListScreen_verifyCustomerCanSwipeOnFilters() {
+        //When
+        locationsScreen.submitAddress();
+        firstFilterTitle = restaurantsListScreen.swipeFiltersList();
+
+        //Then
+        restaurantsListScreen.verifyFiltersSwipedSuccessfully(firstFilterTitle);
     }
 }
