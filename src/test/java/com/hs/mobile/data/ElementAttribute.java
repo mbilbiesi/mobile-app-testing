@@ -2,7 +2,8 @@ package com.hs.mobile.data;
 
 public enum ElementAttribute {
     ENABLED("enabled"),
-    TEXT("text");
+    TEXT("text"),
+    CHECKED("checked");
 
     private String value;
 

@@ -113,25 +113,20 @@ public class OrdersScreen extends AbstractScreen {
 
     @Step("Make sure that \"Verify Mobile Number\" button if customer is not logged in")
     public void verifyThatVerifyMobileButtonIsDisplayed() {
-        assertThat(isBtnVerifyDisplayed())
-                .as("Verify mobile number button is not displayed.").isTrue();
+        assertThat(isBtnVerifyDisplayed()).as("Verify mobile number button is not displayed.").isTrue();
     }
 
     @Step("Make sure that all orders details are displayed if customer is logged in")
     public void verifyThatAllOrdersElementsIsDisplayed() {
         SoftAssertions soft = new SoftAssertions();
-        soft.assertThat(isEleOrdersDisplayed())
-                .as("Customer orders are not displayed.").isTrue();
-        soft.assertThat(isEleOrderTitlesDisplayed()).as(
-                "Customer order titles are not displayed.").isTrue();
-        soft.assertThat(isEleOrderPriceDisplayed()).as(
-                "Order prices are not displayed.").isTrue();
-        soft.assertThat(isEleOrderStatusDisplayed())
-                .as("Orders statuses are not displayed.").isTrue();
-        soft.assertThat(isEleOrderDateDisplayed())
-                .as("Orders item is not displayed.").isTrue();
-        soft.assertThat(isEleOrderDateDisplayed())
-                .as("Orders dates are not displayed.").isTrue();
+        soft.assertThat(isEleOrdersDisplayed()).as("Customer orders are not displayed.").isTrue();
+        soft.assertThat(isEleOrderTitlesDisplayed())
+                .as("Customer order titles are not displayed.")
+                .isTrue();
+        soft.assertThat(isEleOrderPriceDisplayed()).as("Order prices are not displayed.").isTrue();
+        soft.assertThat(isEleOrderStatusDisplayed()).as("Orders statuses are not displayed.").isTrue();
+        soft.assertThat(isEleOrderDateDisplayed()).as("Orders item is not displayed.").isTrue();
+        soft.assertThat(isEleOrderDateDisplayed()).as("Orders dates are not displayed.").isTrue();
         soft.assertAll();
     }
 

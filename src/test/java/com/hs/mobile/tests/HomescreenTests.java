@@ -15,24 +15,26 @@ public class HomescreenTests extends BaseTest {
 
     @Test(description = "Open the application with a new user")
     void navigateToHomeScreen_allHomeScreenElementsAreDisplayed() {
-        //Given
-        homeScreen.verifyThatAllHomeElementsDisplayed();
+        // Given
+        homeScreenSteps.verifyThatAllHomeElementsDisplayed();
     }
 
-    @Test(enabled = true, description = "Open the application with an already registered user without any saved place")
+    @Test(
+            enabled = true,
+            description = "Open the application with an already registered user without any saved place")
     void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
-        //Given
-        homeScreen.clickMyOrdersButton();
+        // Given
+        homeScreenSteps.clickMyOrdersButton();
         ordersScreen.clickVerifyButton();
-        verifyAccountScreen.insertMobileNumber("503263813");
-        verifyAccountScreen.clickNextButton();
+        verifyAccountScreenSteps.insertMobileNumber("503263813");
+        verifyAccountScreenSteps.clickNextButton();
         pinCodeVerificationScreen.insertVerificationCode("395406");
         addReferalCodeScreen.clickCloseButton();
 
-        //When
+        // When
         ordersScreen.navigateToRestaurants();
 
-        //Then
-        homeScreen.verifyThatAllHomeElementsDisplayed();
+        // Then
+        homeScreenSteps.verifyThatAllHomeElementsDisplayed();
     }
 }

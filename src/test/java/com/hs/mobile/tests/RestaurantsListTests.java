@@ -18,14 +18,14 @@ public class RestaurantsListTests extends BaseTest {
     int restaurantCount = 0;
     int afterSearchRestaurantCount = 0;
     String keyword = null;
-    //ToDO: Find a way to retrieve different test data for restaurants dynamically:
+    // ToDO: Find a way to retrieve different test data for restaurants dynamically:
     String recommendedRestaurant = "ماكدونالد";
     String notReadyRecommendedRestaurant = "ليمونة";
 
     @BeforeMethod
     public void beforeEachTest() {
-        //Given
-        homeScreen.clickFindRestaurantsButton();
+        // Given
+        homeScreenSteps.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("riyadh");
         locationsScreen.selectItemArea(3);
@@ -36,72 +36,77 @@ public class RestaurantsListTests extends BaseTest {
     @Issue("HSAP-185")
     @Test(description = "Verify all Restaurant List objects are displayed correctly")
     void navigateToRestaurantListScreen_screenElementAreDisplayed() {
-        //When
+        // When
         locationsScreen.submitAddress();
 
-        //Then
+        // Then
         restaurantsListScreen.verifyRestaurantsListLayout();
     }
 
     @Issue("HSAP-186")
     @Test(description = "Verify all restaurants that meet the search criteria are returned")
     public void searchForRestaurant_resultsMatchedSearchCriteria() {
-        //When
+        // When
         locationsScreen.submitAddress();
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
 
-        //Then
+        // Then
         restaurantsListScreen.verifyReturnedRestaurants(keyword);
     }
 
     @Issue("HSAP-186")
     @Test(description = "Verify clearing search criteria will reset the list view")
     public void clickToResetSearchCriteria_restaurantListWillBeReset() {
-        //When
+        // When
         locationsScreen.submitAddress();
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
 
-        //When
+        // When
         afterSearchRestaurantCount = restaurantsListScreen.clearSearchCriteria();
 
-        //Then
-        restaurantsListScreen.verifyAllRestaurantsAreReturned(restaurantCount, afterSearchRestaurantCount);
+        // Then
+        restaurantsListScreen.verifyAllRestaurantsAreReturned(
+                restaurantCount, afterSearchRestaurantCount);
     }
 
     @Issue("HSAP-188")
     @Test(description = "Verify recommended badge is displaying next to the recommended restaurants")
     public void navigateToRestaurantsListScreen_checkRecommendedRestaurantsBadge() {
-        //When
+        // When
         locationsScreen.submitAddress();
         restaurantsListScreen.searchForRestaurant(recommendedRestaurant);
 
-        //Then
+        // Then
         restaurantsListScreen.checkRecommendedBadge(true);
-        //todo: make sure that this step is going to be executed otherwise next tests will fail
+        // todo: make sure that this step is going to be executed otherwise next tests will fail
         restaurantsListScreen.clearSearchCriteria();
     }
 
     @Issue("HSAP-189")
-    @Test(description = "verify recommended badge is only displayed for restaurant with ready status only")
+    @Test(
+            description =
+                    "verify recommended badge is only displayed for restaurant with ready status only")
     public void navigateToRestaurantList_recommendedBadgeDisplayOnlyForReadyRestaurant() {
-        //When
+        // When
         locationsScreen.submitAddress();
         restaurantsListScreen.searchForRestaurant(notReadyRecommendedRestaurant);
 
-        //Then
+        // Then
         restaurantsListScreen.checkRecommendedBadge(false);
     }
 
     @Issue("HSAP-190")
-    @Test(description = "Verify restaurants are sorted according to the distance from the location provided")
+    @Test(
+            description =
+                    "Verify restaurants are sorted according to the distance from the location provided")
     public void navigateToRestaurantsListScreen_verifyRestaurantsSortedByDistance() {
-        //When
+        // When
         locationsScreen.submitAddress();
         restaurantsListScreen.scrollDownRestaurantsList();
 
-        //Then
+        // Then
         restaurantsListScreen.checkIfRestaurantsSortedByDistance();
     }
 }

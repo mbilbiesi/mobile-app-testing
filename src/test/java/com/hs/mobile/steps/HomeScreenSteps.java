@@ -1,6 +1,7 @@
 package com.hs.mobile.steps;
 
 import com.hs.mobile.screens.HomeScreen;
+import com.hs.mobile.screens.HomeScreenSideMenu;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 
@@ -38,5 +39,11 @@ public class HomeScreenSteps extends HomeScreen {
     @Step("Click on restaurant icon")
     public void clickOnResturantIcon() {
         tap(getRestaurantsItem());
+    }
+
+    @Step("Click on more")
+    public HomeScreenSideMenu clickOnMore() {
+        tap(getMoreItem());
+        return new HomeScreenSideMenu(driver);
     }
 }

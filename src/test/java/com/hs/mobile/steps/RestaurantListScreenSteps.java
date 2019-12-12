@@ -39,14 +39,19 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
         SoftAssertions soft = new SoftAssertions();
         soft.assertThat(restaurantCountAfterSearch > 0)
-                .as("No restaurants match the search criteria").isTrue();
+                .as("No restaurants match the search criteria")
+                .isTrue();
 
         List<WebElement> restaurantTitles = getRestaurantTitle();
 
         for (WebElement restaurantTitle : restaurantTitles) {
             String titleText = restaurantTitle.getText();
             soft.assertThat(titleText.contains(keyword))
-                    .as("The restaurant: " + titleText + " does not match the search criteria with the keyword: " + keyword)
+                    .as(
+                            "The restaurant: "
+                                    + titleText
+                                    + " does not match the search criteria with the keyword: "
+                                    + keyword)
                     .isTrue();
         }
 
@@ -69,7 +74,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     @Step("Verify that all restaurants are returned after clearing the search criteria")
     public void verifyAllRestaurantsAreReturned(int allRestaurantsCount, int searchRestaurantCount) {
         assertThat(allRestaurantsCount == searchRestaurantCount)
-                .as("Not all restaurants are returned after clearing search criteria").isTrue();
+                .as("Not all restaurants are returned after clearing search criteria")
+                .isTrue();
     }
 
     @Step("Verify that recommended badge is showing next to a recommended restaurant")
@@ -80,7 +86,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         for (int i = 0; i < restaurantCount; i++) {
             if (isRestaurantRecommended) {
                 soft.assertThat(getRecommendedBadge().size() > 0)
-                        .as("Recommended badge is not displayed for this restaurant").isTrue();
+                        .as("Recommended badge is not displayed for this restaurant")
+                        .isTrue();
             } else {
                 soft.assertThat(getRecommendedBadge().size() > 0)
                         .as("Recommended badge is displayed even though the restaurant is not recommended")
@@ -108,9 +115,14 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         int restaurantCount = getRestaurantsCount(true);
         boolean listSorted = false;
         ArrayList<Double> restaurantDistance = getDistanceOfDisplayedRestaurants(restaurantCount);
-        listSorted = restaurantDistance.stream().sorted().collect(Collectors.toList()).equals(restaurantDistance);
-        assertThat(listSorted).as("Restaurants are not sorted according their distance " +
-                "from customer's location").isTrue();
+        listSorted =
+                restaurantDistance.stream()
+                        .sorted()
+                        .collect(Collectors.toList())
+                        .equals(restaurantDistance);
+        assertThat(listSorted)
+                .as("Restaurants are not sorted according their distance " + "from customer's location")
+                .isTrue();
     }
 
     public int getRestaurantsCount(boolean verifiableElements) {

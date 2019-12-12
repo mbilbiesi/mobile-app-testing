@@ -22,106 +22,112 @@ public class LocationTests extends BaseTest {
 
     @BeforeMethod
     public void startApp() {
-        homeScreen.clickMyOrdersButton();
+        homeScreenSteps.clickMyOrdersButton();
         ordersScreen.clickVerifyButton();
-        verifyAccountScreen.insertMobileNumber("503263813");
-        verifyAccountScreen.clickNextButton();
+        verifyAccountScreenSteps.insertMobileNumber("503263813");
+        verifyAccountScreenSteps.clickNextButton();
         pinCodeVerificationScreen.insertVerificationCode("395406");
         addReferalCodeScreen.clickCloseButton();
-        homeScreen.clickOnResturantIcon();
+        homeScreenSteps.clickOnResturantIcon();
 
         deleteExistingLocations();
     }
 
     @Test(description = "Add locations for all available location types")
     void addLocationsForAllAvailableLocationTypes() {
-        //When
+        // When
         addAllTypesOfLocations();
 
-        //Then
+        // Then
         verifyNewlyAddedLocations();
     }
 
     @Test(description = "Search by landmark")
     void searchByLandmark() {
-        //When
+        // When
         searchForALandmark();
 
-        //Then
+        // Then
         Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
-                .as("Submit button should be enabled for valid landmarks.").isTrue();
+                .as("Submit button should be enabled for valid landmarks.")
+                .isTrue();
     }
 
     @Test(description = "SSave without description")
     void saveWithoutDescription() {
-        //When
+        // When
         saveLocation(null);
-        homeScreen.viewSavedLocations();
+        homeScreenSteps.viewSavedLocations();
 
-        //Then
-        Assertions.assertThat(savedLocationsScreen.getSavedLocations().size())
-                .as("Description is not mandatory.").isEqualTo(1);
+        // Then
+        Assertions.assertThat(savedLocationsScreenSteps.getSavedLocations().size())
+                .as("Description is not mandatory.")
+                .isEqualTo(1);
     }
 
     @Test(description = "Edit location")
     void editLocation() {
-        //When
+        // When
         saveLocation("test");
-        homeScreen.viewSavedLocations();
-        savedLocationsScreen.editLocation();
+        homeScreenSteps.viewSavedLocations();
+        savedLocationsScreenSteps.editLocation();
 
-        //Then
+        // Then
         Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
-                .as("User should be directed to the saved location.").isTrue();
+                .as("User should be directed to the saved location.")
+                .isTrue();
     }
 
     @Test(description = "Use an out of range location")
     void useAnOutOfRangeLocation() {
-        //When
+        // When
         searchForAnOutOfRangeLocation();
 
-        //Then
+        // Then
         Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
-                .as("Submit button should be disabled for out of range locations.").isFalse();
+                .as("Submit button should be disabled for out of range locations.")
+                .isFalse();
     }
 
     @Test(description = "Edit description with different characters")
     void editDescriptionWithDifferentCharacters() {
-        //When
+        // When
         saveLocation(null);
         String description = "% 5";
         updateDescription(description);
 
-        //Then
+        // Then
         verifyUpdatedDescription(description);
     }
 
     @Test(description = "Delete all locations")
     void deleteAllLocations() {
-        //When
+        // When
         saveLocation(null);
         deleteExistingLocations();
-        homeScreen.viewSavedLocations();
+        homeScreenSteps.viewSavedLocations();
 
-        //Then
+        // Then
         Assertions.assertThat(locationsScreen.isSearchButtonDisplayed())
-                .as("User should be redirected to locations screen.").isEqualTo(true);
+                .as("User should be redirected to locations screen.")
+                .isEqualTo(true);
     }
 
     @Step("Verify {description} updated description")
     public void verifyUpdatedDescription(String description) {
-        savedLocationsScreen.editLocation();
+        savedLocationsScreenSteps.editLocation();
         locationsScreen.submitAddress();
         Assertions.assertThat(locationsScreen.getDescription())
-                .as("Actual updated description does not match expected one.").isEqualTo(description);
+                .as("Actual updated description does not match expected one.")
+                .isEqualTo(description);
         locationsScreen.submitAddress();
-        savedLocationsScreen.waitUntilNewLocationButtonDisplays();
+        savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
     }
 
     @Step("Update description to {description}")
     public void updateDescription(String description) {
-        homeScreen.viewSavedLocations();
-        savedLocationsScreen.editLocation();
+        homeScreenSteps.viewSavedLocations();
+        savedLocationsScreenSteps.editLocation();
         locationsScreen.submitAddress();
         locationsScreen.clearDescription();
         locationsScreen.insertAddressDescription(description);
@@ -130,7 +136,7 @@ public class LocationTests extends BaseTest {
 
     @Step("Save location")
     public void saveLocation(String description) {
-        homeScreen.findRestaurants();
+        homeScreenSteps.findRestaurants();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("Riyadh");
         locationsScreen.selectItemArea(0);
@@ -147,7 +153,7 @@ public class LocationTests extends BaseTest {
 
     @Step("Search for a landmark")
     public void searchForALandmark() {
-        homeScreen.findRestaurants();
+        homeScreenSteps.findRestaurants();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("hayah mall");
         locationsScreen.selectItemArea(0);
@@ -155,7 +161,7 @@ public class LocationTests extends BaseTest {
 
     @Step("Search for an out of range location")
     public void searchForAnOutOfRangeLocation() {
-        homeScreen.findRestaurants();
+        homeScreenSteps.findRestaurants();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("Amman");
         locationsScreen.selectItemArea(0);
@@ -163,9 +169,10 @@ public class LocationTests extends BaseTest {
 
     @Step("Verify newly added locations")
     public void verifyNewlyAddedLocations() {
-        homeScreen.viewSavedLocations();
-        Assertions.assertThat(savedLocationsScreen.getSavedLocations().size())
-                .as("Number of saved locations should be 4.").isEqualTo(4);
+        homeScreenSteps.viewSavedLocations();
+        Assertions.assertThat(savedLocationsScreenSteps.getSavedLocations().size())
+                .as("Number of saved locations should be 4.")
+                .isEqualTo(4);
     }
 
     @Step("Add all types of locations")
@@ -176,23 +183,23 @@ public class LocationTests extends BaseTest {
 
     @Step("Delete existing locations")
     public void deleteExistingLocations() {
-        homeScreen.viewSavedLocations();
+        homeScreenSteps.viewSavedLocations();
         try {
             locationsScreen.isSearchButtonDisplayed();
         } catch (Exception e) {
-            savedLocationsScreen.deleteSavedLocations();
-            savedLocationsScreen.waitUntilNewLocationButtonDisplays();
+            savedLocationsScreenSteps.deleteSavedLocations();
+            savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
         } finally {
             driver.navigate().back();
         }
     }
 
     private void addNewLocations(List<LocationType> types) {
-        homeScreen.findRestaurants();
+        homeScreenSteps.findRestaurants();
         for (int i = 0; i < types.size(); i++) {
             if (i > 0) {
-                homeScreen.viewSavedLocations();
-                savedLocationsScreen.addNewLocation();
+                homeScreenSteps.viewSavedLocations();
+                savedLocationsScreenSteps.addNewLocation();
             }
             locationsScreen.searchForRestaurants();
             locationsScreen.insertLocation("Riyadh");
