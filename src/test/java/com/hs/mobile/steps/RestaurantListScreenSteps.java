@@ -249,7 +249,6 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     }
 
     public boolean checkTopBanner() {
-        SoftAssertions soft = new SoftAssertions();
         boolean topBannerHasOffers = false;
 
         if (getOfferWidgets().size() > 0) {
@@ -274,6 +273,5 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         } catch (ElementNotVisibleException e) {
             e.printStackTrace();
         }
-
     }
 }
