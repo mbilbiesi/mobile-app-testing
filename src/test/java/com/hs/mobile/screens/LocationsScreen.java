@@ -23,7 +23,8 @@ public class LocationsScreen extends AbstractScreen {
     private WebElement searchTextBox;
 
     @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_prediction_primary_text")
+    @AndroidFindBy(
+            id = "com.hungerstation.android.web.debug:id/places_autocomplete_prediction_primary_text")
     private List<WebElement> itemAreas;
 
     @iOSXCUITFindBy(id = "")
@@ -39,7 +40,9 @@ public class LocationsScreen extends AbstractScreen {
     private WebElement saveForLaterToggleButton;
 
     @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(xpath = "//android.widget.RadioGroup[@resource-id='com.hungerstation.android.web.debug:id/save_location_radio_group']/*")
+    @AndroidFindBy(
+            xpath =
+                    "//android.widget.RadioGroup[@resource-id='com.hungerstation.android.web.debug:id/save_location_radio_group']/*")
     private List<WebElement> locationTypes;
 
     public LocationsScreen(AppiumDriver driver) {

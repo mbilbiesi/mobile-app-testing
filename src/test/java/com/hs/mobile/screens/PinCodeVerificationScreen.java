@@ -80,21 +80,24 @@ public class PinCodeVerificationScreen extends AbstractScreen {
     public void verifyThatAllPinCodeVerificationScreenElementsIsDisplayed() {
         SoftAssertions soft = new SoftAssertions();
         soft.assertThat(isEleCustomerPhoneNumberDisplayed())
-                .as("Customer's mobile number is not displayed.").isTrue();
-        soft.assertThat(isTxtVerificationCodeDisplayed()).as(
-                "Verification code text box is not displayed.").isTrue();
-        soft.assertThat(isLnkResendPinDisplayed()).as(
-                "Resend Pin link is not displayed.").isTrue();
-        soft.assertThat(isLnkResendPinCallDisplayed()).as(
-                "Call to Resend Pin link is not displayed.").isTrue();
-        soft.assertThat(isBtnVerifyNumberDisplayed()).as(
-                "Verify My Number button is not displayed.").isTrue();
+                .as("Customer's mobile number is not displayed.")
+                .isTrue();
+        soft.assertThat(isTxtVerificationCodeDisplayed())
+                .as("Verification code text box is not displayed.")
+                .isTrue();
+        soft.assertThat(isLnkResendPinDisplayed()).as("Resend Pin link is not displayed.").isTrue();
+        soft.assertThat(isLnkResendPinCallDisplayed())
+                .as("Call to Resend Pin link is not displayed.")
+                .isTrue();
+        soft.assertThat(isBtnVerifyNumberDisplayed())
+                .as("Verify My Number button is not displayed.")
+                .isTrue();
         soft.assertAll();
     }
 
     @Step("Insert Verification Code")
     public void insertVerificationCode(String number) {
-        //TODO: Add a step to verify whether the inserted code is valid or not
+        // TODO: Add a step to verify whether the inserted code is valid or not
         getVerificationCode().sendKeys(number);
     }
 

@@ -28,91 +28,96 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
 
-class AbstractScreen {
-    protected final TouchAction touchAction;
-    protected final AppiumDriver driver;
+public class AbstractScreen {
+  protected final TouchAction touchAction;
+  protected final AppiumDriver driver;
 
-    //ToDo: find the locator of the skip promotion link in english
-    @iOSXCUITFindBy(xpath = "")
-    @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='textInEnglish']")
-    private List<WebElement> lnkSkipPromotion;
+  // ToDo: find the locator of the skip promotion link in english
+  @iOSXCUITFindBy(xpath = "")
+  @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='textInEnglish']")
+  private List<WebElement> lnkSkipPromotion;
 
-    public AbstractScreen(AppiumDriver driver) {
-        this.driver = driver;
-        this.touchAction = new TouchAction(driver);
-        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
+  public AbstractScreen(AppiumDriver driver) {
+    this.driver = driver;
+    this.touchAction = new TouchAction(driver);
+    PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
+  }
+
+  public void dismissPromotion() {
+    if (lnkSkipPromotion.size() > 0) {
+      tap(lnkSkipPromotion.get(0));
     }
+  }
 
-    public void dismissPromotion() {
-        if (lnkSkipPromotion.size() > 0) {
-            tap(lnkSkipPromotion.get(0));
+  protected void hideKeyboard() {
+    if (isAndroid()) {
+      driver.hideKeyboard();
+    } else {
+      IOSDriver iosDriver = (IOSDriver) driver;
+      iosDriver.hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Done");
+    }
+  }
+
+  public boolean isAndroid() {
+    return driver instanceof AndroidDriver;
+  }
+
+  public boolean isIOS() {
+    return driver instanceof IOSDriver;
+  }
+
+  public void tap(WebElement element) {
+    touchAction.tap(tapOptions().withElement(element(element))).perform();
+  }
+
+  protected String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
+    return element.getAttribute(attribute.getName());
+  }
+
+  protected void verifyScreenElements() {
+    SoftAssertions soft = new SoftAssertions();
+
+    Class<?> clazz = this.getClass();
+    for (Field field : clazz.getDeclaredFields()) {
+      if (field.isAnnotationPresent(AssertElementVisibility.class)) {
+        if (field.getType().isAssignableFrom(MobileElement.class)) {
+          try {
+            field.setAccessible(true);
+            WebElement element = (WebElement) field.get(this);
+            soft.assertThat(element.isDisplayed())
+                    .as(field.getName() + " is not displayed")
+                    .isTrue();
+          } catch (IllegalAccessException e) {
+            e.printStackTrace();
+          }
         }
+      }
     }
 
+    soft.assertAll();
+  }
 
-    public void hideKeyboard() {
-        if (isAndroid()) {
-            driver.hideKeyboard();
-        } else {
-            IOSDriver iosDriver = (IOSDriver) driver;
-            iosDriver.hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Done");
-        }
-    }
+  protected void scrollByElement(WebElement element) {
+    Dimension dimension = driver.manage().window().getSize();
+    int x = element.getLocation().x;
+    int y = element.getLocation().y;
+    int startY = (int) (dimension.getHeight() * 0.90);
+    int endY = (int) (dimension.getHeight() * 0.10);
+    touchAction
+            .press(point(x, startY))
+            .waitAction(waitOptions(ofMillis(100)))
+            .moveTo(point(x, endY))
+            .release()
+            .perform();
+  }
 
-    public boolean isAndroid() {
-        return driver instanceof AndroidDriver;
-    }
+  protected Boolean isElementActive(WebElement element) {
+    return element.isDisplayed() && element.isEnabled();
+  }
 
-    public boolean isIOS() {
-        return driver instanceof IOSDriver;
-    }
-
-    public void tap(WebElement element) {
-        touchAction.tap(tapOptions().withElement(element(element))).perform();
-    }
-
-    String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
-        return element.getAttribute(attribute.getName());
-    }
-
-    public void verifyScreenElements() {
-        SoftAssertions soft = new SoftAssertions();
-
-        Class<?> clazz = this.getClass();
-        for (Field field : clazz.getDeclaredFields()) {
-            if (field.isAnnotationPresent(AssertElementVisibility.class)) {
-                if (field.getType().isAssignableFrom(MobileElement.class)) {
-                    try {
-                        field.setAccessible(true);
-                        WebElement element = (WebElement) field.get(this);
-                        soft.assertThat(element.isDisplayed())
-                                .as(field.getName() + " is not displayed")
-                                .isTrue();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-        soft.assertAll();
-    }
-
-    public void scrollByElement(WebElement element) {
-        Dimension dimension = driver.manage().window().getSize();
-        int x = element.getLocation().x;
-        int y = element.getLocation().y;
-        int startY = (int) (dimension.getHeight() * 0.90);
-        int endY = (int) (dimension.getHeight() * 0.10);
-        touchAction.press(point(x, startY)).waitAction(waitOptions(ofMillis(100)))
-                .moveTo(point(x, endY)).release().perform();
-    }
-    Boolean isElementActive(WebElement element) {
-        return element.isDisplayed() && element.isEnabled();
-    }
-
-    void waitUntilAnElementIsUpdated(WebElement element, ElementAttribute attribute, String expectedValue) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.attributeToBe(element, attribute.getName(), expectedValue));
-    }
+  protected void waitUntilAnElementIsUpdated(
+          WebElement element, ElementAttribute attribute, String expectedValue) {
+    WebDriverWait wait = new WebDriverWait(driver, 5);
+    wait.until(ExpectedConditions.attributeToBe(element, attribute.getName(), expectedValue));
+  }
 }

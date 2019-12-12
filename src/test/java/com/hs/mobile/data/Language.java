@@ -2,11 +2,11 @@ package com.hs.mobile.data;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 public enum Language {
-    ENGLISH("English"), ARABIC("العربية");
+    ENGLISH("English"),
+    ARABIC("العربية");
 
     private String label;
 

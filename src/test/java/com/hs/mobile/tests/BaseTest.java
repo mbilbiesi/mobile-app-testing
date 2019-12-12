@@ -2,20 +2,19 @@ package com.hs.mobile.tests;
 
 import com.google.common.io.Resources;
 import com.hs.mobile.screens.AddReferalCodeScreen;
-import com.hs.mobile.screens.HomeScreen;
-import com.hs.mobile.screens.InvoicesScreen;
 import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.OrdersScreen;
 import com.hs.mobile.screens.PaymentOptionsScreen;
 import com.hs.mobile.screens.PinCodeVerificationScreen;
 import com.hs.mobile.screens.ProfileScreen;
 import com.hs.mobile.screens.RestaurantScreen;
-import com.hs.mobile.screens.SavedLocationsScreen;
-import com.hs.mobile.screens.SettingsScreen;
-import com.hs.mobile.screens.VerifyAccountScreen;
 import com.hs.mobile.steps.HomeScreenSteps;
+import com.hs.mobile.steps.InvoicesScreenSteps;
 import com.hs.mobile.steps.RestaurantListScreenSteps;
-import com.hs.mobile.screens.WalletScreen;
+import com.hs.mobile.steps.SavedLocationsScreenSteps;
+import com.hs.mobile.steps.SettingsScreenSteps;
+import com.hs.mobile.steps.VerifyAccountScreenSteps;
+import com.hs.mobile.steps.WalletScreenSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -33,22 +32,23 @@ import java.net.URL;
 public class BaseTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
-    protected static final String ANDROID_FILE_PATH = Resources.getResource("apps/hs-app.apk").getPath();
+    protected static final String ANDROID_FILE_PATH =
+            Resources.getResource("apps/hs-app.apk").getPath();
     private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
-    protected HomeScreenSteps homeScreen;
+    protected HomeScreenSteps homeScreenSteps;
     protected LocationsScreen locationsScreen;
     RestaurantListScreenSteps restaurantsListScreen;
     RestaurantScreen restaurantScreen;
-    SavedLocationsScreen savedLocationsScreen;
+    SavedLocationsScreenSteps savedLocationsScreenSteps;
     OrdersScreen ordersScreen;
-    VerifyAccountScreen verifyAccountScreen;
+    VerifyAccountScreenSteps verifyAccountScreenSteps;
     PinCodeVerificationScreen pinCodeVerificationScreen;
     AddReferalCodeScreen addReferalCodeScreen;
     ProfileScreen profileScreen;
-    InvoicesScreen invoicesScreen;
-    SettingsScreen settingsScreen;
+    InvoicesScreenSteps invoicesScreenSteps;
+    SettingsScreenSteps settingsScreenSteps;
     PaymentOptionsScreen paymentOptionsScreen;
-    WalletScreen walletScreen;
+    WalletScreenSteps walletScreenSteps;
 
     protected AppiumDriver driver;
 
@@ -73,20 +73,20 @@ public class BaseTest {
             LOG.error("unable to initiate Android driver", e);
         }
 
-        homeScreen = new HomeScreenSteps(driver);
+        homeScreenSteps = new HomeScreenSteps(driver);
         locationsScreen = new LocationsScreen(driver);
         restaurantsListScreen = new RestaurantListScreenSteps(driver);
         restaurantScreen = new RestaurantScreen(driver);
         ordersScreen = new OrdersScreen(driver);
-        verifyAccountScreen = new VerifyAccountScreen(driver);
+        verifyAccountScreenSteps = new VerifyAccountScreenSteps(driver);
         pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
         addReferalCodeScreen = new AddReferalCodeScreen(driver);
-        savedLocationsScreen = new SavedLocationsScreen(driver);
+        savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
         profileScreen = new ProfileScreen(driver);
-        invoicesScreen = new InvoicesScreen(driver);
-        settingsScreen = new SettingsScreen(driver);
+        invoicesScreenSteps = new InvoicesScreenSteps(driver);
+        settingsScreenSteps = new SettingsScreenSteps(driver);
         paymentOptionsScreen = new PaymentOptionsScreen(driver);
-        walletScreen = new WalletScreen(driver);
+        walletScreenSteps = new WalletScreenSteps(driver);
     }
 
     @AfterClass
