@@ -274,6 +274,24 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         } catch (ElementNotVisibleException e) {
             e.printStackTrace();
         }
+    }
 
+    @Step("Verify that campaigns are displayed in a separate carousel")
+    public void verifyCampaignsDisplayInSeparateCarousel(boolean campaginsEnabled) {
+        SoftAssertions soft = new SoftAssertions();
+
+        if (campaginsEnabled) {
+            try {
+                soft.assertThat(getCampaignContainer().isDisplayed())
+                        .as("Campaigns section doesn't exist in the screen").isTrue();
+                soft.assertThat(getCampainBanners().size() > 0)
+                        .as("No campaigns are displayed inside the campaigns section").isTrue();
+            } catch (ElementNotVisibleException e) {
+                e.printStackTrace();
+            }
+        } else {
+            soft.assertThat(getCampainBanners().size() == 0)
+                    .as("Campaigns are displayed even though campaigns are disabled").isTrue();
+        }
     }
 }
