@@ -147,7 +147,7 @@ public class RestaurantsListTests extends BaseTest {
     }
 
     @Issue("HSAP-195")
-    @Test(description = "Check if the user is able to swipe left and right on the filters list")
+    @Test(description = "Check that the top banner image's ratio is 2:1")
     public void navigateToRestaurantsListScreen_verifyTopBannerImgRatioIs2_1() {
         //When
         locationsScreen.submitAddress();
@@ -157,7 +157,7 @@ public class RestaurantsListTests extends BaseTest {
     }
 
     @Issue("HSAP-197")
-    @Test(description = "Check if the user is able to swipe left and right on the filters list")
+    @Test(description = "Check if the top banner shows restaurant offers")
     public void navigateToRestaurantsListScreen_verifyTopBannerShowsRestaurantOffers() {
         //When
         locationsScreen.submitAddress();
