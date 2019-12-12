@@ -1,7 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.screens.InvoiceScreen;
+import com.hs.mobile.steps.InvoiceScreenSteps;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
@@ -64,14 +64,14 @@ public class InvoicesTests extends BaseTest {
 
   @Step("Verify the first available invoice")
   public void verifyFirstAvailableInvoice() {
-    Optional<InvoiceScreen> optionalFirstInvoice = invoicesScreenSteps.viewInvoice(0);
+    Optional<InvoiceScreenSteps> optionalFirstInvoice = invoicesScreenSteps.viewInvoice(0);
     if (optionalFirstInvoice.isEmpty()) {
       driver.navigate().back();
       throw new AssertionError("Unable to open the invoice to verify its components.");
     }
 
     SoftAssertions assertions = new SoftAssertions();
-    InvoiceScreen invoiceScreen = optionalFirstInvoice.get();
+    InvoiceScreenSteps invoiceScreen = optionalFirstInvoice.get();
     String title = invoiceScreen.getTitle();
     boolean isValidTitle = "تفاصيل الفاتورة".equals(title) || "Invoice details".equals(title);
 

@@ -1,6 +1,5 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.screens.InvoiceScreen;
 import com.hs.mobile.screens.InvoicesScreen;
 import io.appium.java_client.AppiumDriver;
 import org.apache.commons.collections4.CollectionUtils;
@@ -31,10 +30,10 @@ public class InvoicesScreenSteps extends InvoicesScreen {
         return getElementAttributeValue(getLblMessage(), TEXT);
     }
 
-    public Optional<InvoiceScreen> viewInvoice(int index) {
+    public Optional<InvoiceScreenSteps> viewInvoice(int index) {
         if (CollectionUtils.isNotEmpty(getLstInvoices()) && index >= 0 && index < getLstInvoices().size()) {
             tap(getLstInvoices().get(index));
-            return Optional.of(new InvoiceScreen(driver));
+            return Optional.of(new InvoiceScreenSteps(driver));
         }
         return Optional.empty();
     }
