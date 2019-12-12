@@ -78,16 +78,19 @@ public class AddReferalCodeScreen extends AbstractScreen {
     @Step("Make sure that all Add Referal Code screen elements are displayed")
     public void verifyThatAllAddReferalCodeScreenElementsIsDisplayed() {
         SoftAssertions soft = new SoftAssertions();
-        soft.assertThat(isBtnCloseDisplayed())
-                .as("Close button is not displayed.").isTrue();
+        soft.assertThat(isBtnCloseDisplayed()).as("Close button is not displayed.").isTrue();
         soft.assertThat(isImgReferralCodeDisplayed())
-                .as("Referral Code Image is not displayed.").isTrue();
+                .as("Referral Code Image is not displayed.")
+                .isTrue();
         soft.assertThat(isLblReferralCodeDisplayed())
-                .as("Referral Code Label is not displayed.").isTrue();
+                .as("Referral Code Label is not displayed.")
+                .isTrue();
         soft.assertThat(isTxtReferralCodeDisplayed())
-                .as("Referral Code Text is not displayed.").isTrue();
-        soft.assertThat(isBtnVerifyReferralCodeDisplayed()).as(
-                "Verify Referral Code button is not displayed.").isTrue();
+                .as("Referral Code Text is not displayed.")
+                .isTrue();
+        soft.assertThat(isBtnVerifyReferralCodeDisplayed())
+                .as("Verify Referral Code button is not displayed.")
+                .isTrue();
         soft.assertAll();
     }
 

@@ -11,31 +11,31 @@ import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class RestaurantScreen extends AbstractScreen {
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
-    private List<WebElement> menuItems;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
+  private List<WebElement> menuItems;
 
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
-    private WebElement addMenuItemButton;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
+  private WebElement addMenuItemButton;
 
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
-    private WebElement cartButton;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
+  private WebElement cartButton;
 
-    public RestaurantScreen(AppiumDriver driver) {
-        super(driver);
-    }
+  public RestaurantScreen(AppiumDriver driver) {
+    super(driver);
+  }
 
-    public void selectMenuItem(int index) {
-        touchAction.tap(tapOptions().withElement(element(menuItems.get(index)))).perform();
-    }
+  public void selectMenuItem(int index) {
+    touchAction.tap(tapOptions().withElement(element(menuItems.get(index)))).perform();
+  }
 
-    public void addMenuItem() {
-        touchAction.tap(tapOptions().withElement(element(addMenuItemButton))).perform();
-    }
+  public void addMenuItem() {
+    touchAction.tap(tapOptions().withElement(element(addMenuItemButton))).perform();
+  }
 
-    public void goToCart() {
-        touchAction.tap(tapOptions().withElement(element(cartButton))).perform();
-    }
+  public void goToCart() {
+    touchAction.tap(tapOptions().withElement(element(cartButton))).perform();
+  }
 }
