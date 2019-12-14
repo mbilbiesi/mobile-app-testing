@@ -7,7 +7,7 @@ This project is an automation test project based on Java, TestNg and Appium whic
 To run platform integration test project, please continue with the following sections. 
 
 >If you could not find what you are looking for here or you are facing some difficulties setup this project please reach us via:
-[Automation Wiki](https://hungerstation.atlassian.net/wiki/spaces/AT/overview).
+[Wiki](https://hungerstation.atlassian.net/wiki/spaces/HPDLC/overview).
 
 
 ### What you'll need
