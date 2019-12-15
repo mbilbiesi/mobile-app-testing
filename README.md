@@ -1,3 +1,4 @@
+![workflow](https://github.com/HungerStation/mobile-apps-testing/workflows/Build%20project/badge.svg)
 
 # Mobile Apps Testing
 
