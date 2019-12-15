@@ -176,19 +176,16 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
     @Step("Verify that 'All' filter is displayed")
     public void verifyAllFiterIsDisplayed() {
-        SoftAssertions soft = new SoftAssertions();
-        soft.assertThat(isAllFilterDisplayed(getFiltersNames().get(0)))
+        assertThat(isAllFilterDisplayed(getFiltersNames().get(0)))
                 .as("'All' filter is not displayed").isTrue();
     }
 
     @Step("Verify that 'All' filter is selected")
     public void verifyAllFiterIsSelectedAndColorIsYellow() {
         String filterColor;
-        SoftAssertions soft = new SoftAssertions();
-
         filterColor = getElementColor((MobileElement) getBtnFilter().get(0));
 
-        soft.assertThat(filterColor.equalsIgnoreCase("#ffd700"))
+        assertThat(filterColor.equalsIgnoreCase("#ffd700"))
                 .as("The 'All' filter isn't selected, and it's color isn't yellow");
     }
 
