@@ -292,4 +292,35 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
         soft.assertAll();
     }
+
+    @Step("Verify that the max number of campaigns displyed in the campaigns carousel is 8")
+    public void verifyMaxCampaginsNumberInCarousel() {
+        int campaignsCount;
+        int activeScreenCampagins;
+
+        campaignsCount = getCampaignsCount();
+        activeScreenCampagins = campaignsCount;
+
+        while (activeScreenCampagins >= 4) {
+            swipeCampaigns(campaignsCount);
+            activeScreenCampagins = getCampaignsCount();
+            campaignsCount = campaignsCount + activeScreenCampagins;
+        }
+
+        assertThat(campaignsCount < 8)
+                .as("Campagins count should be 8 maximum " +
+                        "while actual number of campagins is: " + campaignsCount).isTrue();
+    }
+
+    public int getCampaignsCount() {
+        return getCampainBanners().size();
+    }
+
+    public void swipeCampaigns(int campaignsCount) {
+        int endElementIndex = campaignsCount - 1;
+        MobileElement startElement = (MobileElement) getCampainBanners().get(endElementIndex);
+        MobileElement endElement = (MobileElement) getCampainBanners().get(0);
+
+        swipe(startElement, endElement);
+    }
 }

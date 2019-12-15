@@ -175,4 +175,15 @@ public class RestaurantsListTests extends BaseTest {
         //Then
         restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(true);
     }
+
+    @Issue("HSAP-199")
+    @Test(description = "Check if the Max number of campaigns shown in campaign carousel is 8")
+    public void navigateToRestaurantsListScreen_verifyMaxNumberOfCampaignsDisplayed() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyMaxCampaginsNumberInCarousel();
+        //NEEDS RUN
+    }
 }
