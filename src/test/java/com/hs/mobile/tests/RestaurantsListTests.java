@@ -174,5 +174,7 @@ public class RestaurantsListTests extends BaseTest {
 
         //Then
         restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(true);
+
+        //NEEDS RUN
     }
 }
