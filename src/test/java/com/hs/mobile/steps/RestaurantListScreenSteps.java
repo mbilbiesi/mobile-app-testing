@@ -174,14 +174,14 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         }
     }
 
-    @Step("Verify that \"All\" filter is displayed")
+    @Step("Verify that 'All' filter is displayed")
     public void verifyAllFiterIsDisplayed() {
         SoftAssertions soft = new SoftAssertions();
         soft.assertThat(isAllFilterDisplayed(getFiltersNames().get(0)))
-                .as("\"All\" filter is not displayed").isTrue();
+                .as("'All' filter is not displayed").isTrue();
     }
 
-    @Step("Verify that \"All\" filter is selected")
+    @Step("Verify that 'All' filter is selected")
     public void verifyAllFiterIsSelectedAndColorIsYellow() {
         String filterColor;
         SoftAssertions soft = new SoftAssertions();
@@ -189,7 +189,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         filterColor = getElementColor((MobileElement) getBtnFilter().get(0));
 
         soft.assertThat(filterColor.equalsIgnoreCase("#ffd700"))
-                .as("The \"All\" filter isn't selected, and it's color isn't yellow");
+                .as("The 'All' filter isn't selected, and it's color isn't yellow");
     }
 
     public boolean isAllFilterDisplayed(WebElement allFilter) {
@@ -217,10 +217,9 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
     @Step("Verify that customer was able to swipe the filters list")
     public void verifyFiltersSwipedSuccessfully(String filterTitleBeforeSwipe) {
-        SoftAssertions soft = new SoftAssertions();
         String filterTitleAfterSwipe = getFiltersNames().get(0).getText();
 
-        soft.assertThat(!filterTitleBeforeSwipe.equals(filterTitleAfterSwipe))
+        assertThat(!filterTitleBeforeSwipe.equals(filterTitleAfterSwipe))
                 .as("Customer wasn't able to do swipe action on the filters list").isTrue();
     }
 
@@ -229,13 +228,12 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         Dimension topBannerSize;
         double bannerHeight;
         double bannerWidth;
-        SoftAssertions soft = new SoftAssertions();
 
         topBannerSize = getOfferWidgets().get(0).getSize();
         bannerHeight = topBannerSize.getHeight();
         bannerWidth = topBannerSize.getWidth();
 
-        soft.assertThat(bannerWidth == bannerHeight * 2)
+        assertThat(bannerWidth == bannerHeight * 2)
                 .as("Top banner ratio is not 2:1").isTrue();
     }
 
