@@ -170,22 +170,20 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         }
     }
 
-    @Step("Verify that \"All\" filter is displayed")
+    @Step("Verify that 'All' filter is displayed")
     public void verifyAllFiterIsDisplayed() {
-        SoftAssertions soft = new SoftAssertions();
-        soft.assertThat(isAllFilterDisplayed(getFiltersNames().get(0)))
-                .as("\"All\" filter is not displayed").isTrue();
+        assertThat(isAllFilterDisplayed(getFiltersNames().get(0)))
+                .as("'All' filter is not displayed").isTrue();
     }
 
-    @Step("Verify that \"All\" filter is selected")
+    @Step("Verify that 'All' filter is selected")
     public void verifyAllFiterIsSelectedAndColorIsYellow() {
         String filterColor;
-        SoftAssertions soft = new SoftAssertions();
 
         filterColor = getElementColor((MobileElement) getBtnFilter().get(0));
 
-        soft.assertThat(filterColor.equalsIgnoreCase("#ffd700"))
-                .as("The \"All\" filter isn't selected, and it's color isn't yellow");
+        assertThat(filterColor.equalsIgnoreCase("#ffd700"))
+                .as("The 'All' filter isn't selected, and it's color isn't yellow");
     }
 
     public boolean isAllFilterDisplayed(WebElement allFilter) {
@@ -213,10 +211,9 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
     @Step("Verify that customer was able to swipe the filters list")
     public void verifyFiltersSwipedSuccessfully(String filterTitleBeforeSwipe) {
-        SoftAssertions soft = new SoftAssertions();
         String filterTitleAfterSwipe = getFiltersNames().get(0).getText();
 
-        soft.assertThat(!filterTitleBeforeSwipe.equals(filterTitleAfterSwipe))
+        assertThat(!filterTitleBeforeSwipe.equals(filterTitleAfterSwipe))
                 .as("Customer wasn't able to do swipe action on the filters list").isTrue();
     }
 }

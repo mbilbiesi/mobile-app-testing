@@ -125,7 +125,7 @@ public class RestaurantsListTests extends BaseTest {
     }
 
     @Issue("HSAP-193")
-    @Test(description = "Check if the user is eligible to see the \"All\" filter among the filters list")
+    @Test(description = "Check if the user is eligible to see the 'All' filter among the filters list")
     public void navigateToRestaurantsListScreen_verifyTheAllFilterIsDisplayedAndSelected() {
         //When
         locationsScreen.submitAddress();
