@@ -263,10 +263,9 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     }
 
     public void verifyCustomerRedirectedToARestaurant() {
-        SoftAssertions soft = new SoftAssertions();
 
         try {
-            soft.assertThat(restaurant.getRestaurantHeader().isDisplayed())
+            assertThat(restaurant.getRestaurantHeader().isDisplayed())
                     .as("Top banner doesn't have restaurant offers").isTrue();
         } catch (ElementNotVisibleException e) {
             e.printStackTrace();
