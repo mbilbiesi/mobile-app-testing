@@ -1,6 +1,5 @@
-![workflow](https://github.com/HungerStation/mobile-apps-testing/workflows/Build%20project/badge.svg)
-
 # Mobile Apps Testing
+![workflow](https://github.com/HungerStation/mobile-apps-testing/workflows/Build%20project/badge.svg)
 
 This project is an automation test project based on Java, TestNg and Appium which will contain automated acceptance test cases for Hungerstation mobile applications (iOS and Android).
 
