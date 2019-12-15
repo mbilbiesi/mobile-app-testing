@@ -11,7 +11,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import io.appium.java_client.remote.HideKeyboardStrategy;
-import io.appium.java_client.touch.offset.ElementOption;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;

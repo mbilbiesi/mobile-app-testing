@@ -183,6 +183,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     @Step("Verify that 'All' filter is selected")
     public void verifyAllFiterIsSelectedAndColorIsYellow() {
         String filterColor;
+
         filterColor = getElementColor((MobileElement) getBtnFilter().get(0));
 
         assertThat(filterColor.equalsIgnoreCase("#ffd700"))
