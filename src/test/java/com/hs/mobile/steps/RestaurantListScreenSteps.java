@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -287,7 +288,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
             }
         } else {
             soft.assertThat(getCampainBanners().size() == 0)
-                    .as("Campaigns are displayed even though campaigns are disabled").isTrue();
+                    .as("Campaigns are displayed even though campaigns are disabled, " +
+                            "or there are no available campaigns for this location").isTrue();
         }
 
         soft.assertAll();
@@ -301,7 +303,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         campaignsCount = getCampaignsCount();
         activeScreenCampagins = campaignsCount;
 
-        WebElement lastVisibleCampaignBeforeSwipe = getCampainBanners().get(campaignsCount-1);
+        WebElement lastVisibleCampaignBeforeSwipe = getCampainBanners().get(campaignsCount - 1);
         WebElement lastVisibleCampaignAfterSwipe;
 
         while (activeScreenCampagins > 4) {
@@ -309,9 +311,9 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
             activeScreenCampagins = getCampaignsCount();
             campaignsCount = campaignsCount + activeScreenCampagins;
 
-            lastVisibleCampaignAfterSwipe = getCampainBanners().get(activeScreenCampagins-1);
+            lastVisibleCampaignAfterSwipe = getCampainBanners().get(activeScreenCampagins - 1);
 
-            if(lastVisibleCampaignBeforeSwipe.getText().equals(lastVisibleCampaignAfterSwipe.getText())) {
+            if (lastVisibleCampaignBeforeSwipe.getText().equals(lastVisibleCampaignAfterSwipe.getText())) {
                 break;
             }
         }
@@ -331,5 +333,56 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         MobileElement endElement = (MobileElement) getCampainBanners().get(0);
 
         swipe(startElement, endElement);
+    }
+
+    @Step("Click one of the displayed campaigns")
+    public void clickCampaign() {
+        int randomCampaignIndex = getRandomCampaign();
+
+        try {
+            tap(getCampainBanners().get(randomCampaignIndex));
+            waitUntilRestaurantsAreLoaded();
+        } catch (ElementNotVisibleException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Step("Verify that restaurants are displayed based on the selected campaign")
+    public void verifyCampaignRestaurants() {
+        //ToDo: Implement an API call to verify that restaurants that display under a
+        // campaign actually belong to it
+        assertThat(getRestaurantWidgets().size() > 0)
+                .as("No restaurants are displayed for this campaign").isTrue();
+    }
+
+    private int getRandomCampaign() {
+        int randomCampaign;
+        int campaignsCount = getCampaignsCount();
+        Random random = new Random();
+
+        randomCampaign = random.nextInt(campaignsCount - 0);
+
+        return randomCampaign;
+    }
+
+    @Step("Verify that campaign image ratio is 2:1")
+    public void verifyCampaignImageRatio() {
+        Dimension campaignSize;
+        double campaignHeight;
+        double campaignWidth;
+        boolean campaignImgDisplayed;
+
+        try {
+            campaignSize = getCampaignMainImage().getSize();
+            campaignHeight = campaignSize.getHeight();
+            campaignWidth = campaignSize.getWidth();
+
+            assertThat(campaignWidth == campaignHeight * 2)
+                    .as("Campaign image ratio is not 2:1").isTrue();
+        } catch (ElementNotVisibleException e) {
+            campaignImgDisplayed = false;
+            assertThat(campaignImgDisplayed).
+                    as("Campaign Image is not displayed").isTrue();
+        }
     }
 }

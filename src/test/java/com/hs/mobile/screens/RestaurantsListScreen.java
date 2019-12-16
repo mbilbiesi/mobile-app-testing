@@ -140,6 +140,10 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
     @AndroidFindBy(xpath = "//*[@text='اعلان' or @text='Promoted']")
     private List<WebElement> promotedBadge;
 
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/layout_campaign_tool_bar")
+    private WebElement campaignMainImage;
+
     private String promotedBadgeLocator = "//*[@text='اعلان' or @text='Promoted']";
 
     public RestaurantsListScreen(AppiumDriver driver) {
