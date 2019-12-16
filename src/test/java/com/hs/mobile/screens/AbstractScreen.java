@@ -69,7 +69,7 @@ class AbstractScreen {
         touchAction.tap(tapOptions().withElement(element(element))).perform();
     }
 
-    String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
+    public String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
         return element.getAttribute(attribute.getName());
     }
 

@@ -136,4 +136,9 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         waitUntilRestaurantsAreLoaded();
         scrollByElement(getRestaurantsListWidget());
     }
+
+    @Step("Select displayed restaurant")
+    public void selectDisplayedRestaurant() {
+        tap(getRestaurantTitle().get(0));
+    }
 }

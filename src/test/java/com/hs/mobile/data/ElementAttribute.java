@@ -2,7 +2,9 @@ package com.hs.mobile.data;
 
 public enum ElementAttribute {
     ENABLED("enabled"),
-    TEXT("text");
+    TEXT("text"),
+    CLICKABLE("clickable"),
+    FOCUSABLE("focusable");
 
     private String value;
 

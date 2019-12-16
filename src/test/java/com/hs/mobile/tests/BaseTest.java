@@ -10,6 +10,7 @@ import com.hs.mobile.screens.SavedLocationsScreen;
 import com.hs.mobile.screens.VerifyAccountScreen;
 import com.hs.mobile.steps.HomeScreenSteps;
 import com.hs.mobile.steps.RestaurantListScreenSteps;
+import com.hs.mobile.steps.RestaurantScreenSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -33,6 +34,7 @@ public class BaseTest {
     protected LocationsScreen locationsScreen;
     RestaurantListScreenSteps restaurantsListScreen;
     RestaurantScreen restaurantScreen;
+    RestaurantScreenSteps restaurantScreenSteps;
     SavedLocationsScreen savedLocationsScreen;
     OrdersScreen ordersScreen;
     VerifyAccountScreen verifyAccountScreen;
@@ -66,6 +68,7 @@ public class BaseTest {
         locationsScreen = new LocationsScreen(driver);
         restaurantsListScreen = new RestaurantListScreenSteps(driver);
         restaurantScreen = new RestaurantScreen(driver);
+        restaurantScreenSteps = new RestaurantScreenSteps(driver);
         ordersScreen = new OrdersScreen(driver);
         verifyAccountScreen = new VerifyAccountScreen(driver);
         pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
