@@ -301,14 +301,23 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         campaignsCount = getCampaignsCount();
         activeScreenCampagins = campaignsCount;
 
-        while (activeScreenCampagins >= 4) {
+        WebElement lastVisibleCampaignBeforeSwipe = getCampainBanners().get(campaignsCount-1);
+        WebElement lastVisibleCampaignAfterSwipe;
+
+        while (activeScreenCampagins > 4) {
             swipeCampaigns(campaignsCount);
             activeScreenCampagins = getCampaignsCount();
             campaignsCount = campaignsCount + activeScreenCampagins;
+
+            lastVisibleCampaignAfterSwipe = getCampainBanners().get(activeScreenCampagins-1);
+
+            if(lastVisibleCampaignBeforeSwipe.getText().equals(lastVisibleCampaignAfterSwipe.getText())) {
+                break;
+            }
         }
 
-        assertThat(campaignsCount < 8)
-                .as("Campagins count should be 8 maximum " +
+        assertThat(campaignsCount <= 8)
+                .as("Campagins count should be 8 as a maximum " +
                         "while actual number of campagins is: " + campaignsCount).isTrue();
     }
 
