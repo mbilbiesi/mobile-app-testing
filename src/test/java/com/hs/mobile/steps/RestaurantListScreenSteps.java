@@ -1,10 +1,13 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.exception.TestExecutionException;
 import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.screens.RestaurantsListScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
+import org.apache.commons.lang3.RandomUtils;
+import org.assertj.core.api.Assumptions;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -16,11 +19,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RestaurantListScreenSteps extends RestaurantsListScreen {
+
+    final int MAX_CAMPAIGNS_NUMBER = 8;
 
     public RestaurantListScreenSteps(AppiumDriver driver) {
         super(driver);
@@ -172,6 +178,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
             soft.assertThat(getFiltersNames().get(i).isDisplayed())
                     .as("Filter name isn't displayed for filter #" + i + 1).isTrue();
         }
+
+        soft.assertAll();
     }
 
     @Step("Verify that 'All' filter is displayed")
@@ -261,13 +269,111 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     }
 
     public void verifyCustomerRedirectedToARestaurant() {
-        SoftAssertions soft = new SoftAssertions();
 
         try {
-            soft.assertThat(restaurant.getRestaurantHeader().isDisplayed())
+            assertThat(restaurant.getRestaurantHeader().isDisplayed())
                     .as("Top banner doesn't have restaurant offers").isTrue();
         } catch (ElementNotVisibleException e) {
             e.printStackTrace();
         }
+    }
+
+    @Step("Verify that campaigns are displayed in a separate carousel")
+    public void verifyCampaignsDisplayInSeparateCarousel(boolean campaginsEnabled) {
+
+        if (campaginsEnabled) {
+            try {
+                SoftAssertions soft = new SoftAssertions();
+                soft.assertThat(getCampaignContainer().isDisplayed())
+                        .as("Campaigns section doesn't exist in the screen").isTrue();
+                soft.assertThat(getCampainBanners().size() > 0)
+                        .as("No campaigns are displayed inside the campaigns section").isTrue();
+                soft.assertAll();
+            } catch (TestExecutionException e) {
+                e.printStackTrace();
+            }
+        } else {
+            assertThat(getCampainBanners().size() == 0)
+                    .as("Campaigns are displayed even though campaigns are disabled").isTrue();
+        }
+    }
+
+    @Step("Verify that the max number of campaigns displyed in the campaigns carousel is " + MAX_CAMPAIGNS_NUMBER)
+    public void verifyMaxCampaginsNumberInCarousel() {
+        int campaignsCount = getCampaignsCount();
+        int activeScreenCampagins = campaignsCount;
+
+        WebElement lastVisibleCampaignBeforeSwipe = getCampainBanners().get(campaignsCount - 1);
+        WebElement lastVisibleCampaignAfterSwipe;
+
+        while (activeScreenCampagins > 4) {
+            swipeCampaigns(campaignsCount);
+            activeScreenCampagins = getCampaignsCount();
+            campaignsCount = campaignsCount + activeScreenCampagins;
+
+            lastVisibleCampaignAfterSwipe = getCampainBanners().get(activeScreenCampagins - 1);
+
+            if (lastVisibleCampaignBeforeSwipe.getText().equals(lastVisibleCampaignAfterSwipe.getText())) {
+                break;
+            }
+        }
+
+        assertThat(campaignsCount <= MAX_CAMPAIGNS_NUMBER)
+                .as("Campagins count should be " + MAX_CAMPAIGNS_NUMBER + " as a maximum " +
+                        "while actual number of campagins is: " + campaignsCount).isTrue();
+    }
+
+    public int getCampaignsCount() {
+        return getCampainBanners().size();
+    }
+
+    public void swipeCampaigns(int campaignsCount) {
+        int endElementIndex = campaignsCount - 1;
+        MobileElement startElement = getCampainBanners().get(endElementIndex);
+        MobileElement endElement = getCampainBanners().get(0);
+
+        swipe(startElement, endElement);
+    }
+
+    @Step("Click one of the displayed campaigns")
+    public void clickCampaign(boolean campaignsEnabled) {
+        Assumptions.assumeThat(campaignsEnabled)
+                .as("Campaigns are not enabled, so there's no campaign to check").isTrue();
+
+        int randomCampaignIndex = getRandomCampaignIndex();
+
+        tap(getCampainBanners().get(randomCampaignIndex));
+        waitUntilRestaurantsAreLoaded();
+    }
+
+    @Step("Verify that restaurants are displayed based on the selected campaign")
+    public void verifyCampaignRestaurants() {
+        //ToDo: Implement an API call to verify that restaurants that display under a
+        // campaign actually belong to it
+        assertThat(getRestaurantWidgets().size() > 0)
+                .as("No restaurants are displayed for this campaign").isTrue();
+    }
+
+    private int getRandomCampaignIndex() {
+        return RandomUtils.nextInt(0, getCampaignsCount());
+    }
+
+    @Step("Verify that campaign image ratio is 2:1")
+    public void verifyCampaignImageRatio(boolean campaignsEnabled) {
+
+        Assumptions.assumeThat(campaignsEnabled)
+                .as("Campaigns are not enabled, so there's no campaign to check").isTrue();
+
+        Dimension campaignSize;
+        double campaignHeight;
+        double campaignWidth;
+        boolean campaignImgDisplayed;
+
+        campaignSize = getCampaignMainImage().getSize();
+        campaignHeight = campaignSize.getHeight();
+        campaignWidth = campaignSize.getWidth();
+
+        assertThat(campaignWidth / campaignHeight)
+                .as("Campaign image ratio is not 2:1").isEqualTo(2);
     }
 }
