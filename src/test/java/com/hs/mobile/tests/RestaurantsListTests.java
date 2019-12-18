@@ -30,7 +30,7 @@ public class RestaurantsListTests extends BaseTest {
     @BeforeMethod
     public void beforeEachTest() {
         //Given
-        homeScreen.clickFindRestaurantsButton();
+        homeScreenSteps.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("riyadh");
         locationsScreen.selectItemArea(3);
