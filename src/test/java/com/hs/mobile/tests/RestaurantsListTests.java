@@ -15,6 +15,10 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class RestaurantsListTests extends BaseTest {
 
+    //ToDo: Some test here have to be skipped based on whether campaigns are enabled
+    // or not or whether the location has campaigns or not. We need to implement a way
+    // skip test conditionally based on the information above. For now, I'll just manually skip the tests
+
     int restaurantCount = 0;
     int afterSearchRestaurantCount = 0;
     String keyword = null;
@@ -125,7 +129,7 @@ public class RestaurantsListTests extends BaseTest {
     }
 
     @Issue("HSAP-193")
-    @Test(description = "Check if the user is eligible to see the 'All filter among the filters list")
+    @Test(description = "Check if the user is eligible to see the 'All' filter among the filters list")
     public void navigateToRestaurantsListScreen_verifyTheAllFilterIsDisplayedAndSelected() {
         //When
         locationsScreen.submitAddress();
@@ -174,5 +178,48 @@ public class RestaurantsListTests extends BaseTest {
 
         //Then
         restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(true);
+    }
+
+    @Issue("HSAP-199")
+    @Test(description = "Check if the Max number of campaigns shown in campaign carousel is 8")
+    public void navigateToRestaurantsListScreen_verifyMaxNumberOfCampaignsDisplayed() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyMaxCampaginsNumberInCarousel();
+    }
+
+    @Issue("HSAP-200")
+    @Test(description = "Verify that restaurants will be displayed based on the selected campaign")
+    public void clickCampaign_verifyRestaurantsWithCampaignDisplayed() {
+        //When
+        locationsScreen.submitAddress();
+        restaurantsListScreen.clickCampaign(true);
+
+        //Then
+        restaurantsListScreen.verifyCampaignRestaurants();
+    }
+
+    @Issue("HSAP-201")
+    @Test(enabled = false, description = "Check that no campaigns are displayed to customer " +
+            "if they are disabled")
+    public void navigateToRestaurantsListScreen_verifyNoCampaignsAreShowedToCustomer() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(false);
+    }
+
+    @Issue("HSAP-202")
+    @Test(description = "Check if the the top campaign width set to ratio 2:1")
+    public void clickCampaign_verifyTopCampaignWidthRatioIs2_1() {
+        //When
+        locationsScreen.submitAddress();
+        restaurantsListScreen.clickCampaign(true);
+
+        //Then
+        restaurantsListScreen.verifyCampaignImageRatio(true);
     }
 }
