@@ -1,16 +1,17 @@
 package com.hs.mobile.data;
 
 public enum ElementAttribute {
-    ENABLED("enabled"),
-    TEXT("text");
+  ENABLED("enabled"),
+  TEXT("text"),
+  CHECKED("checked");
 
-    private String value;
+  private String value;
 
-    ElementAttribute(String value) {
-        this.value = value;
-    }
+  ElementAttribute(String value) {
+    this.value = value;
+  }
 
-    public String getName() {
-        return value;
-    }
+  public String getName() {
+    return value;
+  }
 }

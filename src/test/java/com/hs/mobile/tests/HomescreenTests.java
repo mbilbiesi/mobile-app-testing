@@ -13,26 +13,28 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class HomescreenTests extends BaseTest {
 
-    @Test(description = "Open the application with a new user")
-    void navigateToHomeScreen_allHomeScreenElementsAreDisplayed() {
-        //Given
-        homeScreen.verifyThatAllHomeElementsDisplayed();
-    }
+  @Test(description = "Open the application with a new user")
+  void navigateToHomeScreen_allHomeScreenElementsAreDisplayed() {
+    // Given
+    homeScreenSteps.verifyThatAllHomeElementsDisplayed();
+  }
 
-    @Test(enabled = true, description = "Open the application with an already registered user without any saved place")
-    void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
-        //Given
-        homeScreen.clickMyOrdersButton();
-        ordersScreen.clickVerifyButton();
-        verifyAccountScreen.insertMobileNumber("503263813");
-        verifyAccountScreen.clickNextButton();
-        pinCodeVerificationScreen.insertVerificationCode("395406");
-        addReferalCodeScreen.clickCloseButton();
+  @Test(
+      enabled = true,
+      description = "Open the application with an already registered user without any saved place")
+  void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
+    // Given
+    homeScreenSteps.clickMyOrdersButton();
+    ordersScreen.clickVerifyButton();
+    verifyAccountScreenSteps.insertMobileNumber("503263813");
+    verifyAccountScreenSteps.clickNextButton();
+    pinCodeVerificationScreen.insertVerificationCode("395406");
+    addReferalCodeScreen.clickCloseButton();
 
-        //When
-        ordersScreen.navigateToRestaurants();
+    // When
+    ordersScreen.navigateToRestaurants();
 
-        //Then
-        homeScreen.verifyThatAllHomeElementsDisplayed();
-    }
+    // Then
+    homeScreenSteps.verifyThatAllHomeElementsDisplayed();
+  }
 }
