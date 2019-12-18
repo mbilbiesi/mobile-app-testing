@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -183,19 +184,17 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
     @Step("Verify that 'All' filter is displayed")
     public void verifyAllFiterIsDisplayed() {
-        SoftAssertions soft = new SoftAssertions();
-        soft.assertThat(isAllFilterDisplayed(getFiltersNames().get(0)))
+        assertThat(isAllFilterDisplayed(getFiltersNames().get(0)))
                 .as("'All' filter is not displayed").isTrue();
     }
 
     @Step("Verify that 'All' filter is selected")
     public void verifyAllFiterIsSelectedAndColorIsYellow() {
         String filterColor;
-        SoftAssertions soft = new SoftAssertions();
 
         filterColor = getElementColor((MobileElement) getBtnFilter().get(0));
 
-        soft.assertThat(filterColor.equalsIgnoreCase("#ffd700"))
+        assertThat(filterColor.equalsIgnoreCase("#ffd700"))
                 .as("The 'All' filter isn't selected, and it's color isn't yellow");
     }
 
@@ -254,7 +253,6 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     }
 
     public boolean checkTopBanner() {
-        SoftAssertions soft = new SoftAssertions();
         boolean topBannerHasOffers = false;
 
         if (getOfferWidgets().size() > 0) {
@@ -271,10 +269,9 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     }
 
     public void verifyCustomerRedirectedToARestaurant() {
-        SoftAssertions soft = new SoftAssertions();
 
         try {
-            soft.assertThat(restaurant.getRestaurantHeader().isDisplayed())
+            assertThat(restaurant.getRestaurantHeader().isDisplayed())
                     .as("Top banner doesn't have restaurant offers").isTrue();
         } catch (ElementNotVisibleException e) {
             e.printStackTrace();
