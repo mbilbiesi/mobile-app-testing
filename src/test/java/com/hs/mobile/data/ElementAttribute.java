@@ -4,7 +4,8 @@ public enum ElementAttribute {
     ENABLED("enabled"),
     TEXT("text"),
     CLICKABLE("clickable"),
-    FOCUSABLE("focusable");
+    FOCUSABLE("focusable"),
+    CHECKED("checked");
 
     private String value;
 

@@ -4,13 +4,19 @@ import com.google.common.io.Resources;
 import com.hs.mobile.screens.AddReferalCodeScreen;
 import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.OrdersScreen;
+import com.hs.mobile.screens.PaymentOptionsScreen;
 import com.hs.mobile.screens.PinCodeVerificationScreen;
 import com.hs.mobile.screens.RestaurantScreen;
-import com.hs.mobile.screens.SavedLocationsScreen;
-import com.hs.mobile.screens.VerifyAccountScreen;
 import com.hs.mobile.steps.HomeScreenSteps;
+import com.hs.mobile.steps.InvoicesScreenSteps;
+import com.hs.mobile.steps.LocationScreenSteps;
+import com.hs.mobile.steps.ProfileScreenSteps;
 import com.hs.mobile.steps.RestaurantListScreenSteps;
 import com.hs.mobile.steps.RestaurantScreenSteps;
+import com.hs.mobile.steps.SavedLocationsScreenSteps;
+import com.hs.mobile.steps.SettingsScreenSteps;
+import com.hs.mobile.steps.VerifyAccountScreenSteps;
+import com.hs.mobile.steps.WalletScreenSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -19,8 +25,8 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
 import java.net.URL;
@@ -28,22 +34,29 @@ import java.net.URL;
 public class BaseTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
-    protected static final String ANDROID_FILE_PATH = Resources.getResource("apps/hs-app.apk").getPath();
+    protected static final String ANDROID_FILE_PATH =
+            Resources.getResource("apps/hs-app.apk").getPath();
     private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
-    protected HomeScreenSteps homeScreen;
+    protected HomeScreenSteps homeScreenSteps;
     protected LocationsScreen locationsScreen;
+    LocationScreenSteps locationScreenSteps;
     RestaurantListScreenSteps restaurantsListScreen;
     RestaurantScreen restaurantScreen;
+    SavedLocationsScreenSteps savedLocationsScreenSteps;
     RestaurantScreenSteps restaurantScreenSteps;
-    SavedLocationsScreen savedLocationsScreen;
     OrdersScreen ordersScreen;
-    VerifyAccountScreen verifyAccountScreen;
+    VerifyAccountScreenSteps verifyAccountScreenSteps;
     PinCodeVerificationScreen pinCodeVerificationScreen;
     AddReferalCodeScreen addReferalCodeScreen;
+    ProfileScreenSteps profileScreenSteps;
+    InvoicesScreenSteps invoicesScreenSteps;
+    SettingsScreenSteps settingsScreenSteps;
+    PaymentOptionsScreen paymentOptionsScreen;
+    WalletScreenSteps walletScreenSteps;
 
     protected AppiumDriver driver;
 
-    @BeforeMethod
+    @BeforeClass
     @Parameters({"platform", "udid", "systemPort"})
     void startAppiumServer(String platform, String udid, String systemPort) {
         String[] platformInfo = platform.split(" ");
@@ -64,19 +77,25 @@ public class BaseTest {
             LOG.error("unable to initiate Android driver", e);
         }
 
-        homeScreen = new HomeScreenSteps(driver);
+        homeScreenSteps = new HomeScreenSteps(driver);
         locationsScreen = new LocationsScreen(driver);
+        locationScreenSteps = new LocationScreenSteps(driver);
         restaurantsListScreen = new RestaurantListScreenSteps(driver);
         restaurantScreen = new RestaurantScreen(driver);
         restaurantScreenSteps = new RestaurantScreenSteps(driver);
         ordersScreen = new OrdersScreen(driver);
-        verifyAccountScreen = new VerifyAccountScreen(driver);
+        verifyAccountScreenSteps = new VerifyAccountScreenSteps(driver);
         pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
         addReferalCodeScreen = new AddReferalCodeScreen(driver);
-        savedLocationsScreen = new SavedLocationsScreen(driver);
+        savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
+        profileScreenSteps = new ProfileScreenSteps(driver);
+        invoicesScreenSteps = new InvoicesScreenSteps(driver);
+        settingsScreenSteps = new SettingsScreenSteps(driver);
+        paymentOptionsScreen = new PaymentOptionsScreen(driver);
+        walletScreenSteps = new WalletScreenSteps(driver);
     }
 
-    @AfterMethod
+    @AfterClass
     public void teardown() {
         if (driver != null) {
             driver.quit();

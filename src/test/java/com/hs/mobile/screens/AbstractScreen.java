@@ -15,6 +15,8 @@ import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.lang.reflect.Field;
 import java.time.Duration;
@@ -26,11 +28,11 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
 
-class AbstractScreen {
+public class AbstractScreen {
     protected final TouchAction touchAction;
     protected final AppiumDriver driver;
 
-    //ToDo: find the locator of the skip promotion link in english
+    // ToDo: find the locator of the skip promotion link in english
     @iOSXCUITFindBy(xpath = "")
     @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='textInEnglish']")
     private List<WebElement> lnkSkipPromotion;
@@ -47,8 +49,7 @@ class AbstractScreen {
         }
     }
 
-
-    public void hideKeyboard() {
+    protected void hideKeyboard() {
         if (isAndroid()) {
             driver.hideKeyboard();
         } else {
@@ -69,11 +70,11 @@ class AbstractScreen {
         touchAction.tap(tapOptions().withElement(element(element))).perform();
     }
 
-    public String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
+    protected String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
         return element.getAttribute(attribute.getName());
     }
 
-    public void verifyScreenElements() {
+    protected void verifyScreenElements() {
         SoftAssertions soft = new SoftAssertions();
 
         Class<?> clazz = this.getClass();
@@ -96,13 +97,27 @@ class AbstractScreen {
         soft.assertAll();
     }
 
-    public void scrollByElement(WebElement element) {
+    protected void scrollByElement(WebElement element) {
         Dimension dimension = driver.manage().window().getSize();
         int x = element.getLocation().x;
         int y = element.getLocation().y;
         int startY = (int) (dimension.getHeight() * 0.90);
         int endY = (int) (dimension.getHeight() * 0.10);
-        touchAction.press(point(x, startY)).waitAction(waitOptions(ofMillis(100)))
-                .moveTo(point(x, endY)).release().perform();
+        touchAction
+                .press(point(x, startY))
+                .waitAction(waitOptions(ofMillis(100)))
+                .moveTo(point(x, endY))
+                .release()
+                .perform();
+    }
+
+    protected Boolean isElementActive(WebElement element) {
+        return element.isDisplayed() && element.isEnabled();
+    }
+
+    protected void waitUntilAnElementIsUpdated(
+            WebElement element, ElementAttribute attribute, String expectedValue) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        wait.until(ExpectedConditions.attributeToBe(element, attribute.getName(), expectedValue));
     }
 }

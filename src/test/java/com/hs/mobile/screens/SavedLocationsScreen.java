@@ -3,16 +3,18 @@ package com.hs.mobile.screens;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class SavedLocationsScreen extends AbstractScreen {
+@Getter
+public abstract class SavedLocationsScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(xpath = "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.hungerstation.android.web.debug:id/my_addresses_recycler']/*")
+    @AndroidFindBy(
+            xpath =
+                    "//androidx.recyclerview.widget.RecyclerView[@resource-id='com.hungerstation.android.web.debug:id/my_addresses_recycler']/*")
     private List<WebElement> savedLocations;
 
     @iOSXCUITFindBy(id = "")
@@ -33,31 +35,5 @@ public class SavedLocationsScreen extends AbstractScreen {
 
     public SavedLocationsScreen(AppiumDriver driver) {
         super(driver);
-    }
-
-    public void addNewLocation() {
-        tap(newLocation);
-    }
-
-    public void deleteSavedLocations() {
-        int numberOfLocations = savedLocations.size();
-        for (WebElement loc : savedLocations) {
-            tap(more);
-            tap(delete);
-        }
-    }
-
-    public List<WebElement> getSavedLocations() {
-        return savedLocations;
-    }
-
-    public void editLocation() {
-        tap(more);
-        tap(edit);
-    }
-
-    public void waitUntilNewLocationButtonDisplays() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        newLocation = wait.until(ExpectedConditions.visibilityOf(newLocation));
     }
 }

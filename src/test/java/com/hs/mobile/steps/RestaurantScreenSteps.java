@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.hs.mobile.data.ElementAttribute.CLICKABLE;
 import static com.hs.mobile.data.ElementAttribute.ENABLED;
@@ -20,9 +22,25 @@ import static com.hs.mobile.data.Language.ARABIC;
 import static com.hs.mobile.data.Language.ENGLISH;
 
 public class RestaurantScreenSteps extends RestaurantScreen {
+    private HomeScreenSteps homeScreenSteps = new HomeScreenSteps(driver);
+    private LocationScreenSteps locationScreenSteps = new LocationScreenSteps(driver);
+    private RestaurantListScreenSteps restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
 
     public RestaurantScreenSteps(AppiumDriver driver) {
         super(driver);
+    }
+
+    @Step("Go to restaurant screen")
+    public void goToRestaurantScreen() {
+        //Given
+        homeScreenSteps.viewSavedLocations();
+        locationScreenSteps.searchForRestaurants();
+        locationScreenSteps.insertLocation("Riyadh");
+        locationScreenSteps.selectItemArea(0);
+        locationScreenSteps.submitAddress();
+        locationScreenSteps.submitAddress();
+        restaurantListScreenSteps.searchForRestaurant("The Pizza Company");
+        restaurantListScreenSteps.selectDisplayedRestaurant();
     }
 
     @Step("Verify that menu groups display properly")
@@ -80,6 +98,18 @@ public class RestaurantScreenSteps extends RestaurantScreen {
         if (title.matches("^[a-zA-Z0-9$@$!%*?&#^-_. +]+$")) {
             return ENGLISH;
         } else return ARABIC;
+    }
+
+    @Step("Swipe through the menu groups")
+    public List<WebElement> swipeThroughTheMenuGroups() {
+        List<WebElement> menuGroups = getMenuGroups();
+        swipe(menuGroups.get(3), menuGroups.get(0));
+        swipe(menuGroups.get(2), menuGroups.get(0));
+        RestaurantScreen restaurantScreen = new RestaurantScreen(driver);
+        return Stream
+                .concat(menuGroups.stream(), restaurantScreen.getMenuGroups().stream())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     private void waitUntilHeaderIsLoaded() {
