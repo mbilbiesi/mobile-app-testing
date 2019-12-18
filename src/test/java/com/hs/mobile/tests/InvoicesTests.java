@@ -46,9 +46,9 @@ public class InvoicesTests extends BaseTest {
 
     assertions.assertThat(isValidTitle).as(String.format("Invalid title: [%s]", title)).isTrue();
     assertions
-            .assertThat(invoicesScreenSteps.isBackButtonActive())
-            .as("Return button should be displayed and enabled.")
-            .isTrue();
+        .assertThat(invoicesScreenSteps.isBackButtonActive())
+        .as("Return button should be displayed and enabled.")
+        .isTrue();
     driver.navigate().back();
     assertions.assertAll();
   }
@@ -77,13 +77,13 @@ public class InvoicesTests extends BaseTest {
 
     assertions.assertThat(isValidTitle).as(String.format("Invalid title: [%s]", title)).isTrue();
     assertions
-            .assertThat(invoiceScreen.isDownloadButtonActive())
-            .as("Download button should be active.")
-            .isTrue();
+        .assertThat(invoiceScreen.isDownloadButtonActive())
+        .as("Download button should be active.")
+        .isTrue();
     assertions
-            .assertThat(invoiceScreen.isBackButtonActive())
-            .as("Return button should be active.")
-            .isTrue();
+        .assertThat(invoiceScreen.isBackButtonActive())
+        .as("Return button should be active.")
+        .isTrue();
     driver.navigate().back();
     driver.navigate().back();
     assertions.assertAll();
@@ -93,11 +93,11 @@ public class InvoicesTests extends BaseTest {
   public void verifyDisplayedMessage() {
     String message = invoicesScreenSteps.getMessage();
     boolean isValidMessage =
-            "لا يوجد لديك اي فاتورة حالياً".equals(message)
-                    || "There are no invoices to be shown at the moment".equals(message);
+        "لا يوجد لديك اي فاتورة حالياً".equals(message)
+            || "There are no invoices to be shown at the moment".equals(message);
     driver.navigate().back();
     Assertions.assertThat(isValidMessage)
-            .as(String.format("Invalid message: [%s]", message))
-            .isTrue();
+        .as(String.format("Invalid message: [%s]", message))
+        .isTrue();
   }
 }

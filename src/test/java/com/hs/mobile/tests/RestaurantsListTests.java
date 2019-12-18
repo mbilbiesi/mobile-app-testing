@@ -15,16 +15,21 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class RestaurantsListTests extends BaseTest {
 
+    //ToDo: Some test here have to be skipped based on whether campaigns are enabled
+    // or not or whether the location has campaigns or not. We need to implement a way
+    // skip test conditionally based on the information above. For now, I'll just manually skip the tests
+
     int restaurantCount = 0;
     int afterSearchRestaurantCount = 0;
     String keyword = null;
-    // ToDO: Find a way to retrieve different test data for restaurants dynamically:
+    //ToDO: Find a way to retrieve different test data for restaurants dynamically:
     String recommendedRestaurant = "ماكدونالد";
     String notReadyRecommendedRestaurant = "ليمونة";
+    String firstFilterTitle;
 
     @BeforeMethod
     public void beforeEachTest() {
-        // Given
+        //Given
         homeScreenSteps.clickFindRestaurantsButton();
         locationsScreen.searchForRestaurants();
         locationsScreen.insertLocation("riyadh");
@@ -36,77 +41,185 @@ public class RestaurantsListTests extends BaseTest {
     @Issue("HSAP-185")
     @Test(description = "Verify all Restaurant List objects are displayed correctly")
     void navigateToRestaurantListScreen_screenElementAreDisplayed() {
-        // When
+        //When
         locationsScreen.submitAddress();
 
-        // Then
+        //Then
         restaurantsListScreen.verifyRestaurantsListLayout();
     }
 
     @Issue("HSAP-186")
     @Test(description = "Verify all restaurants that meet the search criteria are returned")
     public void searchForRestaurant_resultsMatchedSearchCriteria() {
-        // When
+        //When
         locationsScreen.submitAddress();
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
 
-        // Then
+        //Then
         restaurantsListScreen.verifyReturnedRestaurants(keyword);
     }
 
     @Issue("HSAP-186")
     @Test(description = "Verify clearing search criteria will reset the list view")
     public void clickToResetSearchCriteria_restaurantListWillBeReset() {
-        // When
+        //When
         locationsScreen.submitAddress();
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
-
-        // When
         afterSearchRestaurantCount = restaurantsListScreen.clearSearchCriteria();
 
-        // Then
-        restaurantsListScreen.verifyAllRestaurantsAreReturned(
-                restaurantCount, afterSearchRestaurantCount);
+        //Then
+        restaurantsListScreen.verifyAllRestaurantsAreReturned(restaurantCount, afterSearchRestaurantCount);
     }
 
     @Issue("HSAP-188")
     @Test(description = "Verify recommended badge is displaying next to the recommended restaurants")
     public void navigateToRestaurantsListScreen_checkRecommendedRestaurantsBadge() {
-        // When
+        //When
         locationsScreen.submitAddress();
         restaurantsListScreen.searchForRestaurant(recommendedRestaurant);
 
-        // Then
+        //Then
         restaurantsListScreen.checkRecommendedBadge(true);
-        // todo: make sure that this step is going to be executed otherwise next tests will fail
+        //todo: make sure that this step is going to be executed otherwise next tests will fail
         restaurantsListScreen.clearSearchCriteria();
     }
 
     @Issue("HSAP-189")
-    @Test(
-            description =
-                    "verify recommended badge is only displayed for restaurant with ready status only")
+    @Test(description = "verify recommended badge is only displayed for restaurant with ready status only")
     public void navigateToRestaurantList_recommendedBadgeDisplayOnlyForReadyRestaurant() {
-        // When
+        //When
         locationsScreen.submitAddress();
         restaurantsListScreen.searchForRestaurant(notReadyRecommendedRestaurant);
 
-        // Then
+        //Then
         restaurantsListScreen.checkRecommendedBadge(false);
     }
 
     @Issue("HSAP-190")
-    @Test(
-            description =
-                    "Verify restaurants are sorted according to the distance from the location provided")
+    @Test(description = "Verify restaurants are sorted according to the distance from the location provided")
     public void navigateToRestaurantsListScreen_verifyRestaurantsSortedByDistance() {
-        // When
+        //When
         locationsScreen.submitAddress();
         restaurantsListScreen.scrollDownRestaurantsList();
 
-        // Then
+        //Then
         restaurantsListScreen.checkIfRestaurantsSortedByDistance();
+    }
+
+    @Issue("HSAP-191")
+    @Test(description = "Verify promoted restaurants are displayed at the top of restaurants list", enabled = false)
+    public void navigateToRestaurantsListScreen_verifyPromotedRestaurantsDisplayOnTop() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyPromotedRestaurantsDisplayOnTop();
+    }
+
+    @Issue("HSAP-192")
+    @Test(description = "Check if the filters section is displayed below the banners section")
+    public void navigateToRestaurantsListScreen_verifyKitchenTypeFiltersAreDisplayed() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyRestaurantFiltersAreDisplayed();
+    }
+
+    @Issue("HSAP-193")
+    @Test(description = "Check if the user is eligible to see the 'All' filter among the filters list")
+    public void navigateToRestaurantsListScreen_verifyTheAllFilterIsDisplayedAndSelected() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyAllFiterIsDisplayed();
+        restaurantsListScreen.verifyAllFiterIsSelectedAndColorIsYellow();
+    }
+
+    @Issue("HSAP-194")
+    @Test(description = "Check if the user is able to swipe left and right on the filters list")
+    public void navigateToRestaurantsListScreen_verifyCustomerCanSwipeOnFilters() {
+        //When
+        locationsScreen.submitAddress();
+        firstFilterTitle = restaurantsListScreen.swipeFiltersList();
+
+        //Then
+        restaurantsListScreen.verifyFiltersSwipedSuccessfully(firstFilterTitle);
+    }
+
+    @Issue("HSAP-195")
+    @Test(description = "Check that the top banner image's ratio is 2:1")
+    public void navigateToRestaurantsListScreen_verifyTopBannerImgRatioIs2_1() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyTopBannerImageRatio();
+    }
+
+    @Issue("HSAP-197")
+    @Test(description = "Check if the top banner shows restaurant offers")
+    public void navigateToRestaurantsListScreen_verifyTopBannerShowsRestaurantOffers() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyTopBannerShowsOnlyOffers();
+    }
+
+    @Issue("HSAP-198")
+    @Test(description = "Check if the the campaigns are displayed in a separate carousel ")
+    public void navigateToRestaurantsListScreen_verifyCampaignsDisplayedInSeparateCarousel() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(true);
+    }
+
+    @Issue("HSAP-199")
+    @Test(description = "Check if the Max number of campaigns shown in campaign carousel is 8")
+    public void navigateToRestaurantsListScreen_verifyMaxNumberOfCampaignsDisplayed() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyMaxCampaginsNumberInCarousel();
+    }
+
+    @Issue("HSAP-200")
+    @Test(description = "Verify that restaurants will be displayed based on the selected campaign")
+    public void clickCampaign_verifyRestaurantsWithCampaignDisplayed() {
+        //When
+        locationsScreen.submitAddress();
+        restaurantsListScreen.clickCampaign(true);
+
+        //Then
+        restaurantsListScreen.verifyCampaignRestaurants();
+    }
+
+    @Issue("HSAP-201")
+    @Test(enabled = false, description = "Check that no campaigns are displayed to customer " +
+            "if they are disabled")
+    public void navigateToRestaurantsListScreen_verifyNoCampaignsAreShowedToCustomer() {
+        //When
+        locationsScreen.submitAddress();
+
+        //Then
+        restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(false);
+    }
+
+    @Issue("HSAP-202")
+    @Test(description = "Check if the the top campaign width set to ratio 2:1")
+    public void clickCampaign_verifyTopCampaignWidthRatioIs2_1() {
+        //When
+        locationsScreen.submitAddress();
+        restaurantsListScreen.clickCampaign(true);
+
+        //Then
+        restaurantsListScreen.verifyCampaignImageRatio(true);
     }
 }

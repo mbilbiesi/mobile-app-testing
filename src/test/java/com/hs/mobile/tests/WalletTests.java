@@ -14,18 +14,18 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class WalletTests extends BaseTest {
 
-    @BeforeMethod
-    public void goToPaymentOptions() {
-        // Given
-        homeScreenSteps.clickOnMore().goToPaymentOptions();
-    }
+  @BeforeMethod
+  public void goToPaymentOptions() {
+    // Given
+    homeScreenSteps.clickOnMore().goToPaymentOptions();
+  }
 
-    @Test(description = "Check wallet screen headers")
-    public void navigateToWalletScreen_headersAreProperlyDisplayed() {
-        // When
-        paymentOptionsScreen.openWallet();
+  @Test(description = "Check wallet screen headers")
+  public void navigateToWalletScreen_headersAreProperlyDisplayed() {
+    // When
+    paymentOptionsScreen.openWallet();
 
-        // Then
-        walletScreenSteps.verifyHeaders();
-    }
+    // Then
+    walletScreenSteps.verifyHeaders();
+  }
 }

@@ -8,33 +8,33 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SavedLocationsScreenSteps extends SavedLocationsScreen {
 
-    public SavedLocationsScreenSteps(AppiumDriver driver) {
-        super(driver);
-    }
+  public SavedLocationsScreenSteps(AppiumDriver driver) {
+    super(driver);
+  }
 
-    @Step("Add new location")
-    public void addNewLocation() {
-        tap(getNewLocation());
-    }
+  @Step("Add new location")
+  public void addNewLocation() {
+    tap(getNewLocation());
+  }
 
-    @Step("Delete saved locations")
-    public void deleteSavedLocations() {
-        getSavedLocations()
-                .forEach(
-                        location -> {
-                            tap(getMore());
-                            tap(getDelete());
-                        });
-    }
+  @Step("Delete saved locations")
+  public void deleteSavedLocations() {
+    getSavedLocations()
+        .forEach(
+            location -> {
+              tap(getMore());
+              tap(getDelete());
+            });
+  }
 
-    @Step("Edit location")
-    public void editLocation() {
-        tap(getMore());
-        tap(getEdit());
-    }
+  @Step("Edit location")
+  public void editLocation() {
+    tap(getMore());
+    tap(getEdit());
+  }
 
-    public void waitUntilNewLocationButtonDisplays() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOf(getNewLocation()));
-    }
+  public void waitUntilNewLocationButtonDisplays() {
+    WebDriverWait wait = new WebDriverWait(driver, 10);
+    wait.until(ExpectedConditions.visibilityOf(getNewLocation()));
+  }
 }

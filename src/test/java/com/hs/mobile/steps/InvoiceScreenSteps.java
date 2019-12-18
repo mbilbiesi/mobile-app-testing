@@ -7,19 +7,19 @@ import static com.hs.mobile.data.ElementAttribute.TEXT;
 
 public class InvoiceScreenSteps extends InvoiceScreen {
 
-    public InvoiceScreenSteps(AppiumDriver driver) {
-        super(driver);
-    }
+  public InvoiceScreenSteps(AppiumDriver driver) {
+    super(driver);
+  }
 
-    public String getTitle() {
-        return getElementAttributeValue(getLblTitle(), TEXT);
-    }
+  public String getTitle() {
+    return getElementAttributeValue(getLblTitle(), TEXT);
+  }
 
-    public Boolean isDownloadButtonActive() {
-        return isElementActive(getBtnDownload());
-    }
+  public Boolean isDownloadButtonActive() {
+    return isElementActive(getBtnDownload());
+  }
 
-    public Boolean isBackButtonActive() {
-        return isElementActive(getBtnBack());
-    }
+  public Boolean isBackButtonActive() {
+    return isElementActive(getBtnBack());
+  }
 }
