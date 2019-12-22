@@ -7,43 +7,46 @@ import io.qameta.allure.Step;
 
 public class HomeScreenSteps extends HomeScreen {
 
-  public HomeScreenSteps(AppiumDriver driver) {
-    super(driver);
-  }
+    public HomeScreenSteps(AppiumDriver driver) {
+        super(driver);
+    }
 
-  @Step("Find restaurants")
-  public void findRestaurants() {
-    tap(getFindRestaurantsButton());
-  }
+    private RestaurantListScreenSteps restaurant = new RestaurantListScreenSteps(driver);
 
-  @Step("View saved locations")
-  public void viewSavedLocations() {
-    tap(getUseMyCurrentLocationText());
-  }
+    @Step("Find restaurants")
+    public void findRestaurants() {
+        tap(getFindRestaurantsButton());
+        restaurant.waitUntilRestaurantsAreLoaded();
+    }
 
-  @Step("Verify that all 'Homescreen' elements are displayed correctly")
-  public void verifyThatAllHomeElementsDisplayed() {
-    verifyScreenElements();
-  }
+    @Step("View saved locations")
+    public void viewSavedLocations() {
+        tap(getUseMyCurrentLocationText());
+    }
 
-  @Step("Click the 'My Orders' button")
-  public void clickMyOrdersButton() {
-    tap(getOrdersItem());
-  }
+    @Step("Verify that all 'Homescreen' elements are displayed correctly")
+    public void verifyThatAllHomeElementsDisplayed() {
+        verifyScreenElements();
+    }
 
-  @Step("Click the 'Find Restaurants' button")
-  public void clickFindRestaurantsButton() {
-    tap(getFindRestaurantsButton());
-  }
+    @Step("Click the 'My Orders' button")
+    public void clickMyOrdersButton() {
+        tap(getOrdersItem());
+    }
 
-  @Step("Click on restaurant icon")
-  public void clickOnResturantIcon() {
-    tap(getRestaurantsItem());
-  }
+    @Step("Click the 'Find Restaurants' button")
+    public void clickFindRestaurantsButton() {
+        tap(getFindRestaurantsButton());
+    }
 
-  @Step("Click on more")
-  public HomeScreenSideMenu clickOnMore() {
-    tap(getMoreItem());
-    return new HomeScreenSideMenu(driver);
-  }
+    @Step("Click on restaurant icon")
+    public void clickOnResturantIcon() {
+        tap(getRestaurantsItem());
+    }
+
+    @Step("Click on more")
+    public HomeScreenSideMenu clickOnMore() {
+        tap(getMoreItem());
+        return new HomeScreenSideMenu(driver);
+    }
 }

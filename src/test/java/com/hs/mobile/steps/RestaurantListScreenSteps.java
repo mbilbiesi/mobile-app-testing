@@ -340,6 +340,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         Assumptions.assumeThat(campaignsEnabled)
                 .as("Campaigns are not enabled, so there's no campaign to check").isTrue();
 
+        waitUntilCampaignsAreLoaded();
+
         int randomCampaignIndex = getRandomCampaignIndex();
 
         tap(getCampainBanners().get(randomCampaignIndex));
@@ -375,5 +377,16 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
         assertThat(campaignWidth / campaignHeight)
                 .as("Campaign image ratio is not 2:1").isEqualTo(2);
+    }
+
+    public void navigateBackToRestaurantsList() {
+        if (getRestaurantListLayout().size() == 0 && getRestaurantWidgets().size() == 0) {
+            driver.navigate().back();
+        }
+    }
+
+    public void waitUntilCampaignsAreLoaded() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfAllElements(getOfferWidgets()));
     }
 }

@@ -8,6 +8,8 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 @Getter
 public abstract class HomeScreen extends AbstractScreen {
 
@@ -49,6 +51,10 @@ public abstract class HomeScreen extends AbstractScreen {
   @iOSXCUITFindBy(xpath = "")
   @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='TBD']")
   private WebElement lnkSkipPromotion;
+
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rel")
+  private List<WebElement> homescreenLayout;
 
   public HomeScreen(AppiumDriver driver) {
     super(driver);

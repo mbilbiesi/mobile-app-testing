@@ -147,6 +147,10 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
 
     private String promotedBadgeLocator = "//*[@text='اعلان' or @text='Promoted']";
 
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_value")
+    @AssertElementVisibility
+    private List<WebElement> restaurantListLayout;
+
     public RestaurantsListScreen(AppiumDriver driver) {
         super(driver);
     }
