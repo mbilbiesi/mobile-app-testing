@@ -1,37 +1,41 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.data.Language;
+import com.hs.mobile.screens.MenuItemScreen;
 import com.hs.mobile.screens.RestaurantScreen;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
+import java.time.Duration;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.hs.mobile.data.ElementAttribute.CLICKABLE;
 import static com.hs.mobile.data.ElementAttribute.ENABLED;
 import static com.hs.mobile.data.ElementAttribute.FOCUSABLE;
-import static com.hs.mobile.data.Language.ARABIC;
-import static com.hs.mobile.data.Language.ENGLISH;
+import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
+@Slf4j
 public class RestaurantScreenSteps extends RestaurantScreen {
-    private HomeScreenSteps homeScreenSteps = new HomeScreenSteps(driver);
-    private LocationScreenSteps locationScreenSteps = new LocationScreenSteps(driver);
-    private RestaurantListScreenSteps restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
+    private HomeScreenSteps homeScreenSteps;
+    private LocationScreenSteps locationScreenSteps;
+    private RestaurantListScreenSteps restaurantListScreenSteps;
 
     public RestaurantScreenSteps(AppiumDriver driver) {
         super(driver);
+        homeScreenSteps = new HomeScreenSteps(driver);
+        locationScreenSteps = new LocationScreenSteps(driver);
+        restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
     }
 
     @Step("Go to restaurant screen")
-    public void goToRestaurantScreen() {
+    public void goToRestaurantScreen(String restaurantName) {
         //Given
         homeScreenSteps.viewSavedLocations();
         locationScreenSteps.searchForRestaurants();
@@ -39,65 +43,24 @@ public class RestaurantScreenSteps extends RestaurantScreen {
         locationScreenSteps.selectItemArea(0);
         locationScreenSteps.submitAddress();
         locationScreenSteps.submitAddress();
-        restaurantListScreenSteps.searchForRestaurant("The Pizza Company");
+        restaurantListScreenSteps.searchForRestaurant(restaurantName);
         restaurantListScreenSteps.selectDisplayedRestaurant();
     }
 
     @Step("Verify that menu groups display properly")
     public void verifyThatMenuGroupsDisplayProperly(List<WebElement> menuGroups) {
-        SoftAssertions assertions = new SoftAssertions();
+        SoftAssertions soft = new SoftAssertions();
         String isTrue = String.valueOf(true);
         for (WebElement menuGroup : menuGroups) {
-            assertions.assertThat(getElementAttributeValue(menuGroup, CLICKABLE))
+            soft.assertThat(getElementAttributeValue(menuGroup, CLICKABLE))
                     .as("Menu group should be clickable").isEqualTo(isTrue);
-            assertions.assertThat(getElementAttributeValue(menuGroup, ENABLED))
+            soft.assertThat(getElementAttributeValue(menuGroup, ENABLED))
                     .as("Menu group should be enabled").isEqualTo(isTrue);
-            assertions.assertThat(getElementAttributeValue(menuGroup, FOCUSABLE))
+            soft.assertThat(getElementAttributeValue(menuGroup, FOCUSABLE))
                     .as("Menu group should be focusable").isEqualTo(isTrue);
         }
-        driver.navigate().back();
-        driver.navigate().back();
-        driver.navigate().back();
-        assertions.assertAll();
-    }
-
-    @Step("Extract menu groups from restaurant screen")
-    public List<String> getDisplayedMenuGroups() {
-        List<String> menuGroups = new ArrayList<>();
-
-        for (WebElement menuGroup : getMenuGroups()) {
-            tap(menuGroup);
-            waitUntilHeaderIsLoaded();
-            menuGroups.add(getMenuGroupHeader().getText());
-        }
-
-        driver.navigate().back();
-        driver.navigate().back();
-        driver.navigate().back();
-        return menuGroups;
-    }
-
-    @Step("Verify that displayed menu groups match expected ones")
-    public void verifyDisplayedMenuGroups(List<String> actualMenuGroups,
-                                          Map<Language, List<String>> multilingualExpectedMenuGroups,
-                                          Language selectedLanguage) {
-        SoftAssertions assertions = new SoftAssertions();
-        List<String> expectedMenuGroups = selectedLanguage.equals(ENGLISH) ? multilingualExpectedMenuGroups.get(ENGLISH)
-                : multilingualExpectedMenuGroups.get(ARABIC);
-
-        for (String menuGroup : actualMenuGroups) {
-            assertions.assertThat(expectedMenuGroups.contains(menuGroup))
-                    .as(String.format("Menu group [%s] is incorrectly displayed.", menuGroup)).isTrue();
-        }
-        assertions.assertAll();
-    }
-
-    @Step("Determine the selected language")
-    public Language getSelectedLanguage() {
-        String title = getRestaurantTitle().getText();
-        if (title.matches("^[a-zA-Z0-9$@$!%*?&#^-_. +]+$")) {
-            return ENGLISH;
-        } else return ARABIC;
+        navigateBack(3);
+        soft.assertAll();
     }
 
     @Step("Swipe through the menu groups")
@@ -112,8 +75,44 @@ public class RestaurantScreenSteps extends RestaurantScreen {
                 .collect(Collectors.toList());
     }
 
-    private void waitUntilHeaderIsLoaded() {
+    @Step("Verify that calories display properly for a menu item")
+    public void verifyThatCaloriesDisplayProperlyForAMenuItem() {
+        SoftAssertions soft = new SoftAssertions();
+
+        soft.assertThat(isElementActive(getCaloriesIcon()))
+                .as("Calories icon should be active").isTrue();
+        soft.assertThat(isElementActive(getCaloriesLabel()))
+                .as("Calories label should be active").isTrue();
+        soft.assertThat(isElementActive(getFirstMenuItemName()))
+                .as("Menu item should be active").isTrue();
+
+        String caloriesLabel = getCaloriesLabel().getText();
+        String firstMenuItemName = getFirstMenuItemName().getText();
+
+        tap(getFirstMenuItem());
+        MenuItemScreen menuItemScreen = new MenuItemScreen(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(getMenuGroupHeader()));
+        wait.until(ExpectedConditions.visibilityOf(menuItemScreen.getTitle()));
+
+        soft.assertThat(isElementActive(menuItemScreen.getCaloriesIcon()))
+                .as("Calories icon should be active.").isTrue();
+        soft.assertThat(isElementActive(menuItemScreen.getCaloriesLabel()))
+                .as("Calories label should be active.").isTrue();
+        soft.assertThat(isElementActive(menuItemScreen.getCaloriesTotal()))
+                .as("Calories total should be active.").isTrue();
+        soft.assertThat(caloriesLabel)
+                .as("Calories details should match.").isEqualTo(menuItemScreen.getCaloriesTotal().getText()
+                + " " + menuItemScreen.getCaloriesLabel().getText().toLowerCase());
+        soft.assertThat(firstMenuItemName)
+                .as("Menu item details should match.").isEqualTo(menuItemScreen.getTitle().getText());
+
+        navigateBack(4);
+        soft.assertAll();
+    }
+
+    public void swipe(WebElement startElement, WebElement endElement) {
+        touchAction.longPress(longPressOptions().withElement(element(startElement))
+                .withDuration(Duration.ofMillis(500))).moveTo(element(endElement))
+                .release().perform();
     }
 }

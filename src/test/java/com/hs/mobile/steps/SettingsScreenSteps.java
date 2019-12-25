@@ -28,6 +28,7 @@ public class SettingsScreenSteps extends SettingsScreen {
         if (selectedLanguage.equals(ENGLISH)) {
             selectLanguage(ARABIC);
         }
+        navigateBack(1);
     }
 
     @Step("Set the language to English")
@@ -36,42 +37,43 @@ public class SettingsScreenSteps extends SettingsScreen {
         if (selectedLanguage.equals(ARABIC)) {
             selectLanguage(ENGLISH);
         }
+        navigateBack(1);
     }
 
     @Step("Verify that elements display correctly in Arabic")
     public void verifyThatScreenDisplaysProperlyInArabic() {
-        SoftAssertions assertions = new SoftAssertions();
+        SoftAssertions soft = new SoftAssertions();
         String title = "الإعدادات";
 
-        assertions
+        soft
                 .assertThat(getTitleFromElement())
                 .as(String.format("Invalid title [%s].", title))
                 .isEqualTo(title);
-        assertions.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
-        assertions
+        soft.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
+        soft
                 .assertThat(getSelectedLanguage())
                 .as("Selected language should be Arabic")
                 .isEqualTo(ARABIC);
-        driver.navigate().back();
-        assertions.assertAll();
+        navigateBack(1);
+        soft.assertAll();
     }
 
     @Step("Verify that elements display correctly in English")
     public void verifyThatScreenDisplaysProperlyInEnglish() {
-        SoftAssertions assertions = new SoftAssertions();
+        SoftAssertions soft = new SoftAssertions();
         String title = "Settings";
 
-        assertions
+        soft
                 .assertThat(getTitleFromElement())
                 .as(String.format("Invalid title [%s].", title))
                 .isEqualTo(title);
-        assertions.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
-        assertions
+        soft.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
+        soft
                 .assertThat(getSelectedLanguage())
                 .as("Selected language should be English")
                 .isEqualTo(ENGLISH);
-        driver.navigate().back();
-        assertions.assertAll();
+        navigateBack(1);
+        soft.assertAll();
     }
 
     @Step("Enable notifications")
@@ -82,7 +84,7 @@ public class SettingsScreenSteps extends SettingsScreen {
         } else {
             tickNotificationsCheckBox();
         }
-        driver.navigate().back();
+        navigateBack(1);
     }
 
     @Step("Disable notifications")
@@ -93,7 +95,7 @@ public class SettingsScreenSteps extends SettingsScreen {
             tickNotificationsCheckBox();
             tickNotificationsCheckBox();
         }
-        driver.navigate().back();
+        navigateBack(1);
     }
 
     public String getTitleFromElement() {

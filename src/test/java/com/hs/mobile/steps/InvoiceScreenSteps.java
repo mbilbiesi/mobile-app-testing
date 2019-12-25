@@ -11,7 +11,7 @@ public class InvoiceScreenSteps extends InvoiceScreen {
         super(driver);
     }
 
-    public String getTitle() {
+    public String getInvoiceTitle() {
         return getElementAttributeValue(getLblTitle(), TEXT);
     }
 

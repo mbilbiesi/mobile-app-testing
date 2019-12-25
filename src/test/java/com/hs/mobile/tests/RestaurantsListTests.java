@@ -26,18 +26,18 @@ public class RestaurantsListTests extends BaseTest {
     public void beforeEachTest() {
         // Given
         homeScreenSteps.clickFindRestaurantsButton();
-        locationsScreen.searchForRestaurants();
-        locationsScreen.insertLocation("riyadh");
-        locationsScreen.selectItemArea(3);
-        locationsScreen.submitAddress();
-        locationsScreen.insertAddressDescription("desc");
+        locationScreenSteps.searchForRestaurants();
+        locationScreenSteps.insertLocation("riyadh");
+        locationScreenSteps.selectItemArea(3);
+        locationScreenSteps.submitAddress();
+        locationScreenSteps.insertAddressDescription("desc");
     }
 
     @Issue("HSAP-185")
     @Test(description = "Verify all Restaurant List objects are displayed correctly")
     void navigateToRestaurantListScreen_screenElementAreDisplayed() {
         // When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
 
         // Then
         restaurantsListScreen.verifyRestaurantsListLayout();
@@ -47,7 +47,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Verify all restaurants that meet the search criteria are returned")
     public void searchForRestaurant_resultsMatchedSearchCriteria() {
         // When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
 
@@ -59,7 +59,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Verify clearing search criteria will reset the list view")
     public void clickToResetSearchCriteria_restaurantListWillBeReset() {
         // When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
 
@@ -75,7 +75,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Verify recommended badge is displaying next to the recommended restaurants")
     public void navigateToRestaurantsListScreen_checkRecommendedRestaurantsBadge() {
         // When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
         restaurantsListScreen.searchForRestaurant(recommendedRestaurant);
 
         // Then
@@ -90,7 +90,7 @@ public class RestaurantsListTests extends BaseTest {
                     "verify recommended badge is only displayed for restaurant with ready status only")
     public void navigateToRestaurantList_recommendedBadgeDisplayOnlyForReadyRestaurant() {
         // When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
         restaurantsListScreen.searchForRestaurant(notReadyRecommendedRestaurant);
 
         // Then
@@ -103,7 +103,7 @@ public class RestaurantsListTests extends BaseTest {
                     "Verify restaurants are sorted according to the distance from the location provided")
     public void navigateToRestaurantsListScreen_verifyRestaurantsSortedByDistance() {
         // When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
         restaurantsListScreen.scrollDownRestaurantsList();
 
         // Then

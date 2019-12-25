@@ -9,13 +9,21 @@ import org.assertj.core.api.Assertions;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.hs.mobile.data.ElementAttribute.ENABLED;
+import static com.hs.mobile.data.ElementAttribute.TEXT;
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+
 public class LocationScreenSteps extends LocationsScreen {
-    private HomeScreenSteps homeScreenSteps = new HomeScreenSteps(driver);
-    private SavedLocationsScreenSteps savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
-    private RestaurantListScreenSteps restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
+    private HomeScreenSteps homeScreenSteps;
+    private SavedLocationsScreenSteps savedLocationsScreenSteps;
+    private RestaurantListScreenSteps restaurantListScreenSteps;
 
     public LocationScreenSteps(AppiumDriver driver) {
         super(driver);
+        homeScreenSteps = new HomeScreenSteps(driver);
+        savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
+        restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
     }
 
     @Step("Verify {description} updated description")
@@ -25,7 +33,7 @@ public class LocationScreenSteps extends LocationsScreen {
         String desc = getDescription();
         submitAddress();
         savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
-        driver.navigate().back();
+        navigateBack(1);
 
         Assertions.assertThat(desc)
                 .as("Actual updated description does not match expected one.")
@@ -56,7 +64,7 @@ public class LocationScreenSteps extends LocationsScreen {
         saveForLater();
         submitAddress();
         restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
-        driver.navigate().back();
+        navigateBack(1);
     }
 
     @Step("Search for a landmark")
@@ -79,7 +87,7 @@ public class LocationScreenSteps extends LocationsScreen {
     public void verifyNewlyAddedLocations() {
         homeScreenSteps.viewSavedLocations();
         int locationsCount = savedLocationsScreenSteps.getSavedLocations().size();
-        driver.navigate().back();
+        navigateBack(1);
         Assertions.assertThat(locationsCount)
                 .as("Number of saved locations should be 4.")
                 .isEqualTo(4);
@@ -100,8 +108,66 @@ public class LocationScreenSteps extends LocationsScreen {
             savedLocationsScreenSteps.deleteSavedLocations();
             savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
         } finally {
-            driver.navigate().back();
+            navigateBack(1);
         }
+    }
+
+    @Step("search for restaurants")
+    public void searchForRestaurants() {
+        touchAction.tap(tapOptions().withElement(element(getSearchButton()))).perform();
+    }
+
+    @Step("insert {text} location")
+    public void insertLocation(String text) {
+        getSearchTextBox().sendKeys(text);
+    }
+
+    @Step("select {index} area")
+    public void selectItemArea(int index) {
+        touchAction.tap(tapOptions().withElement(element(getItemAreas().get(index)))).perform();
+    }
+
+    public void submitAddress() {
+        touchAction.tap(tapOptions().withElement(element(getSelectAddressButton()))).perform();
+    }
+
+    @Step("Insert {description} address description")
+    public void insertAddressDescription(String description) {
+        getAddressDescriptionTextBox().sendKeys(description);
+    }
+
+    @Step("Toggle save for later button")
+    public void saveForLater() {
+        tap(getSaveForLaterToggleButton());
+    }
+
+    @Step("Select {index} location type")
+    public void selectLocationType(int index) {
+        tap(getLocationTypes().get(index));
+    }
+
+    @Step("Check if the submit button is enabled")
+    public boolean isSubmitButtonEnabled() {
+        return Boolean.parseBoolean(getElementAttributeValue(getSelectAddressButton(), ENABLED));
+    }
+
+    @Step("Clear description text box")
+    public void clearDescription() {
+        getAddressDescriptionTextBox().clear();
+    }
+
+    @Step("Get the current address description")
+    public String getDescription() {
+        return getElementAttributeValue(getAddressDescriptionTextBox(), TEXT);
+    }
+
+    @Step("Check if the search button is displayed")
+    public boolean isSearchButtonDisplayed() {
+        return getSearchButton().isDisplayed();
+    }
+
+    public void waitUntilSubmitButtonIsEnabled() {
+        waitUntilAnElementIsUpdated(getSelectAddressButton(), ENABLED, String.valueOf(true));
     }
 
     private void addNewLocations(List<LocationType> types) {
@@ -119,7 +185,7 @@ public class LocationScreenSteps extends LocationsScreen {
             selectLocationType(i);
             submitAddress();
             restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
-            driver.navigate().back();
+            navigateBack(1);
         }
     }
 }

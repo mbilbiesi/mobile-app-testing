@@ -17,13 +17,13 @@ public class LocationTests extends BaseTest {
 
     @BeforeMethod
     public void startApp() {
-        homeScreenSteps.clickMyOrdersButton();
-        ordersScreen.clickVerifyButton();
-        verifyAccountScreenSteps.insertMobileNumber("503263813");
-        verifyAccountScreenSteps.clickNextButton();
-        pinCodeVerificationScreen.insertVerificationCode("395406");
-        addReferalCodeScreen.clickCloseButton();
-        homeScreenSteps.clickOnResturantIcon();
+//        homeScreenSteps.clickMyOrdersButton();
+//        ordersScreen.clickVerifyButton();
+//        verifyAccountScreenSteps.insertMobileNumber("503263813");
+//        verifyAccountScreenSteps.clickNextButton();
+//        pinCodeVerificationScreen.insertVerificationCode("395406");
+//        addReferalCodeScreen.clickCloseButton();
+//        homeScreenSteps.clickOnResturantIcon();
 
         locationScreenSteps.deleteExistingLocations();
     }
@@ -42,8 +42,8 @@ public class LocationTests extends BaseTest {
         // When
         locationScreenSteps.searchForALandmark();
         locationScreenSteps.waitUntilSubmitButtonIsEnabled();
-        boolean isSubmitButtonEnabled = locationsScreen.isSubmitButtonEnabled();
-        driver.navigate().back();
+        boolean isSubmitButtonEnabled = locationScreenSteps.isSubmitButtonEnabled();
+        locationScreenSteps.navigateBack(1);
 
         // Then
         Assertions.assertThat(isSubmitButtonEnabled)
@@ -57,7 +57,7 @@ public class LocationTests extends BaseTest {
         locationScreenSteps.saveLocation(null);
         homeScreenSteps.viewSavedLocations();
         int savedLocationsCount = savedLocationsScreenSteps.getSavedLocations().size();
-        driver.navigate().back();
+        locationScreenSteps.navigateBack(1);
 
         // Then
         Assertions.assertThat(savedLocationsCount)
@@ -71,10 +71,9 @@ public class LocationTests extends BaseTest {
         locationScreenSteps.saveLocation("test");
         homeScreenSteps.viewSavedLocations();
         savedLocationsScreenSteps.editLocation();
-        locationsScreen.waitUntilSubmitButtonIsEnabled();
-        boolean isSubmitButtonEnabled = locationsScreen.isSubmitButtonEnabled();
-        driver.navigate().back();
-        driver.navigate().back();
+        locationScreenSteps.waitUntilSubmitButtonIsEnabled();
+        boolean isSubmitButtonEnabled = locationScreenSteps.isSubmitButtonEnabled();
+        locationScreenSteps.navigateBack(2);
 
         // Then
         Assertions.assertThat(isSubmitButtonEnabled)
@@ -88,7 +87,7 @@ public class LocationTests extends BaseTest {
         locationScreenSteps.searchForAnOutOfRangeLocation();
 
         // Then
-        Assertions.assertThat(locationsScreen.isSubmitButtonEnabled())
+        Assertions.assertThat(locationScreenSteps.isSubmitButtonEnabled())
                 .as("Submit button should be disabled for out of range locations.")
                 .isFalse();
     }
@@ -110,8 +109,8 @@ public class LocationTests extends BaseTest {
         locationScreenSteps.saveLocation(null);
         locationScreenSteps.deleteExistingLocations();
         homeScreenSteps.viewSavedLocations();
-        boolean isSearchButtonDisplayed = locationsScreen.isSearchButtonDisplayed();
-        driver.navigate().back();
+        boolean isSearchButtonDisplayed = locationScreenSteps.isSearchButtonDisplayed();
+        locationScreenSteps.navigateBack(1);
 
         // Then
         Assertions.assertThat(isSearchButtonDisplayed)

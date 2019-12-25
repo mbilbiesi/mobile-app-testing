@@ -49,7 +49,7 @@ public class SettingsTests extends BaseTest {
 
         // Then
         boolean areNotificationsEnabled = settingsScreenSteps.areNotificationsEnabled();
-        driver.navigate().back();
+        settingsScreenSteps.navigateBack(1);
         Assertions.assertThat(areNotificationsEnabled).as("Notifications should be enabled.").isTrue();
     }
 
@@ -61,7 +61,7 @@ public class SettingsTests extends BaseTest {
 
         // Then
         boolean areNotificationsEnabled = settingsScreenSteps.areNotificationsEnabled();
-        driver.navigate().back();
+        settingsScreenSteps.navigateBack(1);
         Assertions.assertThat(areNotificationsEnabled)
                 .as("Notifications should be disabled.")
                 .isFalse();

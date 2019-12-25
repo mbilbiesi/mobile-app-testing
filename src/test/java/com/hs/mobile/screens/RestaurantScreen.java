@@ -6,12 +6,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
 import java.util.List;
-
-import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
 
 @Getter
 public class RestaurantScreen extends AbstractScreen {
@@ -39,25 +34,23 @@ public class RestaurantScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/header_title")
     private WebElement restaurantTitle;
 
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/calories_icon")
+    private WebElement caloriesIcon;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/tv_calories_total")
+    private WebElement caloriesLabel;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@index='1']")
+    private WebElement firstMenuItem;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
+    private WebElement firstMenuItemName;
+
     public RestaurantScreen(AppiumDriver driver) {
         super(driver);
-    }
-
-    public void selectMenuItem(int index) {
-        touchAction.tap(tapOptions().withElement(element(menuItems.get(index)))).perform();
-    }
-
-    public void addMenuItem() {
-        touchAction.tap(tapOptions().withElement(element(addMenuItemButton))).perform();
-    }
-
-    public void goToCart() {
-        touchAction.tap(tapOptions().withElement(element(cartButton))).perform();
-    }
-
-    public void swipe(WebElement startElement, WebElement endElement) {
-        touchAction.longPress(longPressOptions().withElement(element(startElement))
-                .withDuration(Duration.ofMillis(500))).moveTo(element(endElement))
-                .release().perform();
     }
 }

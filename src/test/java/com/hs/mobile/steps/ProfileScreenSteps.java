@@ -3,94 +3,95 @@ package com.hs.mobile.steps;
 import com.hs.mobile.screens.ProfileScreen;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.assertj.core.api.SoftAssertions;
 
 import java.nio.charset.StandardCharsets;
 
 public class ProfileScreenSteps extends ProfileScreen {
     private static final String VALID_NAME = "Nabeel Sweidan";
-    private HomeScreenSteps homeScreenSteps = new HomeScreenSteps(driver);
+    private HomeScreenSteps homeScreenSteps;
 
     public ProfileScreenSteps(AppiumDriver driver) {
         super(driver);
+        homeScreenSteps = new HomeScreenSteps(driver);
     }
 
     @Step("Verify profile screen")
     public void verifyProfileScreen() {
-        SoftAssertions assertions = new SoftAssertions();
+        SoftAssertions soft = new SoftAssertions();
         String title = getTitle();
         boolean isValidTitle =
                 new String("حسابي".getBytes(), StandardCharsets.UTF_8).equals(title)
                         || "My Account".equals(title);
 
-        assertions.assertThat(isValidTitle).as(String.format("Invalid title: [%s].", title)).isTrue();
-        assertions
+        soft.assertThat(isValidTitle).as(String.format("Invalid title: [%s].", title)).isTrue();
+        soft
                 .assertThat(isNumberEnabled())
                 .as("Number field should be disabled.")
                 .isFalse();
-        assertions
+        soft
                 .assertThat(isNameActive())
                 .as("Name field should be displayed and enabled.")
                 .isTrue();
-        assertions
+        soft
                 .assertThat(isEmailActive())
                 .as("Email field should be displayed and enabled.")
                 .isTrue();
-        driver.navigate().back();
-        assertions.assertAll();
+        navigateBack(1);
+        soft.assertAll();
     }
 
     @Step("Verify profile updates")
     public void verifyProfileUpdates() {
-        SoftAssertions assertions = new SoftAssertions();
+        SoftAssertions soft = new SoftAssertions();
         String email = "ns1@hs.com";
 
         insertName(VALID_NAME);
         insertEmail(email);
         update();
         waitUntilProfileIsUpdated();
-        driver.navigate().back();
+        navigateBack(1);
         homeScreenSteps.clickOnMore().goToProfile();
-        assertions
+        soft
                 .assertThat(getName())
                 .as("Name was not successfully updated.")
                 .isEqualTo(VALID_NAME);
-        assertions
+        soft
                 .assertThat(getEmail())
                 .as("Name was not successfully updated.")
                 .isEqualTo(email);
-        driver.navigate().back();
-        assertions.assertAll();
+        navigateBack(1);
+        soft.assertAll();
     }
 
     @Step("Verify field boundaries")
     public void verifyFieldBoundaries() {
-        SoftAssertions assertions = new SoftAssertions();
-        String invalidName =
-                "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+        SoftAssertions soft = new SoftAssertions();
+        String invalidName = RandomStringUtils.randomAlphanumeric(50);
 
         insertName(VALID_NAME);
         insertEmail("");
-        assertions
+        soft
                 .assertThat(isUpdateButtonEnabled())
                 .as("Email is mandatory.")
                 .isFalse();
         insertName("");
         insertEmail("ns2@hs.com");
-        assertions
+        soft
                 .assertThat(isUpdateButtonEnabled())
                 .as("Name is not mandatory.")
                 .isTrue();
         insertName(invalidName);
         update();
         waitUntilProfileIsUpdated();
-        driver.navigate().back();
+        navigateBack(1);
         homeScreenSteps.clickOnMore().goToProfile();
-        assertions
+        soft
                 .assertThat(getName())
                 .as("Name should not exceed 50 characters.")
                 .isNotEqualTo(invalidName);
-        driver.navigate().back();
-        assertions.assertAll();
+        navigateBack(1);
+        soft.assertAll();
     }
 }

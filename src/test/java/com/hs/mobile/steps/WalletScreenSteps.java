@@ -20,18 +20,17 @@ public class WalletScreenSteps extends WalletScreen {
     @Step("Verify that all headers are displayed properly")
     public void verifyHeaders() {
         List<WebElement> headers = getAllHeaders();
-        SoftAssertions assertions = new SoftAssertions();
+        SoftAssertions soft = new SoftAssertions();
 
         for (WebElement header : headers) {
-            assertions
+            soft
                     .assertThat(isHeaderActive(header))
                     .as(String.format("%s header should be properly displayed.", getHeaderText(header)))
                     .isTrue();
         }
 
-        driver.navigate().back();
-        driver.navigate().back();
-        assertions.assertAll();
+        navigateBack(2);
+        soft.assertAll();
     }
 
     private List<WebElement> getAllHeaders() {
