@@ -110,7 +110,7 @@ public class RestaurantScreenSteps extends RestaurantScreen {
         soft.assertAll();
     }
 
-    public void swipe(WebElement startElement, WebElement endElement) {
+    private void swipe(WebElement startElement, WebElement endElement) {
         touchAction.longPress(longPressOptions().withElement(element(startElement))
                 .withDuration(Duration.ofMillis(500))).moveTo(element(endElement))
                 .release().perform();

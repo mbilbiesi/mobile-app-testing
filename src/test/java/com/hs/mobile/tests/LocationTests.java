@@ -17,13 +17,13 @@ public class LocationTests extends BaseTest {
 
     @BeforeMethod
     public void startApp() {
-//        homeScreenSteps.clickMyOrdersButton();
-//        ordersScreen.clickVerifyButton();
-//        verifyAccountScreenSteps.insertMobileNumber("503263813");
-//        verifyAccountScreenSteps.clickNextButton();
-//        pinCodeVerificationScreen.insertVerificationCode("395406");
-//        addReferalCodeScreen.clickCloseButton();
-//        homeScreenSteps.clickOnResturantIcon();
+        homeScreenSteps.clickMyOrdersButton();
+        ordersScreen.clickVerifyButton();
+        verifyAccountScreenSteps.insertMobileNumber("503263813");
+        verifyAccountScreenSteps.clickNextButton();
+        pinCodeVerificationScreen.insertVerificationCode("395406");
+        addReferalCodeScreen.clickCloseButton();
+        homeScreenSteps.clickOnResturantIcon();
 
         locationScreenSteps.deleteExistingLocations();
     }

@@ -5,8 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Optional;
 
 public enum Language {
-    ARABIC("ar","العربية"),
-    ENGLISH("en","English");
+    ARABIC("ar", "العربية"),
+    ENGLISH("en", "English");
 
     private String value;
     private String label;

@@ -33,7 +33,7 @@ public class SavedLocationsScreenSteps extends SavedLocationsScreen {
         tap(getEdit());
     }
 
-    public void waitUntilNewLocationButtonDisplays() {
+    void waitUntilNewLocationButtonDisplays() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOf(getNewLocation()));
     }

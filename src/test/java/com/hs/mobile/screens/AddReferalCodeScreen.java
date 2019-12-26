@@ -11,10 +11,6 @@ import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class AddReferalCodeScreen extends AbstractScreen {
-    public AddReferalCodeScreen(AppiumDriver driver) {
-        super(driver);
-    }
-
     @iOSXCUITFindBy(className = "")
     @AndroidFindBy(className = "android.widget.ImageButton")
     private MobileElement btnClose;
@@ -34,6 +30,10 @@ public class AddReferalCodeScreen extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_verify")
     private MobileElement btnVerifyReferralCode;
+
+    public AddReferalCodeScreen(AppiumDriver driver) {
+        super(driver);
+    }
 
     public boolean isBtnCloseDisplayed() {
         return btnClose.isDisplayed();

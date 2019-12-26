@@ -20,7 +20,6 @@ import com.hs.mobile.steps.WalletScreenSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
@@ -33,13 +32,14 @@ import java.net.URL;
 
 public class BaseTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
     protected static final String ANDROID_FILE_PATH =
             Resources.getResource("apps/hs-app.apk").getPath();
+    private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
     private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
     protected HomeScreenSteps homeScreenSteps;
     protected LocationsScreen locationsScreen;
     LocationScreenSteps locationScreenSteps;
+    protected AppiumDriver driver;
     RestaurantListScreenSteps restaurantsListScreen;
     RestaurantScreen restaurantScreen;
     SavedLocationsScreenSteps savedLocationsScreenSteps;
@@ -54,22 +54,19 @@ public class BaseTest {
     PaymentOptionsScreen paymentOptionsScreen;
     WalletScreenSteps walletScreenSteps;
 
-    protected AppiumDriver driver;
-
     @BeforeClass
     @Parameters({"platform", "udid", "systemPort"})
     void startAppiumServer(String platform, String udid, String systemPort) {
         String[] platformInfo = platform.split(" ");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "DeviceName");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel2Emulator");
         capabilities.setCapability(MobileCapabilityType.UDID, udid);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformInfo[0]);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformInfo[1]);
         capabilities.setCapability(MobileCapabilityType.APP, ANDROID_FILE_PATH);
         capabilities.setCapability("autoGrantPermissions", true);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
 
         try {
             driver = new AndroidDriver<MobileElement>(new URL(APPIUM_URL), capabilities);

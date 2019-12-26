@@ -2,6 +2,7 @@ package com.hs.mobile.screens;
 
 import com.hs.mobile.core.annotation.AssertElementVisibility;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
@@ -50,7 +51,7 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/campaign_banner")
     @AssertElementVisibility
-    private List<WebElement> campainBanners;
+    private List<MobileElement> campainBanners;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_component")
@@ -128,15 +129,23 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
     private List<WebElement> recommendedBadge;
 
     @iOSXCUITFindBy(xpath = "")
-    @AndroidFindBy(
-            xpath =
-                    "//*[@id='com.hungerstation.android.web.debug:id/value'"
-                            + " and not(@text='يوصى به' or @text='recommended')]")
+    @AndroidFindBy(xpath = "//*[@id='com.hungerstation.android.web.debug:id/value'" +
+            " and not(@text='يوصى به' or @text='recommended')]")
     private WebElement branchStatusBadge;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon_end")
     private WebElement btnClearSearchResult;
+
+    @iOSXCUITFindBy(xpath = "")
+    @AndroidFindBy(xpath = "//*[@text='اعلان' or @text='Promoted']")
+    private List<WebElement> promotedBadge;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/layout_campaign_tool_bar")
+    private WebElement campaignMainImage;
+
+    private String promotedBadgeLocator = "//*[@text='اعلان' or @text='Promoted']";
 
     public RestaurantsListScreen(AppiumDriver driver) {
         super(driver);

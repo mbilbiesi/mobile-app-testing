@@ -25,7 +25,7 @@ public class MenusTests extends BaseTest {
         restaurantScreenSteps.verifyThatMenuGroupsDisplayProperly(menuGroups);
     }
 
-    @Test(description = "Verify that calories display properly")
+    @Test(description = "Verify that calories display properly for a menu item")
     public void navigateToRestaurantScreen_verifyCaloriesForAMenuItem() {
         //When
         restaurantScreenSteps.goToRestaurantScreen("Porygon - Soso");

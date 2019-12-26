@@ -17,6 +17,10 @@ public class InvoicesScreenSteps extends InvoicesScreen {
         super(driver);
     }
 
+    public String getTitle() {
+        return getElementAttributeValue(getLblTitle(), TEXT);
+    }
+
     @Step("Verify that basic invoices screen elements are displayed correctly")
     public void verifyInvoicesScreen() {
         SoftAssertions soft = new SoftAssertions();
@@ -83,20 +87,22 @@ public class InvoicesScreenSteps extends InvoicesScreen {
         return getElementAttributeValue(getLblTitle(), TEXT);
     }
 
-    private Boolean isBackButtonActive() {
+    public Boolean isBackButtonActive() {
         return isElementActive(getLblTitle());
     }
 
-    private Boolean areThereInvoices() {
+    public Boolean areThereInvoices() {
         return CollectionUtils.isNotEmpty(getLstInvoices());
     }
 
-    private String getMessage() {
+    public String getMessage() {
         return getElementAttributeValue(getLblMessage(), TEXT);
     }
 
-    private Optional<InvoiceScreenSteps> viewInvoice(int index) {
-        if (CollectionUtils.isNotEmpty(getLstInvoices()) && index >= 0 && index < getLstInvoices().size()) {
+    public Optional<InvoiceScreenSteps> viewInvoice(int index) {
+        if (CollectionUtils.isNotEmpty(getLstInvoices())
+                && index >= 0
+                && index < getLstInvoices().size()) {
             tap(getLstInvoices().get(index));
             return Optional.of(new InvoiceScreenSteps(driver));
         }

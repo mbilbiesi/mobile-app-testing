@@ -11,11 +11,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 
 public abstract class AppiumServer {
-    protected static final Logger LOG = LoggerFactory.getLogger(AppiumServer.class);
-
-    private static final String LOCAL_IP_ADDRESS = "127.0.0.1";
     public static final int APPIUM_PORT = 4723; // todo: generate random available port
-
+    protected static final Logger LOG = LoggerFactory.getLogger(AppiumServer.class);
+    private static final String LOCAL_IP_ADDRESS = "127.0.0.1";
     private static AppiumDriverLocalService service;
     private static AppiumServiceBuilder builder;
     private static DesiredCapabilities capabilities;
