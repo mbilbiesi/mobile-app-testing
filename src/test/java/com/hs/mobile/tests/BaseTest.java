@@ -60,7 +60,7 @@ public class BaseTest {
         String[] platformInfo = platform.split(" ");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel2Emulator");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "DeviceName");
         capabilities.setCapability(MobileCapabilityType.UDID, udid);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformInfo[0]);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformInfo[1]);
