@@ -50,6 +50,14 @@ public class RestaurantScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
     private WebElement firstMenuItemName;
 
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_value")
+    private WebElement deliveryAmount;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/primary_label")
+    private WebElement viewCart;
+
     public RestaurantScreen(AppiumDriver driver) {
         super(driver);
     }
