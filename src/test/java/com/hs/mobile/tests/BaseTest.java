@@ -2,17 +2,26 @@ package com.hs.mobile.tests;
 
 import com.google.common.io.Resources;
 import com.hs.mobile.screens.AddReferalCodeScreen;
+import com.hs.mobile.screens.CreateTicketScreen;
+import com.hs.mobile.screens.HelpScreen;
 import com.hs.mobile.screens.LocationsScreen;
-import com.hs.mobile.screens.OrdersScreen;
+import com.hs.mobile.screens.MyOrdersScreen;
+import com.hs.mobile.screens.OrderScreen;
 import com.hs.mobile.screens.PaymentOptionsScreen;
 import com.hs.mobile.screens.PinCodeVerificationScreen;
 import com.hs.mobile.screens.ProfileScreen;
 import com.hs.mobile.screens.RestaurantScreen;
+import com.hs.mobile.screens.TicketScreen;
+import com.hs.mobile.steps.CreateTicketSteps;
+import com.hs.mobile.steps.HelpSteps;
 import com.hs.mobile.steps.HomeScreenSteps;
 import com.hs.mobile.steps.InvoicesScreenSteps;
+import com.hs.mobile.steps.MyOrdersSteps;
+import com.hs.mobile.steps.OrderSteps;
 import com.hs.mobile.steps.RestaurantListScreenSteps;
 import com.hs.mobile.steps.SavedLocationsScreenSteps;
 import com.hs.mobile.steps.SettingsScreenSteps;
+import com.hs.mobile.steps.TicketSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
 import com.hs.mobile.steps.WalletScreenSteps;
 import io.appium.java_client.AppiumDriver;
@@ -41,7 +50,7 @@ public class BaseTest {
     RestaurantListScreenSteps restaurantsListScreen;
     RestaurantScreen restaurantScreen;
     SavedLocationsScreenSteps savedLocationsScreenSteps;
-    OrdersScreen ordersScreen;
+    MyOrdersScreen myOrdersScreen;
     VerifyAccountScreenSteps verifyAccountScreenSteps;
     PinCodeVerificationScreen pinCodeVerificationScreen;
     AddReferalCodeScreen addReferalCodeScreen;
@@ -50,6 +59,16 @@ public class BaseTest {
     SettingsScreenSteps settingsScreenSteps;
     PaymentOptionsScreen paymentOptionsScreen;
     WalletScreenSteps walletScreenSteps;
+    MyOrdersSteps myOrdersSteps;
+    OrderScreen orderScreen;
+    OrderSteps orderSteps;
+    HelpScreen helpScreen;
+    HelpSteps helpSteps;
+    TicketScreen ticketScreen;
+    TicketSteps ticketSteps;
+    CreateTicketScreen createTicketScreen;
+    CreateTicketSteps createTicketSteps;
+
 
     @BeforeClass
     @Parameters({"platform", "udid", "systemPort"})
@@ -76,7 +95,7 @@ public class BaseTest {
         locationsScreen = new LocationsScreen(driver);
         restaurantsListScreen = new RestaurantListScreenSteps(driver);
         restaurantScreen = new RestaurantScreen(driver);
-        ordersScreen = new OrdersScreen(driver);
+        myOrdersScreen = new MyOrdersScreen(driver);
         verifyAccountScreenSteps = new VerifyAccountScreenSteps(driver);
         pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
         addReferalCodeScreen = new AddReferalCodeScreen(driver);
@@ -86,6 +105,15 @@ public class BaseTest {
         settingsScreenSteps = new SettingsScreenSteps(driver);
         paymentOptionsScreen = new PaymentOptionsScreen(driver);
         walletScreenSteps = new WalletScreenSteps(driver);
+        myOrdersSteps = new MyOrdersSteps(driver);
+        orderScreen = new OrderScreen(driver);
+        orderSteps = new OrderSteps(driver);
+        helpScreen = new HelpScreen(driver);
+        helpSteps = new HelpSteps(driver);
+        ticketScreen = new TicketScreen(driver);
+        ticketSteps = new TicketSteps(driver);
+        createTicketScreen = new CreateTicketScreen(driver);
+        createTicketSteps = new CreateTicketSteps(driver);
     }
 
     @AfterClass
