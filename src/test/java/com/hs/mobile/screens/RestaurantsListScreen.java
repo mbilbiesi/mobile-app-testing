@@ -129,8 +129,10 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
     private List<WebElement> recommendedBadge;
 
     @iOSXCUITFindBy(xpath = "")
-    @AndroidFindBy(xpath = "//*[@id='com.hungerstation.android.web.debug:id/value'" +
-            " and not(@text='يوصى به' or @text='recommended')]")
+    @AndroidFindBy(
+            xpath =
+                    "//*[@id='com.hungerstation.android.web.debug:id/value'"
+                            + " and not(@text='يوصى به' or @text='recommended')]")
     private WebElement branchStatusBadge;
 
     @iOSXCUITFindBy(id = "")

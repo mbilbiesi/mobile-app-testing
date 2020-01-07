@@ -19,8 +19,7 @@ public class CreateTicketSteps extends CreateTicketScreen {
 
         waitUntilCreateTicketScreenLoaded();
 
-        soft.assertThat(getBtnSend().size() > 0)
-                .as("'Send' button doesn't exist").isTrue();
+        soft.assertThat(getBtnSend().size() > 0).as("'Send' button doesn't exist").isTrue();
         verifyScreenElements();
         soft.assertAll();
     }
@@ -38,11 +37,14 @@ public class CreateTicketSteps extends CreateTicketScreen {
                 .as("Ticket has been created even though no description was entered")
                 .isTrue();
         soft.assertThat(getToastMessage().size() > 0)
-                .as("No error message is displayed after trying to " +
-                        "create a ticket without a description").isTrue();
-        soft.assertThat(getToastMessage().get(0).getText().
-                equalsIgnoreCase("['اكتب لنا تفاصيل ملاحظتك']"))
-                .as("Description error message isn't correct").isTrue();
+                .as(
+                        "No error message is displayed after trying to "
+                                + "create a ticket without a description")
+                .isTrue();
+        soft.assertThat(
+                getToastMessage().get(0).getText().equalsIgnoreCase("['اكتب لنا تفاصيل ملاحظتك']"))
+                .as("Description error message isn't correct")
+                .isTrue();
         soft.assertAll();
     }
 

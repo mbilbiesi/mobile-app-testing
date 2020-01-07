@@ -20,17 +20,21 @@ public class TicketSteps extends TicketScreen {
         waitUntilTicketScreenLoaded();
         if (!ticketCreated) {
             soft.assertThat(getBtnCreateTicket().size() > 0)
-                    .as("'Create Ticket' button doesn't exist").isTrue();
+                    .as("'Create Ticket' button doesn't exist")
+                    .isTrue();
             verifyScreenElements();
             soft.assertAll();
         } else {
             try {
                 soft.assertThat(getTicketDescription().isDisplayed())
-                        .as("No description is showing up for the ticket").isTrue();
-                soft.assertThat(getTicketDescription().getText()
-                        .equalsIgnoreCase("لديك تذكرة مفتوحة حاليّا متعلقة بهذا الطلب!"))
-                        .as("description isn't correct in case user has already " +
-                                "created a ticket").isTrue();
+                        .as("No description is showing up for the ticket")
+                        .isTrue();
+                soft.assertThat(
+                        getTicketDescription()
+                                .getText()
+                                .equalsIgnoreCase("لديك تذكرة مفتوحة حاليّا متعلقة بهذا الطلب!"))
+                        .as("description isn't correct in case user has already " + "created a ticket")
+                        .isTrue();
                 soft.assertAll();
             } catch (TestExecutionException e) {
                 e.printStackTrace();

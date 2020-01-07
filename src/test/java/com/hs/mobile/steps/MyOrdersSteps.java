@@ -24,7 +24,7 @@ public class MyOrdersSteps extends MyOrdersScreen {
         if (orderStatus.equalsIgnoreCase("delivered")) {
             orders = getDeliveredOrders();
         } else {
-            //ToDo: add code for different order statuses
+            // ToDo: add code for different order statuses
             orders = getEleOrderTitles();
         }
 
@@ -48,8 +48,8 @@ public class MyOrdersSteps extends MyOrdersScreen {
         }
 
         if (deliveredOrders.size() == 0) {
-            //There are no delivered orders
-            //ToDo: Implement a logging mechanism to inform when there are no delivered orders
+            // There are no delivered orders
+            // ToDo: Implement a logging mechanism to inform when there are no delivered orders
             deliveredOrders = getEleOrderTitles();
         }
 

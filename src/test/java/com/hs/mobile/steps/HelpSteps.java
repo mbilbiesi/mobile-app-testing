@@ -38,11 +38,12 @@ public class HelpSteps extends HelpScreen {
         List<String> actualTicketTypes = getActualTicketCategories();
 
         assertThat(expectedTicketTypes.equals(actualTicketTypes))
-                .as("Ticket types are not displayed correctly for this order").isTrue();
+                .as("Ticket types are not displayed correctly for this order")
+                .isTrue();
     }
 
     public List<String> getExpectedTicketCategories(String orderStatus) {
-        //ToDo change this method to prepare the expected ticket types
+        // ToDo change this method to prepare the expected ticket types
         // based on the different business logic for tickets
         List<String> expectedTickets;
 
@@ -92,7 +93,8 @@ public class HelpSteps extends HelpScreen {
             expectedTickets = getExpectedTicketsPerCategory(category);
             actualTickets = getActualTicketsPerCategory(getTicket());
             soft.assertThat(getTicket().size() > 0)
-                    .as("No tickets exist for the category: " + category).isTrue();
+                    .as("No tickets exist for the category: " + category)
+                    .isTrue();
             soft.assertThat(expectedTickets.equals(actualTickets))
                     .as("Tickets related to the '" + category + "' category are not correct")
                     .isTrue();
@@ -110,7 +112,7 @@ public class HelpSteps extends HelpScreen {
             case "":
                 expectedCategories = Arrays.asList("ملاحظة على موظف المطعم");
                 break;
-            //ToDo: To add more data cases regarding the rest of ticket types.
+            // ToDo: To add more data cases regarding the rest of ticket types.
         }
 
         return expectedCategories;
