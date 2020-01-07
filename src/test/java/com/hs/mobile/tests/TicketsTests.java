@@ -5,10 +5,13 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 @Epic("Smoke Tests")
 @Feature("Tickets Tests")
@@ -39,7 +42,7 @@ public class TicketsTests extends BaseTest {
     @Test(description = "Verify that all ticket categories related to an order are displayed")
     public void navigateToHelp_verifyTicketCategoriesExistForDeliveredOrder() {
         orderStatus = "delivered";
-        myOrdersSteps.clickOrder(orderStatus);
+        myOrdersSteps.navigateToOrder(orderStatus);
         orderSteps.clickHelp();
         helpSteps.verifyHelpElementsDisplayed();
         helpSteps.verifyThatTicketCategoriesAreDisplayed(orderStatus);
@@ -51,7 +54,7 @@ public class TicketsTests extends BaseTest {
     @Test(description = "Verify that ticket types are displayed correctly for all ticket categories")
     public void navigateToHelp_verifyTicketTypesExistForEachCategory() {
         orderStatus = "delivered";
-        myOrdersSteps.clickOrder(orderStatus);
+        myOrdersSteps.navigateToOrder(orderStatus);
         orderSteps.clickHelp();
         helpSteps.verifyEachTicketCategoryContainCorrectTicketType();
 
@@ -62,7 +65,7 @@ public class TicketsTests extends BaseTest {
     @Test(description = "Navigate to a ticket and verify that ticket screen displays correctly")
     public void navigateToTicket_verifyTicketScreenElements() {
         orderStatus = "delivered";
-        myOrdersSteps.clickOrder(orderStatus);
+        myOrdersSteps.navigateToOrder(orderStatus);
         orderSteps.clickHelp();
         helpSteps.navigateToTicket(false);
         ticketSteps.verifyTicketScreenLayout(hasTicketBeenCreated);
@@ -78,7 +81,7 @@ public class TicketsTests extends BaseTest {
 //                        "customer won't be able to navigate to 'Create Ticket' screen").isTrue();
         //ToDo: If a ticket is already created, find another order or create a new order
         orderStatus = "delivered";
-        myOrdersSteps.clickOrder(orderStatus);
+        myOrdersSteps.navigateToOrder(orderStatus);
         orderSteps.clickHelp();
         helpSteps.navigateToTicket(false);
         ticketSteps.clickCreateTicketButton();
@@ -88,16 +91,15 @@ public class TicketsTests extends BaseTest {
     }
 
     @Issue("HSAP-238")
-    @Test(description = "Create a ticket with no description")
+    @Test(enabled = false, description = "Create a ticket with no description")
     public void createTicketWithoutDescription_TicketShouldntBeCreated() {
-//        Assumptions.assumeThat(hasTicketBeenCreated)
-//                .as("A ticket has been already created, therefore " +
-//                        "customer won't be able to navigate to create a ticket").isTrue();
+        List<WebElement> errorMessage;
+//        Test case will be disabled untill we find an appropriate way to identify toast messages
         //ToDo: If a ticket is already created, find another order or create a new order
         orderStatus = "delivered";
 
         //When
-        myOrdersSteps.clickOrder(orderStatus);
+        myOrdersSteps.navigateToOrder(orderStatus);
         orderSteps.clickHelp();
         helpSteps.navigateToTicket(true);
         ticketSteps.clickCreateTicketButton();
@@ -114,10 +116,9 @@ public class TicketsTests extends BaseTest {
 //                .as("A ticket has been already created, therefore " +
 //                        "customer won't be able to navigate to create a ticket").isTrue();
         //ToDo: If a ticket is already created, find another order or create a new order
-        orderStatus = "delivered";
 
         //When
-        myOrdersSteps.clickOrder(orderStatus);
+        myOrdersSteps.navigateToOrder("in progress");
         orderSteps.clickHelp();
         helpSteps.navigateToTicket(false);
         ticketSteps.clickCreateTicketButton();

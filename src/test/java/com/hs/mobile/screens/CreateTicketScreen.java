@@ -32,8 +32,16 @@ public class CreateTicketScreen extends AbstractScreen {
     private List<WebElement> btnSend;
 
     @iOSXCUITFindBy(className = "")
-    @AndroidFindBy(className = "android.widget.Toast")
+    @AndroidFindBy(className = "android.widget.Toast[1]")
     private List<WebElement> toastMessage;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/snackbar_text")
+    private List<WebElement> supportText;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/snackbar_action")
+    private List<WebElement> supportButton;
 
     public CreateTicketScreen(AppiumDriver driver) {
         super(driver);

@@ -105,9 +105,9 @@ public class HelpSteps extends HelpScreen {
         category = category.toLowerCase();
         switch (category) {
             case "الدفع":
-                expectedCategories = Arrays.asList("الفاتورة في التطبيق غير مطابقه لفاتورة المطعم");
+                expectedCategories = Arrays.asList("الفاتورة في التطبيق غير مطابقة لفاتورة المطعم");
                 break;
-            case "":
+            case "الموظف":
                 expectedCategories = Arrays.asList("ملاحظة على موظف المطعم");
                 break;
             //ToDo: To add more data cases regarding the rest of ticket types.

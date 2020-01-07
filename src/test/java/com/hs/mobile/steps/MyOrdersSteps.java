@@ -17,17 +17,33 @@ public class MyOrdersSteps extends MyOrdersScreen {
         super(driver);
     }
 
-    @Step("Click on order")
-    public void clickOrder(String orderStatus) {
+    @Step("Select an order, and click it")
+    public void navigateToOrder(String orderStatus) {
         List<MobileElement> orders;
 
-        if (orderStatus.equalsIgnoreCase("delivered")) {
-            orders = getDeliveredOrders();
-        } else {
-            //ToDo: add code for different order statuses
-            orders = getEleOrderTitles();
+        orders = fetchOrder(orderStatus);
+        clickOrder(orders);
+    }
+
+    private List<MobileElement> fetchOrder(String orderStatus) {
+        List<MobileElement> orders;
+
+        switch (orderStatus) {
+            case "delivered":
+                orders = getDeliveredOrders();
+                break;
+            case "in progress":
+                orders = getOpenOrders();
+                break;
+            //ToDo: add all remaining order statuses.. cancelled, etc
+            default:
+                orders = getEleOrderTitles();
         }
 
+        return orders;
+    }
+
+    private void clickOrder(List<MobileElement> orders) {
         try {
             tap(orders.get(0));
         } catch (TestExecutionException e) {
@@ -35,7 +51,7 @@ public class MyOrdersSteps extends MyOrdersScreen {
         }
     }
 
-    public List<MobileElement> getDeliveredOrders() {
+    private List<MobileElement> getDeliveredOrders() {
         int ordersCount = getOrdersCount();
         String orderStatus;
         List<MobileElement> deliveredOrders = new ArrayList<>();
@@ -56,7 +72,19 @@ public class MyOrdersSteps extends MyOrdersScreen {
         return deliveredOrders;
     }
 
-    public int getOrdersCount() {
+    private List<MobileElement> getOpenOrders() {
+        List<MobileElement> openOrders;
+
+        openOrders = getOpenOrderTitle();
+
+        if (openOrders.size() == 0) {
+            openOrders = getEleOrders();
+        }
+
+        return openOrders;
+    }
+
+    private int getOrdersCount() {
         return getEleOrderTitles().size();
     }
 

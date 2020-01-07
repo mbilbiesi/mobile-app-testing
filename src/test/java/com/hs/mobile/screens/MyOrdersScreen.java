@@ -49,6 +49,22 @@ public class MyOrdersScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/restaurants_item")
     private MobileElement btnRestaurants;
 
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rest_title")
+    private List<MobileElement> openOrderTitle;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/order_id_status")
+    private List<MobileElement> openOrderStatus;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/order_trackable_status")
+    private List<MobileElement> openOrderTrackingStatus;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rest_img_logo")
+    private List<MobileElement> openOrderRestaurantLogo;
+
     public MyOrdersScreen(AppiumDriver driver) {
         super(driver);
     }
