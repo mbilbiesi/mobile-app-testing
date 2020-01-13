@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+
 public class MyOrdersSteps extends MyOrdersScreen {
 
     public MyOrdersSteps(AppiumDriver driver) {
@@ -47,7 +50,7 @@ public class MyOrdersSteps extends MyOrdersScreen {
         try {
             tap(orders.get(0));
         } catch (TestExecutionException e) {
-            e.printStackTrace();
+            throw new TestExecutionException("Unable to locate the order which is gonna be clicked " + e);
         }
     }
 
@@ -91,5 +94,15 @@ public class MyOrdersSteps extends MyOrdersScreen {
     public void waitUntilMyOrdersScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfAllElements(getEleOrders().get(0)));
+    }
+
+    @Step("Click the 'Verify' button")
+    public void clickVerifyButton() {
+        touchAction.tap(tapOptions().withElement(element(getVerifyButton()))).perform();
+    }
+
+    @Step("Navigate back to Restaurants")
+    public void navigateToRestaurants() {
+        touchAction.tap(tapOptions().withElement(element(getBtnRestaurants()))).perform();
     }
 }

@@ -37,7 +37,7 @@ public class TicketSteps extends TicketScreen {
                         .isTrue();
                 soft.assertAll();
             } catch (TestExecutionException e) {
-                e.printStackTrace();
+                throw new TestExecutionException("Ticket description text box isn't found " + e);
             }
         }
     }

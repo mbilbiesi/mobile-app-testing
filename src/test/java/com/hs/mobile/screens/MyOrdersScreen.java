@@ -10,8 +10,6 @@ import org.assertj.core.api.SoftAssertions;
 
 import java.util.List;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Getter
@@ -118,15 +116,5 @@ public class MyOrdersScreen extends AbstractScreen {
         soft.assertThat(isEleOrderDateDisplayed()).as("Orders item is not displayed.").isTrue();
         soft.assertThat(isEleOrderDateDisplayed()).as("Orders dates are not displayed.").isTrue();
         soft.assertAll();
-    }
-
-    @Step("Click the 'Verify' button")
-    public void clickVerifyButton() {
-        touchAction.tap(tapOptions().withElement(element(getVerifyButton()))).perform();
-    }
-
-    @Step("Navigate back to Restaurants")
-    public void navigateToRestaurants() {
-        touchAction.tap(tapOptions().withElement(element(getBtnRestaurants()))).perform();
     }
 }

@@ -16,7 +16,7 @@ public class OrderSteps extends OrderScreen {
         try {
             tap(getHelpButton());
         } catch (TestExecutionException e) {
-            e.printStackTrace();
+            throw new TestExecutionException("Unable to locate 'Help' button " + e);
         }
     }
 

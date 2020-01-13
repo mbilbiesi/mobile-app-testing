@@ -21,7 +21,7 @@ public class HelpSteps extends HelpScreen {
         super(driver);
     }
 
-    public void waitUntilHelpScreenLoaded() {
+    private void waitUntilHelpScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfAllElements(getTicketsList()));
     }
@@ -42,7 +42,7 @@ public class HelpSteps extends HelpScreen {
                 .isTrue();
     }
 
-    public List<String> getExpectedTicketCategories(String orderStatus) {
+    private List<String> getExpectedTicketCategories(String orderStatus) {
         // ToDo change this method to prepare the expected ticket types
         // based on the different business logic for tickets
         List<String> expectedTickets;
@@ -64,7 +64,7 @@ public class HelpSteps extends HelpScreen {
         return expectedTickets;
     }
 
-    public List<String> getActualTicketCategories() {
+    private List<String> getActualTicketCategories() {
         List<String> actualTickets = new ArrayList<>();
         int ticketsCount = getTicketCategory().size();
 
@@ -77,10 +77,6 @@ public class HelpSteps extends HelpScreen {
 
     @Step("Verify that each tickets category contains the right ticket types")
     public void verifyEachTicketCategoryContainCorrectTicketType() {
-        verifyTicketTypesAreDisplayedCorrectly();
-    }
-
-    public void verifyTicketTypesAreDisplayedCorrectly() {
         SoftAssertions soft = new SoftAssertions();
         int ticketCategoriesCount = getTicketCategory().size();
         String category;
@@ -102,15 +98,21 @@ public class HelpSteps extends HelpScreen {
         soft.assertAll();
     }
 
-    public List<String> getExpectedTicketsPerCategory(String category) {
+    private List<String> getExpectedTicketsPerCategory(String category) {
         List<String> expectedCategories = new ArrayList<>();
         category = category.toLowerCase();
         switch (category) {
             case "الدفع":
                 expectedCategories = Arrays.asList("الفاتورة في التطبيق غير مطابقة لفاتورة المطعم");
                 break;
+            case "The Payment":
+                expectedCategories = Arrays.asList("I've received a different bill amount than the app's");
+                break;
             case "الموظف":
                 expectedCategories = Arrays.asList("ملاحظة على موظف المطعم");
+                break;
+            case "The Staff":
+                expectedCategories = Arrays.asList("I have a comment on the restaurant's staff");
                 break;
             // ToDo: To add more data cases regarding the rest of ticket types.
         }
@@ -118,7 +120,7 @@ public class HelpSteps extends HelpScreen {
         return expectedCategories;
     }
 
-    public List<String> getActualTicketsPerCategory(List<WebElement> ticketType) {
+    private List<String> getActualTicketsPerCategory(List<WebElement> ticketType) {
         int ticketsCount = ticketType.size();
         List<String> actualTickets = new ArrayList<>();
         for (int i = 0; i < ticketsCount; i++) {
@@ -139,17 +141,17 @@ public class HelpSteps extends HelpScreen {
         }
     }
 
-    public void tapRandomCategory() {
+    private void tapRandomCategory() {
         int randomCategoryIndex = getRandomIndex(getTicketCategory());
         tap(getTicketCategory().get(randomCategoryIndex));
     }
 
-    public void tapRandomTicket() {
+    private void tapRandomTicket() {
         int randomTicketIndex = getRandomIndex(getTicket());
         tap(getTicket().get(randomTicketIndex));
     }
 
-    public int getRandomIndex(List<WebElement> tickets) {
+    private int getRandomIndex(List<WebElement> tickets) {
         return RandomUtils.nextInt(0, tickets.size());
     }
 

@@ -23,7 +23,7 @@ public class LocationTests extends BaseTest {
   @BeforeMethod
   public void startApp() {
     homeScreenSteps.clickMyOrdersButton();
-      myOrdersScreen.clickVerifyButton();
+      myOrdersSteps.clickVerifyButton();
     verifyAccountScreenSteps.insertMobileNumber("503263813");
     verifyAccountScreenSteps.clickNextButton();
     pinCodeVerificationScreen.insertVerificationCode("395406");

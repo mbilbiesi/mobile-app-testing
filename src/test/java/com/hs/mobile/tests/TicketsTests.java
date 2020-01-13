@@ -29,7 +29,7 @@ public class TicketsTests extends BaseTest {
         // Given
         if (!hasFirstTestExecuted) {
             homeScreenSteps.clickMyOrdersButton();
-            myOrdersScreen.clickVerifyButton();
+            myOrdersSteps.clickVerifyButton();
             verifyAccountScreenSteps.insertMobileNumber("503263813");
             verifyAccountScreenSteps.clickNextButton();
             pinCodeVerificationScreen.insertVerificationCode("395406");
@@ -78,9 +78,6 @@ public class TicketsTests extends BaseTest {
             description =
                     "Click create a ticket, and verify that the create ticket screen displays correctly")
     public void clickCreateTicket_VerifyScreenElements() {
-//        Assumptions.assumeThat(hasTicketBeenCreated)
-//                .as("A ticket has been already created, therefore " +
-//                        "customer won't be able to navigate to 'Create Ticket' screen").isTrue();
         //ToDo: If a ticket is already created, find another order or create a new order
         orderStatus = "delivered";
         myOrdersSteps.navigateToOrder(orderStatus);
@@ -95,9 +92,6 @@ public class TicketsTests extends BaseTest {
     @Issue("HSAP-238")
     @Test(enabled = false, description = "Create a ticket with no description")
     public void createTicketWithoutDescription_TicketShouldntBeCreated() {
-        //        Assumptions.assumeThat(hasTicketBeenCreated)
-        //                .as("A ticket has been already created, therefore " +
-        //                        "customer won't be able to navigate to create a ticket").isTrue();
         // ToDo: If a ticket is already created, find another order or create a new order
         List<WebElement> errorMessage;
 //        Test case will be disabled untill we find an appropriate way to identify toast messages
@@ -118,9 +112,6 @@ public class TicketsTests extends BaseTest {
     @Issue("HSAP-238")
     @Test(description = "Create a ticket and verify it's created successfully")
     public void createTicket_TicketShouldBeCreatedSuccessfully() {
-        //        Assumptions.assumeThat(hasTicketBeenCreated)
-        //                .as("A ticket has been already created, therefore " +
-        //                        "customer won't be able to navigate to create a ticket").isTrue();
         // ToDo: If a ticket is already created, find another order or create a new order
         orderStatus = "delivered";
 

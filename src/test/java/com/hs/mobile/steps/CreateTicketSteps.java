@@ -41,7 +41,7 @@ public class CreateTicketSteps extends CreateTicketScreen {
 
         SoftAssertions soft = new SoftAssertions();
 
-        soft.assertThat(getTicketDescription().isDisplayed())
+        soft.assertThat(getTxtTicketDescription().isDisplayed())
                 .as("Ticket has been created even though no description was entered")
                 .isTrue();
         soft.assertThat(errorMessage.size() > 0)
@@ -74,7 +74,7 @@ public class CreateTicketSteps extends CreateTicketScreen {
 
     public void waitUntilCreateTicketScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(getTicketTitle()));
+        wait.until(ExpectedConditions.visibilityOfAllElements(getTxtTicketTitle()));
     }
 
     public void cancelTicketCreation() {
