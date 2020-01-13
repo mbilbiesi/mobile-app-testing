@@ -69,7 +69,6 @@ public class BaseTest {
     CreateTicketScreen createTicketScreen;
     CreateTicketSteps createTicketSteps;
 
-
     @BeforeClass
     @Parameters({"platform", "udid", "systemPort"})
     void startAppiumServer(String platform, String udid, String systemPort) {

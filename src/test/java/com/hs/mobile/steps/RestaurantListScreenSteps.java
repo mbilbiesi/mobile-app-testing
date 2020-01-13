@@ -19,7 +19,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,12 +26,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
     final int MAX_CAMPAIGNS_NUMBER = 8;
+    RestaurantScreen restaurant = new RestaurantScreen(driver);
 
     public RestaurantListScreenSteps(AppiumDriver driver) {
         super(driver);
     }
-
-    RestaurantScreen restaurant = new RestaurantScreen(driver);
 
     @Step("Verify that all restaurants list screen objects are displayed correctly")
     public void verifyRestaurantsListLayout() {
@@ -52,14 +50,19 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
         SoftAssertions soft = new SoftAssertions();
         soft.assertThat(restaurantCountAfterSearch > 0)
-                .as("No restaurants match the search criteria").isTrue();
+                .as("No restaurants match the search criteria")
+                .isTrue();
 
         List<WebElement> restaurantTitles = getRestaurantTitle();
 
         for (WebElement restaurantTitle : restaurantTitles) {
             String titleText = restaurantTitle.getText();
             soft.assertThat(titleText.contains(keyword))
-                    .as("The restaurant: " + titleText + " does not match the search criteria with the keyword: " + keyword)
+                    .as(
+                            "The restaurant: "
+                                    + titleText
+                                    + " does not match the search criteria with the keyword: "
+                                    + keyword)
                     .isTrue();
         }
 
@@ -82,7 +85,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     @Step("Verify that all restaurants are returned after clearing the search criteria")
     public void verifyAllRestaurantsAreReturned(int allRestaurantsCount, int searchRestaurantCount) {
         assertThat(allRestaurantsCount == searchRestaurantCount)
-                .as("Not all restaurants are returned after clearing search criteria").isTrue();
+                .as("Not all restaurants are returned after clearing search criteria")
+                .isTrue();
     }
 
     @Step("Verify that recommended badge is showing next to a recommended restaurant")
@@ -93,7 +97,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         for (int i = 0; i < restaurantCount; i++) {
             if (isRestaurantRecommended) {
                 soft.assertThat(getRecommendedBadge().size() > 0)
-                        .as("Recommended badge is not displayed for this restaurant").isTrue();
+                        .as("Recommended badge is not displayed for this restaurant")
+                        .isTrue();
             } else {
                 soft.assertThat(getRecommendedBadge().size() > 0)
                         .as("Recommended badge is displayed even though the restaurant is not recommended")
@@ -121,9 +126,14 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         int restaurantCount = getRestaurantsCount(true);
         boolean listSorted = false;
         ArrayList<Double> restaurantDistance = getDistanceOfDisplayedRestaurants(restaurantCount);
-        listSorted = restaurantDistance.stream().sorted().collect(Collectors.toList()).equals(restaurantDistance);
-        assertThat(listSorted).as("Restaurants are not sorted according their distance " +
-                "from customer's location").isTrue();
+        listSorted =
+                restaurantDistance.stream()
+                        .sorted()
+                        .collect(Collectors.toList())
+                        .equals(restaurantDistance);
+        assertThat(listSorted)
+                .as("Restaurants are not sorted according their distance " + "from customer's location")
+                .isTrue();
     }
 
     public int getRestaurantsCount(boolean verifiableElements) {
@@ -154,11 +164,12 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     public void verifyPromotedRestaurantsDisplayOnTop() {
         List<WebElement> promotedRestaurant;
         SoftAssertions soft = new SoftAssertions();
-        promotedRestaurant = getRestaurantWidgets().get(0).findElements(By.xpath(getPromotedBadgeLocator()));
+        promotedRestaurant =
+                getRestaurantWidgets().get(0).findElements(By.xpath(getPromotedBadgeLocator()));
 
         soft.assertThat(promotedRestaurant.size() > 0 && promotedRestaurant.get(0).isDisplayed())
-                .as("Promoted restaurants" +
-                        "are not displayed at the top of restaurants list").isTrue();
+                .as("Promoted restaurants" + "are not displayed at the top of restaurants list")
+                .isTrue();
     }
 
     public int getFiltersCount() {
@@ -174,9 +185,11 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
         for (int i = 0; i < filtersCount; i++) {
             soft.assertThat(getFiltersIcons().get(i).isDisplayed())
-                    .as("Filter icon isn't displayed for filter #" + (i + 1)).isTrue();
+                    .as("Filter icon isn't displayed for filter #" + (i + 1))
+                    .isTrue();
             soft.assertThat(getFiltersNames().get(i).isDisplayed())
-                    .as("Filter name isn't displayed for filter #" + i + 1).isTrue();
+                    .as("Filter name isn't displayed for filter #" + i + 1)
+                    .isTrue();
         }
 
         soft.assertAll();
@@ -185,7 +198,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     @Step("Verify that 'All' filter is displayed")
     public void verifyAllFiterIsDisplayed() {
         assertThat(isAllFilterDisplayed(getFiltersNames().get(0)))
-                .as("'All' filter is not displayed").isTrue();
+                .as("'All' filter is not displayed")
+                .isTrue();
     }
 
     @Step("Verify that 'All' filter is selected")
@@ -226,7 +240,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         String filterTitleAfterSwipe = getFiltersNames().get(0).getText();
 
         assertThat(!filterTitleBeforeSwipe.equals(filterTitleAfterSwipe))
-                .as("Customer wasn't able to do swipe action on the filters list").isTrue();
+                .as("Customer wasn't able to do swipe action on the filters list")
+                .isTrue();
     }
 
     @Step("Verify that top banner image ration is 2:1")
@@ -239,8 +254,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         bannerHeight = topBannerSize.getHeight();
         bannerWidth = topBannerSize.getWidth();
 
-        assertThat(bannerWidth == bannerHeight * 2)
-                .as("Top banner ratio is not 2:1").isTrue();
+        assertThat(bannerWidth == bannerHeight * 2).as("Top banner ratio is not 2:1").isTrue();
     }
 
     @Step("Verify that top banner shows restaurant offers")
@@ -272,7 +286,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
         try {
             assertThat(restaurant.getRestaurantHeader().isDisplayed())
-                    .as("Top banner doesn't have restaurant offers").isTrue();
+                    .as("Top banner doesn't have restaurant offers")
+                    .isTrue();
         } catch (ElementNotVisibleException e) {
             e.printStackTrace();
         }
@@ -285,20 +300,25 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
             try {
                 SoftAssertions soft = new SoftAssertions();
                 soft.assertThat(getCampaignContainer().isDisplayed())
-                        .as("Campaigns section doesn't exist in the screen").isTrue();
+                        .as("Campaigns section doesn't exist in the screen")
+                        .isTrue();
                 soft.assertThat(getCampainBanners().size() > 0)
-                        .as("No campaigns are displayed inside the campaigns section").isTrue();
+                        .as("No campaigns are displayed inside the campaigns section")
+                        .isTrue();
                 soft.assertAll();
             } catch (TestExecutionException e) {
                 e.printStackTrace();
             }
         } else {
             assertThat(getCampainBanners().size() == 0)
-                    .as("Campaigns are displayed even though campaigns are disabled").isTrue();
+                    .as("Campaigns are displayed even though campaigns are disabled")
+                    .isTrue();
         }
     }
 
-    @Step("Verify that the max number of campaigns displyed in the campaigns carousel is " + MAX_CAMPAIGNS_NUMBER)
+    @Step(
+            "Verify that the max number of campaigns displyed in the campaigns carousel is "
+                    + MAX_CAMPAIGNS_NUMBER)
     public void verifyMaxCampaginsNumberInCarousel() {
         int campaignsCount = getCampaignsCount();
         int activeScreenCampagins = campaignsCount;
@@ -313,14 +333,21 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
             lastVisibleCampaignAfterSwipe = getCampainBanners().get(activeScreenCampagins - 1);
 
-            if (lastVisibleCampaignBeforeSwipe.getText().equals(lastVisibleCampaignAfterSwipe.getText())) {
+            if (lastVisibleCampaignBeforeSwipe
+                    .getText()
+                    .equals(lastVisibleCampaignAfterSwipe.getText())) {
                 break;
             }
         }
 
         assertThat(campaignsCount <= MAX_CAMPAIGNS_NUMBER)
-                .as("Campagins count should be " + MAX_CAMPAIGNS_NUMBER + " as a maximum " +
-                        "while actual number of campagins is: " + campaignsCount).isTrue();
+                .as(
+                        "Campagins count should be "
+                                + MAX_CAMPAIGNS_NUMBER
+                                + " as a maximum "
+                                + "while actual number of campagins is: "
+                                + campaignsCount)
+                .isTrue();
     }
 
     public int getCampaignsCount() {
@@ -338,7 +365,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     @Step("Click one of the displayed campaigns")
     public void clickCampaign(boolean campaignsEnabled) {
         Assumptions.assumeThat(campaignsEnabled)
-                .as("Campaigns are not enabled, so there's no campaign to check").isTrue();
+                .as("Campaigns are not enabled, so there's no campaign to check")
+                .isTrue();
 
         waitUntilCampaignsAreLoaded();
 
@@ -350,10 +378,11 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
     @Step("Verify that restaurants are displayed based on the selected campaign")
     public void verifyCampaignRestaurants() {
-        //ToDo: Implement an API call to verify that restaurants that display under a
+        // ToDo: Implement an API call to verify that restaurants that display under a
         // campaign actually belong to it
         assertThat(getRestaurantWidgets().size() > 0)
-                .as("No restaurants are displayed for this campaign").isTrue();
+                .as("No restaurants are displayed for this campaign")
+                .isTrue();
     }
 
     private int getRandomCampaignIndex() {
@@ -364,7 +393,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     public void verifyCampaignImageRatio(boolean campaignsEnabled) {
 
         Assumptions.assumeThat(campaignsEnabled)
-                .as("Campaigns are not enabled, so there's no campaign to check").isTrue();
+                .as("Campaigns are not enabled, so there's no campaign to check")
+                .isTrue();
 
         Dimension campaignSize;
         double campaignHeight;
@@ -375,8 +405,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         campaignHeight = campaignSize.getHeight();
         campaignWidth = campaignSize.getWidth();
 
-        assertThat(campaignWidth / campaignHeight)
-                .as("Campaign image ratio is not 2:1").isEqualTo(2);
+        assertThat(campaignWidth / campaignHeight).as("Campaign image ratio is not 2:1").isEqualTo(2);
     }
 
     public void navigateBackToRestaurantsList() {
