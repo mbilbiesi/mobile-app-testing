@@ -8,8 +8,11 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
@@ -103,6 +106,18 @@ public class MyOrdersSteps extends MyOrdersScreen {
 
     @Step("Navigate back to Restaurants")
     public void navigateToRestaurants() {
-        touchAction.tap(tapOptions().withElement(element(getBtnRestaurants()))).perform();
+        tap(getBtnRestaurants());
+    }
+
+    @Step("Verify that orders are sorted by date desc")
+    public void verifyOrdersSortedByDateDesc() {
+
+        LocalDate orderDate;
+    }
+
+    private LocalDate getOrderDate(String date, String locale) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d MMMM uuuu", new Locale(locale));
+        LocalDate orderDate = LocalDate.parse(date, formatter);
+        return orderDate;
     }
 }

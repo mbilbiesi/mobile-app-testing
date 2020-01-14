@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -65,14 +66,9 @@ public class HelpSteps extends HelpScreen {
     }
 
     private List<String> getActualTicketCategories() {
-        List<String> actualTickets = new ArrayList<>();
-        int ticketsCount = getTicketCategory().size();
-
-        for (int i = 0; i < ticketsCount; i++) {
-            actualTickets.add(getTicketCategory().get(i).getText());
-        }
-
-        return actualTickets;
+        return getTicketCategory().stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 
     @Step("Verify that each tickets category contains the right ticket types")
@@ -80,8 +76,8 @@ public class HelpSteps extends HelpScreen {
         SoftAssertions soft = new SoftAssertions();
         int ticketCategoriesCount = getTicketCategory().size();
         String category;
-        List<String> expectedTickets = new ArrayList<>();
-        List<String> actualTickets = new ArrayList<>();
+        List<String> expectedTickets;
+        List<String> actualTickets;
 
         for (int i = 0; i < ticketCategoriesCount; i++) {
             category = getTicketCategory().get(i).getText();
