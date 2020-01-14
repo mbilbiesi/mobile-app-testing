@@ -117,13 +117,7 @@ public class HelpSteps extends HelpScreen {
     }
 
     private List<String> getActualTicketsPerCategory(List<WebElement> ticketType) {
-        int ticketsCount = ticketType.size();
-        List<String> actualTickets = new ArrayList<>();
-        for (int i = 0; i < ticketsCount; i++) {
-            actualTickets.add(ticketType.get(i).getText());
-        }
-
-        return actualTickets;
+        return ticketType.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     @Step("Click on a ticket")
