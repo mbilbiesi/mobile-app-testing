@@ -8,10 +8,11 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -112,9 +113,9 @@ public class MyOrdersSteps extends MyOrdersScreen {
     }
 
     @Step("Verify that orders are sorted by date desc")
-    public void verifyOrdersSortedByDateDesc(String locale) {
-        List<LocalDate> actualOrderDates;
-        List<LocalDate> expectedOrderDates;
+    public void verifyOrdersSortedByDateDesc(String locale) throws ParseException {
+        List<Date> actualOrderDates;
+        List<Date> expectedOrderDates;
 
         actualOrderDates = getOrdersDates(locale);
         expectedOrderDates = getExpectedOrderDates(actualOrderDates);
@@ -122,27 +123,33 @@ public class MyOrdersSteps extends MyOrdersScreen {
         assertThat(actualOrderDates.equals(expectedOrderDates))
                 .as("Orders are not sorted from newest to oldest")
                 .isTrue();
-
     }
 
-    private List<LocalDate> getOrdersDates(String locale) {
+    private List<Date> getOrdersDates(String locale) throws ParseException {
         int size = getEleOrderDate().size();
-        List<LocalDate> orderDates = new ArrayList<>();
+        List<Date> orderDates = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-            orderDates.add(getDate(getEleOrderDate().get(i).getText(), locale));
+            orderDates.add(getDate(getEleOrderDate().get(i).getText()
+                    .replace(",", ""), locale));
         }
 
         return orderDates;
     }
 
-    private LocalDate getDate(String date, String locale) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d, MMMM uuuu", new Locale(locale));
-        LocalDate orderDate = LocalDate.parse(date, formatter);
-        return orderDate;
+    private Date getDate(String date, String locale) throws ParseException {
+        SimpleDateFormat formatter;
+
+        if (locale.equalsIgnoreCase("ar")) {
+            formatter = new SimpleDateFormat("MMMM d yyyy", Locale.forLanguageTag("ar-SA-nu-arab"));
+        } else {
+            formatter = new SimpleDateFormat("MMMM d yyyy");
+        }
+
+        return formatter.parse(date);
     }
 
-    private List<LocalDate> getExpectedOrderDates(List<LocalDate> orderDates) {
+    private List<Date> getExpectedOrderDates(List<Date> orderDates) {
         Collections.sort(orderDates, Collections.reverseOrder());
         return orderDates;
     }

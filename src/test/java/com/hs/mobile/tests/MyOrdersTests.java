@@ -4,6 +4,8 @@ import io.qameta.allure.Issue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.text.ParseException;
+
 public class MyOrdersTests extends BaseTest {
 
     boolean hasFirstTestExecuted = false;
@@ -25,7 +27,7 @@ public class MyOrdersTests extends BaseTest {
 
     @Issue("HSAP-229")
     @Test(description = "Verify that orders are sorted by date from newest to oldest")
-    public void navigateToOrders_OrdersShouldBeSortedByDate() {
+    public void navigateToOrders_OrdersShouldBeSortedByDate() throws ParseException {
         // Then
         myOrdersSteps.verifyOrdersSortedByDateDesc("ar");
     }
