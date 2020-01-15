@@ -15,125 +15,125 @@ public class OrderScreen extends AbstractScreen {
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/header_component")
-    private WebElement orderHeader;
+    private WebElement eleOrderHeader;
 
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/back_button")
-    private WebElement backButton;
+    private WebElement btnBack;
 
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/help_button")
-    private WebElement helpButton;
+    private WebElement btnHelp;
 
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/help_label")
-    private WebElement helpLabel;
+    private WebElement lblHelp;
 
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/logo")
-    private WebElement restaurantLogo;
+    private WebElement imgRestaurantLogo;
 
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rest_name")
-    private WebElement RestaurantTitle;
+    private WebElement lblRestaurantTitle;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon")
-    private List<WebElement> orderDetailsIcons;
+    private List<WebElement> imgOrderDetailsIcons;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/label")
-    private List<WebElement> orderDetailsDescriptions;
+    private List<WebElement> txaOrderDetailsDescriptions;
 
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/state_title")
-    private WebElement orderStatus;
+    private WebElement lblOrderStatus;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/state_background")
-    private WebElement orderStatusBackground;
+    private WebElement imgOrderStatusBackground;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/summary_component")
-    private WebElement orderSummary;
+    private WebElement txaOrderSummary;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/summary_title")
-    private WebElement summaryTitle;
+    private WebElement lblSummaryTitle;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/order_number")
-    private WebElement orderNumber;
+    private WebElement lblOrderNumber;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_items_list")
-    private WebElement orderItemsList;
+    private WebElement eleOrderItemsList;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/item_count")
-    private List<WebElement> orderItemQuantity;
+    private List<WebElement> lblOrderItemQuantity;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/item_name")
-    private List<WebElement> orderItemsNames;
+    private List<WebElement> lblOrderItemsNames;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/price")
-    private List<WebElement> orderItemsPrices;
+    private List<WebElement> lblOrderItemsPrices;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/currency")
-    private List<WebElement> orderItemsCurrency;
+    private List<WebElement> lblOrderItemsCurrency;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/item_desc")
-    private List<WebElement> orderItemsDescriptions;
+    private List<WebElement> txaOrderItemsDescriptions;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/sub_total")
-    private WebElement orderSubTotal;
+    private WebElement lblOrderSubTotal;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_fees")
-    private WebElement orderDeliveryFees;
+    private WebElement lblOrderDeliveryFees;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/discount")
-    private WebElement orderDiscount;
+    private WebElement lblOrderDiscount;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/total")
-    private WebElement orderTotal;
+    private WebElement lblOrderTotal;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/vat_message")
-    private WebElement vatMessage;
+    private WebElement lblVatMessage;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/cashback_component")
-    private WebElement cashbackComponent;
+    private WebElement eleCashback;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/title")
-    private WebElement cashbackTitle;
+    private WebElement lblCashbackTitle;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/description")
-    private WebElement cashbackDescription;
+    private WebElement txaCashbackDescription;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/cashback_value")
-    private WebElement cashbackCode;
+    private WebElement eleCashbackCode;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/copy_icon")
-    private WebElement copyCashbackCode;
+    private WebElement btnCopyCashbackCode;
 
     public OrderScreen(AppiumDriver driver) {
         super(driver);

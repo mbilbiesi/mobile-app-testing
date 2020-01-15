@@ -26,11 +26,11 @@ public class TicketSteps extends TicketScreen {
             soft.assertAll();
         } else {
             try {
-                soft.assertThat(getTicketDescription().isDisplayed())
+                soft.assertThat(getTxaTicketDescription().isDisplayed())
                         .as("No description is showing up for the ticket")
                         .isTrue();
                 soft.assertThat(
-                        getTicketDescription()
+                        getTxaTicketDescription()
                                 .getText()
                                 .equalsIgnoreCase("لديك تذكرة مفتوحة حاليّا متعلقة بهذا الطلب!"))
                         .as("description isn't correct in case user has already " + "created a ticket")
@@ -54,7 +54,7 @@ public class TicketSteps extends TicketScreen {
 
     public void waitUntilTicketScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(getTicketTitle()));
+        wait.until(ExpectedConditions.visibilityOfAllElements(getLblTicketTitle()));
     }
 
     public void navigateBackToHelp() {
