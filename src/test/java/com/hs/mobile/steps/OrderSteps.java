@@ -14,13 +14,13 @@ public class OrderSteps extends OrderScreen {
     @Step("Click on 'Help' button")
     public void clickHelp() {
         try {
-            tap(getHelpButton());
+            tap(getBtnHelp());
         } catch (TestExecutionException e) {
             throw new TestExecutionException("Unable to locate 'Help' button " + e);
         }
     }
 
     public void navigateBackToAllOrders() {
-        tap(getBackButton());
+        tap(getBtnBack());
     }
 }

@@ -24,7 +24,7 @@ public class HelpSteps extends HelpScreen {
 
     private void waitUntilHelpScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(getTicketsList()));
+        wait.until(ExpectedConditions.visibilityOfAllElements(getEleTicketsList()));
     }
 
     @Step("Verify that all 'Help' screen elements are displayed")
@@ -66,7 +66,7 @@ public class HelpSteps extends HelpScreen {
     }
 
     private List<String> getActualTicketCategories() {
-        return getTicketCategory().stream()
+        return getLblTicketCategory().stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
@@ -74,17 +74,17 @@ public class HelpSteps extends HelpScreen {
     @Step("Verify that each tickets category contains the right ticket types")
     public void verifyEachTicketCategoryContainCorrectTicketType() {
         SoftAssertions soft = new SoftAssertions();
-        int ticketCategoriesCount = getTicketCategory().size();
+        int ticketCategoriesCount = getLblTicketCategory().size();
         String category;
         List<String> expectedTickets;
         List<String> actualTickets;
 
         for (int i = 0; i < ticketCategoriesCount; i++) {
-            category = getTicketCategory().get(i).getText();
-            tap(getTicketCategory().get(i));
+            category = getLblTicketCategory().get(i).getText();
+            tap(getLblTicketCategory().get(i));
             expectedTickets = getExpectedTicketsPerCategory(category);
-            actualTickets = getActualTicketsPerCategory(getTicket());
-            soft.assertThat(getTicket().size() > 0)
+            actualTickets = getActualTicketsPerCategory(getEleTicket());
+            soft.assertThat(getEleTicket().size() > 0)
                     .as("No tickets exist for the category: " + category)
                     .isTrue();
             soft.assertThat(expectedTickets.equals(actualTickets))
@@ -126,19 +126,19 @@ public class HelpSteps extends HelpScreen {
             tapRandomCategory();
             tapRandomTicket();
         } else {
-            tap(getTicketCategory().get(1));
-            tap(getTicket().get(0));
+            tap(getLblTicketCategory().get(1));
+            tap(getEleTicket().get(0));
         }
     }
 
     private void tapRandomCategory() {
-        int randomCategoryIndex = getRandomIndex(getTicketCategory());
-        tap(getTicketCategory().get(randomCategoryIndex));
+        int randomCategoryIndex = getRandomIndex(getLblTicketCategory());
+        tap(getLblTicketCategory().get(randomCategoryIndex));
     }
 
     private void tapRandomTicket() {
-        int randomTicketIndex = getRandomIndex(getTicket());
-        tap(getTicket().get(randomTicketIndex));
+        int randomTicketIndex = getRandomIndex(getEleTicket());
+        tap(getEleTicket().get(randomTicketIndex));
     }
 
     private int getRandomIndex(List<WebElement> tickets) {

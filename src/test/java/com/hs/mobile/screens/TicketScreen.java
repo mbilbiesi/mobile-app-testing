@@ -20,12 +20,12 @@ public class TicketScreen extends AbstractScreen {
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_title")
-    private WebElement ticketTitle;
+    private WebElement lblTicketTitle;
 
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/ticket_description")
-    private WebElement ticketDescription;
+    private WebElement txaTicketDescription;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
