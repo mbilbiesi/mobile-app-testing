@@ -27,6 +27,6 @@ public class MyOrdersTests extends BaseTest {
     @Test(description = "Verify that orders are sorted by date from newest to oldest")
     public void navigateToOrders_OrdersShouldBeSortedByDate() {
         // Then
-
+        myOrdersSteps.verifyOrdersSortedByDateDesc("ar");
     }
 }

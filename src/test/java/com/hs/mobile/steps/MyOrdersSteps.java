@@ -11,11 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyOrdersSteps extends MyOrdersScreen {
 
@@ -110,14 +112,38 @@ public class MyOrdersSteps extends MyOrdersScreen {
     }
 
     @Step("Verify that orders are sorted by date desc")
-    public void verifyOrdersSortedByDateDesc() {
+    public void verifyOrdersSortedByDateDesc(String locale) {
+        List<LocalDate> actualOrderDates;
+        List<LocalDate> expectedOrderDates;
 
-        LocalDate orderDate;
+        actualOrderDates = getOrdersDates(locale);
+        expectedOrderDates = getExpectedOrderDates(actualOrderDates);
+
+        assertThat(actualOrderDates.equals(expectedOrderDates))
+                .as("Orders are not sorted from newest to oldest")
+                .isTrue();
+
     }
 
-    private LocalDate getOrderDate(String date, String locale) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d MMMM uuuu", new Locale(locale));
+    private List<LocalDate> getOrdersDates(String locale) {
+        int size = getEleOrderDate().size();
+        List<LocalDate> orderDates = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            orderDates.add(getDate(getEleOrderDate().get(i).getText(), locale));
+        }
+
+        return orderDates;
+    }
+
+    private LocalDate getDate(String date, String locale) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d, MMMM uuuu", new Locale(locale));
         LocalDate orderDate = LocalDate.parse(date, formatter);
         return orderDate;
+    }
+
+    private List<LocalDate> getExpectedOrderDates(List<LocalDate> orderDates) {
+        Collections.sort(orderDates, Collections.reverseOrder());
+        return orderDates;
     }
 }
