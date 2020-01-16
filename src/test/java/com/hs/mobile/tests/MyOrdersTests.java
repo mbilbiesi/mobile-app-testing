@@ -31,4 +31,15 @@ public class MyOrdersTests extends BaseTest {
         // Then
         myOrdersSteps.verifyOrdersSortedByDateDesc("ar");
     }
+
+    @Issue("HSAP-230")
+    @Test(description = "Verify that orders are sorted by date from newest to oldest")
+    public void navigateToOrder_OrderSummaryShouldDisplayCorrectly() {
+        // When
+        myOrdersSteps.navigateToOrder("delivered");
+        orderSteps.waitUntilOrderScreenLoaded();
+
+        // Then
+        orderSteps.verifyAllOrderElements();
+    }
 }
