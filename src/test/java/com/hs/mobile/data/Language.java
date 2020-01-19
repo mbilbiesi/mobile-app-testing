@@ -5,29 +5,35 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Optional;
 
 public enum Language {
-  ENGLISH("English"),
-  ARABIC("العربية");
+    ARABIC("ar", "العربية"),
+    ENGLISH("en", "English");
 
-  private String label;
+    private String value;
+    private String label;
 
-  Language(String label) {
-    this.label = label;
-  }
-
-  public static Optional<Language> getByLabel(String label) {
-    if (StringUtils.isBlank(label)) {
-      return Optional.empty();
+    Language(String value, String label) {
+        this.value = value;
+        this.label = label;
     }
 
-    for (Language language : Language.values()) {
-      if (language.label.equals(label)) {
-        return Optional.of(language);
-      }
+    public String getValue() {
+        return value;
     }
-    return Optional.empty();
-  }
 
-  public String getLabel() {
-    return label;
-  }
+    public String getLabel() {
+        return label;
+    }
+
+    public static Optional<Language> getByLabel(String label) {
+        if (StringUtils.isBlank(label)) {
+            return Optional.empty();
+        }
+
+        for (Language language : Language.values()) {
+            if (language.label.equals(label)) {
+                return Optional.of(language);
+            }
+        }
+        return Optional.empty();
+    }
 }

@@ -6,11 +6,13 @@ import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.OrdersScreen;
 import com.hs.mobile.screens.PaymentOptionsScreen;
 import com.hs.mobile.screens.PinCodeVerificationScreen;
-import com.hs.mobile.screens.ProfileScreen;
 import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.steps.HomeScreenSteps;
 import com.hs.mobile.steps.InvoicesScreenSteps;
+import com.hs.mobile.steps.LocationScreenSteps;
+import com.hs.mobile.steps.ProfileScreenSteps;
 import com.hs.mobile.steps.RestaurantListScreenSteps;
+import com.hs.mobile.steps.RestaurantScreenSteps;
 import com.hs.mobile.steps.SavedLocationsScreenSteps;
 import com.hs.mobile.steps.SettingsScreenSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
@@ -18,7 +20,6 @@ import com.hs.mobile.steps.WalletScreenSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
@@ -31,67 +32,70 @@ import java.net.URL;
 
 public class BaseTest {
 
-  protected static final String ANDROID_FILE_PATH =
-      Resources.getResource("apps/hs-app.apk").getPath();
-  private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
-  private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
-  protected HomeScreenSteps homeScreenSteps;
-  protected LocationsScreen locationsScreen;
-  protected AppiumDriver driver;
-  RestaurantListScreenSteps restaurantsListScreen;
-  RestaurantScreen restaurantScreen;
-  SavedLocationsScreenSteps savedLocationsScreenSteps;
-  OrdersScreen ordersScreen;
-  VerifyAccountScreenSteps verifyAccountScreenSteps;
-  PinCodeVerificationScreen pinCodeVerificationScreen;
-  AddReferalCodeScreen addReferalCodeScreen;
-  ProfileScreen profileScreen;
-  InvoicesScreenSteps invoicesScreenSteps;
-  SettingsScreenSteps settingsScreenSteps;
-  PaymentOptionsScreen paymentOptionsScreen;
-  WalletScreenSteps walletScreenSteps;
+    protected static final String ANDROID_FILE_PATH =
+            Resources.getResource("apps/hs-app.apk").getPath();
+    private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
+    private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
+    protected HomeScreenSteps homeScreenSteps;
+    protected LocationsScreen locationsScreen;
+    LocationScreenSteps locationScreenSteps;
+    protected AppiumDriver driver;
+    RestaurantListScreenSteps restaurantsListScreen;
+    RestaurantScreen restaurantScreen;
+    SavedLocationsScreenSteps savedLocationsScreenSteps;
+    RestaurantScreenSteps restaurantScreenSteps;
+    OrdersScreen ordersScreen;
+    VerifyAccountScreenSteps verifyAccountScreenSteps;
+    PinCodeVerificationScreen pinCodeVerificationScreen;
+    AddReferalCodeScreen addReferalCodeScreen;
+    ProfileScreenSteps profileScreenSteps;
+    InvoicesScreenSteps invoicesScreenSteps;
+    SettingsScreenSteps settingsScreenSteps;
+    PaymentOptionsScreen paymentOptionsScreen;
+    WalletScreenSteps walletScreenSteps;
 
-  @BeforeClass
-  @Parameters({"platform", "udid", "systemPort"})
-  void startAppiumServer(String platform, String udid, String systemPort) {
-    String[] platformInfo = platform.split(" ");
+    @BeforeClass
+    @Parameters({"platform", "udid", "systemPort"})
+    void startAppiumServer(String platform, String udid, String systemPort) {
+        String[] platformInfo = platform.split(" ");
 
-    DesiredCapabilities capabilities = new DesiredCapabilities();
-    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "DeviceName");
-    capabilities.setCapability(MobileCapabilityType.UDID, udid);
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformInfo[0]);
-    capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformInfo[1]);
-    capabilities.setCapability(MobileCapabilityType.APP, ANDROID_FILE_PATH);
-    capabilities.setCapability("autoGrantPermissions", true);
-    capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-    capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, systemPort);
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "DeviceName");
+        capabilities.setCapability(MobileCapabilityType.UDID, udid);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, platformInfo[0]);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformInfo[1]);
+        capabilities.setCapability(MobileCapabilityType.APP, ANDROID_FILE_PATH);
+        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
 
-    try {
-      driver = new AndroidDriver<MobileElement>(new URL(APPIUM_URL), capabilities);
-    } catch (Exception e) {
-      LOG.error("unable to initiate Android driver", e);
+        try {
+            driver = new AndroidDriver<MobileElement>(new URL(APPIUM_URL), capabilities);
+        } catch (Exception e) {
+            LOG.error("unable to initiate Android driver", e);
+        }
+
+        homeScreenSteps = new HomeScreenSteps(driver);
+        locationsScreen = new LocationsScreen(driver);
+        locationScreenSteps = new LocationScreenSteps(driver);
+        restaurantsListScreen = new RestaurantListScreenSteps(driver);
+        restaurantScreen = new RestaurantScreen(driver);
+        restaurantScreenSteps = new RestaurantScreenSteps(driver);
+        ordersScreen = new OrdersScreen(driver);
+        verifyAccountScreenSteps = new VerifyAccountScreenSteps(driver);
+        pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
+        addReferalCodeScreen = new AddReferalCodeScreen(driver);
+        savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
+        profileScreenSteps = new ProfileScreenSteps(driver);
+        invoicesScreenSteps = new InvoicesScreenSteps(driver);
+        settingsScreenSteps = new SettingsScreenSteps(driver);
+        paymentOptionsScreen = new PaymentOptionsScreen(driver);
+        walletScreenSteps = new WalletScreenSteps(driver);
     }
 
-    homeScreenSteps = new HomeScreenSteps(driver);
-    locationsScreen = new LocationsScreen(driver);
-    restaurantsListScreen = new RestaurantListScreenSteps(driver);
-    restaurantScreen = new RestaurantScreen(driver);
-    ordersScreen = new OrdersScreen(driver);
-    verifyAccountScreenSteps = new VerifyAccountScreenSteps(driver);
-    pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
-    addReferalCodeScreen = new AddReferalCodeScreen(driver);
-    savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
-    profileScreen = new ProfileScreen(driver);
-    invoicesScreenSteps = new InvoicesScreenSteps(driver);
-    settingsScreenSteps = new SettingsScreenSteps(driver);
-    paymentOptionsScreen = new PaymentOptionsScreen(driver);
-    walletScreenSteps = new WalletScreenSteps(driver);
-  }
-
-  @AfterClass
-  public void teardown() {
-    if (driver != null) {
-      driver.quit();
+    @AfterClass
+    public void teardown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
-  }
 }

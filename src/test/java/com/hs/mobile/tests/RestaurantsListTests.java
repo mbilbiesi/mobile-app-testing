@@ -31,18 +31,18 @@ public class RestaurantsListTests extends BaseTest {
     public void beforeEachTest() {
         //Given
         homeScreenSteps.clickFindRestaurantsButton();
-        locationsScreen.searchForRestaurants();
-        locationsScreen.insertLocation("riyadh");
-        locationsScreen.selectItemArea(3);
-        locationsScreen.submitAddress();
-        locationsScreen.insertAddressDescription("desc");
+        locationScreenSteps.searchForRestaurants();
+        locationScreenSteps.insertLocation("riyadh");
+        locationScreenSteps.selectItemArea(3);
+        locationScreenSteps.submitAddress();
+        locationScreenSteps.insertAddressDescription("desc");
     }
 
     @Issue("HSAP-185")
     @Test(description = "Verify all Restaurant List objects are displayed correctly")
     void navigateToRestaurantListScreen_screenElementAreDisplayed() {
-        //When
-        locationsScreen.submitAddress();
+        // When
+        locationScreenSteps.submitAddress();
 
         //Then
         restaurantsListScreen.verifyRestaurantsListLayout();
@@ -51,8 +51,8 @@ public class RestaurantsListTests extends BaseTest {
     @Issue("HSAP-186")
     @Test(description = "Verify all restaurants that meet the search criteria are returned")
     public void searchForRestaurant_resultsMatchedSearchCriteria() {
-        //When
-        locationsScreen.submitAddress();
+        // When
+        locationScreenSteps.submitAddress();
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
 
@@ -63,8 +63,8 @@ public class RestaurantsListTests extends BaseTest {
     @Issue("HSAP-186")
     @Test(description = "Verify clearing search criteria will reset the list view")
     public void clickToResetSearchCriteria_restaurantListWillBeReset() {
-        //When
-        locationsScreen.submitAddress();
+        // When
+        locationScreenSteps.submitAddress();
         restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
         keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
         afterSearchRestaurantCount = restaurantsListScreen.clearSearchCriteria();
@@ -76,8 +76,8 @@ public class RestaurantsListTests extends BaseTest {
     @Issue("HSAP-188")
     @Test(description = "Verify recommended badge is displaying next to the recommended restaurants")
     public void navigateToRestaurantsListScreen_checkRecommendedRestaurantsBadge() {
-        //When
-        locationsScreen.submitAddress();
+        // When
+        locationScreenSteps.submitAddress();
         restaurantsListScreen.searchForRestaurant(recommendedRestaurant);
 
         //Then
@@ -89,8 +89,8 @@ public class RestaurantsListTests extends BaseTest {
     @Issue("HSAP-189")
     @Test(description = "verify recommended badge is only displayed for restaurant with ready status only")
     public void navigateToRestaurantList_recommendedBadgeDisplayOnlyForReadyRestaurant() {
-        //When
-        locationsScreen.submitAddress();
+        // When
+        locationScreenSteps.submitAddress();
         restaurantsListScreen.searchForRestaurant(notReadyRecommendedRestaurant);
 
         //Then
@@ -100,8 +100,8 @@ public class RestaurantsListTests extends BaseTest {
     @Issue("HSAP-190")
     @Test(description = "Verify restaurants are sorted according to the distance from the location provided")
     public void navigateToRestaurantsListScreen_verifyRestaurantsSortedByDistance() {
-        //When
-        locationsScreen.submitAddress();
+        // When
+        locationScreenSteps.submitAddress();
         restaurantsListScreen.scrollDownRestaurantsList();
 
         //Then
@@ -112,7 +112,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Verify promoted restaurants are displayed at the top of restaurants list", enabled = false)
     public void navigateToRestaurantsListScreen_verifyPromotedRestaurantsDisplayOnTop() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
 
         //Then
         restaurantsListScreen.verifyPromotedRestaurantsDisplayOnTop();
@@ -122,7 +122,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Check if the filters section is displayed below the banners section")
     public void navigateToRestaurantsListScreen_verifyKitchenTypeFiltersAreDisplayed() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
 
         //Then
         restaurantsListScreen.verifyRestaurantFiltersAreDisplayed();
@@ -132,7 +132,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Check if the user is eligible to see the 'All' filter among the filters list")
     public void navigateToRestaurantsListScreen_verifyTheAllFilterIsDisplayedAndSelected() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
 
         //Then
         restaurantsListScreen.verifyAllFiterIsDisplayed();
@@ -143,7 +143,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Check if the user is able to swipe left and right on the filters list")
     public void navigateToRestaurantsListScreen_verifyCustomerCanSwipeOnFilters() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
         firstFilterTitle = restaurantsListScreen.swipeFiltersList();
 
         //Then
@@ -154,7 +154,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Check that the top banner image's ratio is 2:1")
     public void navigateToRestaurantsListScreen_verifyTopBannerImgRatioIs2_1() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
 
         //Then
         restaurantsListScreen.verifyTopBannerImageRatio();
@@ -164,7 +164,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Check if the top banner shows restaurant offers")
     public void navigateToRestaurantsListScreen_verifyTopBannerShowsRestaurantOffers() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
 
         //Then
         restaurantsListScreen.verifyTopBannerShowsOnlyOffers();
@@ -174,7 +174,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Check if the the campaigns are displayed in a separate carousel ")
     public void navigateToRestaurantsListScreen_verifyCampaignsDisplayedInSeparateCarousel() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
 
         //Then
         restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(true);
@@ -184,7 +184,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Check if the Max number of campaigns shown in campaign carousel is 8")
     public void navigateToRestaurantsListScreen_verifyMaxNumberOfCampaignsDisplayed() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
 
         //Then
         restaurantsListScreen.verifyMaxCampaginsNumberInCarousel();
@@ -194,7 +194,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Verify that restaurants will be displayed based on the selected campaign")
     public void clickCampaign_verifyRestaurantsWithCampaignDisplayed() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
         restaurantsListScreen.clickCampaign(true);
 
         //Then
@@ -206,7 +206,7 @@ public class RestaurantsListTests extends BaseTest {
             "if they are disabled")
     public void navigateToRestaurantsListScreen_verifyNoCampaignsAreShowedToCustomer() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
 
         //Then
         restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(false);
@@ -216,7 +216,7 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Check if the the top campaign width set to ratio 2:1")
     public void clickCampaign_verifyTopCampaignWidthRatioIs2_1() {
         //When
-        locationsScreen.submitAddress();
+        locationScreenSteps.submitAddress();
         restaurantsListScreen.clickCampaign(true);
 
         //Then

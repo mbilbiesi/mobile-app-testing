@@ -19,7 +19,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -121,9 +120,14 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         int restaurantCount = getRestaurantsCount(true);
         boolean listSorted = false;
         ArrayList<Double> restaurantDistance = getDistanceOfDisplayedRestaurants(restaurantCount);
-        listSorted = restaurantDistance.stream().sorted().collect(Collectors.toList()).equals(restaurantDistance);
-        assertThat(listSorted).as("Restaurants are not sorted according their distance " +
-                "from customer's location").isTrue();
+        listSorted =
+                restaurantDistance.stream()
+                        .sorted()
+                        .collect(Collectors.toList())
+                        .equals(restaurantDistance);
+        assertThat(listSorted)
+                .as("Restaurants are not sorted according their distance " + "from customer's location")
+                .isTrue();
     }
 
     public int getRestaurantsCount(boolean verifiableElements) {
@@ -271,7 +275,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     public void verifyCustomerRedirectedToARestaurant() {
 
         try {
-            assertThat(restaurant.getRestaurantHeader().isDisplayed())
+            assertThat(restaurant.getRestaurantTitle().isDisplayed())
                     .as("Top banner doesn't have restaurant offers").isTrue();
         } catch (ElementNotVisibleException e) {
             e.printStackTrace();
@@ -375,5 +379,10 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
 
         assertThat(campaignWidth / campaignHeight)
                 .as("Campaign image ratio is not 2:1").isEqualTo(2);
+    }
+
+    @Step("Select displayed restaurant")
+    public void selectDisplayedRestaurant() {
+        tap(getRestaurantTitle().get(0));
     }
 }
