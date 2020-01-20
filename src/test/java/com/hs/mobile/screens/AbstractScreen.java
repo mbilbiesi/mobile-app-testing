@@ -105,6 +105,26 @@ public class AbstractScreen {
         soft.assertAll();
     }
 
+    protected void verifyScreenElements(SoftAssertions soft) {
+        //Method has been created in case we want to verify other things before closing the soft assertion
+        Class<?> clazz = this.getClass();
+        for (Field field : clazz.getDeclaredFields()) {
+            if (field.isAnnotationPresent(AssertElementVisibility.class)) {
+                if (field.getType().isAssignableFrom(MobileElement.class)) {
+                    try {
+                        field.setAccessible(true);
+                        WebElement element = (WebElement) field.get(this);
+                        soft.assertThat(element.isDisplayed())
+                                .as(field.getName() + " is not displayed")
+                                .isTrue();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
     public void scrollByElement(WebElement element) {
         Dimension dimension = driver.manage().window().getSize();
         int x = element.getLocation().x;

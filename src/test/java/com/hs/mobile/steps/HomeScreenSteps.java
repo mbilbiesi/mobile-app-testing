@@ -11,9 +11,13 @@ public class HomeScreenSteps extends HomeScreen {
         super(driver);
     }
 
+    private RestaurantListScreenSteps restaurant = new RestaurantListScreenSteps(driver);
+
+
     @Step("Find restaurants")
     public void findRestaurants() {
         tap(getFindRestaurantsButton());
+        restaurant.waitUntilRestaurantsAreLoaded();
     }
 
     @Step("View saved locations")

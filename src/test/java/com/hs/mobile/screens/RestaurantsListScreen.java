@@ -129,8 +129,10 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
     private List<WebElement> recommendedBadge;
 
     @iOSXCUITFindBy(xpath = "")
-    @AndroidFindBy(xpath = "//*[@id='com.hungerstation.android.web.debug:id/value'" +
-            " and not(@text='يوصى به' or @text='recommended')]")
+    @AndroidFindBy(
+            xpath =
+                    "//*[@id='com.hungerstation.android.web.debug:id/value'"
+                            + " and not(@text='يوصى به' or @text='recommended')]")
     private WebElement branchStatusBadge;
 
     @iOSXCUITFindBy(id = "")
@@ -146,6 +148,10 @@ public abstract class RestaurantsListScreen extends AbstractScreen {
     private WebElement campaignMainImage;
 
     private String promotedBadgeLocator = "//*[@text='اعلان' or @text='Promoted']";
+
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_value")
+    @AssertElementVisibility
+    private List<WebElement> restaurantListLayout;
 
     public RestaurantsListScreen(AppiumDriver driver) {
         super(driver);
