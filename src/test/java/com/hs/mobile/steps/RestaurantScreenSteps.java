@@ -26,12 +26,14 @@ public class RestaurantScreenSteps extends RestaurantScreen {
     private HomeScreenSteps homeScreenSteps;
     private LocationScreenSteps locationScreenSteps;
     private RestaurantListScreenSteps restaurantListScreenSteps;
+    private MenuItemScreenSteps menuItemScreenSteps;
 
     public RestaurantScreenSteps(AppiumDriver driver) {
         super(driver);
         homeScreenSteps = new HomeScreenSteps(driver);
         locationScreenSteps = new LocationScreenSteps(driver);
         restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
+        menuItemScreenSteps = new MenuItemScreenSteps(driver);
     }
 
     @Step("Go to restaurant screen")
@@ -108,6 +110,32 @@ public class RestaurantScreenSteps extends RestaurantScreen {
 
         navigateBack(4);
         soft.assertAll();
+    }
+
+    @Step("Add first item to cart for {count} time(s)")
+    public Double addFirstItemToCart(int count) {
+        if (count <= 0) {
+            return null;
+        }
+        tap(getFirstMenuItem());
+        int i = 0;
+        while (i < count) {
+            menuItemScreenSteps.addQuantity();
+            i++;
+        }
+        menuItemScreenSteps.addToCart();
+        return menuItemScreenSteps.getTotalAmount();
+    }
+
+    @Step("Get delivery fee from the restaurant screen")
+    public Double getDeliveryFee() {
+        String deliveryFeeLabel = getDeliveryAmount().getText().trim();
+        return Double.parseDouble(deliveryFeeLabel.substring(0, deliveryFeeLabel.indexOf(' ')));
+    }
+
+    @Step("Go to checkout screen")
+    public void goToCheckout() {
+        tap(getViewCart());
     }
 
     private void swipe(WebElement startElement, WebElement endElement) {

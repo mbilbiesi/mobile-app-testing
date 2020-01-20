@@ -11,6 +11,7 @@ import com.hs.mobile.screens.PaymentOptionsScreen;
 import com.hs.mobile.screens.PinCodeVerificationScreen;
 import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.screens.TicketScreen;
+import com.hs.mobile.steps.CheckoutScreenSteps;
 import com.hs.mobile.steps.CreateTicketSteps;
 import com.hs.mobile.steps.HelpSteps;
 import com.hs.mobile.steps.HomeScreenSteps;
@@ -71,6 +72,7 @@ public class BaseTest {
     TicketSteps ticketSteps;
     CreateTicketScreen createTicketScreen;
     CreateTicketSteps createTicketSteps;
+    CheckoutScreenSteps checkoutScreenSteps;
 
     @BeforeClass
     @Parameters({"platform", "udid", "systemPort"})
@@ -116,6 +118,7 @@ public class BaseTest {
         ticketSteps = new TicketSteps(driver);
         createTicketScreen = new CreateTicketScreen(driver);
         createTicketSteps = new CreateTicketSteps(driver);
+        checkoutScreenSteps = new CheckoutScreenSteps(driver);
     }
 
     @AfterClass

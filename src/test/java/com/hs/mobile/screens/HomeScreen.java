@@ -52,11 +52,11 @@ public abstract class HomeScreen extends AbstractScreen {
     @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='TBD']")
     private WebElement lnkSkipPromotion;
 
-  @iOSXCUITFindBy(id = "")
-  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rel")
-  private List<WebElement> homescreenLayout;
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rel")
+    private List<WebElement> homescreenLayout;
 
-  public HomeScreen(AppiumDriver driver) {
-    super(driver);
-  }
+    public HomeScreen(AppiumDriver driver) {
+        super(driver);
+    }
 }

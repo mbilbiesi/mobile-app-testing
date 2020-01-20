@@ -34,7 +34,6 @@ public class CreateTicketSteps extends CreateTicketScreen {
         tap(getBtnSend().get(0));
     }
 
-
     @Step("Verify that customer isn't able to create a ticket without adding description")
     public void verifyNoDescriptionErrorMessage() {
         List<WebElement> errorMessage = getToastMessage();
