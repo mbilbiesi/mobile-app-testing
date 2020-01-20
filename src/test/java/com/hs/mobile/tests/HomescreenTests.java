@@ -25,14 +25,14 @@ public class HomescreenTests extends BaseTest {
     void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
         // Given
         homeScreenSteps.clickMyOrdersButton();
-        ordersScreen.clickVerifyButton();
+        myOrdersSteps.clickVerifyButton();
         verifyAccountScreenSteps.insertMobileNumber("503263813");
         verifyAccountScreenSteps.clickNextButton();
         pinCodeVerificationScreen.insertVerificationCode("395406");
         addReferalCodeScreen.clickCloseButton();
 
         // When
-        ordersScreen.navigateToRestaurants();
+        myOrdersSteps.navigateToRestaurants();
 
         // Then
         homeScreenSteps.verifyThatAllHomeElementsDisplayed();
