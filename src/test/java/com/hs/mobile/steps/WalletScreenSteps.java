@@ -13,41 +13,40 @@ import static com.hs.mobile.data.ElementAttribute.TEXT;
 
 public class WalletScreenSteps extends WalletScreen {
 
-  public WalletScreenSteps(AppiumDriver driver) {
-    super(driver);
-  }
-
-  @Step("Verify that all headers are displayed properly")
-  public void verifyHeaders() {
-    List<WebElement> headers = getAllHeaders();
-    SoftAssertions assertions = new SoftAssertions();
-
-    for (WebElement header : headers) {
-      assertions
-          .assertThat(isHeaderActive(header))
-          .as(String.format("%s header should be properly displayed.", getHeaderText(header)))
-          .isTrue();
+    public WalletScreenSteps(AppiumDriver driver) {
+        super(driver);
     }
 
-    driver.navigate().back();
-    driver.navigate().back();
-    assertions.assertAll();
-  }
+    @Step("Verify that all headers are displayed properly")
+    public void verifyHeaders() {
+        List<WebElement> headers = getAllHeaders();
+        SoftAssertions soft = new SoftAssertions();
 
-  private List<WebElement> getAllHeaders() {
-    List<WebElement> headers = new ArrayList<>();
-    headers.add(getTransactionHeader());
-    headers.add(getDateHeader());
-    headers.add(getExpiryDateHeader());
-    headers.add(getAmountHeader());
-    return headers;
-  }
+        for (WebElement header : headers) {
+            soft
+                    .assertThat(isHeaderActive(header))
+                    .as(String.format("%s header should be properly displayed.", getHeaderText(header)))
+                    .isTrue();
+        }
 
-  private Boolean isHeaderActive(WebElement header) {
-    return isElementActive(header);
-  }
+        navigateBack(2);
+        soft.assertAll();
+    }
 
-  private String getHeaderText(WebElement header) {
-    return getElementAttributeValue(header, TEXT);
-  }
+    private List<WebElement> getAllHeaders() {
+        List<WebElement> headers = new ArrayList<>();
+        headers.add(getTransactionHeader());
+        headers.add(getDateHeader());
+        headers.add(getExpiryDateHeader());
+        headers.add(getAmountHeader());
+        return headers;
+    }
+
+    private Boolean isHeaderActive(WebElement header) {
+        return isElementActive(header);
+    }
+
+    private String getHeaderText(WebElement header) {
+        return getElementAttributeValue(header, TEXT);
+    }
 }

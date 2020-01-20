@@ -7,11 +7,12 @@ import io.qameta.allure.Step;
 
 public class HomeScreenSteps extends HomeScreen {
 
-    private RestaurantListScreenSteps restaurant = new RestaurantListScreenSteps(driver);
-
     public HomeScreenSteps(AppiumDriver driver) {
         super(driver);
     }
+
+    private RestaurantListScreenSteps restaurant = new RestaurantListScreenSteps(driver);
+
 
     @Step("Find restaurants")
     public void findRestaurants() {
