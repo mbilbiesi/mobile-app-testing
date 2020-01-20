@@ -76,8 +76,8 @@ public class HelpSteps extends HelpScreen {
         SoftAssertions soft = new SoftAssertions();
         int ticketCategoriesCount = getLblTicketCategory().size();
         String category;
-        List<String> expectedTickets = new ArrayList<>();
-        List<String> actualTickets = new ArrayList<>();
+        List<String> expectedTickets;
+        List<String> actualTickets;
 
         for (int i = 0; i < ticketCategoriesCount; i++) {
             category = getLblTicketCategory().get(i).getText();

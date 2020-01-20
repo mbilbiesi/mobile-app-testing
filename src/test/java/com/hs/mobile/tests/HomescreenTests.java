@@ -19,9 +19,7 @@ public class HomescreenTests extends BaseTest {
         homeScreenSteps.verifyThatAllHomeElementsDisplayed();
     }
 
-    @Test(
-            enabled = true,
-            description = "Open the application with an already registered user without any saved place")
+    @Test(description = "Open the application with an already registered user without any saved place")
     void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
         // Given
         homeScreenSteps.clickMyOrdersButton();

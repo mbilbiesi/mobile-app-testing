@@ -2,6 +2,7 @@ package com.hs.mobile.screens;
 
 import com.hs.mobile.core.annotation.AssertElementVisibility;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class OrderScreen extends AbstractScreen {
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/logo")
-    private WebElement imgRestaurantLogo;
+    private MobileElement imgRestaurantLogo;
 
     @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
@@ -55,22 +56,27 @@ public class OrderScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/state_title")
     private WebElement lblOrderStatus;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/state_background")
     private WebElement imgOrderStatusBackground;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/summary_component")
     private WebElement txaOrderSummary;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/summary_title")
     private WebElement lblSummaryTitle;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/order_number")
     private WebElement lblOrderNumber;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_items_list")
     private WebElement eleOrderItemsList;
@@ -95,45 +101,50 @@ public class OrderScreen extends AbstractScreen {
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/item_desc")
     private List<WebElement> txaOrderItemsDescriptions;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/sub_total")
     private WebElement lblOrderSubTotal;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_fees")
     private WebElement lblOrderDeliveryFees;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/discount")
     private WebElement lblOrderDiscount;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/total")
-    private WebElement lblOrderTotal;
+    private MobileElement lblOrderTotal;
 
+    @AssertElementVisibility
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/vat_message")
     private WebElement lblVatMessage;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/cashback_component")
-    private WebElement eleCashback;
+    private List<WebElement> eleCashback;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/title")
-    private WebElement lblCashbackTitle;
+    private List<WebElement> lblCashbackTitle;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/description")
-    private WebElement txaCashbackDescription;
+    private List<WebElement> txaCashbackDescription;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/cashback_value")
-    private WebElement eleCashbackCode;
+    private List<WebElement> eleCashbackCode;
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/copy_icon")
-    private WebElement btnCopyCashbackCode;
+    private List<WebElement> btnCopyCashbackCode;
 
     public OrderScreen(AppiumDriver driver) {
         super(driver);

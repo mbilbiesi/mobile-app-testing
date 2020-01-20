@@ -8,11 +8,17 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyOrdersSteps extends MyOrdersScreen {
 
@@ -103,6 +109,48 @@ public class MyOrdersSteps extends MyOrdersScreen {
 
     @Step("Navigate back to Restaurants")
     public void navigateToRestaurants() {
-        touchAction.tap(tapOptions().withElement(element(getBtnRestaurants()))).perform();
+        tap(getBtnRestaurants());
+    }
+
+    @Step("Verify that orders are sorted by date desc")
+    public void verifyOrdersSortedByDateDesc(String locale) throws ParseException {
+        List<Date> actualOrderDates;
+        List<Date> expectedOrderDates;
+
+        actualOrderDates = getOrdersDates(locale);
+        expectedOrderDates = getExpectedOrderDates(actualOrderDates);
+
+        assertThat(actualOrderDates.equals(expectedOrderDates))
+                .as("Orders are not sorted from newest to oldest")
+                .isTrue();
+    }
+
+    private List<Date> getOrdersDates(String locale) throws ParseException {
+        int size = getEleOrderDate().size();
+        List<Date> orderDates = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            orderDates.add(getDate(getEleOrderDate().get(i).getText()
+                    .replace(",", ""), locale));
+        }
+
+        return orderDates;
+    }
+
+    private Date getDate(String date, String locale) throws ParseException {
+        SimpleDateFormat formatter;
+
+        if (locale.equalsIgnoreCase("ar")) {
+            formatter = new SimpleDateFormat("MMMM d yyyy", Locale.forLanguageTag("ar-SA-nu-arab"));
+        } else {
+            formatter = new SimpleDateFormat("MMMM d yyyy");
+        }
+
+        return formatter.parse(date);
+    }
+
+    private List<Date> getExpectedOrderDates(List<Date> orderDates) {
+        Collections.sort(orderDates, Collections.reverseOrder());
+        return orderDates;
     }
 }
