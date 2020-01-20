@@ -285,7 +285,7 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     public void verifyCustomerRedirectedToARestaurant() {
 
         try {
-            assertThat(restaurant.getRestaurantHeader().isDisplayed())
+            assertThat(restaurant.getRestaurantTitle().isDisplayed())
                     .as("Top banner doesn't have restaurant offers")
                     .isTrue();
         } catch (ElementNotVisibleException e) {
@@ -417,5 +417,10 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
     public void waitUntilCampaignsAreLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfAllElements(getOfferWidgets()));
+    }
+
+    @Step("Select displayed restaurant")
+    public void selectDisplayedRestaurant() {
+        tap(getRestaurantTitle().get(0));
     }
 }

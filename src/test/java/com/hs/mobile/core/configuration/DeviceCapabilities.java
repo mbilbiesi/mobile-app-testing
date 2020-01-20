@@ -10,11 +10,15 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 public class DeviceCapabilities {
 
-  @JsonProperty private String platformName;
+    @JsonProperty
+    private String platformName;
 
-  @JsonProperty private String platformVersion;
+    @JsonProperty
+    private String platformVersion;
 
-  @JsonProperty private String udid;
+    @JsonProperty
+    private String udid;
 
-  @JsonProperty private String systemPort;
+    @JsonProperty
+    private String systemPort;
 }

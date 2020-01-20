@@ -199,4 +199,15 @@ public class AbstractScreen {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.attributeToBe(element, attribute.getName(), expectedValue));
     }
+
+    public void navigateBack(int count) {
+        if (count <= 0) {
+            return;
+        }
+        int i = 0;
+        while (i < count) {
+            driver.navigate().back();
+            i++;
+        }
+    }
 }

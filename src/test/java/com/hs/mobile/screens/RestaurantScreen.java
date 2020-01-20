@@ -8,40 +8,49 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-
 @Getter
 public class RestaurantScreen extends AbstractScreen {
-  @iOSXCUITFindBy(id = "")
-  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
-  private List<WebElement> menuItems;
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
+    private List<WebElement> menuItems;
 
-  @iOSXCUITFindBy(id = "")
-  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
-  private WebElement addMenuItemButton;
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
+    private WebElement addMenuItemButton;
 
-  @iOSXCUITFindBy(id = "")
-  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
-  private WebElement cartButton;
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
+    private WebElement cartButton;
 
-  @iOSXCUITFindBy(id = "")
-  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/restaurant_header")
-  private WebElement restaurantHeader;
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(className = "androidx.appcompat.app.ActionBar$Tab")
+    private List<WebElement> menuGroups;
 
-  public RestaurantScreen(AppiumDriver driver) {
-    super(driver);
-  }
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/header_value")
+    private WebElement menuGroupHeader;
 
-  public void selectMenuItem(int index) {
-    touchAction.tap(tapOptions().withElement(element(menuItems.get(index)))).perform();
-  }
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/header_title")
+    private WebElement restaurantTitle;
 
-  public void addMenuItem() {
-    touchAction.tap(tapOptions().withElement(element(addMenuItemButton))).perform();
-  }
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/calories_icon")
+    private WebElement caloriesIcon;
 
-  public void goToCart() {
-    touchAction.tap(tapOptions().withElement(element(cartButton))).perform();
-  }
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/tv_calories_total")
+    private WebElement caloriesLabel;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@index='1']")
+    private WebElement firstMenuItem;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
+    private WebElement firstMenuItemName;
+
+    public RestaurantScreen(AppiumDriver driver) {
+        super(driver);
+    }
 }

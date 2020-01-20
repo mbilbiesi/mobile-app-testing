@@ -36,12 +36,12 @@ public class RestaurantsListTests extends BaseTest {
         // Given
         homeScreenSteps.clickFindRestaurantsButton();
         if (!hasFirstTestExecuted) {
-            locationsScreen.searchForRestaurants();
-            locationsScreen.insertLocation("riyadh");
-            locationsScreen.selectItemArea(3);
-            locationsScreen.submitAddress();
-            locationsScreen.insertAddressDescription("desc");
-            locationsScreen.submitAddress();
+            locationScreenSteps.searchForRestaurants();
+            locationScreenSteps.insertLocation("riyadh");
+            locationScreenSteps.selectItemArea(3);
+            locationScreenSteps.submitAddress();
+            locationScreenSteps.insertAddressDescription("desc");
+            locationScreenSteps.submitAddress();
             hasFirstTestExecuted = true;
         }
     }
