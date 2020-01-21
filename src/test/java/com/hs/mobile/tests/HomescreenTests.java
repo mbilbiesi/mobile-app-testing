@@ -27,7 +27,6 @@ public class HomescreenTests extends BaseTest {
         verifyAccountScreenSteps.insertMobileNumber("503263813");
         verifyAccountScreenSteps.clickNextButton();
         pinCodeVerificationScreen.insertVerificationCode("395406");
-        addReferalCodeScreen.clickCloseButton();
 
         // When
         myOrdersSteps.navigateToRestaurants();
