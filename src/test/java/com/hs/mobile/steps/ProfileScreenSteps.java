@@ -68,7 +68,7 @@ public class ProfileScreenSteps extends ProfileScreen {
     @Step("Verify field boundaries")
     public void verifyFieldBoundaries() {
         SoftAssertions soft = new SoftAssertions();
-        String invalidName = RandomStringUtils.randomAlphanumeric(50);
+        String invalidName = RandomStringUtils.randomAlphanumeric(51);
 
         insertName(VALID_NAME);
         insertEmail("");

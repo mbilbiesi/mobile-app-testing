@@ -15,9 +15,22 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class SettingsTests extends BaseTest {
 
+    boolean hasFirstTestExecuted = false;
+
     @BeforeMethod
     public void goToSettings() {
         // Given
+        // When
+        if (!hasFirstTestExecuted) {
+            homeScreenSteps.clickMyOrdersButton();
+            myOrdersSteps.clickVerifyButton();
+            verifyAccountScreenSteps.insertMobileNumber("503263813");
+            verifyAccountScreenSteps.clickNextButton();
+            pinCodeVerificationScreen.insertVerificationCode("395406");
+
+            hasFirstTestExecuted = true;
+        }
+
         homeScreenSteps.clickOnMore().goToSettings();
     }
 
@@ -25,7 +38,6 @@ public class SettingsTests extends BaseTest {
     public void navigateToSettingsScreen_appSuccessfullySwitchesToArabic() {
         // When
         settingsScreenSteps.useArabic();
-        homeScreenSteps.clickOnMore().goToSettings();
 
         // Then
         settingsScreenSteps.verifyThatScreenDisplaysProperlyInArabic();

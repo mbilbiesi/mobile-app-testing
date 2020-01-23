@@ -14,9 +14,21 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class ProfileTests extends BaseTest {
 
+    boolean hasFirstTestExecuted = false;
+
     @BeforeMethod
     public void goToProfile() {
         // When
+        if (!hasFirstTestExecuted) {
+            homeScreenSteps.clickMyOrdersButton();
+            myOrdersSteps.clickVerifyButton();
+            verifyAccountScreenSteps.insertMobileNumber("503263813");
+            verifyAccountScreenSteps.clickNextButton();
+            pinCodeVerificationScreen.insertVerificationCode("395406");
+
+            hasFirstTestExecuted = true;
+        }
+
         homeScreenSteps.clickOnMore().goToProfile();
     }
 

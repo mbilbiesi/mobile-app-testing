@@ -28,7 +28,6 @@ public class SettingsScreenSteps extends SettingsScreen {
         if (selectedLanguage.equals(ENGLISH)) {
             selectLanguage(ARABIC);
         }
-        navigateBack(1);
     }
 
     @Step("Set the language to English")
@@ -37,7 +36,6 @@ public class SettingsScreenSteps extends SettingsScreen {
         if (selectedLanguage.equals(ARABIC)) {
             selectLanguage(ENGLISH);
         }
-        navigateBack(1);
     }
 
     @Step("Verify that elements display correctly in Arabic")
