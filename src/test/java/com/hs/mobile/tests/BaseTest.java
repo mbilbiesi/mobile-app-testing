@@ -119,6 +119,7 @@ public class BaseTest {
         createTicketScreen = new CreateTicketScreen(driver);
         createTicketSteps = new CreateTicketSteps(driver);
         checkoutScreenSteps = new CheckoutScreenSteps(driver);
+        locationScreenSteps = new LocationScreenSteps(driver);
     }
 
     @AfterClass

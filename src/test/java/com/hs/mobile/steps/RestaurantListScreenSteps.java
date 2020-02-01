@@ -405,6 +405,8 @@ public class RestaurantListScreenSteps extends RestaurantsListScreen {
         campaignHeight = campaignSize.getHeight();
         campaignWidth = campaignSize.getWidth();
 
+        navigateBack(1);
+
         assertThat(campaignWidth / campaignHeight).as("Campaign image ratio is not 2:1").isEqualTo(2);
     }
 
