@@ -18,9 +18,9 @@ public class CheckoutTests extends BaseTest {
         homeScreenSteps.clickMyOrdersButton();
         if (!hasFirstTestExecuted) {
             myOrdersSteps.clickVerifyButton();
-            verifyAccountScreenSteps.insertMobileNumber("503263813");
+            verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
             verifyAccountScreenSteps.clickNextButton();
-            pinCodeVerificationScreen.insertVerificationCode("395406");
+            pinCodeVerificationScreen.insertVerificationCode(testUser.getVerificationCode());
             myOrdersSteps.waitUntilMyOrdersScreenLoaded();
             homeScreenSteps.clickOnResturantIcon();
 

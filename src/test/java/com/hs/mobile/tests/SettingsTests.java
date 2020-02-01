@@ -24,9 +24,9 @@ public class SettingsTests extends BaseTest {
         if (!hasFirstTestExecuted) {
             homeScreenSteps.clickMyOrdersButton();
             myOrdersSteps.clickVerifyButton();
-            verifyAccountScreenSteps.insertMobileNumber("503263813");
+            verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
             verifyAccountScreenSteps.clickNextButton();
-            pinCodeVerificationScreen.insertVerificationCode("395406");
+            pinCodeVerificationScreen.insertVerificationCode(testUser.getVerificationCode());
 
             hasFirstTestExecuted = true;
         }
