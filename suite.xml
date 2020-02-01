@@ -6,6 +6,7 @@
         <parameter name="platform" value="Android 10.0"/>
         <parameter name="udid" value="emulator-5556"/>
         <parameter name="systemPort" value="8200"/>
+        <parameter name="userId" value="1"/>
         <classes>
             <class name="com.hs.mobile.tests.HomescreenTests"/>
             <!--            <class name="com.hs.mobile.tests.LocationTests"/>-->
@@ -15,6 +16,7 @@
         <parameter name="platform" value="Android 10.0"/>
         <parameter name="udid" value="emulator-5554"/>
         <parameter name="systemPort" value="8201"/>
+        <parameter name="userId" value="1"/>
         <classes>
             <class name="com.hs.mobile.tests.HomescreenTests"/>
             <!--            <class name="com.hs.mobile.tests.LocationTests"/>-->

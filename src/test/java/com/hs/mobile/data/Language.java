@@ -16,13 +16,6 @@ public enum Language {
         this.label = label;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public String getLabel() {
-        return label;
-    }
 
     public static Optional<Language> getByLabel(String label) {
         if (StringUtils.isBlank(label)) {
