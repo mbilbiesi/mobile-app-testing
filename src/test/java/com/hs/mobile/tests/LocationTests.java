@@ -4,7 +4,6 @@ import com.hs.mobile.core.listener.TestListener;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
-import org.assertj.core.api.Assertions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -15,106 +14,91 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class LocationTests extends BaseTest {
 
-    @BeforeMethod
-    public void startApp() {
-        homeScreenSteps.clickMyOrdersButton();
-        myOrdersSteps.clickVerifyButton();
-        verifyAccountScreenSteps.insertMobileNumber("503263813");
-        verifyAccountScreenSteps.clickNextButton();
-        pinCodeVerificationScreen.insertVerificationCode("395406");
-        addReferalCodeScreen.clickCloseButton();
-        homeScreenSteps.clickOnResturantIcon();
+  boolean hasFirstTestExecuted = false;
 
-        locationScreenSteps.deleteExistingLocations();
+  @BeforeMethod
+  public void startApp() {
+    if (!hasFirstTestExecuted) {
+      homeScreenSteps.clickMyOrdersButton();
+      myOrdersSteps.clickVerifyButton();
+      verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
+      verifyAccountScreenSteps.clickNextButton();
+      pinCodeVerificationScreen.insertVerificationCode(testUser.getVerificationCode());
+
+      hasFirstTestExecuted = true;
     }
 
-    @Test(description = "Add locations for all available location types")
-    void addLocationsForAllAvailableLocationTypes() {
-        // When
-        locationScreenSteps.addAllTypesOfLocations();
+    homeScreenSteps.clickOnResturantIcon();
+    locationScreenSteps.deleteExistingLocations();
+  }
 
-        // Then
-        locationScreenSteps.verifyNewlyAddedLocations();
-    }
+  @Test(description = "Add locations for all available location types")
+  void addLocationsForAllAvailableLocationTypes() {
+    // When
+    locationScreenSteps.addAllTypesOfLocations();
 
-    @Test(description = "Search by landmark")
-    void searchByLandmark() {
-        // When
-        locationScreenSteps.searchForALandmark();
-        locationScreenSteps.waitUntilSubmitButtonIsEnabled();
-        boolean isSubmitButtonEnabled = locationScreenSteps.isSubmitButtonEnabled();
-        locationScreenSteps.navigateBack(1);
+    // Then
+    locationScreenSteps.verifyNewlyAddedLocations();
+  }
 
-        // Then
-        Assertions.assertThat(isSubmitButtonEnabled)
-                .as("Submit button should be enabled for valid landmarks.")
-                .isTrue();
-    }
+  @Test(description = "Search by landmark")
+  void searchByLandmark() {
+    // When
+    locationScreenSteps.searchForALandmark();
 
-    @Test(description = "Save without description")
-    void saveWithoutDescription() {
-        // When
-        locationScreenSteps.saveLocation(null);
-        homeScreenSteps.viewSavedLocations();
-        int savedLocationsCount = savedLocationsScreenSteps.getSavedLocations().size();
-        locationScreenSteps.navigateBack(1);
+    // Then
+    locationScreenSteps.verifySubmitButtonAfterSelectingValidLandmark();
+  }
 
-        // Then
-        Assertions.assertThat(savedLocationsCount)
-                .as("Description is not mandatory.")
-                .isEqualTo(1);
-    }
+  @Test(description = "Save without description")
+  void saveWithoutDescription() {
+    // When
+    locationScreenSteps.saveLocation(null);
+    homeScreenSteps.viewSavedLocations();
 
-    @Test(description = "Edit location")
-    void editLocation() {
-        // When
-        locationScreenSteps.saveLocation("test");
-        homeScreenSteps.viewSavedLocations();
-        savedLocationsScreenSteps.editLocation();
-        locationScreenSteps.waitUntilSubmitButtonIsEnabled();
-        boolean isSubmitButtonEnabled = locationScreenSteps.isSubmitButtonEnabled();
-        locationScreenSteps.navigateBack(2);
+    // Then
+    locationScreenSteps.verifyLocationCanBeSavedWithoutDescription();
+  }
 
-        // Then
-        Assertions.assertThat(isSubmitButtonEnabled)
-                .as("User should be directed to the saved location.")
-                .isTrue();
-    }
+  @Test(description = "Edit location")
+  void editLocation() {
+    // When
+    locationScreenSteps.saveLocation("test");
+    homeScreenSteps.viewSavedLocations();
+    savedLocationsScreenSteps.editLocation();
 
-    @Test(description = "Use an out of range location")
-    void useAnOutOfRangeLocation() {
-        // When
-        locationScreenSteps.searchForAnOutOfRangeLocation();
+    // Then
+    locationScreenSteps.verifyLocationUpdatedSuccessfully();
+  }
 
-        // Then
-        Assertions.assertThat(locationScreenSteps.isSubmitButtonEnabled())
-                .as("Submit button should be disabled for out of range locations.")
-                .isFalse();
-    }
+  @Test(description = "Use an out of range location")
+  void useAnOutOfRangeLocation() {
+    // When
+    locationScreenSteps.searchForAnOutOfRangeLocation();
 
-    @Test(description = "Edit description with different characters")
-    void editDescriptionWithDifferentCharacters() {
-        // When
-        locationScreenSteps.saveLocation(null);
-        String description = "% 5";
-        locationScreenSteps.updateDescription(description);
+    // Then
+    locationScreenSteps.verifyOutOfRangeLocations();
+  }
 
-        // Then
-        locationScreenSteps.verifyUpdatedDescription(description);
-    }
+  @Test(description = "Edit description with different characters")
+  void editDescriptionWithDifferentCharacters() {
+    // When
+    locationScreenSteps.saveLocation(null);
+    String description = "% 5";
+    locationScreenSteps.updateDescription(description);
 
-    @Test(description = "Delete all locations")
-    void deleteAllLocations() {
-        // When
-        locationScreenSteps.saveLocation(null);
-        locationScreenSteps.deleteExistingLocations();
-        homeScreenSteps.viewSavedLocations();
-        boolean isSearchButtonDisplayed = locationScreenSteps.isSearchButtonDisplayed();
-        locationScreenSteps.navigateBack(1);
+    // Then
+    locationScreenSteps.verifyUpdatedDescription(description);
+  }
 
-        // Then
-        Assertions.assertThat(isSearchButtonDisplayed)
-                .as("User should be redirected to locations screen.")
-                .isEqualTo(true);
-    }
+  @Test(description = "Delete all locations")
+  void deleteAllLocations() {
+    // When
+    locationScreenSteps.saveLocation(null);
+    locationScreenSteps.deleteExistingLocations();
+    homeScreenSteps.viewSavedLocations();
+
+    // Then
+    locationScreenSteps.verifyAllLocationsDeleted();
+  }
 }

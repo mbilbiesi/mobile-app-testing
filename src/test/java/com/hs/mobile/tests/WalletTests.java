@@ -14,9 +14,22 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class WalletTests extends BaseTest {
 
+    boolean hasFirstTestExecuted = false;
+
     @BeforeMethod
     public void goToPaymentOptions() {
         // Given
+        if (!hasFirstTestExecuted) {
+            homeScreenSteps.clickMyOrdersButton();
+            myOrdersSteps.clickVerifyButton();
+            verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
+            verifyAccountScreenSteps.clickNextButton();
+            pinCodeVerificationScreen.insertVerificationCode(testUser.getVerificationCode());
+
+            hasFirstTestExecuted = true;
+        }
+
+        //When
         homeScreenSteps.clickOnMore().goToPaymentOptions();
     }
 

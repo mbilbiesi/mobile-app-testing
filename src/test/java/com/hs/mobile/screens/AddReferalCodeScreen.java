@@ -11,6 +11,7 @@ import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class AddReferalCodeScreen extends AbstractScreen {
+
     @iOSXCUITFindBy(className = "")
     @AndroidFindBy(className = "android.widget.ImageButton")
     private MobileElement btnClose;
