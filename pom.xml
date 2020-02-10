@@ -150,8 +150,7 @@
                 </executions>
                 <configuration>
                     <reportVersion>${allure.version}</reportVersion>
-                    <resultsDirectory>${project.basedir}/allure-results</resultsDirectory>
-                    <reportDirectory>${project.basedir}/target/site</reportDirectory>
+                    <resultsDirectory>${project.basedir}/target/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
             <plugin>
