@@ -4,7 +4,6 @@ import com.hs.mobile.screens.MenuItemScreen;
 import com.hs.mobile.screens.RestaurantScreen;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
-import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,15 +20,17 @@ import static com.hs.mobile.data.ElementAttribute.FOCUSABLE;
 import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-@Slf4j
-public class RestaurantScreenSteps extends RestaurantScreen {
+public class RestaurantScreenSteps {
+    private RestaurantScreen restaurantScreen;
     private HomeScreenSteps homeScreenSteps;
     private LocationScreenSteps locationScreenSteps;
     private RestaurantListScreenSteps restaurantListScreenSteps;
     private MenuItemScreenSteps menuItemScreenSteps;
+    private AppiumDriver driver;
 
     public RestaurantScreenSteps(AppiumDriver driver) {
-        super(driver);
+        this.driver = driver;
+        restaurantScreen = new RestaurantScreen(driver);
         homeScreenSteps = new HomeScreenSteps(driver);
         locationScreenSteps = new LocationScreenSteps(driver);
         restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
@@ -38,7 +39,7 @@ public class RestaurantScreenSteps extends RestaurantScreen {
 
     @Step("Go to restaurant screen")
     public void goToRestaurantScreen(String restaurantName) {
-        //Given
+        // Given
         homeScreenSteps.viewSavedLocations();
         locationScreenSteps.searchForRestaurants();
         locationScreenSteps.insertLocation("Riyadh");
@@ -54,25 +55,27 @@ public class RestaurantScreenSteps extends RestaurantScreen {
         SoftAssertions soft = new SoftAssertions();
         String isTrue = String.valueOf(true);
         for (WebElement menuGroup : menuGroups) {
-            soft.assertThat(getElementAttributeValue(menuGroup, CLICKABLE))
-                    .as("Menu group should be clickable").isEqualTo(isTrue);
-            soft.assertThat(getElementAttributeValue(menuGroup, ENABLED))
-                    .as("Menu group should be enabled").isEqualTo(isTrue);
-            soft.assertThat(getElementAttributeValue(menuGroup, FOCUSABLE))
-                    .as("Menu group should be focusable").isEqualTo(isTrue);
+            soft.assertThat(restaurantScreen.getElementAttributeValue(menuGroup, CLICKABLE))
+                    .as("Menu group should be clickable")
+                    .isEqualTo(isTrue);
+            soft.assertThat(restaurantScreen.getElementAttributeValue(menuGroup, ENABLED))
+                    .as("Menu group should be enabled")
+                    .isEqualTo(isTrue);
+            soft.assertThat(restaurantScreen.getElementAttributeValue(menuGroup, FOCUSABLE))
+                    .as("Menu group should be focusable")
+                    .isEqualTo(isTrue);
         }
-        navigateBack(3);
+        restaurantScreen.navigateBack(3);
         soft.assertAll();
     }
 
     @Step("Swipe through the menu groups")
     public List<WebElement> swipeThroughTheMenuGroups() {
-        List<WebElement> menuGroups = getMenuGroups();
+        List<WebElement> menuGroups = restaurantScreen.getMenuGroups();
         swipe(menuGroups.get(3), menuGroups.get(0));
         swipe(menuGroups.get(2), menuGroups.get(0));
         RestaurantScreen restaurantScreen = new RestaurantScreen(driver);
-        return Stream
-                .concat(menuGroups.stream(), restaurantScreen.getMenuGroups().stream())
+        return Stream.concat(menuGroups.stream(), restaurantScreen.getMenuGroups().stream())
                 .distinct()
                 .collect(Collectors.toList());
     }
@@ -81,34 +84,44 @@ public class RestaurantScreenSteps extends RestaurantScreen {
     public void verifyThatCaloriesDisplayProperlyForAMenuItem() {
         SoftAssertions soft = new SoftAssertions();
 
-        soft.assertThat(isElementActive(getCaloriesIcon()))
-                .as("Calories icon should be active").isTrue();
-        soft.assertThat(isElementActive(getCaloriesLabel()))
-                .as("Calories label should be active").isTrue();
-        soft.assertThat(isElementActive(getFirstMenuItemName()))
-                .as("Menu item should be active").isTrue();
+        soft.assertThat(restaurantScreen.isElementActive(restaurantScreen.getCaloriesIcon()))
+                .as("Calories icon should be active")
+                .isTrue();
+        soft.assertThat(restaurantScreen.isElementActive(restaurantScreen.getCaloriesLabel()))
+                .as("Calories label should be active")
+                .isTrue();
+        soft.assertThat(restaurantScreen.isElementActive(restaurantScreen.getFirstMenuItemName()))
+                .as("Menu item should be active")
+                .isTrue();
 
-        String caloriesLabel = getCaloriesLabel().getText();
-        String firstMenuItemName = getFirstMenuItemName().getText();
+        String caloriesLabel = restaurantScreen.getCaloriesLabel().getText();
+        String firstMenuItemName = restaurantScreen.getFirstMenuItemName().getText();
 
-        tap(getFirstMenuItem());
+        restaurantScreen.tap(restaurantScreen.getFirstMenuItem());
         MenuItemScreen menuItemScreen = new MenuItemScreen(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOf(menuItemScreen.getTitle()));
 
-        soft.assertThat(isElementActive(menuItemScreen.getCaloriesIcon()))
-                .as("Calories icon should be active.").isTrue();
-        soft.assertThat(isElementActive(menuItemScreen.getCaloriesLabel()))
-                .as("Calories label should be active.").isTrue();
-        soft.assertThat(isElementActive(menuItemScreen.getCaloriesTotal()))
-                .as("Calories total should be active.").isTrue();
+        soft.assertThat(restaurantScreen.isElementActive(menuItemScreen.getCaloriesIcon()))
+                .as("Calories icon should be active.")
+                .isTrue();
+        soft.assertThat(restaurantScreen.isElementActive(menuItemScreen.getCaloriesLabel()))
+                .as("Calories label should be active.")
+                .isTrue();
+        soft.assertThat(restaurantScreen.isElementActive(menuItemScreen.getCaloriesTotal()))
+                .as("Calories total should be active.")
+                .isTrue();
         soft.assertThat(caloriesLabel)
-                .as("Calories details should match.").isEqualTo(menuItemScreen.getCaloriesTotal().getText()
-                + " " + menuItemScreen.getCaloriesLabel().getText().toLowerCase());
+                .as("Calories details should match.")
+                .isEqualTo(
+                        menuItemScreen.getCaloriesTotal().getText()
+                                + " "
+                                + menuItemScreen.getCaloriesLabel().getText().toLowerCase());
         soft.assertThat(firstMenuItemName)
-                .as("Menu item details should match.").isEqualTo(menuItemScreen.getTitle().getText());
+                .as("Menu item details should match.")
+                .isEqualTo(menuItemScreen.getTitle().getText());
 
-        navigateBack(4);
+        restaurantScreen.navigateBack(4);
         soft.assertAll();
     }
 
@@ -117,7 +130,7 @@ public class RestaurantScreenSteps extends RestaurantScreen {
         if (count <= 0) {
             return null;
         }
-        tap(getFirstMenuItem());
+        restaurantScreen.tap(restaurantScreen.getFirstMenuItem());
         int i = 0;
         while (i < count) {
             menuItemScreenSteps.addQuantity();
@@ -129,18 +142,24 @@ public class RestaurantScreenSteps extends RestaurantScreen {
 
     @Step("Get delivery fee from the restaurant screen")
     public Double getDeliveryFee() {
-        String deliveryFeeLabel = getDeliveryAmount().getText().trim();
+        String deliveryFeeLabel = restaurantScreen.getDeliveryAmount().getText().trim();
         return Double.parseDouble(deliveryFeeLabel.substring(0, deliveryFeeLabel.indexOf(' ')));
     }
 
     @Step("Go to checkout screen")
     public void goToCheckout() {
-        tap(getViewCart());
+        restaurantScreen.tap(restaurantScreen.getViewCart());
     }
 
     private void swipe(WebElement startElement, WebElement endElement) {
-        touchAction.longPress(longPressOptions().withElement(element(startElement))
-                .withDuration(Duration.ofMillis(500))).moveTo(element(endElement))
-                .release().perform();
+        restaurantScreen
+                .touchAction
+                .longPress(
+                        longPressOptions()
+                                .withElement(element(startElement))
+                                .withDuration(Duration.ofMillis(500)))
+                .moveTo(element(endElement))
+                .release()
+                .perform();
     }
 }

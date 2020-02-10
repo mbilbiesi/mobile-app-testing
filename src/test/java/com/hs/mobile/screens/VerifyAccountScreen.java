@@ -7,7 +7,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
 
 @Getter
-public abstract class VerifyAccountScreen extends AbstractScreen {
+public class VerifyAccountScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/phone_number")

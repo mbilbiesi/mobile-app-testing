@@ -5,21 +5,22 @@ import io.appium.java_client.AppiumDriver;
 
 import static com.hs.mobile.data.ElementAttribute.TEXT;
 
-public class InvoiceScreenSteps extends InvoiceScreen {
+public class InvoiceScreenSteps {
+    private InvoiceScreen invoiceScreen;
 
     public InvoiceScreenSteps(AppiumDriver driver) {
-        super(driver);
+        invoiceScreen = new InvoiceScreen(driver);
     }
 
     public String getInvoiceTitle() {
-        return getElementAttributeValue(getLblTitle(), TEXT);
+        return invoiceScreen.getElementAttributeValue(invoiceScreen.getLblTitle(), TEXT);
     }
 
     public Boolean isDownloadButtonActive() {
-        return isElementActive(getBtnDownload());
+        return invoiceScreen.isElementActive(invoiceScreen.getBtnDownload());
     }
 
     public Boolean isBackButtonActive() {
-        return isElementActive(getBtnBack());
+        return invoiceScreen.isElementActive(invoiceScreen.getBtnBack());
     }
 }

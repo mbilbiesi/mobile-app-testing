@@ -6,35 +6,39 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SavedLocationsScreenSteps extends SavedLocationsScreen {
+public class SavedLocationsScreenSteps {
+  private SavedLocationsScreen savedLocationsScreen;
+  private AppiumDriver driver;
 
-    public SavedLocationsScreenSteps(AppiumDriver driver) {
-        super(driver);
-    }
+  public SavedLocationsScreenSteps(AppiumDriver driver) {
+    this.driver = driver;
+    savedLocationsScreen = new SavedLocationsScreen(driver);
+  }
 
-    @Step("Add new location")
-    public void addNewLocation() {
-        tap(getNewLocation());
-    }
+  @Step("Add new location")
+  public void addNewLocation() {
+    savedLocationsScreen.tap(savedLocationsScreen.getNewLocation());
+  }
 
-    @Step("Delete saved locations")
-    public void deleteSavedLocations() {
-        getSavedLocations()
-                .forEach(
-                        location -> {
-                            tap(getMore());
-                            tap(getDelete());
-                        });
-    }
+  @Step("Delete saved locations")
+  public void deleteSavedLocations() {
+    savedLocationsScreen
+            .getSavedLocations()
+            .forEach(
+                    location -> {
+                      savedLocationsScreen.tap(savedLocationsScreen.getMore());
+                      savedLocationsScreen.tap(savedLocationsScreen.getDelete());
+                    });
+  }
 
-    @Step("Edit location")
-    public void editLocation() {
-        tap(getMore());
-        tap(getEdit());
-    }
+  @Step("Edit location")
+  public void editLocation() {
+    savedLocationsScreen.tap(savedLocationsScreen.getMore());
+    savedLocationsScreen.tap(savedLocationsScreen.getEdit());
+  }
 
-    void waitUntilNewLocationButtonDisplays() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOf(getNewLocation()));
-    }
+  void waitUntilNewLocationButtonDisplays() {
+    WebDriverWait wait = new WebDriverWait(driver, 10);
+    wait.until(ExpectedConditions.visibilityOf(savedLocationsScreen.getNewLocation()));
+  }
 }

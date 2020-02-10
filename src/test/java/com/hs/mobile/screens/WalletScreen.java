@@ -7,7 +7,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
 @Getter
-public abstract class WalletScreen extends AbstractScreen {
+public class WalletScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(xpath = "//android.widget.TextView[@text='العمليات' or @text='Transaction']")

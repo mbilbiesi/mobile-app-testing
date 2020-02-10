@@ -11,14 +11,17 @@ import java.util.Optional;
 
 import static com.hs.mobile.data.ElementAttribute.TEXT;
 
-public class InvoicesScreenSteps extends InvoicesScreen {
+public class InvoicesScreenSteps {
+    private InvoicesScreen invoicesScreen;
+    private AppiumDriver driver;
 
     public InvoicesScreenSteps(AppiumDriver driver) {
-        super(driver);
+        this.driver = driver;
+        invoicesScreen = new InvoicesScreen(driver);
     }
 
     public String getTitle() {
-        return getElementAttributeValue(getLblTitle(), TEXT);
+        return invoicesScreen.getElementAttributeValue(invoicesScreen.getLblTitle(), TEXT);
     }
 
     @Step("Verify that basic invoices screen elements are displayed correctly")
@@ -32,7 +35,7 @@ public class InvoicesScreenSteps extends InvoicesScreen {
                 .assertThat(isBackButtonActive())
                 .as("Return button should be displayed and enabled.")
                 .isTrue();
-        navigateBack(1);
+        invoicesScreen.navigateBack(1);
         soft.assertAll();
     }
 
@@ -49,7 +52,7 @@ public class InvoicesScreenSteps extends InvoicesScreen {
     public void verifyFirstAvailableInvoice() {
         Optional<InvoiceScreenSteps> optionalFirstInvoice = viewInvoice(0);
         if (optionalFirstInvoice.isEmpty()) {
-            navigateBack(1);
+            invoicesScreen.navigateBack(1);
             throw new AssertionError("Unable to open the invoice to verify its components.");
         }
 
@@ -67,7 +70,7 @@ public class InvoicesScreenSteps extends InvoicesScreen {
                 .assertThat(invoiceScreen.isBackButtonActive())
                 .as("Return button should be active.")
                 .isTrue();
-        navigateBack(2);
+        invoicesScreen.navigateBack(2);
         soft.assertAll();
     }
 
@@ -77,33 +80,33 @@ public class InvoicesScreenSteps extends InvoicesScreen {
         boolean isValidMessage =
                 "لا يوجد لديك اي فاتورة حالياً".equals(message)
                         || "There are no invoices to be shown at the moment".equals(message);
-        navigateBack(1);
+        invoicesScreen.navigateBack(1);
         Assertions.assertThat(isValidMessage)
                 .as(String.format("Invalid message: [%s]", message))
                 .isTrue();
     }
 
     private String getInvoiceTitle() {
-        return getElementAttributeValue(getLblTitle(), TEXT);
+        return invoicesScreen.getElementAttributeValue(invoicesScreen.getLblTitle(), TEXT);
     }
 
     public Boolean isBackButtonActive() {
-        return isElementActive(getLblTitle());
+        return invoicesScreen.isElementActive(invoicesScreen.getLblTitle());
     }
 
     public Boolean areThereInvoices() {
-        return CollectionUtils.isNotEmpty(getLstInvoices());
+        return CollectionUtils.isNotEmpty(invoicesScreen.getLstInvoices());
     }
 
     public String getMessage() {
-        return getElementAttributeValue(getLblMessage(), TEXT);
+        return invoicesScreen.getElementAttributeValue(invoicesScreen.getLblMessage(), TEXT);
     }
 
     public Optional<InvoiceScreenSteps> viewInvoice(int index) {
-        if (CollectionUtils.isNotEmpty(getLstInvoices())
+        if (CollectionUtils.isNotEmpty(invoicesScreen.getLstInvoices())
                 && index >= 0
-                && index < getLstInvoices().size()) {
-            tap(getLstInvoices().get(index));
+                && index < invoicesScreen.getLstInvoices().size()) {
+            invoicesScreen.tap(invoicesScreen.getLstInvoices().get(index));
             return Optional.of(new InvoiceScreenSteps(driver));
         }
         return Optional.empty();

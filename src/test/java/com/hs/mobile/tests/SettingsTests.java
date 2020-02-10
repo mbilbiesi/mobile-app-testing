@@ -61,7 +61,8 @@ public class SettingsTests extends BaseTest {
 
         // Then
         boolean areNotificationsEnabled = settingsScreenSteps.areNotificationsEnabled();
-        settingsScreenSteps.navigateBack(1);
+        //todo:Fix the below comment
+        //settingsScreenSteps.navigateBack(1);
         Assertions.assertThat(areNotificationsEnabled).as("Notifications should be enabled.").isTrue();
     }
 
@@ -73,7 +74,8 @@ public class SettingsTests extends BaseTest {
 
         // Then
         boolean areNotificationsEnabled = settingsScreenSteps.areNotificationsEnabled();
-        settingsScreenSteps.navigateBack(1);
+        //todo: fix below
+        //settingsScreenSteps.navigateBack(1);
         Assertions.assertThat(areNotificationsEnabled)
                 .as("Notifications should be disabled.")
                 .isFalse();

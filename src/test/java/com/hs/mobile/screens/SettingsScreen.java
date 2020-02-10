@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 @Getter
-public abstract class SettingsScreen extends AbstractScreen {
+public class SettingsScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(xpath = "//android.widget.TextView[@index='1']")

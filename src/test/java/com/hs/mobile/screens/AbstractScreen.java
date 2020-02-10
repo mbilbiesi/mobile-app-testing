@@ -37,7 +37,7 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
 
 public class AbstractScreen {
-    protected final TouchAction touchAction;
+    public final TouchAction touchAction;
     protected final AppiumDriver driver;
 
     // ToDo: find the locator of the skip promotion link in english
@@ -57,7 +57,7 @@ public class AbstractScreen {
         }
     }
 
-    protected void hideKeyboard() {
+    public void hideKeyboard() {
         if (isAndroid()) {
             driver.hideKeyboard();
         } else {
@@ -78,11 +78,11 @@ public class AbstractScreen {
         touchAction.tap(tapOptions().withElement(element(element))).perform();
     }
 
-    protected String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
+    public String getElementAttributeValue(WebElement element, ElementAttribute attribute) {
         return element.getAttribute(attribute.getName());
     }
 
-    protected void verifyScreenElements() {
+    public void verifyScreenElements() {
         SoftAssertions soft = new SoftAssertions();
 
         Class<?> clazz = this.getClass();
@@ -105,7 +105,7 @@ public class AbstractScreen {
         soft.assertAll();
     }
 
-    protected void verifyScreenElements(SoftAssertions soft) {
+    public void verifyScreenElements(SoftAssertions soft) {
         //Method has been created in case we want to verify other things before closing the soft assertion
         Class<?> clazz = this.getClass();
         for (Field field : clazz.getDeclaredFields()) {
@@ -190,11 +190,11 @@ public class AbstractScreen {
                 .perform();
     }
 
-    protected Boolean isElementActive(WebElement element) {
+    public Boolean isElementActive(WebElement element) {
         return element.isDisplayed() && element.isEnabled();
     }
 
-    protected void waitUntilAnElementIsUpdated(
+    public void waitUntilAnElementIsUpdated(
             WebElement element, ElementAttribute attribute, String expectedValue) {
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.attributeToBe(element, attribute.getName(), expectedValue));

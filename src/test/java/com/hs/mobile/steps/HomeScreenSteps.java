@@ -5,49 +5,52 @@ import com.hs.mobile.screens.HomeScreenSideMenu;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 
-public class HomeScreenSteps extends HomeScreen {
+public class HomeScreenSteps {
+    private HomeScreen homeScreen;
+    private RestaurantListScreenSteps restaurant;
+    private AppiumDriver driver;
 
     public HomeScreenSteps(AppiumDriver driver) {
-        super(driver);
+        this.driver = driver;
+        homeScreen = new HomeScreen(driver);
+        restaurant = new RestaurantListScreenSteps(driver);
     }
-
-    private RestaurantListScreenSteps restaurant = new RestaurantListScreenSteps(driver);
 
 
     @Step("Find restaurants")
     public void findRestaurants() {
-        tap(getFindRestaurantsButton());
+        homeScreen.tap(homeScreen.getFindRestaurantsButton());
         restaurant.waitUntilRestaurantsAreLoaded();
     }
 
     @Step("View saved locations")
     public void viewSavedLocations() {
-        tap(getUseMyCurrentLocationText());
+        homeScreen.tap(homeScreen.getUseMyCurrentLocationText());
     }
 
     @Step("Verify that all 'Homescreen' elements are displayed correctly")
     public void verifyThatAllHomeElementsDisplayed() {
-        verifyScreenElements();
+        homeScreen.verifyScreenElements();
     }
 
     @Step("Click the 'My Orders' button")
     public void clickMyOrdersButton() {
-        tap(getOrdersItem());
+        homeScreen.tap(homeScreen.getOrdersItem());
     }
 
     @Step("Click the 'Find Restaurants' button")
     public void clickFindRestaurantsButton() {
-        tap(getFindRestaurantsButton());
+        homeScreen.tap(homeScreen.getFindRestaurantsButton());
     }
 
     @Step("Click on restaurant icon")
     public void clickOnResturantIcon() {
-        tap(getRestaurantsItem());
+        homeScreen.tap(homeScreen.getRestaurantsItem());
     }
 
     @Step("Click on more")
     public HomeScreenSideMenu clickOnMore() {
-        tap(getMoreItem());
+        homeScreen.tap(homeScreen.getMoreItem());
         return new HomeScreenSideMenu(driver);
     }
 }

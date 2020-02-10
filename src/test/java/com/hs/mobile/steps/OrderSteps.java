@@ -8,28 +8,31 @@ import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class OrderSteps extends OrderScreen {
+public class OrderSteps {
+    private OrderScreen orderScreen;
+    private AppiumDriver driver;
 
     public OrderSteps(AppiumDriver driver) {
-        super(driver);
+        this.driver = driver;
+        orderScreen = new OrderScreen(driver);
     }
 
     @Step("Click on 'Help' button")
     public void clickHelp() {
         try {
-            tap(getBtnHelp());
+            orderScreen.tap(orderScreen.getBtnHelp());
         } catch (TestExecutionException e) {
             throw new TestExecutionException("Unable to locate 'Help' button " + e);
         }
     }
 
     public void navigateBackToAllOrders() {
-        tap(getBtnBack());
+        orderScreen.tap(orderScreen.getBtnBack());
     }
 
     public void waitUntilOrderScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(getEleOrderHeader()));
+        wait.until(ExpectedConditions.visibilityOfAllElements(orderScreen.getEleOrderHeader()));
     }
 
     @Step("Verify that 'Order' screen elements are showing properly")
@@ -40,7 +43,7 @@ public class OrderSteps extends OrderScreen {
 
         verifyOrderSummaryElements(soft);
 
-        swipe(getLblOrderTotal(), getImgRestaurantLogo());
+        orderScreen.swipe(orderScreen.getLblOrderTotal(), orderScreen.getImgRestaurantLogo());
         verifyCashbackElements(soft);
 
         driver.navigate().back();
@@ -49,41 +52,41 @@ public class OrderSteps extends OrderScreen {
     }
 
     private void verifyOrderHeaderElements(SoftAssertions soft) {
-        if (getImgOrderDetailsIcons().size() == 3) {
-            soft.assertThat(getImgOrderDetailsIcons().get(0).isDisplayed())
+        if (orderScreen.getImgOrderDetailsIcons().size() == 3) {
+            soft.assertThat(orderScreen.getImgOrderDetailsIcons().get(0).isDisplayed())
                     .as("Location icon isn't displayed").isTrue();
-            soft.assertThat(getImgOrderDetailsIcons().get(1).isDisplayed())
+            soft.assertThat(orderScreen.getImgOrderDetailsIcons().get(1).isDisplayed())
                     .as("Order payment method icon isn't displayed").isTrue();
-            soft.assertThat(getImgOrderDetailsIcons().get(2).isDisplayed())
+            soft.assertThat(orderScreen.getImgOrderDetailsIcons().get(2).isDisplayed())
                     .as("Delivery type icon isn't displayed").isTrue();
         } else {
             soft.assertThat(false)
                     .as("Not all order details icons are displayed").isTrue();
         }
-        verifyScreenElements(soft);
+        orderScreen.verifyScreenElements(soft);
     }
 
     private void verifyOrderSummaryElements(SoftAssertions soft) {
-        soft.assertThat(getLblOrderItemQuantity().size() > 0)
+        soft.assertThat(orderScreen.getLblOrderItemQuantity().size() > 0)
                 .as("Quantity value isn't displayed for all order items").isTrue();
-        soft.assertThat(getLblOrderItemsNames().size() > 0)
+        soft.assertThat(orderScreen.getLblOrderItemsNames().size() > 0)
                 .as("Item name isn't displayed for all order items").isTrue();
-        soft.assertThat(getLblOrderItemsPrices().size() > 0)
+        soft.assertThat(orderScreen.getLblOrderItemsPrices().size() > 0)
                 .as("Price isn't displayed for all order items").isTrue();
-        soft.assertThat(getLblOrderItemsCurrency().size() > 0)
+        soft.assertThat(orderScreen.getLblOrderItemsCurrency().size() > 0)
                 .as("Currency isn't displayed for all order item prices").isTrue();
     }
 
     private void verifyCashbackElements(SoftAssertions soft) {
-        soft.assertThat(getEleCashback().size() > 0)
+        soft.assertThat(orderScreen.getEleCashback().size() > 0)
                 .as("Cashback component does not exist").isTrue();
-        soft.assertThat(getLblCashbackTitle().size() > 0)
+        soft.assertThat(orderScreen.getLblCashbackTitle().size() > 0)
                 .as("Cashback component title isn't displayed").isTrue();
-        soft.assertThat(getTxaCashbackDescription().size() > 0)
+        soft.assertThat(orderScreen.getTxaCashbackDescription().size() > 0)
                 .as("Cashback description isn't displayed").isTrue();
-        soft.assertThat(getEleCashbackCode().size() > 0)
+        soft.assertThat(orderScreen.getEleCashbackCode().size() > 0)
                 .as("Cashback code isn't displayed").isTrue();
-        soft.assertThat(getBtnCopyCashbackCode().size() > 0)
+        soft.assertThat(orderScreen.getBtnCopyCashbackCode().size() > 0)
                 .as("Copy Cashback Code button isn't displayed").isTrue();
     }
 }

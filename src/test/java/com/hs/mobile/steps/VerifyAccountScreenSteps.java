@@ -9,26 +9,27 @@ import org.assertj.core.api.SoftAssertions;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-public class VerifyAccountScreenSteps extends VerifyAccountScreen {
+public class VerifyAccountScreenSteps {
+    private VerifyAccountScreen verifyAccountScreen;
 
     public VerifyAccountScreenSteps(AppiumDriver driver) {
-        super(driver);
+        verifyAccountScreen = new VerifyAccountScreen(driver);
     }
 
     public boolean isTxtPhoneNumberDisplayed() {
-        return getTxtPhoneNumber().isDisplayed();
+        return verifyAccountScreen.getTxtPhoneNumber().isDisplayed();
     }
 
     public boolean isBtnNextDisplayed() {
-        return getBtnNext().isDisplayed();
+        return verifyAccountScreen.getBtnNext().isDisplayed();
     }
 
     public MobileElement getPhoneNumberTextbox() {
-        return getTxtPhoneNumber();
+        return verifyAccountScreen.getTxtPhoneNumber();
     }
 
     public MobileElement getNextButton() {
-        return getBtnNext();
+        return verifyAccountScreen.getBtnNext();
     }
 
     @Step("Make sure that all orders details are displayed if customer isn't logged in")
@@ -47,8 +48,11 @@ public class VerifyAccountScreenSteps extends VerifyAccountScreen {
         getPhoneNumberTextbox().sendKeys(number);
     }
 
-    @Step("Click the \"Next\" button")
+    @Step("Click the 'Next' button")
     public void clickNextButton() {
-        touchAction.tap(tapOptions().withElement(element(getNextButton()))).perform();
+        verifyAccountScreen
+                .touchAction
+                .tap(tapOptions().withElement(element(getNextButton())))
+                .perform();
     }
 }

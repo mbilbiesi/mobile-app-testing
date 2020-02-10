@@ -6,27 +6,31 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MenuItemScreenSteps extends MenuItemScreen {
+public class MenuItemScreenSteps {
+    private MenuItemScreen menuItemScreen;
+    private AppiumDriver driver;
 
     public MenuItemScreenSteps(AppiumDriver driver) {
-        super(driver);
+        this.driver = driver;
+        menuItemScreen = new MenuItemScreen(driver);
     }
 
     @Step("")
     public void addQuantity() {
-        tap(getPlus());
+        menuItemScreen.tap(menuItemScreen.getPlus());
     }
 
     @Step("")
     public Double getTotalAmount() {
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOf(getAmount()));
-        String amountLabel = getAmount().getText().trim();
+        wait.until(ExpectedConditions.visibilityOf(menuItemScreen.getAmount()));
+        String amountLabel = menuItemScreen.getAmount().getText().trim();
         return Double.parseDouble(amountLabel.substring(0, amountLabel.indexOf(' ')));
     }
 
     @Step("")
     public void addToCart() {
-        tap(getAdd());
+        menuItemScreen.tap(menuItemScreen.getAdd());
     }
+    // todo: check why this class's steps are without description
 }

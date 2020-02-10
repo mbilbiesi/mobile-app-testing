@@ -8,37 +8,35 @@ import org.assertj.core.api.SoftAssertions;
 
 import java.nio.charset.StandardCharsets;
 
-public class ProfileScreenSteps extends ProfileScreen {
-    private static final String VALID_NAME = "Nabeel Sweidan";
+public class ProfileScreenSteps {
+    private static final String VALID_NAME = RandomStringUtils.randomAlphanumeric(10);
+    private ProfileScreen profileScreen;
     private HomeScreenSteps homeScreenSteps;
 
     public ProfileScreenSteps(AppiumDriver driver) {
-        super(driver);
+        profileScreen = new ProfileScreen(driver);
         homeScreenSteps = new HomeScreenSteps(driver);
     }
 
     @Step("Verify profile screen")
     public void verifyProfileScreen() {
         SoftAssertions soft = new SoftAssertions();
-        String title = getTitle();
+        String title = profileScreen.getTitle();
         boolean isValidTitle =
                 new String("حسابي".getBytes(), StandardCharsets.UTF_8).equals(title)
                         || "My Account".equals(title);
 
         soft.assertThat(isValidTitle).as(String.format("Invalid title: [%s].", title)).isTrue();
-        soft
-                .assertThat(isNumberEnabled())
+        soft.assertThat(profileScreen.isNumberEnabled())
                 .as("Number field should be disabled.")
                 .isFalse();
-        soft
-                .assertThat(isNameActive())
+        soft.assertThat(profileScreen.isNameActive())
                 .as("Name field should be displayed and enabled.")
                 .isTrue();
-        soft
-                .assertThat(isEmailActive())
+        soft.assertThat(profileScreen.isEmailActive())
                 .as("Email field should be displayed and enabled.")
                 .isTrue();
-        navigateBack(1);
+        profileScreen.navigateBack(1);
         soft.assertAll();
     }
 
@@ -47,21 +45,19 @@ public class ProfileScreenSteps extends ProfileScreen {
         SoftAssertions soft = new SoftAssertions();
         String email = "ns1@hs.com";
 
-        insertName(VALID_NAME);
-        insertEmail(email);
-        update();
-        waitUntilProfileIsUpdated();
-        navigateBack(1);
+        profileScreen.insertName(VALID_NAME);
+        profileScreen.insertEmail(email);
+        profileScreen.update();
+        profileScreen.waitUntilProfileIsUpdated();
+        profileScreen.navigateBack(1);
         homeScreenSteps.clickOnMore().goToProfile();
-        soft
-                .assertThat(getName())
+        soft.assertThat(profileScreen.getName())
                 .as("Name was not successfully updated.")
                 .isEqualTo(VALID_NAME);
-        soft
-                .assertThat(getEmail())
+        soft.assertThat(profileScreen.getEmail())
                 .as("Name was not successfully updated.")
                 .isEqualTo(email);
-        navigateBack(1);
+        profileScreen.navigateBack(1);
         soft.assertAll();
     }
 
@@ -70,28 +66,21 @@ public class ProfileScreenSteps extends ProfileScreen {
         SoftAssertions soft = new SoftAssertions();
         String invalidName = RandomStringUtils.randomAlphanumeric(51);
 
-        insertName(VALID_NAME);
-        insertEmail("");
-        soft
-                .assertThat(isUpdateButtonEnabled())
-                .as("Email is mandatory.")
-                .isFalse();
-        insertName("");
-        insertEmail("ns2@hs.com");
-        soft
-                .assertThat(isUpdateButtonEnabled())
-                .as("Name is not mandatory.")
-                .isTrue();
-        insertName(invalidName);
-        update();
-        waitUntilProfileIsUpdated();
-        navigateBack(1);
+        profileScreen.insertName(VALID_NAME);
+        profileScreen.insertEmail("");
+        soft.assertThat(profileScreen.isUpdateButtonEnabled()).as("Email is mandatory.").isFalse();
+        profileScreen.insertName("");
+        profileScreen.insertEmail("ns2@hs.com");
+        soft.assertThat(profileScreen.isUpdateButtonEnabled()).as("Name is not mandatory.").isTrue();
+        profileScreen.insertName(invalidName);
+        profileScreen.update();
+        profileScreen.waitUntilProfileIsUpdated();
+        profileScreen.navigateBack(1);
         homeScreenSteps.clickOnMore().goToProfile();
-        soft
-                .assertThat(getName())
+        soft.assertThat(profileScreen.getName())
                 .as("Name should not exceed 50 characters.")
                 .isNotEqualTo(invalidName);
-        navigateBack(1);
+        profileScreen.navigateBack(1);
         soft.assertAll();
     }
 }

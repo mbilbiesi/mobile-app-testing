@@ -16,21 +16,24 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HelpSteps extends HelpScreen {
+public class HelpSteps {
+    private HelpScreen helpScreen;
+    private AppiumDriver driver;
 
     public HelpSteps(AppiumDriver driver) {
-        super(driver);
+        this.driver = driver;
+        helpScreen = new HelpScreen(driver);
     }
 
     private void waitUntilHelpScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(getEleTicketsList()));
+        wait.until(ExpectedConditions.visibilityOfAllElements(helpScreen.getEleTicketsList()));
     }
 
     @Step("Verify that all 'Help' screen elements are displayed")
     public void verifyHelpElementsDisplayed() {
         waitUntilHelpScreenLoaded();
-        verifyScreenElements();
+        helpScreen.verifyScreenElements();
     }
 
     @Step("Verify that different ticket categories are displayed to the customer")
@@ -66,7 +69,7 @@ public class HelpSteps extends HelpScreen {
     }
 
     private List<String> getActualTicketCategories() {
-        return getLblTicketCategory().stream()
+        return helpScreen.getLblTicketCategory().stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
@@ -74,17 +77,17 @@ public class HelpSteps extends HelpScreen {
     @Step("Verify that each tickets category contains the right ticket types")
     public void verifyEachTicketCategoryContainCorrectTicketType() {
         SoftAssertions soft = new SoftAssertions();
-        int ticketCategoriesCount = getLblTicketCategory().size();
+        int ticketCategoriesCount = helpScreen.getLblTicketCategory().size();
         String category;
         List<String> expectedTickets;
         List<String> actualTickets;
 
         for (int i = 0; i < ticketCategoriesCount; i++) {
-            category = getLblTicketCategory().get(i).getText();
-            tap(getLblTicketCategory().get(i));
+            category = helpScreen.getLblTicketCategory().get(i).getText();
+            helpScreen.tap(helpScreen.getLblTicketCategory().get(i));
             expectedTickets = getExpectedTicketsPerCategory(category);
-            actualTickets = getActualTicketsPerCategory(getEleTicket());
-            soft.assertThat(getEleTicket().size() > 0)
+            actualTickets = getActualTicketsPerCategory(helpScreen.getEleTicket());
+            soft.assertThat(helpScreen.getEleTicket().size() > 0)
                     .as("No tickets exist for the category: " + category)
                     .isTrue();
             soft.assertThat(expectedTickets.equals(actualTickets))
@@ -126,19 +129,19 @@ public class HelpSteps extends HelpScreen {
             tapRandomCategory();
             tapRandomTicket();
         } else {
-            tap(getLblTicketCategory().get(1));
-            tap(getEleTicket().get(0));
+            helpScreen.tap(helpScreen.getLblTicketCategory().get(1));
+            helpScreen.tap(helpScreen.getEleTicket().get(0));
         }
     }
 
     private void tapRandomCategory() {
-        int randomCategoryIndex = getRandomIndex(getLblTicketCategory());
-        tap(getLblTicketCategory().get(randomCategoryIndex));
+        int randomCategoryIndex = getRandomIndex(helpScreen.getLblTicketCategory());
+        helpScreen.tap(helpScreen.getLblTicketCategory().get(randomCategoryIndex));
     }
 
     private void tapRandomTicket() {
-        int randomTicketIndex = getRandomIndex(getEleTicket());
-        tap(getEleTicket().get(randomTicketIndex));
+        int randomTicketIndex = getRandomIndex(helpScreen.getEleTicket());
+        helpScreen.tap(helpScreen.getEleTicket().get(randomTicketIndex));
     }
 
     private int getRandomIndex(List<WebElement> tickets) {
@@ -146,6 +149,6 @@ public class HelpSteps extends HelpScreen {
     }
 
     public void navigateBackToOrder() {
-        tap(getBtnBack());
+        helpScreen.tap(helpScreen.getBtnBack());
     }
 }

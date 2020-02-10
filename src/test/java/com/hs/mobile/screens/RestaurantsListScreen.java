@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 @Getter
-public abstract class RestaurantsListScreen extends AbstractScreen {
+public class RestaurantsListScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_icon")

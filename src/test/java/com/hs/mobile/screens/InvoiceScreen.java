@@ -7,7 +7,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
 @Getter
-public abstract class InvoiceScreen extends AbstractScreen {
+public class InvoiceScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_download")

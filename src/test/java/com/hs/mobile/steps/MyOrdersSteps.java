@@ -20,10 +20,13 @@ import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MyOrdersSteps extends MyOrdersScreen {
+public class MyOrdersSteps {
+    private MyOrdersScreen myOrdersScreen;
+    private AppiumDriver driver;
 
     public MyOrdersSteps(AppiumDriver driver) {
-        super(driver);
+        this.driver = driver;
+        myOrdersScreen = new MyOrdersScreen(driver);
     }
 
     @Step("Select an order, and click it")
@@ -44,9 +47,9 @@ public class MyOrdersSteps extends MyOrdersScreen {
             case "in progress":
                 orders = getOpenOrders();
                 break;
-            //ToDo: add all remaining order statuses.. cancelled, etc
+            // ToDo: add all remaining order statuses.. cancelled, etc
             default:
-                orders = getEleOrderTitles();
+                orders = myOrdersScreen.getEleOrderTitles();
         }
 
         return orders;
@@ -54,7 +57,7 @@ public class MyOrdersSteps extends MyOrdersScreen {
 
     private void clickOrder(List<MobileElement> orders) {
         try {
-            tap(orders.get(0));
+            myOrdersScreen.tap(orders.get(0));
         } catch (TestExecutionException e) {
             throw new TestExecutionException("Unable to locate the order which is gonna be clicked " + e);
         }
@@ -66,16 +69,16 @@ public class MyOrdersSteps extends MyOrdersScreen {
         List<MobileElement> deliveredOrders = new ArrayList<>();
 
         for (int i = 0; i < ordersCount; i++) {
-            orderStatus = getEleOrderStatus().get(i).getText();
+            orderStatus = myOrdersScreen.getEleOrderStatus().get(i).getText();
             if (orderStatus.equalsIgnoreCase("delivered") || orderStatus.equals("تم التوصيل")) {
-                deliveredOrders.add(getEleOrderTitles().get(i));
+                deliveredOrders.add(myOrdersScreen.getEleOrderTitles().get(i));
             }
         }
 
         if (deliveredOrders.size() == 0) {
-            //There are no delivered orders
-            //ToDo: Implement a logging mechanism to inform when there are no delivered orders
-            deliveredOrders = getEleOrderTitles();
+            // There are no delivered orders
+            // ToDo: Implement a logging mechanism to inform when there are no delivered orders
+            deliveredOrders = myOrdersScreen.getEleOrderTitles();
         }
 
         return deliveredOrders;
@@ -84,32 +87,35 @@ public class MyOrdersSteps extends MyOrdersScreen {
     private List<MobileElement> getOpenOrders() {
         List<MobileElement> openOrders;
 
-        openOrders = getOpenOrderTitle();
+        openOrders = myOrdersScreen.getOpenOrderTitle();
 
         if (openOrders.size() == 0) {
-            openOrders = getEleOrders();
+            openOrders = myOrdersScreen.getEleOrders();
         }
 
         return openOrders;
     }
 
     private int getOrdersCount() {
-        return getEleOrderTitles().size();
+        return myOrdersScreen.getEleOrderTitles().size();
     }
 
     public void waitUntilMyOrdersScreenLoaded() {
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfAllElements(getEleOrders().get(0)));
+        wait.until(ExpectedConditions.visibilityOfAllElements(myOrdersScreen.getEleOrders().get(0)));
     }
 
     @Step("Click the 'Verify' button")
     public void clickVerifyButton() {
-        touchAction.tap(tapOptions().withElement(element(getVerifyButton()))).perform();
+        myOrdersScreen
+                .touchAction
+                .tap(tapOptions().withElement(element(myOrdersScreen.getVerifyButton())))
+                .perform();
     }
 
     @Step("Navigate back to Restaurants")
     public void navigateToRestaurants() {
-        tap(getBtnRestaurants());
+        myOrdersScreen.tap(myOrdersScreen.getBtnRestaurants());
     }
 
     @Step("Verify that orders are sorted by date desc")
@@ -126,12 +132,12 @@ public class MyOrdersSteps extends MyOrdersScreen {
     }
 
     private List<Date> getOrdersDates(String locale) throws ParseException {
-        int size = getEleOrderDate().size();
+        int size = myOrdersScreen.getEleOrderDate().size();
         List<Date> orderDates = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-            orderDates.add(getDate(getEleOrderDate().get(i).getText()
-                    .replace(",", ""), locale));
+            orderDates.add(
+                    getDate(myOrdersScreen.getEleOrderDate().get(i).getText().replace(",", ""), locale));
         }
 
         return orderDates;

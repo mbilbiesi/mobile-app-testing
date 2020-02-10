@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 @Getter
-public abstract class SavedLocationsScreen extends AbstractScreen {
+public class SavedLocationsScreen extends AbstractScreen {
 
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(

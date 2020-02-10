@@ -5,14 +5,15 @@ import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.assertj.core.api.SoftAssertions;
 
-public class CheckoutScreenSteps extends CheckoutScreen {
+public class CheckoutScreenSteps {
+    private CheckoutScreen checkoutScreen;
     private HomeScreenSteps homeScreenSteps;
     private LocationScreenSteps locationScreenSteps;
     private RestaurantListScreenSteps restaurantListScreenSteps;
     private RestaurantScreenSteps restaurantScreenSteps;
 
     public CheckoutScreenSteps(AppiumDriver driver) {
-        super(driver);
+        checkoutScreen = new CheckoutScreen(driver);
         homeScreenSteps = new HomeScreenSteps(driver);
         locationScreenSteps = new LocationScreenSteps(driver);
         restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
@@ -38,13 +39,13 @@ public class CheckoutScreenSteps extends CheckoutScreen {
 
         SoftAssertions soft = new SoftAssertions();
         double expectedTotalAmount = expectedOrderAmount + expectedDeliveryAmount;
-        String actualOrderAmountLabel = getOrderAmount().getText();
+        String actualOrderAmountLabel = checkoutScreen.getOrderAmount().getText();
         double actualOrderAmount = Double.parseDouble(actualOrderAmountLabel.substring(
                 actualOrderAmountLabel.indexOf(' '), actualOrderAmountLabel.length() - 1));
-        String actualDeliveryAmountLabel = getDeliveryAmount().getText();
+        String actualDeliveryAmountLabel = checkoutScreen.getDeliveryAmount().getText();
         double actualDeliveryAmount = Double.parseDouble(actualDeliveryAmountLabel.substring(
                 actualDeliveryAmountLabel.indexOf(' '), actualDeliveryAmountLabel.length() - 1));
-        String actualTotalAmountLabel = getTotalAmount().getText();
+        String actualTotalAmountLabel = checkoutScreen.getTotalAmount().getText();
         double actualTotalAmount = Double.parseDouble(actualTotalAmountLabel.substring(
                 actualTotalAmountLabel.indexOf(' '), actualTotalAmountLabel.length() - 1));
 
@@ -60,7 +61,7 @@ public class CheckoutScreenSteps extends CheckoutScreen {
                 .as(String.format("Actual total amount is [%s] instead of [%s]",
                         actualTotalAmount, expectedTotalAmount))
                 .isEqualTo(expectedTotalAmount);
-        navigateBack(3);
+        checkoutScreen.navigateBack(3);
         soft.assertAll();
     }
 }
