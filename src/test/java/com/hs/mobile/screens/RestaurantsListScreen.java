@@ -13,137 +13,137 @@ import java.util.List;
 @Getter
 public abstract class RestaurantsListScreen extends AbstractScreen {
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_icon")
     @AssertElementVisibility
     private WebElement imgLocationIcon;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/location_value")
     @AssertElementVisibility
     private WebElement eleLocationValue;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/input")
     @AssertElementVisibility
     private WebElement txtSearchRestaurants;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon_start")
     @AssertElementVisibility
     private WebElement imgSearchIcon;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/viewpager")
     @AssertElementVisibility
     private WebElement eleOffersContainer;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/image")
     @AssertElementVisibility
     private List<WebElement> offerWidgets;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/campaign_container")
     @AssertElementVisibility
     private WebElement campaignContainer;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/campaign_banner")
     @AssertElementVisibility
     private List<MobileElement> campainBanners;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_component")
     @AssertElementVisibility
     private WebElement filtersWidget;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_filter")
     private List<WebElement> btnFilter;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_name")
     private List<WebElement> filtersNames;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_icon")
     private List<WebElement> filtersIcons;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/RestListView")
     @AssertElementVisibility
     private WebElement restaurantsListWidget;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/constrain_parent")
     @AssertElementVisibility
     private List<WebElement> restaurantList;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/constrain_parent")
     @AssertElementVisibility
     private List<WebElement> restaurantWidgets;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/title")
     @AssertElementVisibility
     private List<WebElement> restaurantTitle;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/description")
     @AssertElementVisibility
     private List<WebElement> restaurantType;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/distance_value")
     private List<WebElement> restaurantDistance;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_fee_title")
     @AssertElementVisibility
     private List<WebElement> deliveryText;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_fee_value")
     @AssertElementVisibility
     private List<WebElement> deliveryFeeValue;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_fee_currency")
     @AssertElementVisibility
     private List<WebElement> deliveryFeeCurrency;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/label_desc")
     @AssertElementVisibility
     private List<WebElement> restaurantDeliveryInfo;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon")
     @AssertElementVisibility
     private List<WebElement> restaurantDeliveryInfoIcon;
 
-    @iOSXCUITFindBy(xpath = "")
+    //@iOSXCUITFindBy(xpath = "//*test")
     @AndroidFindBy(xpath = "//*[@text='يوصى به' or @text='recommended']")
     private List<WebElement> recommendedBadge;
 
-    @iOSXCUITFindBy(xpath = "")
+    //@iOSXCUITFindBy(xpath = "//*test")
     @AndroidFindBy(
             xpath =
                     "//*[@id='com.hungerstation.android.web.debug:id/value'"
                             + " and not(@text='يوصى به' or @text='recommended')]")
     private WebElement branchStatusBadge;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/icon_end")
     private WebElement btnClearSearchResult;
 
-    @iOSXCUITFindBy(xpath = "")
+    //@iOSXCUITFindBy(xpath = "//*test")
     @AndroidFindBy(xpath = "//*[@text='اعلان' or @text='Promoted']")
     private List<WebElement> promotedBadge;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/layout_campaign_tool_bar")
     private WebElement campaignMainImage;
 

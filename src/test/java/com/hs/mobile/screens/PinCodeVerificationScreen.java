@@ -12,23 +12,23 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class PinCodeVerificationScreen extends AbstractScreen {
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/state_description")
     private MobileElement eleCustomerPhoneNumber;
 
-    @iOSXCUITFindBy(id = "")
+    @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeTextField'")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/edt_verification_number")
     private MobileElement txtVerificationCode;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/resend_pin")
     private MobileElement lnkResendPin;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/resend_call_pin")
     private MobileElement lnkResendPinCall;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_login")
     private MobileElement btnVerifyNumber;
 

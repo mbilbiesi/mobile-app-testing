@@ -9,15 +9,15 @@ import lombok.Getter;
 @Getter
 public class CheckoutScreen extends AbstractScreen {
 
-  @iOSXCUITFindBy(id = "")
+  //@iOSXCUITFindBy(id = "test")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_order_amount_val")
   private MobileElement orderAmount;
 
-  @iOSXCUITFindBy(id = "")
+  //@iOSXCUITFindBy(id = "test")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_delivery_amount_val")
   private MobileElement deliveryAmount;
 
-  @iOSXCUITFindBy(id = "")
+  //@iOSXCUITFindBy(id = "test")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_total_amount_val")
   private MobileElement totalAmount;
 

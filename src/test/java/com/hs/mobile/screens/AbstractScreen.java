@@ -41,7 +41,7 @@ public class AbstractScreen {
     protected final AppiumDriver driver;
 
     // ToDo: find the locator of the skip promotion link in english
-    @iOSXCUITFindBy(xpath = "")
+//    @iOSXCUITFindBy(xpath = "//*test")
     @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='textInEnglish']")
     private List<WebElement> lnkSkipPromotion;
 

@@ -10,32 +10,32 @@ import java.util.List;
 
 @Getter
 public class LocationsScreen extends AbstractScreen {
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/action_search")
     private WebElement searchButton;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_edit_text")
     private WebElement searchTextBox;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(
             id = "com.hungerstation.android.web.debug:id/places_autocomplete_prediction_primary_text")
     private List<WebElement> itemAreas;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/BtnAddAddress")
     private WebElement selectAddressButton;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/editDescription")
     private WebElement addressDescriptionTextBox;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/save_location_switch")
     private WebElement saveForLaterToggleButton;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(
             xpath =
                     "//android.widget.RadioGroup[@resource-id='com.hungerstation.android.web.debug:id/save_location_radio_group']/*")

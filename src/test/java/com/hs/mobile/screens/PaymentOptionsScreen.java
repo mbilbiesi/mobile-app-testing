@@ -6,7 +6,7 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 
 public class PaymentOptionsScreen extends AbstractScreen {
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/wallet_recycler_view")
     private WebElement wallet;
 

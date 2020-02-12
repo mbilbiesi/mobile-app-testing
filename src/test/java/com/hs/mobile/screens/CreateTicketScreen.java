@@ -13,33 +13,33 @@ import java.util.List;
 public class CreateTicketScreen extends AbstractScreen {
 
     @AssertElementVisibility
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_close")
     private WebElement btnCancel;
 
     @AssertElementVisibility
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_title")
     private WebElement txtTicketTitle;
 
     @AssertElementVisibility
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/create_ticket_disc")
     private WebElement txtTicketDescription;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
     private List<WebElement> btnSend;
 
-    @iOSXCUITFindBy(className = "")
+    //@iOSXCUITFindBy(className = "test")
     @AndroidFindBy(className = "android.widget.Toast")
     private List<WebElement> toastMessage;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/snackbar_text")
     private List<WebElement> supportText;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/snackbar_action")
     private List<WebElement> supportButton;
 

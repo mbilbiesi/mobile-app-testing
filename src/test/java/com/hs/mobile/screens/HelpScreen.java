@@ -13,29 +13,29 @@ import java.util.List;
 public class HelpScreen extends AbstractScreen {
 
     @AssertElementVisibility
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_title")
     private WebElement lblTicketsMainTitle;
 
     @AssertElementVisibility
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_my_tickets")
     private WebElement btnMyTickets;
 
     @AssertElementVisibility
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/expandable_tickets_list")
     private WebElement eleTicketsList;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txtname")
     private List<WebElement> lblTicketCategory;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/child_ticket_txt")
     private List<WebElement> eleTicket;
 
-    @iOSXCUITFindBy(className = "")
+    //@iOSXCUITFindBy(className = "test")
     @AndroidFindBy(className = "android.widget.ImageButton")
     private WebElement btnBack;
 

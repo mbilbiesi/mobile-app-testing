@@ -12,23 +12,23 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class AddReferalCodeScreen extends AbstractScreen {
 
-    @iOSXCUITFindBy(className = "")
+    //@iOSXCUITFindBy(className = "test")
     @AndroidFindBy(className = "android.widget.ImageButton")
     private MobileElement btnClose;
 
-    @iOSXCUITFindBy(className = "")
+    //@iOSXCUITFindBy(className = "test")
     @AndroidFindBy(className = "android.widget.ImageView")
     private MobileElement imgReferralCode;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_code_label")
     private MobileElement lblReferralCode;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/edt_referral")
     private MobileElement txtReferralCode;
 
-    @iOSXCUITFindBy(id = "")
+    //@iOSXCUITFindBy(id = "test")
     @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_verify")
     private MobileElement btnVerifyReferralCode;
 

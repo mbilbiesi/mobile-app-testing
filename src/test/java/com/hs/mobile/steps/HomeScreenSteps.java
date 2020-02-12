@@ -4,6 +4,8 @@ import com.hs.mobile.screens.HomeScreen;
 import com.hs.mobile.screens.HomeScreenSideMenu;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomeScreenSteps extends HomeScreen {
 
@@ -49,5 +51,10 @@ public class HomeScreenSteps extends HomeScreen {
     public HomeScreenSideMenu clickOnMore() {
         tap(getMoreItem());
         return new HomeScreenSideMenu(driver);
+    }
+
+    public void waitUntilHomescreenIsLoaded() {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfAllElements(getFindRestaurantsButton()));
     }
 }
