@@ -53,7 +53,7 @@ public class SettingsTests extends BaseTest {
         settingsScreenSteps.verifyThatScreenDisplaysProperlyInEnglish();
     }
 
-    @Test(description = "Verify that notifications are correctly enabled")
+    @Test(enabled = false, description = "Verify that notifications are correctly enabled")
     public void navigateToSettingsScreen_notificationsAreSuccessfullyEnabled() {
         // When
         settingsScreenSteps.enableNotifications();
@@ -66,7 +66,7 @@ public class SettingsTests extends BaseTest {
         Assertions.assertThat(areNotificationsEnabled).as("Notifications should be enabled.").isTrue();
     }
 
-    @Test(description = "Verify that notifications are correctly disabled")
+    @Test(enabled = false, description = "Verify that notifications are correctly disabled")
     public void navigateToSettingsScreen_notificationsAreSuccessfullyDisabled() {
         // When
         settingsScreenSteps.disableNotifications();
