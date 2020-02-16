@@ -5,49 +5,72 @@ import com.hs.mobile.screens.HomeScreenSideMenu;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 
-public class HomeScreenSteps extends HomeScreen {
+public class HomeScreenSteps extends BaseSteps {
+  private HomeScreen homeScreen;
+  private HomeScreenSideMenu homeScreenSideMenu;
+  private RestaurantListScreenSteps restaurant;
 
-    public HomeScreenSteps(AppiumDriver driver) {
-        super(driver);
-    }
+  public HomeScreenSteps(AppiumDriver driver) {
+    super(driver);
+    homeScreen = new HomeScreen(driver);
+    homeScreenSideMenu = new HomeScreenSideMenu(driver);
+    restaurant = new RestaurantListScreenSteps(driver);
+  }
 
-    private RestaurantListScreenSteps restaurant = new RestaurantListScreenSteps(driver);
+  @Step("Find restaurants")
+  public void findRestaurants() {
+    tap(homeScreen.getFindRestaurantsButton());
+    restaurant.waitUntilRestaurantsAreLoaded();
+  }
 
+  @Step("View saved locations")
+  public void viewSavedLocations() {
+    tap(homeScreen.getUseMyCurrentLocationText());
+  }
 
-    @Step("Find restaurants")
-    public void findRestaurants() {
-        tap(getFindRestaurantsButton());
-        restaurant.waitUntilRestaurantsAreLoaded();
-    }
+  @Step("Verify that all 'Homescreen' elements are displayed correctly")
+  public void verifyThatAllHomeElementsDisplayed() {
+    verifyScreenElements();
+  }
 
-    @Step("View saved locations")
-    public void viewSavedLocations() {
-        tap(getUseMyCurrentLocationText());
-    }
+  @Step("Click the 'My Orders' button")
+  public void clickMyOrdersButton() {
+    tap(homeScreen.getOrdersItem());
+  }
 
-    @Step("Verify that all 'Homescreen' elements are displayed correctly")
-    public void verifyThatAllHomeElementsDisplayed() {
-        verifyScreenElements();
-    }
+  @Step("Click the 'Find Restaurants' button")
+  public void clickFindRestaurantsButton() {
+    tap(homeScreen.getFindRestaurantsButton());
+  }
 
-    @Step("Click the 'My Orders' button")
-    public void clickMyOrdersButton() {
-        tap(getOrdersItem());
-    }
+  @Step("Click on restaurant icon")
+  public void clickOnResturantIcon() {
+    tap(homeScreen.getRestaurantsItem());
+  }
 
-    @Step("Click the 'Find Restaurants' button")
-    public void clickFindRestaurantsButton() {
-        tap(getFindRestaurantsButton());
-    }
+  @Step("Click on more")
+  public HomeScreenSteps clickOnMore() {
+    tap(homeScreen.getMoreItem());
+    return this;
+  }
 
-    @Step("Click on restaurant icon")
-    public void clickOnResturantIcon() {
-        tap(getRestaurantsItem());
-    }
+  @Step("Go to profile screen")
+  public void goToProfile() {
+    tap(homeScreenSideMenu.getProfile());
+  }
 
-    @Step("Click on more")
-    public HomeScreenSideMenu clickOnMore() {
-        tap(getMoreItem());
-        return new HomeScreenSideMenu(driver);
-    }
+  @Step("Go to profile screen")
+  public void goToInvoices() {
+    tap(homeScreenSideMenu.getInvoices());
+  }
+
+  @Step("Go to settings screen")
+  public void goToSettings() {
+    tap(homeScreenSideMenu.getSettings());
+  }
+
+  @Step("Go to payment options screen")
+  public void goToPaymentOptions() {
+    tap(homeScreenSideMenu.getPaymentOptions());
+  }
 }

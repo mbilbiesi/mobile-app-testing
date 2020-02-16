@@ -3,8 +3,6 @@ package com.hs.mobile.tests;
 import com.google.common.io.Resources;
 import com.hs.mobile.data.user.TestUser;
 import com.hs.mobile.data.user.TestUserProvider;
-import com.hs.mobile.screens.PaymentOptionsScreen;
-import com.hs.mobile.screens.PinCodeVerificationScreen;
 import com.hs.mobile.steps.CheckoutScreenSteps;
 import com.hs.mobile.steps.CreateTicketSteps;
 import com.hs.mobile.steps.HelpSteps;
@@ -13,6 +11,8 @@ import com.hs.mobile.steps.InvoicesScreenSteps;
 import com.hs.mobile.steps.LocationScreenSteps;
 import com.hs.mobile.steps.MyOrdersSteps;
 import com.hs.mobile.steps.OrderSteps;
+import com.hs.mobile.steps.PaymentOptionsSteps;
+import com.hs.mobile.steps.PinCodeVerificationSteps;
 import com.hs.mobile.steps.ProfileScreenSteps;
 import com.hs.mobile.steps.RestaurantListScreenSteps;
 import com.hs.mobile.steps.RestaurantScreenSteps;
@@ -37,7 +37,7 @@ import java.net.URL;
 public class BaseTest {
 
   private static final String ANDROID_FILE_PATH =
-          Resources.getResource("apps/hs-app.apk").getPath();
+      Resources.getResource("apps/hs-app.apk").getPath();
   private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
   private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
   private static final TestUserProvider testUserProvider = new TestUserProvider();
@@ -46,15 +46,15 @@ public class BaseTest {
   TestUser testUser;
   HomeScreenSteps homeScreenSteps;
   LocationScreenSteps locationScreenSteps;
-  RestaurantListScreenSteps restaurantsListScreen;
+  RestaurantListScreenSteps restaurantsListSteps;
   SavedLocationsScreenSteps savedLocationsScreenSteps;
   RestaurantScreenSteps restaurantScreenSteps;
   VerifyAccountScreenSteps verifyAccountScreenSteps;
-  PinCodeVerificationScreen pinCodeVerificationScreen;
+  PinCodeVerificationSteps pinCodeVerificationSteps;
   ProfileScreenSteps profileScreenSteps;
   InvoicesScreenSteps invoicesScreenSteps;
   SettingsScreenSteps settingsScreenSteps;
-  PaymentOptionsScreen paymentOptionsScreen;
+  PaymentOptionsSteps paymentOptionsSteps;
   WalletScreenSteps walletScreenSteps;
   MyOrdersSteps myOrdersSteps;
   OrderSteps orderSteps;
@@ -85,15 +85,15 @@ public class BaseTest {
 
     testUser = testUserProvider.getUser(userId);
     homeScreenSteps = new HomeScreenSteps(driver);
-    restaurantsListScreen = new RestaurantListScreenSteps(driver);
+    restaurantsListSteps = new RestaurantListScreenSteps(driver);
     verifyAccountScreenSteps = new VerifyAccountScreenSteps(driver);
-    pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
+    pinCodeVerificationSteps = new PinCodeVerificationSteps(driver);
     restaurantScreenSteps = new RestaurantScreenSteps(driver);
     savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
     profileScreenSteps = new ProfileScreenSteps(driver);
     invoicesScreenSteps = new InvoicesScreenSteps(driver);
     settingsScreenSteps = new SettingsScreenSteps(driver);
-    paymentOptionsScreen = new PaymentOptionsScreen(driver);
+    paymentOptionsSteps = new PaymentOptionsSteps(driver);
     walletScreenSteps = new WalletScreenSteps(driver);
     myOrdersSteps = new MyOrdersSteps(driver);
     orderSteps = new OrderSteps(driver);
