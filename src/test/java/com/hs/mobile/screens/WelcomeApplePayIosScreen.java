@@ -9,11 +9,11 @@ import lombok.Getter;
 @Getter
 public class WelcomeApplePayIosScreen extends AbstractScreen {
 
-  @iOSXCUITFindBy(iOSClassChain = "XCUIElementTypeWindow/*/*/*/XCUIElementTypeButton[1]")
+  @iOSXCUITFindBy(iOSClassChain = "XCUIElementTypeWindow/*/*/*/XCUIElementTypeButton[1]") //todo:id
   @AssertElementVisibility
   private MobileElement btnProceedWithApplePay;
 
-  @iOSXCUITFindBy(iOSClassChain = "XCUIElementTypeWindow/*/*/*/XCUIElementTypeButton[2]")
+  @iOSXCUITFindBy(iOSClassChain = "XCUIElementTypeWindow/*/*/*/XCUIElementTypeButton[2]")//todo:id
   @AssertElementVisibility
   private MobileElement btnSkipApplePay;
 
