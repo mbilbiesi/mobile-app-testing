@@ -45,7 +45,7 @@ public class MyOrdersSteps extends BaseSteps {
       case "in progress":
         orders = getOpenOrders();
         break;
-      // ToDo: add all remaining order statuses.. cancelled, etc
+        // ToDo: add all remaining order statuses.. cancelled, etc
       default:
         orders = myOrdersScreen.getEleOrderTitles();
     }
@@ -121,8 +121,8 @@ public class MyOrdersSteps extends BaseSteps {
     expectedOrderDates = getExpectedOrderDates(actualOrderDates);
 
     assertThat(actualOrderDates.equals(expectedOrderDates))
-            .as("Orders are not sorted from newest to oldest")
-            .isTrue();
+        .as("Orders are not sorted from newest to oldest")
+        .isTrue();
   }
 
   private List<Date> getOrdersDates(String locale) throws ParseException {
@@ -131,7 +131,7 @@ public class MyOrdersSteps extends BaseSteps {
 
     for (int i = 0; i < size; i++) {
       orderDates.add(
-              getDate(myOrdersScreen.getEleOrderDate().get(i).getText().replace(",", ""), locale));
+          getDate(myOrdersScreen.getEleOrderDate().get(i).getText().replace(",", ""), locale));
     }
 
     return orderDates;

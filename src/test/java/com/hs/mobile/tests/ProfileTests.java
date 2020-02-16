@@ -14,39 +14,39 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class ProfileTests extends BaseTest {
 
-    boolean hasFirstTestExecuted = false;
+  boolean hasFirstTestExecuted = false;
 
-    @BeforeMethod
-    public void goToProfile() {
-        // When
-        if (!hasFirstTestExecuted) {
-            homeScreenSteps.clickMyOrdersButton();
-            myOrdersSteps.clickVerifyButton();
-            verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
-            verifyAccountScreenSteps.clickNextButton();
-            pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
+  @BeforeMethod
+  public void goToProfile() {
+    // When
+    if (!hasFirstTestExecuted) {
+      homeScreenSteps.clickMyOrdersButton();
+      myOrdersSteps.clickVerifyButton();
+      verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
+      verifyAccountScreenSteps.clickNextButton();
+      pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
 
-            hasFirstTestExecuted = true;
-        }
-
-        homeScreenSteps.clickOnMore().goToProfile();
+      hasFirstTestExecuted = true;
     }
 
-    @Test(description = "Check user profile screen elements")
-    public void navigateToProfileScreen_elementsAreProperlyDisplayed() {
-        // Then
-        profileScreenSteps.verifyProfileScreen();
-    }
+    homeScreenSteps.clickOnMore().goToProfile();
+  }
 
-    @Test(description = "Perform and verify valid updates")
-    public void navigateToProfileScreen_updatesAreCorrectlyPerformed() {
-        // Then
-        profileScreenSteps.verifyProfileUpdates();
-    }
+  @Test(description = "Check user profile screen elements")
+  public void navigateToProfileScreen_elementsAreProperlyDisplayed() {
+    // Then
+    profileScreenSteps.verifyProfileScreen();
+  }
 
-    @Test(description = "Check user profile field boundaries")
-    public void navigateToProfileScreen_fieldsHaveProperBoundaries() {
-        // Then
-        profileScreenSteps.verifyFieldBoundaries();
-    }
+  @Test(description = "Perform and verify valid updates")
+  public void navigateToProfileScreen_updatesAreCorrectlyPerformed() {
+    // Then
+    profileScreenSteps.verifyProfileUpdates();
+  }
+
+  @Test(description = "Check user profile field boundaries")
+  public void navigateToProfileScreen_fieldsHaveProperBoundaries() {
+    // Then
+    profileScreenSteps.verifyFieldBoundaries();
+  }
 }

@@ -9,30 +9,30 @@ public class SavedLocationsScreenSteps extends BaseSteps {
   private SavedLocationsScreen savedLocationsScreen;
 
   public SavedLocationsScreenSteps(AppiumDriver driver) {
-      super(driver);
+    super(driver);
     savedLocationsScreen = new SavedLocationsScreen(driver);
   }
 
   @Step("Add new location")
   public void addNewLocation() {
-      tap(savedLocationsScreen.getNewLocation());
+    tap(savedLocationsScreen.getNewLocation());
   }
 
   @Step("Delete saved locations")
   public void deleteSavedLocations() {
     savedLocationsScreen
-            .getSavedLocations()
-            .forEach(
-                    location -> {
-                        tap(savedLocationsScreen.getMore());
-                        tap(savedLocationsScreen.getDelete());
-                    });
+        .getSavedLocations()
+        .forEach(
+            location -> {
+              tap(savedLocationsScreen.getMore());
+              tap(savedLocationsScreen.getDelete());
+            });
   }
 
   @Step("Edit location")
   public void editLocation() {
-      tap(savedLocationsScreen.getMore());
-      tap(savedLocationsScreen.getEdit());
+    tap(savedLocationsScreen.getMore());
+    tap(savedLocationsScreen.getEdit());
   }
 
   void waitUntilNewLocationButtonDisplays() {

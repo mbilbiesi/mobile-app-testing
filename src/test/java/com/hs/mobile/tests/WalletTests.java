@@ -14,31 +14,31 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class WalletTests extends BaseTest {
 
-    boolean hasFirstTestExecuted = false;
+  boolean hasFirstTestExecuted = false;
 
-    @BeforeMethod
-    public void goToPaymentOptions() {
-        // Given
-        if (!hasFirstTestExecuted) {
-            homeScreenSteps.clickMyOrdersButton();
-            myOrdersSteps.clickVerifyButton();
-            verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
-            verifyAccountScreenSteps.clickNextButton();
-            pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
+  @BeforeMethod
+  public void goToPaymentOptions() {
+    // Given
+    if (!hasFirstTestExecuted) {
+      homeScreenSteps.clickMyOrdersButton();
+      myOrdersSteps.clickVerifyButton();
+      verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
+      verifyAccountScreenSteps.clickNextButton();
+      pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
 
-            hasFirstTestExecuted = true;
-        }
-
-        //When
-        homeScreenSteps.clickOnMore().goToPaymentOptions();
+      hasFirstTestExecuted = true;
     }
 
-    @Test(description = "Check wallet screen headers")
-    public void navigateToWalletScreen_headersAreProperlyDisplayed() {
-        // When
-        paymentOptionsSteps.openWallet();
+    // When
+    homeScreenSteps.clickOnMore().goToPaymentOptions();
+  }
 
-        // Then
-        walletScreenSteps.verifyHeaders();
-    }
+  @Test(description = "Check wallet screen headers")
+  public void navigateToWalletScreen_headersAreProperlyDisplayed() {
+    // When
+    paymentOptionsSteps.openWallet();
+
+    // Then
+    walletScreenSteps.verifyHeaders();
+  }
 }

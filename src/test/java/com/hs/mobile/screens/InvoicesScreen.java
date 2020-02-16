@@ -11,23 +11,23 @@ import java.util.List;
 @Getter
 public class InvoicesScreen extends AbstractScreen {
 
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(xpath = "//android.widget.TextView[@index='1']")
-    private WebElement lblTitle;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(xpath = "//android.widget.TextView[@index='1']")
+  private WebElement lblTitle;
 
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(xpath = "//android.widget.ImageButton[@index='0']")
-    private WebElement btnBack;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(xpath = "//android.widget.ImageButton[@index='0']")
+  private WebElement btnBack;
 
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(xpath = "//android.widget.RelativeLayout[@clickable='true']")
-    private List<WebElement> lstInvoices;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(xpath = "//android.widget.RelativeLayout[@clickable='true']")
+  private List<WebElement> lstInvoices;
 
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/no_invoice_message")
-    private WebElement lblMessage;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/no_invoice_message")
+  private WebElement lblMessage;
 
-    public InvoicesScreen(AppiumDriver driver) {
-        super(driver);
-    }
+  public InvoicesScreen(AppiumDriver driver) {
+    super(driver);
+  }
 }

@@ -12,12 +12,12 @@ import java.util.List;
 
 public abstract class AbstractScreen {
 
-    // ToDo: find the locator of the skip promotion link in english
-    @iOSXCUITFindBy(xpath = "")
-    @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='textInEnglish']")
-    private List<WebElement> lnkSkipPromotion;
+  // ToDo: find the locator of the skip promotion link in english
+  @iOSXCUITFindBy(xpath = "")
+  @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='textInEnglish']")
+  private List<WebElement> lnkSkipPromotion;
 
-    public AbstractScreen(AppiumDriver driver) {
-        PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
-    }
+  public AbstractScreen(AppiumDriver driver) {
+    PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
+  }
 }

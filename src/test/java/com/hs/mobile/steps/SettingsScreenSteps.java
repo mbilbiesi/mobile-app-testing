@@ -20,7 +20,7 @@ public class SettingsScreenSteps extends BaseSteps {
   private SettingsScreen settingsScreen;
 
   public SettingsScreenSteps(AppiumDriver driver) {
-      super(driver);
+    super(driver);
     settingsScreen = new SettingsScreen(driver);
   }
 
@@ -46,13 +46,13 @@ public class SettingsScreenSteps extends BaseSteps {
     String title = "الإعدادات";
 
     soft.assertThat(getTitleFromElement())
-            .as(String.format("Invalid title [%s].", title))
-            .isEqualTo(title);
+        .as(String.format("Invalid title [%s].", title))
+        .isEqualTo(title);
     soft.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
     soft.assertThat(getSelectedLanguage())
-            .as("Selected language should be Arabic")
-            .isEqualTo(ARABIC);
-      navigateBack(1);
+        .as("Selected language should be Arabic")
+        .isEqualTo(ARABIC);
+    navigateBack(1);
     soft.assertAll();
   }
 
@@ -62,13 +62,13 @@ public class SettingsScreenSteps extends BaseSteps {
     String title = "Settings";
 
     soft.assertThat(getTitleFromElement())
-            .as(String.format("Invalid title [%s].", title))
-            .isEqualTo(title);
+        .as(String.format("Invalid title [%s].", title))
+        .isEqualTo(title);
     soft.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
     soft.assertThat(getSelectedLanguage())
-            .as("Selected language should be English")
-            .isEqualTo(ENGLISH);
-      navigateBack(1);
+        .as("Selected language should be English")
+        .isEqualTo(ENGLISH);
+    navigateBack(1);
     soft.assertAll();
   }
 
@@ -80,7 +80,7 @@ public class SettingsScreenSteps extends BaseSteps {
     } else {
       tickNotificationsCheckBox();
     }
-      navigateBack(1);
+    navigateBack(1);
   }
 
   @Step("Disable notifications")
@@ -91,34 +91,34 @@ public class SettingsScreenSteps extends BaseSteps {
       tickNotificationsCheckBox();
       tickNotificationsCheckBox();
     }
-      navigateBack(1);
+    navigateBack(1);
   }
 
   public String getTitleFromElement() {
-      return getElementAttributeValue(settingsScreen.getTitle(), TEXT);
+    return getElementAttributeValue(settingsScreen.getTitle(), TEXT);
   }
 
   public Boolean isBackButtonActive() {
-      return isElementActive(settingsScreen.getBack());
+    return isElementActive(settingsScreen.getBack());
   }
 
   public void selectLanguage(Language desiredLanguage) {
-      tap(settingsScreen.getLanguage());
+    tap(settingsScreen.getLanguage());
     waitUntilDialogDisplays();
     if (desiredLanguage.equals(ENGLISH)) {
-        tap(settingsScreen.getEnglish());
+      tap(settingsScreen.getEnglish());
     } else {
-        tap(settingsScreen.getArabic());
+      tap(settingsScreen.getArabic());
     }
   }
 
   public Language getSelectedLanguage() {
-      tap(settingsScreen.getLanguage());
+    tap(settingsScreen.getLanguage());
     waitUntilDialogDisplays();
     for (WebElement lang : settingsScreen.getLanguages()) {
-        if (getElementAttributeValue(lang, CHECKED).equals(String.valueOf(true))) {
+      if (getElementAttributeValue(lang, CHECKED).equals(String.valueOf(true))) {
         Optional<Language> languageOptional =
-                Language.getByLabel(getElementAttributeValue(lang, TEXT));
+            Language.getByLabel(getElementAttributeValue(lang, TEXT));
         if (languageOptional.isPresent()) {
           cancel();
           return languageOptional.get();
@@ -129,19 +129,19 @@ public class SettingsScreenSteps extends BaseSteps {
   }
 
   private void cancel() {
-      tap(settingsScreen.getCancel());
+    tap(settingsScreen.getCancel());
   }
 
   public Boolean areNotificationsEnabled() {
     return Boolean.parseBoolean(
-            getElementAttributeValue(settingsScreen.getNotifications(), CHECKED));
+        getElementAttributeValue(settingsScreen.getNotifications(), CHECKED));
   }
 
   private void tickNotificationsCheckBox() {
-      tap(settingsScreen.getNotifications());
+    tap(settingsScreen.getNotifications());
   }
 
   private void waitUntilDialogDisplays() {
-      waitUntilAnElementIsUpdated(settingsScreen.getCancel(), ENABLED, String.valueOf(true));
+    waitUntilAnElementIsUpdated(settingsScreen.getCancel(), ENABLED, String.valueOf(true));
   }
 }

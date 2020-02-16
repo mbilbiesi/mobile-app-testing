@@ -8,23 +8,23 @@ import org.openqa.selenium.WebElement;
 
 @Getter
 public class HomeScreenSideMenu extends AbstractScreen {
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='2']")
-    private WebElement profile;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='2']")
+  private WebElement profile;
 
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='3']")
-    private WebElement invoices;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='3']")
+  private WebElement invoices;
 
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='4']")
-    private WebElement paymentOptions;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='4']")
+  private WebElement paymentOptions;
 
-    @iOSXCUITFindBy(id = "")
-    @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='6']")
-    private WebElement settings;
+  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='6']")
+  private WebElement settings;
 
-    public HomeScreenSideMenu(AppiumDriver driver) {
-        super(driver);
-    }
+  public HomeScreenSideMenu(AppiumDriver driver) {
+    super(driver);
+  }
 }

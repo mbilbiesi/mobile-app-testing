@@ -15,38 +15,38 @@ import java.text.ParseException;
 @Listeners(TestListener.class)
 public class MyOrdersTests extends BaseTest {
 
-    boolean hasFirstTestExecuted = false;
+  boolean hasFirstTestExecuted = false;
 
-    @BeforeMethod
-    public void beforeEachTest() {
-        // Given
-        homeScreenSteps.clickMyOrdersButton();
-        if (!hasFirstTestExecuted) {
-            myOrdersSteps.clickVerifyButton();
-            verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
-            verifyAccountScreenSteps.clickNextButton();
-            pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
-            myOrdersSteps.waitUntilMyOrdersScreenLoaded();
+  @BeforeMethod
+  public void beforeEachTest() {
+    // Given
+    homeScreenSteps.clickMyOrdersButton();
+    if (!hasFirstTestExecuted) {
+      myOrdersSteps.clickVerifyButton();
+      verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
+      verifyAccountScreenSteps.clickNextButton();
+      pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
+      myOrdersSteps.waitUntilMyOrdersScreenLoaded();
 
-            hasFirstTestExecuted = true;
-        }
+      hasFirstTestExecuted = true;
     }
+  }
 
-    @Issue("HSAP-229")
-    @Test(description = "Verify that orders are sorted by date from newest to oldest")
-    public void navigateToOrders_OrdersShouldBeSortedByDate() throws ParseException {
-        // Then
-        myOrdersSteps.verifyOrdersSortedByDateDesc("ar");
-    }
+  @Issue("HSAP-229")
+  @Test(description = "Verify that orders are sorted by date from newest to oldest")
+  public void navigateToOrders_OrdersShouldBeSortedByDate() throws ParseException {
+    // Then
+    myOrdersSteps.verifyOrdersSortedByDateDesc("ar");
+  }
 
-    @Issue("HSAP-230")
-    @Test(description = "Verify that orders are sorted by date from newest to oldest")
-    public void navigateToOrder_OrderSummaryShouldDisplayCorrectly() {
-        // When
-        myOrdersSteps.navigateToOrder("delivered");
-        orderSteps.waitUntilOrderScreenLoaded();
+  @Issue("HSAP-230")
+  @Test(description = "Verify that orders are sorted by date from newest to oldest")
+  public void navigateToOrder_OrderSummaryShouldDisplayCorrectly() {
+    // When
+    myOrdersSteps.navigateToOrder("delivered");
+    orderSteps.waitUntilOrderScreenLoaded();
 
-        // Then
-        orderSteps.verifyAllOrderElements();
-    }
+    // Then
+    orderSteps.verifyAllOrderElements();
+  }
 }

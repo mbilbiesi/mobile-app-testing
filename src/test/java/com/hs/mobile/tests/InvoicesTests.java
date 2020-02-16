@@ -14,32 +14,32 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class InvoicesTests extends BaseTest {
 
-    boolean hasFirstTestExecuted = false;
+  boolean hasFirstTestExecuted = false;
 
-    @BeforeMethod
-    public void goToInvoices() {
-        // When
-        if (!hasFirstTestExecuted) {
-            homeScreenSteps.clickMyOrdersButton();
-            myOrdersSteps.clickVerifyButton();
-            verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
-            verifyAccountScreenSteps.clickNextButton();
-            pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
+  @BeforeMethod
+  public void goToInvoices() {
+    // When
+    if (!hasFirstTestExecuted) {
+      homeScreenSteps.clickMyOrdersButton();
+      myOrdersSteps.clickVerifyButton();
+      verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
+      verifyAccountScreenSteps.clickNextButton();
+      pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
 
-            hasFirstTestExecuted = true;
-        }
-        homeScreenSteps.clickOnMore().goToInvoices();
+      hasFirstTestExecuted = true;
     }
+    homeScreenSteps.clickOnMore().goToInvoices();
+  }
 
-    @Test(description = "Check invoices screen basic elements")
-    public void navigateToInvoicesScreen_basicElementsAreProperlyDisplayed() {
-        // Then
-        invoicesScreenSteps.verifyInvoicesScreen();
-    }
+  @Test(description = "Check invoices screen basic elements")
+  public void navigateToInvoicesScreen_basicElementsAreProperlyDisplayed() {
+    // Then
+    invoicesScreenSteps.verifyInvoicesScreen();
+  }
 
-    @Test(description = "Check invoices")
-    public void navigateToInvoicesScreen_invoicesAreProperlyDisplayed() {
-        // Then
-        invoicesScreenSteps.verifyInvoices();
-    }
+  @Test(description = "Check invoices")
+  public void navigateToInvoicesScreen_invoicesAreProperlyDisplayed() {
+    // Then
+    invoicesScreenSteps.verifyInvoices();
+  }
 }

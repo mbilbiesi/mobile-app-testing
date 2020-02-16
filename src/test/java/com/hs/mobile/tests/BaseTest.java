@@ -37,7 +37,7 @@ import java.net.URL;
 public class BaseTest {
 
   private static final String ANDROID_FILE_PATH =
-          Resources.getResource("apps/hs-app.apk").getPath();
+      Resources.getResource("apps/hs-app.apk").getPath();
   private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
   private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
   private static final TestUserProvider testUserProvider = new TestUserProvider();
