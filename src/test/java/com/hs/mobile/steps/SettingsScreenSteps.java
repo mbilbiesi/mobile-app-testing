@@ -16,10 +16,11 @@ import static com.hs.mobile.data.ElementAttribute.TEXT;
 import static com.hs.mobile.data.Language.ARABIC;
 import static com.hs.mobile.data.Language.ENGLISH;
 
-public class SettingsScreenSteps {
+public class SettingsScreenSteps extends BaseSteps {
   private SettingsScreen settingsScreen;
 
   public SettingsScreenSteps(AppiumDriver driver) {
+      super(driver);
     settingsScreen = new SettingsScreen(driver);
   }
 
@@ -51,7 +52,7 @@ public class SettingsScreenSteps {
     soft.assertThat(getSelectedLanguage())
             .as("Selected language should be Arabic")
             .isEqualTo(ARABIC);
-    settingsScreen.navigateBack(1);
+      navigateBack(1);
     soft.assertAll();
   }
 
@@ -67,7 +68,7 @@ public class SettingsScreenSteps {
     soft.assertThat(getSelectedLanguage())
             .as("Selected language should be English")
             .isEqualTo(ENGLISH);
-    settingsScreen.navigateBack(1);
+      navigateBack(1);
     soft.assertAll();
   }
 
@@ -79,7 +80,7 @@ public class SettingsScreenSteps {
     } else {
       tickNotificationsCheckBox();
     }
-    settingsScreen.navigateBack(1);
+      navigateBack(1);
   }
 
   @Step("Disable notifications")
@@ -90,34 +91,34 @@ public class SettingsScreenSteps {
       tickNotificationsCheckBox();
       tickNotificationsCheckBox();
     }
-    settingsScreen.navigateBack(1);
+      navigateBack(1);
   }
 
   public String getTitleFromElement() {
-    return settingsScreen.getElementAttributeValue(settingsScreen.getTitle(), TEXT);
+      return getElementAttributeValue(settingsScreen.getTitle(), TEXT);
   }
 
   public Boolean isBackButtonActive() {
-    return settingsScreen.isElementActive(settingsScreen.getBack());
+      return isElementActive(settingsScreen.getBack());
   }
 
   public void selectLanguage(Language desiredLanguage) {
-    settingsScreen.tap(settingsScreen.getLanguage());
+      tap(settingsScreen.getLanguage());
     waitUntilDialogDisplays();
     if (desiredLanguage.equals(ENGLISH)) {
-      settingsScreen.tap(settingsScreen.getEnglish());
+        tap(settingsScreen.getEnglish());
     } else {
-      settingsScreen.tap(settingsScreen.getArabic());
+        tap(settingsScreen.getArabic());
     }
   }
 
   public Language getSelectedLanguage() {
-    settingsScreen.tap(settingsScreen.getLanguage());
+      tap(settingsScreen.getLanguage());
     waitUntilDialogDisplays();
     for (WebElement lang : settingsScreen.getLanguages()) {
-      if (settingsScreen.getElementAttributeValue(lang, CHECKED).equals(String.valueOf(true))) {
+        if (getElementAttributeValue(lang, CHECKED).equals(String.valueOf(true))) {
         Optional<Language> languageOptional =
-                Language.getByLabel(settingsScreen.getElementAttributeValue(lang, TEXT));
+                Language.getByLabel(getElementAttributeValue(lang, TEXT));
         if (languageOptional.isPresent()) {
           cancel();
           return languageOptional.get();
@@ -128,20 +129,19 @@ public class SettingsScreenSteps {
   }
 
   private void cancel() {
-    settingsScreen.tap(settingsScreen.getCancel());
+      tap(settingsScreen.getCancel());
   }
 
   public Boolean areNotificationsEnabled() {
     return Boolean.parseBoolean(
-            settingsScreen.getElementAttributeValue(settingsScreen.getNotifications(), CHECKED));
+            getElementAttributeValue(settingsScreen.getNotifications(), CHECKED));
   }
 
   private void tickNotificationsCheckBox() {
-    settingsScreen.tap(settingsScreen.getNotifications());
+      tap(settingsScreen.getNotifications());
   }
 
   private void waitUntilDialogDisplays() {
-    settingsScreen.waitUntilAnElementIsUpdated(
-            settingsScreen.getCancel(), ENABLED, String.valueOf(true));
+      waitUntilAnElementIsUpdated(settingsScreen.getCancel(), ENABLED, String.valueOf(true));
   }
 }

@@ -7,15 +7,13 @@ import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Slf4j
-public class TicketSteps {
+public class TicketSteps extends BaseSteps {
     private TicketScreen ticketScreen;
-    private AppiumDriver driver;
 
     public TicketSteps(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
         ticketScreen = new TicketScreen(driver);
     }
 
@@ -27,7 +25,7 @@ public class TicketSteps {
             soft.assertThat(ticketScreen.getBtnCreateTicket().size() > 0)
                     .as("'Create Ticket' button doesn't exist")
                     .isTrue();
-            ticketScreen.verifyScreenElements();
+            verifyScreenElements();
             soft.assertAll();
         } else {
             try {
@@ -52,18 +50,17 @@ public class TicketSteps {
     public void clickCreateTicketButton() {
         waitUntilTicketScreenLoaded();
         try {
-            ticketScreen.tap(ticketScreen.getBtnCreateTicket().get(0));
+            tap(ticketScreen.getBtnCreateTicket().get(0));
         } catch (Exception e) {
             log.error("Failed to create ticket : ", e);
         }
     }
 
     public void waitUntilTicketScreenLoaded() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfAllElements(ticketScreen.getLblTicketTitle()));
     }
 
     public void navigateBackToHelp() {
-        ticketScreen.tap(ticketScreen.getBtnBack());
+        tap(ticketScreen.getBtnBack());
     }
 }

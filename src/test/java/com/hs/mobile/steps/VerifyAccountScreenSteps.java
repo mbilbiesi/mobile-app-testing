@@ -9,10 +9,11 @@ import org.assertj.core.api.SoftAssertions;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-public class VerifyAccountScreenSteps {
+public class VerifyAccountScreenSteps extends BaseSteps {
     private VerifyAccountScreen verifyAccountScreen;
 
     public VerifyAccountScreenSteps(AppiumDriver driver) {
+        super(driver);
         verifyAccountScreen = new VerifyAccountScreen(driver);
     }
 
@@ -50,9 +51,6 @@ public class VerifyAccountScreenSteps {
 
     @Step("Click the 'Next' button")
     public void clickNextButton() {
-        verifyAccountScreen
-                .touchAction
-                .tap(tapOptions().withElement(element(getNextButton())))
-                .perform();
+        touchAction.tap(tapOptions().withElement(element(getNextButton()))).perform();
     }
 }

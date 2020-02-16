@@ -11,10 +11,11 @@ import java.util.List;
 
 import static com.hs.mobile.data.ElementAttribute.TEXT;
 
-public class WalletScreenSteps {
+public class WalletScreenSteps extends BaseSteps {
     private WalletScreen walletScreen;
 
     public WalletScreenSteps(AppiumDriver driver) {
+        super(driver);
         walletScreen = new WalletScreen(driver);
     }
 
@@ -29,7 +30,7 @@ public class WalletScreenSteps {
                     .isTrue();
         }
 
-        walletScreen.navigateBack(2);
+        navigateBack(2);
         soft.assertAll();
     }
 
@@ -43,10 +44,10 @@ public class WalletScreenSteps {
     }
 
     private Boolean isHeaderActive(WebElement header) {
-        return walletScreen.isElementActive(header);
+        return isElementActive(header);
     }
 
     private String getHeaderText(WebElement header) {
-        return walletScreen.getElementAttributeValue(header, TEXT);
+        return getElementAttributeValue(header, TEXT);
     }
 }

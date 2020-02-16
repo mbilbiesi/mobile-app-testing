@@ -3,12 +3,12 @@ package com.hs.mobile.screens;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
-import static com.hs.mobile.data.ElementAttribute.ENABLED;
-import static com.hs.mobile.data.ElementAttribute.TEXT;
-
+@Getter
 public class ProfileScreen extends AbstractScreen {
+
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(xpath = "//android.widget.TextView[@index='1']")
     private WebElement title;
@@ -35,51 +35,5 @@ public class ProfileScreen extends AbstractScreen {
 
     public ProfileScreen(AppiumDriver driver) {
         super(driver);
-    }
-
-    public String getTitle() {
-        return getElementAttributeValue(title, TEXT);
-    }
-
-    public Boolean isNumberEnabled() {
-        return number.isEnabled();
-    }
-
-    public Boolean isNameActive() {
-        return isElementActive(name);
-    }
-
-    public Boolean isEmailActive() {
-        return isElementActive(email);
-    }
-
-    public void insertName(String newName) {
-        name.clear();
-        name.sendKeys(newName);
-    }
-
-    public void insertEmail(String newEmail) {
-        email.clear();
-        email.sendKeys(newEmail);
-    }
-
-    public String getName() {
-        return getElementAttributeValue(name, TEXT);
-    }
-
-    public String getEmail() {
-        return getElementAttributeValue(email, TEXT);
-    }
-
-    public void update() {
-        tap(update);
-    }
-
-    public Boolean isUpdateButtonEnabled() {
-        return update.isEnabled();
-    }
-
-    public void waitUntilProfileIsUpdated() {
-        waitUntilAnElementIsUpdated(update, ENABLED, String.valueOf(false));
     }
 }

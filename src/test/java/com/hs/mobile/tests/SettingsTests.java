@@ -26,7 +26,7 @@ public class SettingsTests extends BaseTest {
             myOrdersSteps.clickVerifyButton();
             verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
             verifyAccountScreenSteps.clickNextButton();
-            pinCodeVerificationScreen.insertVerificationCode(testUser.getVerificationCode());
+            pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
 
             hasFirstTestExecuted = true;
         }

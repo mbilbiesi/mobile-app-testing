@@ -7,7 +7,6 @@ import io.qameta.allure.Step;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
@@ -20,17 +19,18 @@ import static com.hs.mobile.data.ElementAttribute.FOCUSABLE;
 import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-public class RestaurantScreenSteps {
+public class RestaurantScreenSteps extends BaseSteps {
     private RestaurantScreen restaurantScreen;
+    private MenuItemScreen menuItemScreen;
     private HomeScreenSteps homeScreenSteps;
     private LocationScreenSteps locationScreenSteps;
     private RestaurantListScreenSteps restaurantListScreenSteps;
     private MenuItemScreenSteps menuItemScreenSteps;
-    private AppiumDriver driver;
 
     public RestaurantScreenSteps(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
         restaurantScreen = new RestaurantScreen(driver);
+        menuItemScreen = new MenuItemScreen(driver);
         homeScreenSteps = new HomeScreenSteps(driver);
         locationScreenSteps = new LocationScreenSteps(driver);
         restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
@@ -55,17 +55,17 @@ public class RestaurantScreenSteps {
         SoftAssertions soft = new SoftAssertions();
         String isTrue = String.valueOf(true);
         for (WebElement menuGroup : menuGroups) {
-            soft.assertThat(restaurantScreen.getElementAttributeValue(menuGroup, CLICKABLE))
+            soft.assertThat(getElementAttributeValue(menuGroup, CLICKABLE))
                     .as("Menu group should be clickable")
                     .isEqualTo(isTrue);
-            soft.assertThat(restaurantScreen.getElementAttributeValue(menuGroup, ENABLED))
+            soft.assertThat(getElementAttributeValue(menuGroup, ENABLED))
                     .as("Menu group should be enabled")
                     .isEqualTo(isTrue);
-            soft.assertThat(restaurantScreen.getElementAttributeValue(menuGroup, FOCUSABLE))
+            soft.assertThat(getElementAttributeValue(menuGroup, FOCUSABLE))
                     .as("Menu group should be focusable")
                     .isEqualTo(isTrue);
         }
-        restaurantScreen.navigateBack(3);
+        navigateBack(3);
         soft.assertAll();
     }
 
@@ -74,7 +74,6 @@ public class RestaurantScreenSteps {
         List<WebElement> menuGroups = restaurantScreen.getMenuGroups();
         swipe(menuGroups.get(3), menuGroups.get(0));
         swipe(menuGroups.get(2), menuGroups.get(0));
-        RestaurantScreen restaurantScreen = new RestaurantScreen(driver);
         return Stream.concat(menuGroups.stream(), restaurantScreen.getMenuGroups().stream())
                 .distinct()
                 .collect(Collectors.toList());
@@ -84,31 +83,30 @@ public class RestaurantScreenSteps {
     public void verifyThatCaloriesDisplayProperlyForAMenuItem() {
         SoftAssertions soft = new SoftAssertions();
 
-        soft.assertThat(restaurantScreen.isElementActive(restaurantScreen.getCaloriesIcon()))
+        soft.assertThat(isElementActive(restaurantScreen.getCaloriesIcon()))
                 .as("Calories icon should be active")
                 .isTrue();
-        soft.assertThat(restaurantScreen.isElementActive(restaurantScreen.getCaloriesLabel()))
+        soft.assertThat(isElementActive(restaurantScreen.getCaloriesLabel()))
                 .as("Calories label should be active")
                 .isTrue();
-        soft.assertThat(restaurantScreen.isElementActive(restaurantScreen.getFirstMenuItemName()))
+        soft.assertThat(isElementActive(restaurantScreen.getFirstMenuItemName()))
                 .as("Menu item should be active")
                 .isTrue();
 
         String caloriesLabel = restaurantScreen.getCaloriesLabel().getText();
         String firstMenuItemName = restaurantScreen.getFirstMenuItemName().getText();
 
-        restaurantScreen.tap(restaurantScreen.getFirstMenuItem());
-        MenuItemScreen menuItemScreen = new MenuItemScreen(driver);
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        tap(restaurantScreen.getFirstMenuItem());
+
         wait.until(ExpectedConditions.visibilityOf(menuItemScreen.getTitle()));
 
-        soft.assertThat(restaurantScreen.isElementActive(menuItemScreen.getCaloriesIcon()))
+        soft.assertThat(isElementActive(menuItemScreen.getCaloriesIcon()))
                 .as("Calories icon should be active.")
                 .isTrue();
-        soft.assertThat(restaurantScreen.isElementActive(menuItemScreen.getCaloriesLabel()))
+        soft.assertThat(isElementActive(menuItemScreen.getCaloriesLabel()))
                 .as("Calories label should be active.")
                 .isTrue();
-        soft.assertThat(restaurantScreen.isElementActive(menuItemScreen.getCaloriesTotal()))
+        soft.assertThat(isElementActive(menuItemScreen.getCaloriesTotal()))
                 .as("Calories total should be active.")
                 .isTrue();
         soft.assertThat(caloriesLabel)
@@ -121,7 +119,7 @@ public class RestaurantScreenSteps {
                 .as("Menu item details should match.")
                 .isEqualTo(menuItemScreen.getTitle().getText());
 
-        restaurantScreen.navigateBack(4);
+        navigateBack(4);
         soft.assertAll();
     }
 
@@ -130,7 +128,7 @@ public class RestaurantScreenSteps {
         if (count <= 0) {
             return null;
         }
-        restaurantScreen.tap(restaurantScreen.getFirstMenuItem());
+        tap(restaurantScreen.getFirstMenuItem());
         int i = 0;
         while (i < count) {
             menuItemScreenSteps.addQuantity();
@@ -148,12 +146,11 @@ public class RestaurantScreenSteps {
 
     @Step("Go to checkout screen")
     public void goToCheckout() {
-        restaurantScreen.tap(restaurantScreen.getViewCart());
+        tap(restaurantScreen.getViewCart());
     }
 
     private void swipe(WebElement startElement, WebElement endElement) {
-        restaurantScreen
-                .touchAction
+        touchAction
                 .longPress(
                         longPressOptions()
                                 .withElement(element(startElement))

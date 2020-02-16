@@ -5,52 +5,72 @@ import com.hs.mobile.screens.HomeScreenSideMenu;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 
-public class HomeScreenSteps {
+public class HomeScreenSteps extends BaseSteps {
     private HomeScreen homeScreen;
+    private HomeScreenSideMenu homeScreenSideMenu;
     private RestaurantListScreenSteps restaurant;
-    private AppiumDriver driver;
 
     public HomeScreenSteps(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
         homeScreen = new HomeScreen(driver);
+        homeScreenSideMenu = new HomeScreenSideMenu(driver);
         restaurant = new RestaurantListScreenSteps(driver);
     }
 
-
     @Step("Find restaurants")
     public void findRestaurants() {
-        homeScreen.tap(homeScreen.getFindRestaurantsButton());
+        tap(homeScreen.getFindRestaurantsButton());
         restaurant.waitUntilRestaurantsAreLoaded();
     }
 
     @Step("View saved locations")
     public void viewSavedLocations() {
-        homeScreen.tap(homeScreen.getUseMyCurrentLocationText());
+        tap(homeScreen.getUseMyCurrentLocationText());
     }
 
     @Step("Verify that all 'Homescreen' elements are displayed correctly")
     public void verifyThatAllHomeElementsDisplayed() {
-        homeScreen.verifyScreenElements();
+        verifyScreenElements();
     }
 
     @Step("Click the 'My Orders' button")
     public void clickMyOrdersButton() {
-        homeScreen.tap(homeScreen.getOrdersItem());
+        tap(homeScreen.getOrdersItem());
     }
 
     @Step("Click the 'Find Restaurants' button")
     public void clickFindRestaurantsButton() {
-        homeScreen.tap(homeScreen.getFindRestaurantsButton());
+        tap(homeScreen.getFindRestaurantsButton());
     }
 
     @Step("Click on restaurant icon")
     public void clickOnResturantIcon() {
-        homeScreen.tap(homeScreen.getRestaurantsItem());
+        tap(homeScreen.getRestaurantsItem());
     }
 
     @Step("Click on more")
-    public HomeScreenSideMenu clickOnMore() {
-        homeScreen.tap(homeScreen.getMoreItem());
-        return new HomeScreenSideMenu(driver);
+    public HomeScreenSteps clickOnMore() {
+        tap(homeScreen.getMoreItem());
+        return this;
+    }
+
+    @Step("Go to profile screen")
+    public void goToProfile() {
+        tap(homeScreenSideMenu.getProfile());
+    }
+
+    @Step("Go to profile screen")
+    public void goToInvoices() {
+        tap(homeScreenSideMenu.getInvoices());
+    }
+
+    @Step("Go to settings screen")
+    public void goToSettings() {
+        tap(homeScreenSideMenu.getSettings());
+    }
+
+    @Step("Go to payment options screen")
+    public void goToPaymentOptions() {
+        tap(homeScreenSideMenu.getPaymentOptions());
     }
 }

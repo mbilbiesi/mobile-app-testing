@@ -15,7 +15,7 @@ import static com.hs.mobile.data.ElementAttribute.TEXT;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-public class LocationScreenSteps {
+public class LocationScreenSteps extends BaseSteps {
   private LocationsScreen locationsScreen;
   private HomeScreenSteps homeScreenSteps;
   private SavedLocationsScreen savedLocationsScreen;
@@ -23,6 +23,7 @@ public class LocationScreenSteps {
   private RestaurantListScreenSteps restaurantListScreenSteps;
 
   public LocationScreenSteps(AppiumDriver driver) {
+      super(driver);
     locationsScreen = new LocationsScreen(driver);
     homeScreenSteps = new HomeScreenSteps(driver);
     savedLocationsScreen = new SavedLocationsScreen(driver);
@@ -37,7 +38,7 @@ public class LocationScreenSteps {
     String desc = getDescription();
     submitAddress();
     savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
-    locationsScreen.navigateBack(1);
+      navigateBack(1);
 
     Assertions.assertThat(desc)
             .as("Actual updated description does not match expected one.")
@@ -68,7 +69,7 @@ public class LocationScreenSteps {
     saveForLater();
     submitAddress();
     restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
-    locationsScreen.navigateBack(1);
+      navigateBack(1);
   }
 
   @Step("Search for a landmark")
@@ -94,7 +95,7 @@ public class LocationScreenSteps {
     List<LocationType> allLocationTypes = Arrays.asList(LocationType.values());
     homeScreenSteps.viewSavedLocations();
     int locationsCount = savedLocationsScreen.getSavedLocations().size();
-    locationsScreen.navigateBack(1);
+      navigateBack(1);
     Assertions.assertThat(locationsCount)
             .as("Number of saved locations should be 4.")
             .isEqualTo(allLocationTypes.size());
@@ -103,7 +104,7 @@ public class LocationScreenSteps {
   @Step("Verify location can be saved without adding a description")
   public void verifyLocationCanBeSavedWithoutDescription() {
     int savedLocationsCount = savedLocationsScreen.getSavedLocations().size();
-    locationsScreen.navigateBack(1);
+      navigateBack(1);
 
     Assertions.assertThat(savedLocationsCount).as("Description is not mandatory.").isEqualTo(1);
   }
@@ -112,7 +113,7 @@ public class LocationScreenSteps {
   public void verifyLocationUpdatedSuccessfully() {
     waitUntilSubmitButtonIsEnabled();
     boolean isSubmitButtonEnabled = isSubmitButtonEnabled();
-    locationsScreen.navigateBack(2);
+      navigateBack(2);
 
     Assertions.assertThat(isSubmitButtonEnabled)
             .as("User should be directed to the saved location.")
@@ -129,7 +130,7 @@ public class LocationScreenSteps {
   @Step("Verify that all locations are deleted")
   public void verifyAllLocationsDeleted() {
     boolean isSearchButtonDisplayed = isSearchButtonDisplayed();
-    locationsScreen.navigateBack(1);
+      navigateBack(1);
 
     Assertions.assertThat(isSearchButtonDisplayed)
             .as("User should be redirected to locations screen.")
@@ -151,16 +152,13 @@ public class LocationScreenSteps {
       savedLocationsScreenSteps.deleteSavedLocations();
       savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
     } finally {
-      locationsScreen.navigateBack(1);
+        navigateBack(1);
     }
   }
 
   @Step("search for restaurants")
   public void searchForRestaurants() {
-    locationsScreen
-            .touchAction
-            .tap(tapOptions().withElement(element(locationsScreen.getSearchButton())))
-            .perform();
+      touchAction.tap(tapOptions().withElement(element(locationsScreen.getSearchButton()))).perform();
   }
 
   @Step("insert {text} location")
@@ -170,17 +168,15 @@ public class LocationScreenSteps {
 
   @Step("select {index} area")
   public void selectItemArea(int index) {
-    locationsScreen
-            .touchAction
-            .tap(tapOptions().withElement(element(locationsScreen.getItemAreas().get(index))))
-            .perform();
+      touchAction
+              .tap(tapOptions().withElement(element(locationsScreen.getItemAreas().get(index))))
+              .perform();
   }
 
   public void submitAddress() {
-    locationsScreen
-            .touchAction
-            .tap(tapOptions().withElement(element(locationsScreen.getSelectAddressButton())))
-            .perform();
+      touchAction
+              .tap(tapOptions().withElement(element(locationsScreen.getSelectAddressButton())))
+              .perform();
   }
 
   @Step("Insert {description} address description")
@@ -190,19 +186,18 @@ public class LocationScreenSteps {
 
   @Step("Toggle save for later button")
   public void saveForLater() {
-    locationsScreen.tap(locationsScreen.getSaveForLaterToggleButton());
+      tap(locationsScreen.getSaveForLaterToggleButton());
   }
 
   @Step("Select {index} location type")
   public void selectLocationType(int index) {
-    locationsScreen.tap(locationsScreen.getLocationTypes().get(index));
+      tap(locationsScreen.getLocationTypes().get(index));
   }
 
   @Step("Check if the submit button is enabled")
   public boolean isSubmitButtonEnabled() {
     return Boolean.parseBoolean(
-            locationsScreen.getElementAttributeValue(
-                    locationsScreen.getSelectAddressButton(), ENABLED));
+            getElementAttributeValue(locationsScreen.getSelectAddressButton(), ENABLED));
   }
 
   @Step("Clear description text box")
@@ -212,8 +207,7 @@ public class LocationScreenSteps {
 
   @Step("Get the current address description")
   public String getDescription() {
-    return locationsScreen.getElementAttributeValue(
-            locationsScreen.getAddressDescriptionTextBox(), TEXT);
+      return getElementAttributeValue(locationsScreen.getAddressDescriptionTextBox(), TEXT);
   }
 
   @Step("Check if the search button is displayed")
@@ -224,7 +218,7 @@ public class LocationScreenSteps {
   @Step("Verify that address can be submitted upon selecting a location by it's landmark")
   public void verifySubmitButtonAfterSelectingValidLandmark() {
     boolean isSubmitButtonEnabled = isSubmitButtonEnabled();
-    locationsScreen.navigateBack(1);
+      navigateBack(1);
 
     Assertions.assertThat(isSubmitButtonEnabled)
             .as("Submit button should be enabled for valid landmarks.")
@@ -232,8 +226,8 @@ public class LocationScreenSteps {
   }
 
   public void waitUntilSubmitButtonIsEnabled() {
-    locationsScreen.waitUntilAnElementIsUpdated(
-            locationsScreen.getSelectAddressButton(), ENABLED, String.valueOf(true));
+      waitUntilAnElementIsUpdated(
+              locationsScreen.getSelectAddressButton(), ENABLED, String.valueOf(true));
   }
 
   private void addNewLocations(List<LocationType> types) {
@@ -251,7 +245,7 @@ public class LocationScreenSteps {
       selectLocationType(i);
       submitAddress();
       restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
-      locationsScreen.navigateBack(1);
+        navigateBack(1);
     }
   }
 }

@@ -7,7 +7,6 @@ import org.apache.commons.lang3.RandomUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,24 +15,22 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HelpSteps {
+public class HelpSteps extends BaseSteps {
     private HelpScreen helpScreen;
-    private AppiumDriver driver;
 
     public HelpSteps(AppiumDriver driver) {
-        this.driver = driver;
+        super(driver);
         helpScreen = new HelpScreen(driver);
     }
 
     private void waitUntilHelpScreenLoaded() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfAllElements(helpScreen.getEleTicketsList()));
     }
 
     @Step("Verify that all 'Help' screen elements are displayed")
     public void verifyHelpElementsDisplayed() {
         waitUntilHelpScreenLoaded();
-        helpScreen.verifyScreenElements();
+        verifyScreenElements();
     }
 
     @Step("Verify that different ticket categories are displayed to the customer")
@@ -84,7 +81,7 @@ public class HelpSteps {
 
         for (int i = 0; i < ticketCategoriesCount; i++) {
             category = helpScreen.getLblTicketCategory().get(i).getText();
-            helpScreen.tap(helpScreen.getLblTicketCategory().get(i));
+            tap(helpScreen.getLblTicketCategory().get(i));
             expectedTickets = getExpectedTicketsPerCategory(category);
             actualTickets = getActualTicketsPerCategory(helpScreen.getEleTicket());
             soft.assertThat(helpScreen.getEleTicket().size() > 0)
@@ -97,21 +94,32 @@ public class HelpSteps {
         soft.assertAll();
     }
 
+    @Step("Click on a ticket")
+    public void navigateToTicket(boolean ticketRequiresDescription) {
+        if (!ticketRequiresDescription) {
+            tapRandomCategory();
+            tapRandomTicket();
+        } else {
+            tap(helpScreen.getLblTicketCategory().get(1));
+            tap(helpScreen.getEleTicket().get(0));
+        }
+    }
+
     private List<String> getExpectedTicketsPerCategory(String category) {
         List<String> expectedCategories = new ArrayList<>();
         category = category.toLowerCase();
         switch (category) {
             case "الدفع":
-                expectedCategories = Arrays.asList("الفاتورة في التطبيق غير مطابقة لفاتورة المطعم");
+                expectedCategories = List.of("الفاتورة في التطبيق غير مطابقة لفاتورة المطعم");
                 break;
             case "The Payment":
-                expectedCategories = Arrays.asList("I've received a different bill amount than the app's");
+                expectedCategories = List.of("I've received a different bill amount than the app's");
                 break;
             case "الموظف":
-                expectedCategories = Arrays.asList("ملاحظة على موظف المطعم");
+                expectedCategories = List.of("ملاحظة على موظف المطعم");
                 break;
             case "The Staff":
-                expectedCategories = Arrays.asList("I have a comment on the restaurant's staff");
+                expectedCategories = List.of("I have a comment on the restaurant's staff");
                 break;
             // ToDo: To add more data cases regarding the rest of ticket types.
         }
@@ -123,25 +131,14 @@ public class HelpSteps {
         return ticketType.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    @Step("Click on a ticket")
-    public void navigateToTicket(boolean ticketRequiresDescription) {
-        if (!ticketRequiresDescription) {
-            tapRandomCategory();
-            tapRandomTicket();
-        } else {
-            helpScreen.tap(helpScreen.getLblTicketCategory().get(1));
-            helpScreen.tap(helpScreen.getEleTicket().get(0));
-        }
-    }
-
     private void tapRandomCategory() {
         int randomCategoryIndex = getRandomIndex(helpScreen.getLblTicketCategory());
-        helpScreen.tap(helpScreen.getLblTicketCategory().get(randomCategoryIndex));
+        tap(helpScreen.getLblTicketCategory().get(randomCategoryIndex));
     }
 
     private void tapRandomTicket() {
         int randomTicketIndex = getRandomIndex(helpScreen.getEleTicket());
-        helpScreen.tap(helpScreen.getEleTicket().get(randomTicketIndex));
+        tap(helpScreen.getEleTicket().get(randomTicketIndex));
     }
 
     private int getRandomIndex(List<WebElement> tickets) {
@@ -149,6 +146,6 @@ public class HelpSteps {
     }
 
     public void navigateBackToOrder() {
-        helpScreen.tap(helpScreen.getBtnBack());
+        tap(helpScreen.getBtnBack());
     }
 }

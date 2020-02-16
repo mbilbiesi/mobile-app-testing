@@ -52,30 +52,30 @@ public class RestaurantsListTests extends BaseTest {
         // When
 
         // Then
-        restaurantsListScreen.verifyRestaurantsListLayout();
+        restaurantsListSteps.verifyRestaurantsListLayout();
     }
 
     @Issue("HSAP-186")
     @Test(description = "Verify all restaurants that meet the search criteria are returned")
     public void searchForRestaurant_resultsMatchedSearchCriteria() {
         // When
-        restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
-        keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
+        restaurantCount = restaurantsListSteps.getRestaurantsCount(false);
+        keyword = restaurantsListSteps.searchForRestaurant("بيتزا هت");
 
         // Then
-        restaurantsListScreen.verifyReturnedRestaurants(keyword);
+        restaurantsListSteps.verifyReturnedRestaurants(keyword);
     }
 
     @Issue("HSAP-186")
     @Test(description = "Verify clearing search criteria will reset the list view")
     public void clickToResetSearchCriteria_restaurantListWillBeReset() {
         // When
-        restaurantCount = restaurantsListScreen.getRestaurantsCount(false);
-        keyword = restaurantsListScreen.searchForRestaurant("بيتزا هت");
-        afterSearchRestaurantCount = restaurantsListScreen.clearSearchCriteria();
+        restaurantCount = restaurantsListSteps.getRestaurantsCount(false);
+        keyword = restaurantsListSteps.searchForRestaurant("بيتزا هت");
+        afterSearchRestaurantCount = restaurantsListSteps.clearSearchCriteria();
 
         // Then
-        restaurantsListScreen.verifyAllRestaurantsAreReturned(
+        restaurantsListSteps.verifyAllRestaurantsAreReturned(
                 restaurantCount, afterSearchRestaurantCount);
     }
 
@@ -83,12 +83,12 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Verify recommended badge is displaying next to the recommended restaurants")
     public void navigateToRestaurantsListScreen_checkRecommendedRestaurantsBadge() {
         // When
-        restaurantsListScreen.searchForRestaurant(recommendedRestaurant);
+        restaurantsListSteps.searchForRestaurant(recommendedRestaurant);
 
         // Then
-        restaurantsListScreen.checkRecommendedBadge(true);
+        restaurantsListSteps.checkRecommendedBadge(true);
         // todo: make sure that this step is going to be executed otherwise next tests will fail
-        restaurantsListScreen.clearSearchCriteria();
+        restaurantsListSteps.clearSearchCriteria();
     }
 
     @Issue("HSAP-189")
@@ -97,12 +97,12 @@ public class RestaurantsListTests extends BaseTest {
                     "verify recommended badge is only displayed for restaurant with ready status only")
     public void navigateToRestaurantList_recommendedBadgeDisplayOnlyForReadyRestaurant() {
         // When
-        restaurantsListScreen.searchForRestaurant(notReadyRecommendedRestaurant);
+        restaurantsListSteps.searchForRestaurant(notReadyRecommendedRestaurant);
 
         // Then
-        restaurantsListScreen.checkRecommendedBadge(false);
+        restaurantsListSteps.checkRecommendedBadge(false);
         // todo: make sure that this step is going to be executed otherwise next tests will fail
-        restaurantsListScreen.clearSearchCriteria();
+        restaurantsListSteps.clearSearchCriteria();
     }
 
     @Issue("HSAP-190")
@@ -111,10 +111,10 @@ public class RestaurantsListTests extends BaseTest {
                     "Verify restaurants are sorted according to the distance from the location provided")
     public void navigateToRestaurantsListScreen_verifyRestaurantsSortedByDistance() {
         // When
-        restaurantsListScreen.scrollDownRestaurantsList();
+        restaurantsListSteps.scrollDownRestaurantsList();
 
         // Then
-        restaurantsListScreen.checkIfRestaurantsSortedByDistance();
+        restaurantsListSteps.checkIfRestaurantsSortedByDistance();
     }
 
     @Issue("HSAP-191")
@@ -124,7 +124,7 @@ public class RestaurantsListTests extends BaseTest {
     public void navigateToRestaurantsListScreen_verifyPromotedRestaurantsDisplayOnTop() {
         // When
         // Then
-        restaurantsListScreen.verifyPromotedRestaurantsDisplayOnTop();
+        restaurantsListSteps.verifyPromotedRestaurantsDisplayOnTop();
     }
 
     @Issue("HSAP-192")
@@ -132,7 +132,7 @@ public class RestaurantsListTests extends BaseTest {
     public void navigateToRestaurantsListScreen_verifyKitchenTypeFiltersAreDisplayed() {
         // When
         // Then
-        restaurantsListScreen.verifyRestaurantFiltersAreDisplayed();
+        restaurantsListSteps.verifyRestaurantFiltersAreDisplayed();
     }
 
     @Issue("HSAP-193")
@@ -141,18 +141,18 @@ public class RestaurantsListTests extends BaseTest {
     public void navigateToRestaurantsListScreen_verifyTheAllFilterIsDisplayedAndSelected() {
         // When
         // Then
-        restaurantsListScreen.verifyAllFiterIsDisplayed();
-        restaurantsListScreen.verifyAllFiterIsSelectedAndColorIsYellow();
+        restaurantsListSteps.verifyAllFiterIsDisplayed();
+        restaurantsListSteps.verifyAllFiterIsSelectedAndColorIsYellow();
     }
 
     @Issue("HSAP-194")
     @Test(description = "Check if the user is able to swipe left and right on the filters list")
     public void navigateToRestaurantsListScreen_verifyCustomerCanSwipeOnFilters() {
         // When
-        firstFilterTitle = restaurantsListScreen.swipeFiltersList();
+        firstFilterTitle = restaurantsListSteps.swipeFiltersList();
 
         // Then
-        restaurantsListScreen.verifyFiltersSwipedSuccessfully(firstFilterTitle);
+        restaurantsListSteps.verifyFiltersSwipedSuccessfully(firstFilterTitle);
     }
 
     @Issue("HSAP-195")
@@ -160,7 +160,7 @@ public class RestaurantsListTests extends BaseTest {
     public void navigateToRestaurantsListScreen_verifyTopBannerImgRatioIs2_1() {
         // When
         // Then
-        restaurantsListScreen.verifyTopBannerImageRatio();
+        restaurantsListSteps.verifyTopBannerImageRatio();
     }
 
     @Issue("HSAP-197")
@@ -168,7 +168,7 @@ public class RestaurantsListTests extends BaseTest {
     public void navigateToRestaurantsListScreen_verifyTopBannerShowsRestaurantOffers() {
         // When
         // Then
-        restaurantsListScreen.verifyTopBannerShowsOnlyOffers();
+        restaurantsListSteps.verifyTopBannerShowsOnlyOffers();
         driver.navigate().back();
     }
 
@@ -177,7 +177,7 @@ public class RestaurantsListTests extends BaseTest {
     public void navigateToRestaurantsListScreen_verifyCampaignsDisplayedInSeparateCarousel() {
         // When
         // Then
-        restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(true);
+        restaurantsListSteps.verifyCampaignsDisplayInSeparateCarousel(true);
     }
 
     @Issue("HSAP-199")
@@ -185,17 +185,17 @@ public class RestaurantsListTests extends BaseTest {
     public void navigateToRestaurantsListScreen_verifyMaxNumberOfCampaignsDisplayed() {
         // When
         // Then
-        restaurantsListScreen.verifyMaxCampaginsNumberInCarousel();
+        restaurantsListSteps.verifyMaxCampaginsNumberInCarousel();
     }
 
     @Issue("HSAP-200")
     @Test(description = "Verify that restaurants will be displayed based on the selected campaign")
     public void clickCampaign_verifyRestaurantsWithCampaignDisplayed() {
         // When
-        restaurantsListScreen.clickCampaign(true);
+        restaurantsListSteps.clickCampaign(true);
 
         // Then
-        restaurantsListScreen.verifyCampaignRestaurants();
+        restaurantsListSteps.verifyCampaignRestaurants();
         driver.navigate().back();
     }
 
@@ -204,7 +204,7 @@ public class RestaurantsListTests extends BaseTest {
     public void navigateToRestaurantsListScreen_verifyNoCampaignsAreShowedToCustomer() {
         // When
         // Then
-        restaurantsListScreen.verifyCampaignsDisplayInSeparateCarousel(false);
+        restaurantsListSteps.verifyCampaignsDisplayInSeparateCarousel(false);
         driver.navigate().back();
     }
 
@@ -212,15 +212,15 @@ public class RestaurantsListTests extends BaseTest {
     @Test(description = "Check if the the top campaign width set to ratio 2:1")
     public void clickCampaign_verifyTopCampaignWidthRatioIs2_1() {
         // When
-        restaurantsListScreen.clickCampaign(true);
+        restaurantsListSteps.clickCampaign(true);
 
         // Then
-        restaurantsListScreen.verifyCampaignImageRatio(true);
+        restaurantsListSteps.verifyCampaignImageRatio(true);
     }
 
     @AfterMethod
     public void afterEachTest() {
-        restaurantsListScreen.navigateBackToRestaurantsList();
+        restaurantsListSteps.navigateBackToRestaurantsList();
         driver.navigate().back();
     }
 }

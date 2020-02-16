@@ -3,9 +3,10 @@ package com.hs.mobile.screens;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import io.qameta.allure.Step;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
+@Getter
 public class HomeScreenSideMenu extends AbstractScreen {
     @iOSXCUITFindBy(id = "")
     @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='2']")
@@ -25,25 +26,5 @@ public class HomeScreenSideMenu extends AbstractScreen {
 
     public HomeScreenSideMenu(AppiumDriver driver) {
         super(driver);
-    }
-
-    @Step("Go to profile screen")
-    public void goToProfile() {
-        tap(profile);
-    }
-
-    @Step("Go to profile screen")
-    public void goToInvoices() {
-        tap(invoices);
-    }
-
-    @Step("Go to settings screen")
-    public void goToSettings() {
-        tap(settings);
-    }
-
-    @Step("Go to payment options screen")
-    public void goToPaymentOptions() {
-        tap(paymentOptions);
     }
 }
