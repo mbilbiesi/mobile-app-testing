@@ -52,4 +52,4 @@ allure serve
 
 ### Demonstrating how to run test on android emulator 
 
-[![How to run](https://lh3.googleusercontent.com/qQeBveIRYmX4hlnU7mcnwYbQCHnT5A1fnxNtAcxW5f2je88CEibNo9g0ZlXeHgym3nzzRRaW=w1280)](https://drive.google.com/file/d/1eEXMCLhyi9ZUecf0SZFR6q_HmIfWQQbh/view "How to run")
+[![How to run](https://lh6.googleusercontent.com/wlQ2LZrMC70ZYnundcpKYtOU6bFyKVLl5bTrxxDNt8XXJXBtBWCObQBJdOu_1Me58qni2-tD=w1280)](https://drive.google.com/file/d/1eEXMCLhyi9ZUecf0SZFR6q_HmIfWQQbh/view "How to run")
