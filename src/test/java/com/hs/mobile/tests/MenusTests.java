@@ -16,20 +16,20 @@ import java.util.List;
 @Listeners(TestListener.class)
 public class MenusTests extends BaseTest {
 
-    @Test(description = "While swiping through menu groups, they should display properly")
-    public void navigateToRestaurantScreen_menuGroupsShouldDisplayProperly() {
-        //When
-        restaurantScreenSteps.goToRestaurantScreen("The Pizza Company");
-        List<WebElement> menuGroups = restaurantScreenSteps.swipeThroughTheMenuGroups();
-        //Then
-        restaurantScreenSteps.verifyThatMenuGroupsDisplayProperly(menuGroups);
-    }
+  @Test(description = "While swiping through menu groups, they should display properly")
+  public void navigateToRestaurantScreen_menuGroupsShouldDisplayProperly() {
+    // When
+    restaurantScreenSteps.goToRestaurantScreen("The Pizza Company");
+    List<WebElement> menuGroups = restaurantScreenSteps.swipeThroughTheMenuGroups();
+    // Then
+    restaurantScreenSteps.verifyThatMenuGroupsDisplayProperly(menuGroups);
+  }
 
-    @Test(description = "Verify that calories display properly for a menu item")
-    public void navigateToRestaurantScreen_verifyCaloriesForAMenuItem() {
-        //When
-        restaurantScreenSteps.goToRestaurantScreen("Porygon - Soso");
-        //
-        restaurantScreenSteps.verifyThatCaloriesDisplayProperlyForAMenuItem();
-    }
+  @Test(description = "Verify that calories display properly for a menu item")
+  public void navigateToRestaurantScreen_verifyCaloriesForAMenuItem() {
+    // When
+    restaurantScreenSteps.goToRestaurantScreen("Porygon - Soso");
+    //
+    restaurantScreenSteps.verifyThatCaloriesDisplayProperlyForAMenuItem();
+  }
 }
