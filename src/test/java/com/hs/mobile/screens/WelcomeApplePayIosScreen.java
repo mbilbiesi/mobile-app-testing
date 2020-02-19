@@ -13,7 +13,7 @@ public class WelcomeApplePayIosScreen extends AbstractScreen {
   @AssertElementVisibility
   private MobileElement btnProceedWithApplePay;
 
-  @iOSXCUITFindBy(iOSClassChain = "XCUIElementTypeWindow/*/*/*/XCUIElementTypeButton[2]")//todo:id
+  @iOSXCUITFindBy(iOSClassChain = "XCUIElementTypeWindow/*/*/*/XCUIElementTypeButton[2]") //todo:id
   @AssertElementVisibility
   private MobileElement btnSkipApplePay;
 

@@ -57,22 +57,22 @@ public class HomeScreenSteps extends BaseSteps {
 
   @Step("Go to profile screen")
   public void goToProfile() {
-    tap(homeScreenSideMenu.getProfile());
+    tap(homeScreenSideMenu.getBtnProfile());
   }
 
   @Step("Go to profile screen")
   public void goToInvoices() {
-    tap(homeScreenSideMenu.getInvoices());
+    tap(homeScreenSideMenu.getBtnInvoices());
   }
 
   @Step("Go to settings screen")
   public void goToSettings() {
-    tap(homeScreenSideMenu.getSettings());
+    tap(homeScreenSideMenu.getBtnSettings());
   }
 
   @Step("Go to payment options screen")
   public void goToPaymentOptions() {
-    tap(homeScreenSideMenu.getPaymentOptions());
+    tap(homeScreenSideMenu.getBtnPaymentOptions());
   }
 
   public void waitUntilHomescreenIsLoaded() {

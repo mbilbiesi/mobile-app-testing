@@ -10,27 +10,27 @@ import lombok.Getter;
 @Getter
 public class AddReferralCodeScreen extends AbstractScreen {
 
-  @iOSXCUITFindBy(className = "")//todo:id
+  @iOSXCUITFindBy(accessibility = "Skip") //todo:ChangeArabicId
   @AndroidFindBy(className = "android.widget.ImageButton")
   @AssertElementVisibility
   private MobileElement btnClose;
 
-  @iOSXCUITFindBy(className = "")//todo:id
+  @iOSXCUITFindBy(className = "") //todo:id
   @AndroidFindBy(className = "android.widget.ImageView")
   @AssertElementVisibility
   private MobileElement imgReferralCode;
 
-  @iOSXCUITFindBy(id = "")//todo:id
+  @iOSXCUITFindBy(accessibility = "Please enter you referral code")  //todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_code_label")
   @AssertElementVisibility
   private MobileElement lblReferralCode;
 
-  @iOSXCUITFindBy(id = "")//todo:id
+  @iOSXCUITFindBy(id = "")  //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/edt_referral")
   @AssertElementVisibility
   private MobileElement txtReferralCode;
 
-  @iOSXCUITFindBy(id = "")//todo:id
+  @iOSXCUITFindBy(id = "")  //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_verify")
   @AssertElementVisibility
   private MobileElement btnVerifyReferralCode;

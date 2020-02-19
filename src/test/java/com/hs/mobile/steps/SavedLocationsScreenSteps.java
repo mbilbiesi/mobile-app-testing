@@ -15,7 +15,7 @@ public class SavedLocationsScreenSteps extends BaseSteps {
 
   @Step("Add new location")
   public void addNewLocation() {
-    tap(savedLocationsScreen.getNewLocation());
+    tap(savedLocationsScreen.getBtnAddNewLocation());
   }
 
   @Step("Delete saved locations")
@@ -36,6 +36,6 @@ public class SavedLocationsScreenSteps extends BaseSteps {
   }
 
   void waitUntilNewLocationButtonDisplays() {
-    wait.until(ExpectedConditions.visibilityOf(savedLocationsScreen.getNewLocation()));
+    wait.until(ExpectedConditions.visibilityOf(savedLocationsScreen.getBtnAddNewLocation()));
   }
 }

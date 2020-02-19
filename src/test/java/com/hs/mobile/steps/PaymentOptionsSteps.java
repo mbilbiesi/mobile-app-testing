@@ -12,6 +12,6 @@ public class PaymentOptionsSteps extends BaseSteps {
   }
 
   public void openWallet() {
-    tap(paymentOptionsScreen.getWallet());
+    tap(paymentOptionsScreen.getBtnWallet());
   }
 }

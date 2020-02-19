@@ -98,7 +98,7 @@ public class RestaurantScreenSteps extends BaseSteps {
 
     tap(restaurantScreen.getFirstMenuItem());
 
-    wait.until(ExpectedConditions.visibilityOf(menuItemScreen.getTitle()));
+    wait.until(ExpectedConditions.visibilityOf(menuItemScreen.getTxtTitle()));
 
     soft.assertThat(isElementActive(menuItemScreen.getCaloriesIcon()))
         .as("Calories icon should be active.")
@@ -117,7 +117,7 @@ public class RestaurantScreenSteps extends BaseSteps {
                 + menuItemScreen.getCaloriesLabel().getText().toLowerCase());
     soft.assertThat(firstMenuItemName)
         .as("Menu item details should match.")
-        .isEqualTo(menuItemScreen.getTitle().getText());
+        .isEqualTo(menuItemScreen.getTxtTitle().getText());
 
     navigateBack(4);
     soft.assertAll();

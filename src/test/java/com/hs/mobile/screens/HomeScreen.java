@@ -23,41 +23,41 @@ public class HomeScreen extends AbstractScreen {
   @AssertElementVisibility
   private MobileElement useMyCurrentLocationImage;
 
-  @iOSXCUITFindBy(xpath = "//*[@name='عرض المطاعم' or @name='Find Restaurants']")
+  @iOSXCUITFindBy(xpath = "//*[@name='عرض المطاعم' or @name='Find Restaurants']") //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/BtnRestaurants")
   @AssertElementVisibility
   private MobileElement findRestaurantsButton;
 
   @iOSXCUITFindBy(
-      iOSClassChain = "XCUIElementTypeWindow[1]/*/*/XCUIElementTypeTabBar/XCUIElementTypeButton[1]")
+      iOSClassChain = "XCUIElementTypeWindow[1]/*/*/XCUIElementTypeTabBar/XCUIElementTypeButton[1]")  //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/restaurants_item")
   @AssertElementVisibility
   private MobileElement restaurantsItem;
 
   @iOSXCUITFindBy(
-      iOSClassChain = "XCUIElementTypeWindow[1]/*/*/XCUIElementTypeTabBar/XCUIElementTypeButton[2]")
+      iOSClassChain = "XCUIElementTypeWindow[1]/*/*/XCUIElementTypeTabBar/XCUIElementTypeButton[2]")  //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/orders_item")
   @AssertElementVisibility
   private MobileElement ordersItem;
 
   @iOSXCUITFindBy(
-      iOSClassChain = "XCUIElementTypeWindow[1]/*/*/XCUIElementTypeTabBar/XCUIElementTypeButton[3]")
+      iOSClassChain = "XCUIElementTypeWindow[1]/*/*/XCUIElementTypeTabBar/XCUIElementTypeButton[3]")  //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/offers_item")
   @AssertElementVisibility
   private MobileElement offersItem;
 
   @iOSXCUITFindBy(
-      iOSClassChain = "XCUIElementTypeWindow[1]/*/*/XCUIElementTypeTabBar/XCUIElementTypeButton[4]")
+      iOSClassChain = "XCUIElementTypeWindow[1]/*/*/XCUIElementTypeTabBar/XCUIElementTypeButton[4]")  //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/more_item")
   @AssertElementVisibility
   private MobileElement moreItem;
 
   // ToDo: find the locator of the skip promotion link in english
-  // @iOSXCUITFindBy(xpath = "")
+  // @iOSXCUITFindBy(xpath = "")  //todo:id
   @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='textInEnglish']")
   private List<WebElement> lnkSkipPromotion;
 
-  // @iOSXCUITFindBy(id = "")
+  // @iOSXCUITFindBy(id = "") //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rel")
   private List<WebElement> homescreenLayout;
 

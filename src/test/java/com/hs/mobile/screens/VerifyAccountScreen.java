@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class VerifyAccountScreen extends AbstractScreen {
 
-  @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeTextField'")
+  @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeTextField'")  //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/phone_number")
   private MobileElement txtPhoneNumber;
 

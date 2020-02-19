@@ -134,11 +134,11 @@ public class SettingsScreenSteps extends BaseSteps {
 
   public Boolean areNotificationsEnabled() {
     return Boolean.parseBoolean(
-        getElementAttributeValue(settingsScreen.getNotifications(), CHECKED));
+        getElementAttributeValue(settingsScreen.getChkNotifications(), CHECKED));
   }
 
   private void tickNotificationsCheckBox() {
-    tap(settingsScreen.getNotifications());
+    tap(settingsScreen.getChkNotifications());
   }
 
   private void waitUntilDialogDisplays() {

@@ -9,23 +9,23 @@ import lombok.Getter;
 @Getter
 public class PinCodeVerificationScreen extends AbstractScreen {
 
-  // @iOSXCUITFindBy(id = "test")
+  // @iOSXCUITFindBy(id = "test") todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/state_description")
   private MobileElement eleCustomerPhoneNumber;
 
-  @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeTextField'")
+  @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeTextField'")  //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/edt_verification_number")
   private MobileElement txtVerificationCode;
 
-  // @iOSXCUITFindBy(id = "test")
+  // @iOSXCUITFindBy(id = "test") todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/resend_pin")
   private MobileElement lnkResendPin;
 
-  // @iOSXCUITFindBy(id = "test")
+  // @iOSXCUITFindBy(id = "test") todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/resend_call_pin")
   private MobileElement lnkResendPinCall;
 
-  // @iOSXCUITFindBy(id = "test")
+  // @iOSXCUITFindBy(id = "test") BUTTON DOESN'T EXIST IN IOS APP
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_login")
   private MobileElement btnVerifyNumber;
 
