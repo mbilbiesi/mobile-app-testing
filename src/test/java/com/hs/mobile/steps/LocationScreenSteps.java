@@ -1,6 +1,7 @@
 package com.hs.mobile.steps;
 
 import com.hs.mobile.data.LocationType;
+import com.hs.mobile.data.testData.TestDataProvider;
 import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.SavedLocationsScreen;
 import io.appium.java_client.AppiumDriver;
@@ -21,6 +22,7 @@ public class LocationScreenSteps extends BaseSteps {
   private SavedLocationsScreen savedLocationsScreen;
   private SavedLocationsScreenSteps savedLocationsScreenSteps;
   private RestaurantListScreenSteps restaurantListScreenSteps;
+    private TestDataProvider testData;
 
   public LocationScreenSteps(AppiumDriver driver) {
     super(driver);

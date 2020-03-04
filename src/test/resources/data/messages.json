@@ -1,0 +1,122 @@
+{
+  "screens": [
+    {
+      "tickets": {
+        "messages": [
+          {
+            "messageId": "1",
+            "title": "Ticket Already Opened",
+            "message": {
+              "en": "TBD",
+              "ar": "لديك تذكرة مفتوحة حاليّا متعلقة بهذا الطلب!"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "createTicket": {
+        "messages": [
+          {
+            "messageId": "2",
+            "title": "Required Description",
+            "message": {
+              "en": "",
+              "ar": "['اكتب لنا تفاصيل ملاحظتك']"
+            }
+          },
+          {
+            "messageId": "3",
+            "title": "Message Created Successfully",
+            "message": {
+              "en": "",
+              "ar": "لتتمكن من متابعة التذكرة قم بالضغط على الدعم"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "help": {
+        "messages": [
+          {
+            "messageId": "4",
+            "title": "Ticket Type - Order",
+            "message": {
+              "en": "Order",
+              "ar": "الطلب"
+            }
+          },
+          {
+            "messageId": "5",
+            "title": "Ticket Type - Payment",
+            "message": {
+              "en": "Payment",
+              "ar": "الدفع"
+            }
+          },
+          {
+            "messageId": "6",
+            "title": "Ticket Type - Delivery",
+            "message": {
+              "en": "Delivery",
+              "ar": "التوصيل"
+            }
+          },
+          {
+            "messageId": "7",
+            "title": "Ticket Type - Staff",
+            "message": {
+              "en": "Staff",
+              "ar": "الموظف"
+            }
+          },
+          {
+            "messageId": "8",
+            "title": "The Payment - Different Bill",
+            "message": {
+              "en": "I've received a different bill amount than the app's",
+              "ar": "الفاتورة في التطبيق غير مطابقة لفاتورة المطعم"
+            }
+          },
+          {
+            "messageId": "9",
+            "title": "The Staff - Comment on Staff",
+            "message": {
+              "en": "I have a comment on the restaurant's staff",
+              "ar": "ملاحظة على موظف المطعم"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "invoices": {
+        "messages": [
+          {
+            "messageId": "10",
+            "title": "Invoices - Title",
+            "message": {
+              "en": "Invoices",
+              "ar": "الفواتير"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "settings": {
+        "messages": [
+          {
+            "messageId": "11",
+            "title": "Settings Title",
+            "message": {
+              "en": "Settings",
+              "ar": "الإعدادات"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

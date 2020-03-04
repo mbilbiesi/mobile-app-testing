@@ -16,9 +16,10 @@
         <parameter name="platform" value="IOS 13.2"/>
         <parameter name="systemPort" value="4723"/>
         <parameter name="userId" value="1"/>
-        <parameter name="udid" value="E4358046-B95E-4CF6-B2DB-DFFEF5103943"></parameter>
+        <parameter name="language" value="en"/>
+        <parameter name="udid" value="E4358046-B95E-4CF6-B2DB-DFFEF5103943"/>
         <classes>
-            <class name="com.hs.mobile.tests.HomescreenTests"></class>
+            <class name="com.hs.mobile.tests.HomescreenTests"/>
         </classes>
     </test>
 </suite>

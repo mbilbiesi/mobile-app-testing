@@ -21,15 +21,14 @@ public class RestaurantsListTests extends BaseTest {
   // skip test conditionally based on the information above. For now, I'll just manually skip the
   // tests
 
-  int restaurantCount = 0;
-  int afterSearchRestaurantCount = 0;
-  String keyword = null;
+  private int restaurantCount = 0;
+  private String keyword = null;
   // ToDO: Find a way to retrieve different test data for restaurants dynamically:
-  String recommendedRestaurant = "ماكدونالد";
-  String notReadyRecommendedRestaurant = "ليمونة";
-  String firstFilterTitle;
+  private String recommendedRestaurant = "ماكدونالد";
+  private String notReadyRecommendedRestaurant = "ليمونة";
+  private String firstFilterTitle;
 
-  boolean hasFirstTestExecuted = false;
+  private boolean hasFirstTestExecuted = false;
 
   @BeforeMethod
   public void beforeEachTest() {
@@ -37,7 +36,7 @@ public class RestaurantsListTests extends BaseTest {
     homeScreenSteps.clickFindRestaurantsButton();
     if (!hasFirstTestExecuted) {
       locationScreenSteps.searchForRestaurants();
-      locationScreenSteps.insertLocation("riyadh");
+      locationScreenSteps.insertLocation(testData.getLocationValue("city"));
       locationScreenSteps.selectItemArea(3);
       locationScreenSteps.submitAddress();
       locationScreenSteps.insertAddressDescription("desc");
@@ -72,7 +71,7 @@ public class RestaurantsListTests extends BaseTest {
     // When
     restaurantCount = restaurantsListSteps.getRestaurantsCount(false);
     keyword = restaurantsListSteps.searchForRestaurant("بيتزا هت");
-    afterSearchRestaurantCount = restaurantsListSteps.clearSearchCriteria();
+    int afterSearchRestaurantCount = restaurantsListSteps.clearSearchCriteria();
 
     // Then
     restaurantsListSteps.verifyAllRestaurantsAreReturned(
