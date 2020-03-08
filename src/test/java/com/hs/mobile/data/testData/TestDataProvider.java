@@ -19,6 +19,7 @@ public class TestDataProvider {
     private List<Locations> locations;
     private Locations location;
     private List<Restaurants> restaurants;
+    private Restaurants restaurant;
 
     private String language;
 
@@ -47,6 +48,22 @@ public class TestDataProvider {
             return getLocation(locationType).getLocationEn();
         } else {
             return getLocation(locationType).getLocationAr();
+        }
+    }
+
+    private Restaurants getRestaurant(String restaurantType) {
+        restaurant = restaurants.stream()
+                .filter(restaurant -> restaurant.getRestaurantType().equalsIgnoreCase(restaurantType)).findFirst()
+                .orElseThrow(ExceptionSupplier.failedToInitializeTest("unable to find restaurant by it's type"));
+
+        return restaurant;
+    }
+
+    public String getRestaurantValue(String restaurantType) {
+        if (language.equalsIgnoreCase("en")) {
+            return getRestaurant(restaurantType).getEn();
+        } else {
+            return getRestaurant(restaurantType).getAr();
         }
     }
 }
