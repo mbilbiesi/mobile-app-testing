@@ -6,6 +6,8 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public class CheckoutScreen extends AbstractScreen {
 
@@ -22,16 +24,16 @@ public class CheckoutScreen extends AbstractScreen {
   private MobileElement totalAmount;
 
   @iOSXCUITFindBy(accessibility = "Choose New") //todo:ChangeArabicId
-  @AndroidFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/payment_container")
   private MobileElement btnChoosePmtMethod;
 
   @iOSXCUITFindBy(accessibility = "Select Payment Method")  //todo:ChangeArabicId
-  @AndroidFindBy(id = "")
-  private MobileElement btnSelectPmtMethod;
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_checkout")
+  private List<MobileElement> btnSelectPmtMethod;
 
   @iOSXCUITFindBy(accessibility = "Place Order")  //todo:ChangeArabicId
   //todo:This button's locator has to have the same locator as btnSelectPmtMethod button
-  @AndroidFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_checkout")
   private MobileElement btnPlaceOrder;
 
   public CheckoutScreen(AppiumDriver driver) {

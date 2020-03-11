@@ -1,0 +1,20 @@
+[
+  {
+    "locationId": "1",
+    "location_ar": "حياة مول",
+    "location_en": "hayah mall",
+    "locationType": "landmark"
+  },
+  {
+    "locationId": "2",
+    "location_ar": "الرياض",
+    "location_en": "riyadh",
+    "locationType": "city"
+  },
+  {
+    "locationId": "3",
+    "location_ar": "عمّان",
+    "location_en": "amman",
+    "locationType": "out of range city"
+  }
+]

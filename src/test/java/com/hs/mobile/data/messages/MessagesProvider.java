@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import com.hs.mobile.data.testData.TestData;
-import com.hs.mobile.data.user.TestUserProvider;
 import com.hs.mobile.exception.ExceptionSupplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class MessagesProvider {
-    private static final Logger LOG = LoggerFactory.getLogger(TestUserProvider.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MessagesProvider.class);
     private static final String MESSAGES_SOURCE = "data/messages.json";
     private List<Messages> messagesList;
     private List<CreateTicket> createTicketMessages;
@@ -29,7 +27,7 @@ public class MessagesProvider {
         try {
             String messagesFile = Resources.toString(Resources.getResource(MESSAGES_SOURCE), Charsets.UTF_8);
             messagesList =
-                    new ObjectMapper().readValue(messagesFile, new TypeReference<List<TestData>>() {
+                    new ObjectMapper().readValue(messagesFile, new TypeReference<List<Messages>>() {
                     });
             this.language = language;
         } catch (IOException e) {

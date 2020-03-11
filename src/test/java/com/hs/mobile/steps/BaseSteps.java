@@ -33,11 +33,13 @@ import static java.time.Duration.ofMillis;
 
 public abstract class BaseSteps {
   private AppiumDriver driver;
-  protected TouchAction touchAction = new TouchAction(driver);
-  protected WebDriverWait wait = new WebDriverWait(driver, 10);
+    protected TouchAction touchAction;
+    protected WebDriverWait wait;
 
   public BaseSteps(AppiumDriver driver) {
     this.driver = driver;
+      touchAction = new TouchAction(driver);
+      wait = new WebDriverWait(driver, 10);
   }
 
   public void hideKeyboard() {

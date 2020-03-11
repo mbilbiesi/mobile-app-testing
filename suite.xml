@@ -9,7 +9,11 @@
         <parameter name="userId" value="1"/>
         <parameter name="language" value="en"/>
         <classes>
-            <class name="com.hs.mobile.tests.HomescreenTests"/>
+            <class name="com.hs.mobile.tests.RestaurantsListTests">
+                <methods>
+                    <include name="navigateToRestaurantListScreen_screenElementAreDisplayed"/>
+                </methods>
+            </class>
             <!--            <class name="com.hs.mobile.tests.LocationTests"/>-->
         </classes>
     </test>

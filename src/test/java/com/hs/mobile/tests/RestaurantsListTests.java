@@ -36,7 +36,7 @@ public class RestaurantsListTests extends BaseTest {
     homeScreenSteps.clickFindRestaurantsButton();
     if (!hasFirstTestExecuted) {
       locationScreenSteps.searchForRestaurants();
-      locationScreenSteps.insertLocation(testData.getLocationValue("city"));
+      locationScreenSteps.insertLocation(locationsData.getLocationValue("city"));
       locationScreenSteps.selectItemArea(3);
       locationScreenSteps.submitAddress();
       locationScreenSteps.insertAddressDescription("desc");
@@ -59,7 +59,7 @@ public class RestaurantsListTests extends BaseTest {
   public void searchForRestaurant_resultsMatchedSearchCriteria() {
     // When
     restaurantCount = restaurantsListSteps.getRestaurantsCount(false);
-    keyword = restaurantsListSteps.searchForRestaurant("بيتزا هت");
+    keyword = restaurantsListSteps.searchForRestaurant(restaurantsData.getRestaurantName("sponsored"));
 
     // Then
     restaurantsListSteps.verifyReturnedRestaurants(keyword);

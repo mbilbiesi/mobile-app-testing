@@ -1,0 +1,30 @@
+[
+  {
+    "restaurantId": "1",
+    "en": "Mcdonald's",
+    "ar": "ماكدونالدز",
+    "status": "ready",
+    "restaurantType": "recommended"
+  },
+  {
+    "restaurantId": "2",
+    "en": "Mcdonald's",
+    "ar": "ماكدونالدز",
+    "status": "ready",
+    "restaurantType": "sponsored"
+  },
+  {
+    "restaurantId": "3",
+    "en": "Mcdonald's",
+    "ar": "ماكدونالدز",
+    "status": "ready",
+    "restaurantType": "recommended"
+  },
+  {
+    "restaurantId": "4",
+    "en": "Mcdonald's",
+    "ar": "ماكدونالدز",
+    "status": "ready",
+    "restaurantType": "sponsored"
+  }
+]

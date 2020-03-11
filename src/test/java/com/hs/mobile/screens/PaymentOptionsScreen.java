@@ -14,15 +14,15 @@ public class PaymentOptionsScreen extends AbstractScreen {
   private WebElement btnWallet;
 
   //@iOSXCUITFindBy(accessibility = "") todo:id
-  @AndroidFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/title_payment_method_view")
   private List<WebElement> btnCreditCard;
 
   //@iOSXCUITFindBy(accessibility = "") todo:id
-  @AndroidFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rl_add_credit_card")
   private WebElement btnAddNewCC;
 
   //@iOSXCUITFindBy(accessibility = "") todo:id
-  @AndroidFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/title_payment_method_view")
   private WebElement btnRedeemVoucher;
 
   public PaymentOptionsScreen(AppiumDriver driver) {

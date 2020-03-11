@@ -1,7 +1,8 @@
 package com.hs.mobile.tests;
 
 import com.google.common.io.Resources;
-import com.hs.mobile.data.testData.TestDataProvider;
+import com.hs.mobile.data.locations.LocationsProvider;
+import com.hs.mobile.data.restaurants.RestaurantsProvider;
 import com.hs.mobile.data.user.TestUser;
 import com.hs.mobile.data.user.TestUserProvider;
 import com.hs.mobile.steps.CheckoutScreenSteps;
@@ -41,8 +42,11 @@ import java.net.URL;
 
 public class BaseTest {
 
+  //  private static final String ANDROID_FILE_PATH =
+  //          Resources.getResource("apps/hs-app.apk").getPath();
   private static final String ANDROID_FILE_PATH =
-          Resources.getResource("apps/hs-app.apk").getPath();
+          "C:\\Users\\Discovery1\\Desktop\\mobile-apps-testing\\src\\test\\resources\\apps\\hs"
+                  + "-app.apk";
   private static final String IOS_FILE_PATH =
       Resources.getResource("apps/HungerStation.app").getPath();
   private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
@@ -51,7 +55,8 @@ public class BaseTest {
   protected AppiumDriver driver;
 
   TestUser testUser;
-  TestDataProvider testData;
+  LocationsProvider locationsData;
+  RestaurantsProvider restaurantsData;
   HomeScreenSteps homeScreenSteps;
   LocationScreenSteps locationScreenSteps;
   RestaurantListScreenSteps restaurantsListSteps;
@@ -74,7 +79,8 @@ public class BaseTest {
 
   @BeforeClass
   @Parameters({"platform", "udid", "systemPort", "userId", "language"})
-  void startAppiumServer(String platform, String udid, String systemPort, String userId, String language) {
+  void startAppiumServer(
+          String platform, String udid, String systemPort, String userId, String language) {
     String[] platformInfo = platform.split(" ");
 
     DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -112,7 +118,8 @@ public class BaseTest {
     driver = createDriver(platformInfo[0], capabilities);
 
     testUser = testUserProvider.getUser(userId);
-    testData = new TestDataProvider(language);
+    locationsData = new LocationsProvider(language);
+    restaurantsData = new RestaurantsProvider(language);
     homeScreenSteps = new HomeScreenSteps(driver);
     restaurantsListSteps = new RestaurantListScreenSteps(driver);
     verifyAccountScreenSteps = new VerifyAccountScreenSteps(driver);
