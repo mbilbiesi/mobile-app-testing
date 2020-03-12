@@ -2,6 +2,7 @@ package com.hs.mobile.tests;
 
 import com.google.common.io.Resources;
 import com.hs.mobile.data.locations.LocationsProvider;
+import com.hs.mobile.data.messages.MessagesProvider;
 import com.hs.mobile.data.restaurants.RestaurantsProvider;
 import com.hs.mobile.data.user.TestUser;
 import com.hs.mobile.data.user.TestUserProvider;
@@ -42,11 +43,8 @@ import java.net.URL;
 
 public class BaseTest {
 
-  //  private static final String ANDROID_FILE_PATH =
-  //          Resources.getResource("apps/hs-app.apk").getPath();
   private static final String ANDROID_FILE_PATH =
-          "C:\\Users\\Discovery1\\Desktop\\mobile-apps-testing\\src\\test\\resources\\apps\\hs"
-                  + "-app.apk";
+          Resources.getResource("apps/hs-app.apk").getPath();
   private static final String IOS_FILE_PATH =
       Resources.getResource("apps/HungerStation.app").getPath();
   private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
@@ -57,6 +55,7 @@ public class BaseTest {
   TestUser testUser;
   LocationsProvider locationsData;
   RestaurantsProvider restaurantsData;
+  MessagesProvider messages;
   HomeScreenSteps homeScreenSteps;
   LocationScreenSteps locationScreenSteps;
   RestaurantListScreenSteps restaurantsListSteps;
@@ -120,6 +119,7 @@ public class BaseTest {
     testUser = testUserProvider.getUser(userId);
     locationsData = new LocationsProvider(language);
     restaurantsData = new RestaurantsProvider(language);
+    messages = new MessagesProvider(language);
     homeScreenSteps = new HomeScreenSteps(driver);
     restaurantsListSteps = new RestaurantListScreenSteps(driver);
     verifyAccountScreenSteps = new VerifyAccountScreenSteps(driver);

@@ -1,0 +1,79 @@
+[
+  {
+    "screen": "tickets",
+    "messageId": "1",
+    "title": "Ticket Already Opened",
+    "message_en": "",
+    "message_ar": ""
+  },
+  {
+    "screen": "create ticket",
+    "messageId": "2",
+    "title": "Required Description",
+    "message_en": "",
+    "message_ar": "['اكتب لنا تفاصيل ملاحظتك']"
+  },
+  {
+    "screen": "create ticket",
+    "messageId": "3",
+    "title": "Message Created Successfully",
+    "message_en": "",
+    "message_ar": "لتتمكن من متابعة التذكرة قم بالضغط على الدعم"
+  },
+  {
+    "screen": "help",
+    "messageId": "4",
+    "title": "Ticket Type - Order",
+    "message_en": "Order",
+    "message_ar": "الطلب"
+  },
+  {
+    "screen": "help",
+    "messageId": "5",
+    "title": "Ticket Type - Payment",
+    "message_en": "Payment",
+    "message_ar": "الدفع"
+  },
+  {
+    "screen": "help",
+    "messageId": "6",
+    "title": "Ticket Type - Delivery",
+    "message_en": "Delivery",
+    "message_ar": "التوصيل"
+  },
+  {
+    "screen": "help",
+    "messageId": "7",
+    "title": "Ticket Type - Staff",
+    "message_en": "Staff",
+    "message_ar": "الموظف"
+  },
+  {
+    "screen": "help",
+    "messageId": "8",
+    "title": "The Payment - Different Bill",
+    "message_en": "I've received a different bill amount than the app's",
+    "message_ar": "الفاتورة في التطبيق غير مطابقة لفاتورة المطعم"
+  },
+  {
+    "screen": "help",
+    "messageId": "9",
+    "title": "The Staff - Comment on Staff",
+    "message_en": "I have a comment on the restaurant's staff",
+    "message_ar": "ملاحظة على موظف المطعم"
+  },
+  {
+    "screen": "invoices",
+    "messageId": "10",
+    "title": "Invoices - Title",
+    "message_en": "Invoices",
+    "message_ar": "الفواتير"
+  },
+  {
+    "screen": "settings",
+    "messageId": "11",
+    "title": "Ticket Already Opened",
+    "message_en": "",
+    "message_ar": ""
+  }
+]

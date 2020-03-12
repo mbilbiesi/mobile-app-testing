@@ -21,10 +21,10 @@ public class RestaurantsProvider {
     public RestaurantsProvider(String language) {
         this.language = language;
         try {
-            String locationsFile =
+            String restaurantsFile =
                     Resources.toString(Resources.getResource(RESTAURANTS_SOURCE), Charsets.UTF_8);
             restaurantsList =
-                    new ObjectMapper().readValue(locationsFile, new TypeReference<List<Restaurants>>() {
+                    new ObjectMapper().readValue(restaurantsFile, new TypeReference<List<Restaurants>>() {
                     });
         } catch (IOException e) {
             LOG.error("Unable to read restaurants test data file", e);
