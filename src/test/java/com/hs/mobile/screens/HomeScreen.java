@@ -15,17 +15,17 @@ public class HomeScreen extends AbstractScreen {
 
   @iOSXCUITFindBy(id = "home.location_button")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/main_location_text")
-  @AssertElementVisibility
+//  @AssertElementVisibility
   private MobileElement useMyCurrentLocationText;
 
   //    @iOSXCUITFindBy(id = "TBD")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/imgloc")
-  @AssertElementVisibility
+//  @AssertElementVisibility
   private MobileElement useMyCurrentLocationImage;
 
   @iOSXCUITFindBy(xpath = "//*[@name='عرض المطاعم' or @name='Find Restaurants']") //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/BtnRestaurants")
-  @AssertElementVisibility
+//  @AssertElementVisibility
   private MobileElement findRestaurantsButton;
 
   @iOSXCUITFindBy(
@@ -60,6 +60,68 @@ public class HomeScreen extends AbstractScreen {
   // @iOSXCUITFindBy(id = "") //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rel")
   private List<WebElement> homescreenLayout;
+
+  /*
+  =========================================================
+  New Homescreen elements:
+  =========================================================
+   */
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/home_address_bar")
+    @AssertElementVisibility
+    private WebElement lstHomescreenAddress;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/ic_location")
+    @AssertElementVisibility
+    private WebElement iconLocation;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_label")
+    @AssertElementVisibility
+    private WebElement lblDelivery;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_value")
+    @AssertElementVisibility
+    private WebElement lblDeliveryValue;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/missing_location_image")
+    private List<WebElement> imgMissingLocation;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/explanation")
+    private List<WebElement> lblMissingLocExplanation;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
+    private List<WebElement> btnSetLocation;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/banner_image")
+    private List<WebElement> bannerRestuarantsGrocery;  //Homepage banners including restaurants and grocery store
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "")
+    private List<WebElement> btnRestaurantsOrGrocery;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_to_label")
+    private WebElement lblDeliverTo;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/new_location_clickable_view")
+    private WebElement btnNewLocation;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/row_container")
+    private List<WebElement> eleLocations;
+
+    @iOSXCUITFindBy(id = "")
+    @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/checkbox")
+    private List<WebElement> chkSelectLocation;
 
   public HomeScreen(AppiumDriver driver) {
     super(driver);

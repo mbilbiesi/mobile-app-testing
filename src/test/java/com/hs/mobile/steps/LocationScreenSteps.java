@@ -22,10 +22,10 @@ public class LocationScreenSteps extends BaseSteps {
   private SavedLocationsScreenSteps savedLocationsScreenSteps;
   private RestaurantListScreenSteps restaurantListScreenSteps;
 
-  public LocationScreenSteps(AppiumDriver driver) {
+  public LocationScreenSteps(AppiumDriver driver, String language) {
     super(driver);
     locationsScreen = new LocationsScreen(driver);
-    homeScreenSteps = new HomeScreenSteps(driver);
+    homeScreenSteps = new HomeScreenSteps(driver, language);
     savedLocationsScreen = new SavedLocationsScreen(driver);
     savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
     restaurantListScreenSteps = new RestaurantListScreenSteps(driver);

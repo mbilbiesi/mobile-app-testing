@@ -32,6 +32,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.html5.Location;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,13 +44,16 @@ import java.net.URL;
 
 public class BaseTest {
 
-  private static final String ANDROID_FILE_PATH =
-          Resources.getResource("apps/hs-app.apk").getPath();
+  public static String testLang = "";
   private static final String IOS_FILE_PATH =
       Resources.getResource("apps/HungerStation.app").getPath();
   private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
   private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
   private static final TestUserProvider testUserProvider = new TestUserProvider();
+  //  private static final String ANDROID_FILE_PATH =
+  //          Resources.getResource("apps/hs-app.apk").getPath();
+  private static String ANDROID_FILE_PATH =
+          "C:\\Users\\Discovery1\\Desktop\\mobile-apps-testing\\src\\test\\resources\\apps\\app-debug-258.apk";
   protected AppiumDriver driver;
 
   TestUser testUser;
@@ -77,9 +81,9 @@ public class BaseTest {
   WelcomeApplePaySteps applePaySteps;
 
   @BeforeClass
-  @Parameters({"platform", "udid", "systemPort", "userId", "language"})
+  @Parameters({"platform", "udid", "systemPort", "userId", "language", "longitude", "latitude"})
   void startAppiumServer(
-          String platform, String udid, String systemPort, String userId, String language) {
+          String platform, String udid, String systemPort, String userId, String language, double longitude, double latitude) {
     String[] platformInfo = platform.split(" ");
 
     DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -116,11 +120,14 @@ public class BaseTest {
 
     driver = createDriver(platformInfo[0], capabilities);
 
+    Location location = new Location(latitude, longitude, 5.0);
+    driver.setLocation(location);
+
     testUser = testUserProvider.getUser(userId);
     locationsData = new LocationsProvider(language);
     restaurantsData = new RestaurantsProvider(language);
     messages = new MessagesProvider(language);
-    homeScreenSteps = new HomeScreenSteps(driver);
+    homeScreenSteps = new HomeScreenSteps(driver, language);
     restaurantsListSteps = new RestaurantListScreenSteps(driver);
     verifyAccountScreenSteps = new VerifyAccountScreenSteps(driver);
     pinCodeVerificationSteps = new PinCodeVerificationSteps(driver);
@@ -137,7 +144,7 @@ public class BaseTest {
     ticketSteps = new TicketSteps(driver);
     createTicketSteps = new CreateTicketSteps(driver);
     checkoutScreenSteps = new CheckoutScreenSteps(driver);
-    locationScreenSteps = new LocationScreenSteps(driver);
+    locationScreenSteps = new LocationScreenSteps(driver, language);
     applePaySteps = new WelcomeApplePaySteps(driver);
   }
 

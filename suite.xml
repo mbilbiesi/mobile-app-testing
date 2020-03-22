@@ -8,6 +8,9 @@
         <parameter name="systemPort" value="4723"/>
         <parameter name="userId" value="1"/>
         <parameter name="language" value="en"/>
+        <parameter name="locationCovered" value="false"/>
+        <parameter name="longitude" value="46.647"/>
+        <parameter name="latitude" value="24.8245"/>
         <classes>
             <class name="com.hs.mobile.tests.RestaurantsListTests">
                 <methods>
@@ -22,7 +25,7 @@
     <!--        <parameter name="udid" value="2XJDU17814004631"/>-->
     <!--        <parameter name="systemPort" value="8203"/>-->
     <!--        <classes>-->
-    <!--            <class name="com.hs.mobile.tests.HomescreenTests"/>-->
+    <!--            <class name="com.hs.mobile.tests.HomescreenTests_Deprecated"/>-->
     <!--            <class name="com.hs.mobile.tests.LocationTests"/>-->
     <!--            <class name="com.hs.mobile.tests.RestaurantsListTests"/>-->
     <!--        </classes>-->

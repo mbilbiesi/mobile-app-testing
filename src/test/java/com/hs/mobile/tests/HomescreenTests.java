@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 @Feature("Homescreen smoke test")
 @Story("Verify Homescreen")
-@Issue("HSAP-168")
+@Issue("HSAP-354")
 @Listeners(TestListener.class)
 public class HomescreenTests extends BaseTest {
 
@@ -25,26 +25,38 @@ public class HomescreenTests extends BaseTest {
     }
   }
 
-  @Test(description = "Open the application with a new user")
-  void navigateToHomeScreen_allHomeScreenElementsAreDisplayed() {
+  @Test(description = "Accept location permission")
+  void navigateToHomeScreen_acceptLocation_allHomeScreenElementsAreDisplayed() {
     // Given
     homeScreenSteps.verifyThatAllHomeElementsDisplayed();
+    //Then
+    homeScreenSteps.verifyLocationAcquiredCorrectly();
   }
 
-  @Test(
-      description = "Open the application with an already registered user without any saved place")
-  void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
+  @Test(description = "Verify homescreen elements based on location (Covered, or Un covered)")
+  @Parameters({"locationCovered"})
+  public void navigateToHomeScreen_coveredAndUnCoveredLocation_allHomeScreenElementsAreDisplayed(
+          boolean locationCovered) {
     // Given
-    homeScreenSteps.clickMyOrdersButton();
-    myOrdersSteps.clickVerifyButton();
-    verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
-    verifyAccountScreenSteps.clickNextButton();
-    pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
-
-    // When
-    myOrdersSteps.navigateToRestaurants();
-
-    // Then
     homeScreenSteps.verifyThatAllHomeElementsDisplayed();
+    //Then
+    homeScreenSteps.verifyHomescreenElementsBasedOnLocation(locationCovered);
+  }
+
+  @Test(description = "Customer in an uncovered location clicks 'Select Location' button")
+  @Parameters({"locationCovered"})
+  public void clickSelectLocation_uncoveredLocation_customerRedirectedToMap(boolean locationCovered) {
+    /*
+    This test case will ONLY run in case the location isn't covered by hungerstation
+     */
+    if (locationCovered) {
+      boolean userRedirectedToMap;
+
+      //When
+      userRedirectedToMap = homeScreenSteps.clickChangeLocationButton();
+
+      //Then
+
+    }
   }
 }
