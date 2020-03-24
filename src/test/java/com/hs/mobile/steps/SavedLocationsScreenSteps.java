@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class SavedLocationsScreenSteps extends BaseSteps {
   private SavedLocationsScreen savedLocationsScreen;
 
-  public SavedLocationsScreenSteps(AppiumDriver driver) {
+    public SavedLocationsScreenSteps(AppiumDriver driver, String language) {
     super(driver);
     savedLocationsScreen = new SavedLocationsScreen(driver);
   }

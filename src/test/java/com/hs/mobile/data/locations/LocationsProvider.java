@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocationsProvider {
@@ -49,5 +50,14 @@ public class LocationsProvider {
         } else {
             return getLocation(locationType).getLocationAr();
         }
+    }
+
+    public List<String> getLocationCoordinates(String locationType) {
+        List<String> locationCoordinates = new ArrayList<String>();
+
+        locationCoordinates.add(getLocation(locationType).getLatitude());
+        locationCoordinates.add(getLocation(locationType).getLongitude());
+
+        return locationCoordinates;
     }
 }

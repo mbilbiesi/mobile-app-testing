@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MyOrdersSteps extends BaseSteps {
   private MyOrdersScreen myOrdersScreen;
 
-  public MyOrdersSteps(AppiumDriver driver) {
+    public MyOrdersSteps(AppiumDriver driver, String language) {
     super(driver);
     myOrdersScreen = new MyOrdersScreen(driver);
   }

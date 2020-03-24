@@ -16,10 +16,10 @@ public class ProfileScreenSteps extends BaseSteps {
   private ProfileScreen profileScreen;
   private HomeScreenSteps homeScreenSteps;
 
-  public ProfileScreenSteps(AppiumDriver driver) {
+  public ProfileScreenSteps(AppiumDriver driver, String language) {
     super(driver);
     profileScreen = new ProfileScreen(driver);
-    homeScreenSteps = new HomeScreenSteps(driver);
+    homeScreenSteps = new HomeScreenSteps(driver, language);
   }
 
   @Step("Verify profile screen")

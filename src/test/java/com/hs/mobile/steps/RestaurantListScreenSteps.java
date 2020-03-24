@@ -27,7 +27,7 @@ public class RestaurantListScreenSteps extends BaseSteps {
   private RestaurantsListScreen restaurantsListScreen;
   private RestaurantScreen restaurant;
 
-  public RestaurantListScreenSteps(AppiumDriver driver) {
+    public RestaurantListScreenSteps(AppiumDriver driver, String language) {
     super(driver);
     restaurantsListScreen = new RestaurantsListScreen(driver);
     restaurant = new RestaurantScreen(driver);

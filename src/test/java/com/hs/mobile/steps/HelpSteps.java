@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HelpSteps extends BaseSteps {
   private HelpScreen helpScreen;
 
-  public HelpSteps(AppiumDriver driver) {
+    public HelpSteps(AppiumDriver driver, String language) {
     super(driver);
     helpScreen = new HelpScreen(driver);
   }

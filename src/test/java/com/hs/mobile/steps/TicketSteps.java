@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class TicketSteps extends BaseSteps {
   private TicketScreen ticketScreen;
 
-  public TicketSteps(AppiumDriver driver) {
+    public TicketSteps(AppiumDriver driver, String language) {
     super(driver);
     ticketScreen = new TicketScreen(driver);
   }

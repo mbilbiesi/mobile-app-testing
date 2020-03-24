@@ -12,13 +12,13 @@ public class CheckoutScreenSteps extends BaseSteps {
   private RestaurantListScreenSteps restaurantListScreenSteps;
   private RestaurantScreenSteps restaurantScreenSteps;
 
-  public CheckoutScreenSteps(AppiumDriver driver) {
+  public CheckoutScreenSteps(AppiumDriver driver, String language) {
     super(driver);
     checkoutScreen = new CheckoutScreen(driver);
-    homeScreenSteps = new HomeScreenSteps(driver);
-    locationScreenSteps = new LocationScreenSteps(driver);
-    restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
-    restaurantScreenSteps = new RestaurantScreenSteps(driver);
+    homeScreenSteps = new HomeScreenSteps(driver, language);
+    locationScreenSteps = new LocationScreenSteps(driver, language);
+    restaurantListScreenSteps = new RestaurantListScreenSteps(driver, language);
+    restaurantScreenSteps = new RestaurantScreenSteps(driver, language);
   }
 
   @Step("Add the first menu item to cart")

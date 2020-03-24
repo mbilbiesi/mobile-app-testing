@@ -19,7 +19,7 @@ import static com.hs.mobile.data.Language.ENGLISH;
 public class SettingsScreenSteps extends BaseSteps {
   private SettingsScreen settingsScreen;
 
-  public SettingsScreenSteps(AppiumDriver driver) {
+    public SettingsScreenSteps(AppiumDriver driver, String language) {
     super(driver);
     settingsScreen = new SettingsScreen(driver);
   }

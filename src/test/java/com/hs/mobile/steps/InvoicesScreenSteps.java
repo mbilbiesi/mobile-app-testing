@@ -15,7 +15,7 @@ public class InvoicesScreenSteps extends BaseSteps {
   private InvoicesScreen invoicesScreen;
   private InvoiceScreenSteps invoiceScreenSteps;
 
-  public InvoicesScreenSteps(AppiumDriver driver) {
+    public InvoicesScreenSteps(AppiumDriver driver, String language) {
     super(driver);
     invoicesScreen = new InvoicesScreen(driver);
     invoiceScreenSteps = new InvoiceScreenSteps(driver);

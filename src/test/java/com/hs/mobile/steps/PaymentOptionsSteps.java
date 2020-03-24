@@ -6,7 +6,7 @@ import io.appium.java_client.AppiumDriver;
 public class PaymentOptionsSteps extends BaseSteps {
   private PaymentOptionsScreen paymentOptionsScreen;
 
-  public PaymentOptionsSteps(AppiumDriver driver) {
+    public PaymentOptionsSteps(AppiumDriver driver, String language) {
     super(driver);
     paymentOptionsScreen = new PaymentOptionsScreen(driver);
   }

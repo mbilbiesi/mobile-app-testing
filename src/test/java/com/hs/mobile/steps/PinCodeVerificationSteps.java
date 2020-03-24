@@ -11,7 +11,7 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 public class PinCodeVerificationSteps extends BaseSteps {
   @NonNull private PinCodeVerificationScreen pinCodeVerificationScreen;
 
-  public PinCodeVerificationSteps(@NonNull AppiumDriver driver) {
+    public PinCodeVerificationSteps(@NonNull AppiumDriver driver, String language) {
     super(driver);
     pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
   }

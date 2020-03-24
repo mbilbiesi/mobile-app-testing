@@ -14,7 +14,7 @@ import static com.hs.mobile.data.ElementAttribute.TEXT;
 public class WalletScreenSteps extends BaseSteps {
   private WalletScreen walletScreen;
 
-  public WalletScreenSteps(AppiumDriver driver) {
+    public WalletScreenSteps(AppiumDriver driver, String language) {
     super(driver);
     walletScreen = new WalletScreen(driver);
   }

@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class OrderSteps extends BaseSteps {
   private OrderScreen orderScreen;
 
-  public OrderSteps(AppiumDriver driver) {
+    public OrderSteps(AppiumDriver driver, String language) {
     super(driver);
     orderScreen = new OrderScreen(driver);
   }

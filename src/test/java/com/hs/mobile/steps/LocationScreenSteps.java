@@ -27,8 +27,8 @@ public class LocationScreenSteps extends BaseSteps {
     locationsScreen = new LocationsScreen(driver);
     homeScreenSteps = new HomeScreenSteps(driver, language);
     savedLocationsScreen = new SavedLocationsScreen(driver);
-    savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
-    restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
+    savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver, language);
+    restaurantListScreenSteps = new RestaurantListScreenSteps(driver, language);
   }
 
   @Step("Verify {description} updated description")

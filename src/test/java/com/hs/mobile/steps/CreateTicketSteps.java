@@ -12,7 +12,7 @@ import java.util.List;
 public class CreateTicketSteps extends BaseSteps {
   private CreateTicketScreen createTicketScreen;
 
-  public CreateTicketSteps(AppiumDriver driver) {
+    public CreateTicketSteps(AppiumDriver driver, String language) {
     super(driver);
     createTicketScreen = new CreateTicketScreen(driver);
   }

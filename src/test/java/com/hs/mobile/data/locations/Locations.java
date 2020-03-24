@@ -17,4 +17,10 @@ public class Locations {
 
     @JsonProperty("locationType")
     private String locationType;
+
+    @JsonProperty("longitude")
+    private String longitude;
+
+    @JsonProperty("latitude")
+    private String latitude;
 }

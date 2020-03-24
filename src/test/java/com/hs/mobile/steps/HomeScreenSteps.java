@@ -7,6 +7,7 @@ import com.hs.mobile.screens.LocationsScreen;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ public class HomeScreenSteps extends BaseSteps {
     super(driver);
     homeScreen = new HomeScreen(driver);
     homeScreenSideMenu = new HomeScreenSideMenu(driver);
-    restaurant = new RestaurantListScreenSteps(driver);
+    restaurant = new RestaurantListScreenSteps(driver, language);
     locationsScreen = new LocationsScreen(driver);
     messages = new MessagesProvider(language);
   }
@@ -159,8 +160,17 @@ public class HomeScreenSteps extends BaseSteps {
 
   @Step("Verify that customer has been redirected to Map")
   public void verifyCustomerRedirectedToMap(boolean customerOnMap) {
+    SoftAssertions soft = new SoftAssertions();
     if (customerOnMap) {
-
+      try {
+        soft.assertThat(locationsScreen.getSearchButton().isDisplayed())
+                .as("Customer isn't redirected to Map screen")
+                .isTrue();
+      } catch (ElementNotVisibleException e) {
+        e.printStackTrace();
+        LOG.error("Element has not been found, or customer has not been redirected to Map screen");
+      }
+      soft.assertAll();
     }
   }
 

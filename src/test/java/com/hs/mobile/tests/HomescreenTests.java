@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class HomescreenTests extends BaseTest {
 
+
   @BeforeClass
   @Parameters({"platform"})
   public void skipApplePay(String platformInfo) {
@@ -29,34 +30,34 @@ public class HomescreenTests extends BaseTest {
   void navigateToHomeScreen_acceptLocation_allHomeScreenElementsAreDisplayed() {
     // Given
     homeScreenSteps.verifyThatAllHomeElementsDisplayed();
-    //Then
+    // Then
     homeScreenSteps.verifyLocationAcquiredCorrectly();
   }
 
-  @Test(description = "Verify homescreen elements based on location (Covered, or Un covered)")
-  @Parameters({"locationCovered"})
-  public void navigateToHomeScreen_coveredAndUnCoveredLocation_allHomeScreenElementsAreDisplayed(
-          boolean locationCovered) {
+  @Test(description = "Verify homescreen elements based on location valid or invalid")
+  public void navigateToHomeScreen_validAndInvalidLocation_allHomeScreenElementsAreDisplayed() {
+
     // Given
     homeScreenSteps.verifyThatAllHomeElementsDisplayed();
-    //Then
-    homeScreenSteps.verifyHomescreenElementsBasedOnLocation(locationCovered);
+    // Then
+    homeScreenSteps.verifyHomescreenElementsBasedOnLocation(isLocationValid);
   }
 
   @Test(description = "Customer in an uncovered location clicks 'Select Location' button")
-  @Parameters({"locationCovered"})
-  public void clickSelectLocation_uncoveredLocation_customerRedirectedToMap(boolean locationCovered) {
+  public void clickSelectLocation_uncoveredLocation_customerRedirectedToMap() {
     /*
     This test case will ONLY run in case the location isn't covered by hungerstation
      */
-    if (locationCovered) {
+    if (isLocationValid) {
       boolean userRedirectedToMap;
 
-      //When
+      // When
       userRedirectedToMap = homeScreenSteps.clickChangeLocationButton();
 
-      //Then
-
+      // Then
+      homeScreenSteps.verifyCustomerRedirectedToMap(userRedirectedToMap);
     }
   }
+
+  //ToDo: Cover rest of new homescreen test cases.
 }

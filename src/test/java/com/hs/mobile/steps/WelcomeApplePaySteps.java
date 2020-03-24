@@ -9,9 +9,9 @@ public class WelcomeApplePaySteps extends BaseSteps {
   @NonNull HomeScreenSteps homeScreen;
   @NonNull WelcomeApplePayIosScreen iosWelcomeScreen;
 
-  public WelcomeApplePaySteps(AppiumDriver driver) {
+  public WelcomeApplePaySteps(AppiumDriver driver, String language) {
     super(driver);
-    homeScreen = new HomeScreenSteps(driver);
+    homeScreen = new HomeScreenSteps(driver, language);
     iosWelcomeScreen = new WelcomeApplePayIosScreen(driver);
   }
 
