@@ -49,10 +49,10 @@ public class BaseTest {
   private static final Logger LOG = LoggerFactory.getLogger(BaseTest.class);
   private static final String APPIUM_URL = "http://localhost:4723/wd/hub";
   private static final TestUserProvider testUserProvider = new TestUserProvider();
-  //  private static final String ANDROID_FILE_PATH =
-  //          Resources.getResource("apps/hs-app.apk").getPath();
-  private static String ANDROID_FILE_PATH =
-          "C:\\Users\\Discovery1\\Desktop\\mobile-apps-testing\\src\\test\\resources\\apps\\app-debug-258.apk";
+  private static final String ANDROID_FILE_PATH =
+          Resources.getResource("apps/hs-app.apk").getPath();
+  //  private static String ANDROID_FILE_PATH =
+//          "C:\\Users\\Discovery1\\Desktop\\mobile-apps-testing\\src\\test\\resources\\apps\\app-debug-258.apk";
   protected AppiumDriver driver;
   public boolean isLocationValid;
   private Location location;

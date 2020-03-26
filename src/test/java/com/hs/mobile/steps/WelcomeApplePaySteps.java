@@ -6,8 +6,10 @@ import io.qameta.allure.Step;
 import lombok.NonNull;
 
 public class WelcomeApplePaySteps extends BaseSteps {
-  @NonNull HomeScreenSteps homeScreen;
-  @NonNull WelcomeApplePayIosScreen iosWelcomeScreen;
+    @NonNull
+    private HomeScreenSteps homeScreen;
+    @NonNull
+    private WelcomeApplePayIosScreen iosWelcomeScreen;
 
   public WelcomeApplePaySteps(AppiumDriver driver, String language) {
     super(driver);
