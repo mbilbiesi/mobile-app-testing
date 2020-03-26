@@ -7,17 +7,20 @@
         <parameter name="udid" value="emulator-5554"/>
         <parameter name="systemPort" value="4723"/>
         <parameter name="userId" value="1"/>
-        <parameter name="language" value="en"/>
-        <parameter name="locationCovered" value="false"/>
-        <parameter name="longitude" value="46.647"/>
-        <parameter name="latitude" value="24.8245"/>
+        <parameter name="language" value="ar"/>
         <classes>
-            <class name="com.hs.mobile.tests.RestaurantsListTests">
+<!--            <class name="com.hs.mobile.tests.HomescreenTests"/>-->
+            <class name="com.hs.mobile.tests.LocationTests" >
                 <methods>
-                    <include name="navigateToRestaurantListScreen_screenElementAreDisplayed"/>
+                    <include name="addLocationsForAllAvailableLocationTypes"/>
+                    <include name="deleteAllLocations"/>
+<!--                    <include name="editDescriptionWithDifferentCharacters"/>-->
+<!--                    <include name="editLocation"/>-->
+<!--                    <include name="saveWithoutDescription"/>-->
+<!--                    <include name="searchByLandmark"/>-->
+<!--                    <include name="useAnOutOfRangeLocation"/>-->
                 </methods>
             </class>
-            <!--            <class name="com.hs.mobile.tests.LocationTests"/>-->
         </classes>
     </test>
     <!--    <test name="Real Device - Huawei P10 Lite">-->

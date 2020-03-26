@@ -65,7 +65,8 @@ public class LocationTests extends BaseTest {
     // When
     locationScreenSteps.saveLocation("test");
     homeScreenSteps.viewSavedLocations();
-    savedLocationsScreenSteps.editLocation();
+//    savedLocationsScreenSteps.editLocation();
+    homeScreenSteps.editLocation();
 
     // Then
     locationScreenSteps.verifyLocationUpdatedSuccessfully();
@@ -84,7 +85,7 @@ public class LocationTests extends BaseTest {
   void editDescriptionWithDifferentCharacters() {
     // When
     locationScreenSteps.saveLocation(null);
-    String description = "% 5";
+    String description = "test";
     locationScreenSteps.updateDescription(description);
 
     // Then

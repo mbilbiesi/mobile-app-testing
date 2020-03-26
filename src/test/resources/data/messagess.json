@@ -79,8 +79,8 @@
   {
     "screen": "home",
     "messageId": "12",
-    "title": "loaction not covered",
+    "title": "location not covered",
     "message_en": "Hungerstation isn't available in your area just yet... Hopefully we will be there soon",
-    "message_ar": "الخدمة غير متوفرة في منطقتك حالياً... بنحاول نوصل لك بأسرع وقت"
+    "message_ar": "الخدمة غير متوفرة في منطقتك حالياً… بنحاول نوصل لك بأسرع وقت"
   }
 ]

@@ -41,7 +41,8 @@ public class HomeScreenSteps extends BaseSteps {
 
   @Step("View saved locations")
   public void viewSavedLocations() {
-    tap(homeScreen.getUseMyCurrentLocationText());
+    //tap(homeScreen.getUseMyCurrentLocationText());
+    tap(homeScreen.getLstHomescreenAddresses());
   }
 
   @Step("Verify that all 'Homescreen' elements are displayed correctly")
@@ -57,6 +58,11 @@ public class HomeScreenSteps extends BaseSteps {
   @Step("Click the 'Find Restaurants' button")
   public void clickFindRestaurantsButton() {
     tap(homeScreen.getFindRestaurantsButton());
+  }
+
+  @Step("Click 'Select Location Manually' button")
+  public void clickSelectLocationManually() {
+    tap(homeScreen.getBtnSetLocation().get(0));
   }
 
   @Step("Click on restaurant icon")
@@ -100,9 +106,9 @@ public class HomeScreenSteps extends BaseSteps {
   @Step("Verify that homescreen elements are displayed based on location")
   public void verifyHomescreenElementsBasedOnLocation(boolean isLocationValid) {
     SoftAssertions soft = new SoftAssertions();
-    int homescreenBanners = homeScreen.getBannerRestuarantsGrocery().size();
 
     if (isLocationValid) {
+      int homescreenBanners = homeScreen.getBannerRestuarantsGrocery().size();
       soft.assertThat(homescreenBanners > 0)
               .as("Both restaurants and grocery banners are not showing on Homescreen")
               .isTrue();
@@ -170,12 +176,44 @@ public class HomeScreenSteps extends BaseSteps {
         e.printStackTrace();
         LOG.error("Element has not been found, or customer has not been redirected to Map screen");
       }
+
+      navigateBack(1);
       soft.assertAll();
     }
   }
 
+  @Step("Delete saved locations")
+  public void deleteSavedLocations() {
+    homeScreen
+            .getSavedLocations()
+            .forEach(
+                    location -> {
+                      tap(homeScreen.getBtnMore().get(0));
+                      tap(homeScreen.getBtnEditOrDelete().get(1));
+                      tap(homeScreen.getLstHomescreenAddresses());
+                    });
+  }
+
+  @Step("Edit location")
+  public void editLocation() {
+    tap(homeScreen.getBtnMore().get(0));
+    tap(homeScreen.getBtnEditOrDelete().get(0));
+  }
+
   public void waitUntilHomescreenIsLoaded() {
     wait.until(ExpectedConditions.visibilityOfAllElements(homeScreen.getFindRestaurantsButton()));
+  }
+
+  public void waitUntilNewLocationButtonDisplays() {
+    wait.until(ExpectedConditions.visibilityOf(homeScreen.getBtnNewLocation()));
+  }
+
+  public void waitUntilRestaurantsAnGroceryWidgetsLoaded() {
+    wait.until(ExpectedConditions.visibilityOf(homeScreen.getRestaurantsItem()));
+  }
+
+  public void clickAddNewLocation() {
+    tap(homeScreen.getBtnNewLocation());
   }
 
   public void dismissPromotion() {

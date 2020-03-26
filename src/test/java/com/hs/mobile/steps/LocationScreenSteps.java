@@ -3,6 +3,7 @@ package com.hs.mobile.steps;
 import com.hs.mobile.data.LocationType;
 import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.SavedLocationsScreen;
+import com.hs.mobile.screens.HomeScreen;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.assertj.core.api.Assertions;
@@ -21,6 +22,7 @@ public class LocationScreenSteps extends BaseSteps {
   private SavedLocationsScreen savedLocationsScreen;
   private SavedLocationsScreenSteps savedLocationsScreenSteps;
   private RestaurantListScreenSteps restaurantListScreenSteps;
+  private HomeScreen homeScreen;
 
   public LocationScreenSteps(AppiumDriver driver, String language) {
     super(driver);
@@ -29,16 +31,18 @@ public class LocationScreenSteps extends BaseSteps {
     savedLocationsScreen = new SavedLocationsScreen(driver);
     savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver, language);
     restaurantListScreenSteps = new RestaurantListScreenSteps(driver, language);
+    homeScreen = new HomeScreen(driver);
   }
 
   @Step("Verify {description} updated description")
   public void verifyUpdatedDescription(String description) {
-    savedLocationsScreenSteps.editLocation();
+    tap(homeScreen.getLstHomescreenAddresses());
+    homeScreenSteps.editLocation();
     submitAddress();
     String desc = getDescription();
     submitAddress();
-    savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
-    navigateBack(1);
+//    savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
+//    navigateBack(1);
 
     Assertions.assertThat(desc)
         .as("Actual updated description does not match expected one.")
@@ -48,16 +52,19 @@ public class LocationScreenSteps extends BaseSteps {
   @Step("Update description to {description}")
   public void updateDescription(String description) {
     homeScreenSteps.viewSavedLocations();
-    savedLocationsScreenSteps.editLocation();
+//    savedLocationsScreenSteps.editLocation();
+    homeScreenSteps.editLocation();
     submitAddress();
     clearDescription();
     insertAddressDescription(description);
     submitAddress();
+    homeScreenSteps.waitUntilRestaurantsAnGroceryWidgetsLoaded();
   }
 
   @Step("Save location")
   public void saveLocation(String description) {
-    homeScreenSteps.clickFindRestaurantsButton();
+//    homeScreenSteps.clickFindRestaurantsButton();
+    homeScreenSteps.clickSelectLocationManually();
     searchForRestaurants();
     insertLocation("Riyadh");
     selectItemArea(0);
@@ -68,13 +75,15 @@ public class LocationScreenSteps extends BaseSteps {
     }
     saveForLater();
     submitAddress();
-    restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
-    navigateBack(1);
+//    restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
+    homeScreenSteps.waitUntilRestaurantsAnGroceryWidgetsLoaded();
+//    navigateBack(1);
   }
 
   @Step("Search for a landmark")
   public void searchForALandmark() {
-    homeScreenSteps.clickFindRestaurantsButton();
+//    homeScreenSteps.clickFindRestaurantsButton();
+    homeScreenSteps.clickSelectLocationManually();
     searchForRestaurants();
     insertLocation("hayah mall");
     selectItemArea(0);
@@ -84,7 +93,8 @@ public class LocationScreenSteps extends BaseSteps {
 
   @Step("Search for an out of range location")
   public void searchForAnOutOfRangeLocation() {
-    homeScreenSteps.clickFindRestaurantsButton();
+//    homeScreenSteps.clickFindRestaurantsButton();
+    homeScreenSteps.clickSelectLocationManually();
     searchForRestaurants();
     insertLocation("Amman");
     selectItemArea(0);
@@ -94,7 +104,8 @@ public class LocationScreenSteps extends BaseSteps {
   public void verifyNewlyAddedLocations() {
     List<LocationType> allLocationTypes = Arrays.asList(LocationType.values());
     homeScreenSteps.viewSavedLocations();
-    int locationsCount = savedLocationsScreen.getSavedLocations().size();
+//    int locationsCount = savedLocationsScreen.getSavedLocations().size();
+    int locationsCount = homeScreen.getSavedLocations().size();
     navigateBack(1);
     Assertions.assertThat(locationsCount)
         .as("Number of saved locations should be 4.")
@@ -103,7 +114,8 @@ public class LocationScreenSteps extends BaseSteps {
 
   @Step("Verify location can be saved without adding a description")
   public void verifyLocationCanBeSavedWithoutDescription() {
-    int savedLocationsCount = savedLocationsScreen.getSavedLocations().size();
+//    int savedLocationsCount = savedLocationsScreen.getSavedLocations().size();
+    int savedLocationsCount = homeScreen.getSavedLocations().size();
     navigateBack(1);
 
     Assertions.assertThat(savedLocationsCount).as("Description is not mandatory.").isEqualTo(1);
@@ -149,8 +161,10 @@ public class LocationScreenSteps extends BaseSteps {
     try {
       isSearchButtonDisplayed();
     } catch (Exception e) {
-      savedLocationsScreenSteps.deleteSavedLocations();
-      savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
+//      savedLocationsScreenSteps.deleteSavedLocations();
+      homeScreenSteps.deleteSavedLocations();
+//      savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
+//      homeScreenSteps.waitUntilNewLocationButtonDisplays();
     } finally {
       navigateBack(1);
     }
@@ -231,11 +245,13 @@ public class LocationScreenSteps extends BaseSteps {
   }
 
   private void addNewLocations(List<LocationType> types) {
-    homeScreenSteps.clickFindRestaurantsButton();
+    homeScreenSteps.clickSelectLocationManually();
+//    homeScreenSteps.clickFindRestaurantsButton();
     for (int i = 0; i < types.size(); i++) {
       if (i > 0) {
         homeScreenSteps.viewSavedLocations();
-        savedLocationsScreenSteps.addNewLocation();
+//        savedLocationsScreenSteps.addNewLocation();
+        homeScreenSteps.clickAddNewLocation();
       }
       searchForRestaurants();
       insertLocation("Riyadh");
@@ -244,8 +260,9 @@ public class LocationScreenSteps extends BaseSteps {
       saveForLater();
       selectLocationType(i);
       submitAddress();
-      restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
-      navigateBack(1);
+//      restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
+      homeScreenSteps.waitUntilRestaurantsAnGroceryWidgetsLoaded();
+//      navigateBack(1);
     }
   }
 }

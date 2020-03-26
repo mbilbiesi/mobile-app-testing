@@ -18,7 +18,8 @@ public class LocationsScreen extends AbstractScreen {
   private WebElement btnClose;
 
   @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeStaticText'") //todo:id
-  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_edit_text")
+//  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_edit_text")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_search_bar")
   private WebElement searchTextBox;
 
   @iOSXCUITFindBy(iOSClassChain = "XCUIElementTypeWindow[1]/*/*/*/*/*/*/*/XCUIElementTypeTable/XCUIElementTypeCell")

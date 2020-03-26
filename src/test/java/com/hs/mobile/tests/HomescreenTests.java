@@ -48,7 +48,7 @@ public class HomescreenTests extends BaseTest {
     /*
     This test case will ONLY run in case the location isn't covered by hungerstation
      */
-    if (isLocationValid) {
+    if (!isLocationValid) {
       boolean userRedirectedToMap;
 
       // When
