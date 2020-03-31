@@ -464,5 +464,8 @@ public class RestaurantListScreenSteps extends BaseSteps {
     @Step("Select displayed restaurant")
     public void selectDisplayedRestaurant() {
         tap(restaurantsListScreen.getRestaurantTitle().get(0));
+        if (restaurant.getBtnAcceptOffer().size() > 0) {
+            tap(restaurant.getBtnAcceptOffer().get(0));
+        }
     }
 }

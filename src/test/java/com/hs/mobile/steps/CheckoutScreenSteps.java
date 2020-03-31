@@ -1,6 +1,8 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.data.locations.LocationsProvider;
 import com.hs.mobile.screens.CheckoutScreen;
+import com.hs.mobile.screens.PaymentOptionsScreen;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.assertj.core.api.SoftAssertions;
@@ -11,6 +13,8 @@ public class CheckoutScreenSteps extends BaseSteps {
   private LocationScreenSteps locationScreenSteps;
   private RestaurantListScreenSteps restaurantListScreenSteps;
   private RestaurantScreenSteps restaurantScreenSteps;
+  private LocationsProvider locationsData;
+  private PaymentOptionsScreen pmtOptions;
 
   public CheckoutScreenSteps(AppiumDriver driver, String language) {
     super(driver);
@@ -19,16 +23,25 @@ public class CheckoutScreenSteps extends BaseSteps {
     locationScreenSteps = new LocationScreenSteps(driver, language);
     restaurantListScreenSteps = new RestaurantListScreenSteps(driver, language);
     restaurantScreenSteps = new RestaurantScreenSteps(driver, language);
+    pmtOptions = new PaymentOptionsScreen(driver);
+    locationsData = new LocationsProvider(language);
   }
 
   @Step("Add the first menu item to cart")
   public Double addFirstMenuItemToCart(String restaurantName, int count) {
-    homeScreenSteps.viewSavedLocations();
+//    homeScreenSteps.viewSavedLocations();
+//    locationScreenSteps.searchForRestaurants();
+//    locationScreenSteps.insertLocation("Riyadh");
+//    locationScreenSteps.selectItemArea(0);
+//    locationScreenSteps.submitAddress();
+//    locationScreenSteps.submitAddress();
+    homeScreenSteps.clickSelectLocationManually();
     locationScreenSteps.searchForRestaurants();
-    locationScreenSteps.insertLocation("Riyadh");
-    locationScreenSteps.selectItemArea(0);
+    locationScreenSteps.insertLocation(locationsData.getLocationValue("area"));
+    locationScreenSteps.selectItemArea(1);
     locationScreenSteps.submitAddress();
     locationScreenSteps.submitAddress();
+    homeScreenSteps.clickViewRestaurantsButton();
     restaurantListScreenSteps.searchForRestaurant(restaurantName);
     restaurantListScreenSteps.selectDisplayedRestaurant();
     return restaurantScreenSteps.addFirstItemToCart(count);
@@ -39,13 +52,18 @@ public class CheckoutScreenSteps extends BaseSteps {
       double expectedOrderAmount, double expectedDeliveryAmount) {
     restaurantScreenSteps.goToCheckout();
 
+    tap(checkoutScreen.getBtnChoosePmtMethod());
+    tap(pmtOptions.getBtnCashOnDelivery());
+
+    swipe(checkoutScreen.getDeliveryAmount(), checkoutScreen.getBtnChoosePmtMethod());
+
     SoftAssertions soft = new SoftAssertions();
     double expectedTotalAmount = expectedOrderAmount + expectedDeliveryAmount;
     String actualOrderAmountLabel = checkoutScreen.getOrderAmount().getText();
     double actualOrderAmount =
-        Double.parseDouble(
-            actualOrderAmountLabel.substring(
-                actualOrderAmountLabel.indexOf(' '), actualOrderAmountLabel.length() - 1));
+            Double.parseDouble(
+                    actualOrderAmountLabel.substring(
+                            actualOrderAmountLabel.indexOf(' '), actualOrderAmountLabel.length() - 1));
     String actualDeliveryAmountLabel = checkoutScreen.getDeliveryAmount().getText();
     double actualDeliveryAmount =
         Double.parseDouble(

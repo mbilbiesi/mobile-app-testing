@@ -25,6 +25,9 @@ public class PaymentOptionsScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/title_payment_method_view")
   private WebElement btnRedeemVoucher;
 
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/cash_item")
+  private WebElement btnCashOnDelivery;
+
   public PaymentOptionsScreen(AppiumDriver driver) {
     super(driver);
   }
