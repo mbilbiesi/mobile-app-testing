@@ -9,16 +9,36 @@
         <parameter name="userId" value="1"/>
         <parameter name="language" value="ar"/>
         <classes>
-<!--            <class name="com.hs.mobile.tests.HomescreenTests"/>-->
-            <class name="com.hs.mobile.tests.LocationTests" >
+            <!--            <class name="com.hs.mobile.tests.HomescreenTests"/>-->
+            <!--            <class name="com.hs.mobile.tests.LocationTests" >-->
+            <!--                <methods>-->
+            <!--                    <include name="addLocationsForAllAvailableLocationTypes"/>-->
+            <!--                    <include name="deleteAllLocations"/>-->
+            <!--                    <include name="editDescriptionWithDifferentCharacters"/>-->
+            <!--                    <include name="editLocation"/>-->
+            <!--                    <include name="saveWithoutDescription"/>-->
+            <!--                    <include name="searchByLandmark"/>-->
+            <!--                    <include name="useAnOutOfRangeLocation"/>-->
+            <!--                </methods>-->
+            <!--            </class>-->
+            <class name="com.hs.mobile.tests.RestaurantsListTests">
                 <methods>
-                    <include name="addLocationsForAllAvailableLocationTypes"/>
-                    <include name="deleteAllLocations"/>
-<!--                    <include name="editDescriptionWithDifferentCharacters"/>-->
-<!--                    <include name="editLocation"/>-->
-<!--                    <include name="saveWithoutDescription"/>-->
-<!--                    <include name="searchByLandmark"/>-->
-<!--                    <include name="useAnOutOfRangeLocation"/>-->
+                    <include name="clickCampaign_verifyRestaurantsWithCampaignDisplayed"/>
+                    <include name="clickCampaign_verifyTopCampaignWidthRatioIs2_1"/>
+                    <include name="clickToResetSearchCriteria_restaurantListWillBeReset"/>
+                    <include name="navigateToRestaurantListScreen_screenElementAreDisplayed"/>
+                    <include name="navigateToRestaurantList_recommendedBadgeDisplayOnlyForReadyRestaurant"/>
+                    <include name="navigateToRestaurantsListScreen_verifyCampaignsDisplayedInSeparateCarousel"/>
+                    <include name="navigateToRestaurantsListScreen_verifyCustomerCanSwipeOnFilters"/>
+                    <include name="navigateToRestaurantsListScreen_verifyKitchenTypeFiltersAreDisplayed"/>
+                    <include name="navigateToRestaurantsListScreen_verifyMaxNumberOfCampaignsDisplayed"/>
+                    <include name="navigateToRestaurantsListScreen_verifyNoCampaignsAreShowedToCustomer"/>
+                    <include name="navigateToRestaurantsListScreen_verifyRestaurantsSortedByDistance"/>
+                    <include name="navigateToRestaurantsListScreen_verifyTheAllFilterIsDisplayedAndSelected"/>
+                    <include name="navigateToRestaurantsListScreen_verifyTopBannerImgRatioIs2_1"/>
+                    <include name="navigateToRestaurantsListScreen_verifyTopBannerShowsRestaurantOffers"/>
+                    <include name="searchForRestaurant_resultsMatchedSearchCriteria"/>
+                    <include name="navigateToRestaurantsListScreen_checkRecommendedRestaurantsBadge"/>
                 </methods>
             </class>
         </classes>

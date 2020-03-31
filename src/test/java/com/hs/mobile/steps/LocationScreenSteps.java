@@ -1,9 +1,9 @@
 package com.hs.mobile.steps;
 
 import com.hs.mobile.data.LocationType;
+import com.hs.mobile.screens.HomeScreen;
 import com.hs.mobile.screens.LocationsScreen;
 import com.hs.mobile.screens.SavedLocationsScreen;
-import com.hs.mobile.screens.HomeScreen;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import org.assertj.core.api.Assertions;
@@ -125,7 +125,7 @@ public class LocationScreenSteps extends BaseSteps {
   public void verifyLocationUpdatedSuccessfully() {
     waitUntilSubmitButtonIsEnabled();
     boolean isSubmitButtonEnabled = isSubmitButtonEnabled();
-    navigateBack(2);
+    navigateBack(1);
 
     Assertions.assertThat(isSubmitButtonEnabled)
         .as("User should be directed to the saved location.")

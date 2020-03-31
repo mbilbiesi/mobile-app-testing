@@ -22,5 +22,13 @@
     "location_ar": "عمّان",
     "location_en": "amman",
     "locationType": "out of range"
+  },
+  {
+    "locationId": "3",
+    "longitude": "",
+    "latitude": "",
+    "location_ar": "الياسمين",
+    "location_en": "AlYasmeen",
+    "locationType": "area"
   }
 ]

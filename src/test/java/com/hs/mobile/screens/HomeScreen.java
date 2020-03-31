@@ -55,7 +55,7 @@ public class HomeScreen extends AbstractScreen {
   // ToDo: find the locator of the skip promotion link in english
   // @iOSXCUITFindBy(xpath = "")  //todo:id
   @AndroidFindBy(xpath = "//*[@text='تخطى الإعلان' or @text='textInEnglish']")
-  private List<WebElement> lnkSkipPromotion;
+  private WebElement lnkSkipPromotion;
 
   // @iOSXCUITFindBy(id = "") //todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rel")

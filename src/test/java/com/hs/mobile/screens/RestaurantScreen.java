@@ -59,7 +59,12 @@ public class RestaurantScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/primary_label")
   private WebElement viewCart;
 
+  //  @iOSXCUITFindBy(id = "")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/pos_button")
+  List<WebElement> btnAcceptOffer;
+
   public RestaurantScreen(AppiumDriver driver) {
     super(driver);
   }
+
 }

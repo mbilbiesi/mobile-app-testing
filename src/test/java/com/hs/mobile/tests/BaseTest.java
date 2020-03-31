@@ -6,25 +6,7 @@ import com.hs.mobile.data.messages.MessagesProvider;
 import com.hs.mobile.data.restaurants.RestaurantsProvider;
 import com.hs.mobile.data.user.TestUser;
 import com.hs.mobile.data.user.TestUserProvider;
-import com.hs.mobile.steps.CheckoutScreenSteps;
-import com.hs.mobile.steps.CreateTicketSteps;
-import com.hs.mobile.steps.HelpSteps;
-import com.hs.mobile.steps.HomeScreenSteps;
-import com.hs.mobile.steps.InvoicesScreenSteps;
-import com.hs.mobile.steps.LocationScreenSteps;
-import com.hs.mobile.steps.MyOrdersSteps;
-import com.hs.mobile.steps.OrderSteps;
-import com.hs.mobile.steps.PaymentOptionsSteps;
-import com.hs.mobile.steps.PinCodeVerificationSteps;
-import com.hs.mobile.steps.ProfileScreenSteps;
-import com.hs.mobile.steps.RestaurantListScreenSteps;
-import com.hs.mobile.steps.RestaurantScreenSteps;
-import com.hs.mobile.steps.SavedLocationsScreenSteps;
-import com.hs.mobile.steps.SettingsScreenSteps;
-import com.hs.mobile.steps.TicketSteps;
-import com.hs.mobile.steps.VerifyAccountScreenSteps;
-import com.hs.mobile.steps.WalletScreenSteps;
-import com.hs.mobile.steps.WelcomeApplePaySteps;
+import com.hs.mobile.steps.*;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -126,6 +108,7 @@ public class BaseTest {
 
     driver.setLocation(location);
 
+
     testUser = testUserProvider.getUser(userId);
     locationsData = new LocationsProvider(language);
     restaurantsData = new RestaurantsProvider(language);
@@ -149,6 +132,8 @@ public class BaseTest {
     checkoutScreenSteps = new CheckoutScreenSteps(driver, language);
     locationScreenSteps = new LocationScreenSteps(driver, language);
     applePaySteps = new WelcomeApplePaySteps(driver, language);
+
+    homeScreenSteps.dismissPromotion();
   }
 
   private AppiumDriver createDriver(String platform, DesiredCapabilities capabilities) {
@@ -181,6 +166,7 @@ public class BaseTest {
   @AfterClass
   public void teardown() {
     if (driver != null) {
+      driver.resetApp();
       driver.quit();
     }
   }
