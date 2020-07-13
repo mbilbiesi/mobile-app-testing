@@ -1,0 +1,62 @@
+[
+  {
+    "key": "tickets.ticket_already_opened",
+    "en": "",
+    "ar": ""
+  },
+  {
+    "key": "createTicket.required_description",
+    "en": "",
+    "ar": "['اكتب لنا تفاصيل ملاحظتك']"
+  },
+  {
+    "key": "createTicket.message_created_successfully",
+    "en": "",
+    "ar": "لتتمكن من متابعة التذكرة قم بالضغط على الدعم"
+  },
+  {
+    "key": "help.ticket_type_order",
+    "en": "Order",
+    "ar": "الطلب"
+  },
+  {
+    "key": "help.ticket_type_payment",
+    "en": "Payment",
+    "ar": "الدفع"
+  },
+  {
+    "key": "help.ticket_type_delivery",
+    "en": "Delivery",
+    "ar": "التوصيل"
+  },
+  {
+    "key": "help.ticket_type_staff",
+    "en": "Staff",
+    "ar": "الموظف"
+  },
+  {
+    "key": "help.different_bill",
+    "en": "I've received a different bill amount than the app's",
+    "ar": "الفاتورة في التطبيق غير مطابقة لفاتورة المطعم"
+  },
+  {
+    "key": "help.ticket_type_staff_comment",
+    "en": "I have a comment on the restaurant's staff",
+    "ar": "ملاحظة على موظف المطعم"
+  },
+  {
+    "key": "invoices.invoices",
+    "en": "Invoices",
+    "ar": "الفواتير"
+  },
+  {
+    "key": "settings.ticket_already_opened",
+    "en": "",
+    "ar": ""
+  },
+  {
+    "key": "home.location_not_covered",
+    "en": "Hungerstation isn't available in your area just yet... Hopefully we will be there soon",
+    "ar": "الخدمة غير متوفرة في منطقتك حالياً… بنحاول نوصل لك بأسرع وقت"
+  }
+]

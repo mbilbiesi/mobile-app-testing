@@ -1,17 +1,17 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import lombok.Getter;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
 
 @Getter
 public class OrdersScreen extends AbstractScreen {
 
-  @iOSXCUITFindBy(id = "Login") //todo:ChangeArabicId
+  @iOSXCUITFindBy(id = "Login") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btnaction")
   private MobileElement btnVerify;
 
@@ -39,11 +39,11 @@ public class OrdersScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/order_date")
   private List<MobileElement> eleOrderDate;
 
-  @iOSXCUITFindBy(id = "Restaurants") //todo:ChangeArabicId
+  @iOSXCUITFindBy(id = "Restaurants") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/restaurants_item")
   private MobileElement btnRestaurants;
 
-  public OrdersScreen(AppiumDriver driver) {
-    super(driver);
+  public OrdersScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

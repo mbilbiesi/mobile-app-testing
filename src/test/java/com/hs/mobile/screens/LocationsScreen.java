@@ -1,15 +1,16 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import lombok.Getter;
-import org.openqa.selenium.WebElement;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class LocationsScreen extends AbstractScreen {
+
   @iOSXCUITFindBy(accessibility = "Search")  //todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/action_search")
   private WebElement searchButton;
@@ -46,7 +47,7 @@ public class LocationsScreen extends AbstractScreen {
           "//android.widget.RadioGroup[@resource-id='com.hungerstation.android.web.debug:id/save_location_radio_group']/*")
   private List<WebElement> locationTypes;
 
-  public LocationsScreen(AppiumDriver driver) {
-    super(driver);
+  public LocationsScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

@@ -1,27 +1,29 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.data.Language;
-import com.hs.mobile.exception.TestExecutionException;
-import com.hs.mobile.screens.SettingsScreen;
-import io.appium.java_client.AppiumDriver;
-import io.qameta.allure.Step;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
-
-import java.util.Optional;
-
 import static com.hs.mobile.data.ElementAttribute.CHECKED;
 import static com.hs.mobile.data.ElementAttribute.ENABLED;
 import static com.hs.mobile.data.ElementAttribute.TEXT;
 import static com.hs.mobile.data.Language.ARABIC;
 import static com.hs.mobile.data.Language.ENGLISH;
 
-public class SettingsScreenSteps extends BaseSteps {
-  private SettingsScreen settingsScreen;
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.data.Language;
+import com.hs.mobile.exception.TestExecutionException;
+import com.hs.mobile.screens.SettingsScreen;
+import io.qameta.allure.Step;
+import java.util.Optional;
+import lombok.NonNull;
+import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.WebElement;
 
-    public SettingsScreenSteps(AppiumDriver driver, String language) {
-    super(driver);
-    settingsScreen = new SettingsScreen(driver);
+public class SettingsScreenSteps extends BaseSteps {
+
+  @NonNull
+  private final SettingsScreen settingsScreen;
+
+  public SettingsScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    settingsScreen = new SettingsScreen(settings);
   }
 
   @Step("Set the language to Arabic")

@@ -1,12 +1,12 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import lombok.Getter;
-import org.openqa.selenium.WebElement;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class SavedLocationsScreen extends AbstractScreen {
@@ -33,19 +33,19 @@ public class SavedLocationsScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delete_img")
   private WebElement delete;
 
-  @iOSXCUITFindBy(accessibility = "Edit") //todo:ChangeArabicId
+  @iOSXCUITFindBy(accessibility = "Edit") // todo:ChangeArabicId
   private WebElement btnEditIos;
 
-  @iOSXCUITFindBy(accessibility = "Cancel") //todo:ChangeArabicId
+  @iOSXCUITFindBy(accessibility = "Cancel") // todo:ChangeArabicId
   private WebElement btnCancelIos;
 
-  @iOSXCUITFindBy(accessibility = "Done") //todo:ChangeArabicId
+  @iOSXCUITFindBy(accessibility = "Done") // todo:ChangeArabicId
   private WebElement btnDoneIos;
 
-  @iOSXCUITFindBy(accessibility = "") //todo:id
+  @iOSXCUITFindBy(accessibility = "") // todo:id
   private WebElement btnDeleteLocationIos;
 
-  public SavedLocationsScreen(AppiumDriver driver) {
-    super(driver);
+  public SavedLocationsScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

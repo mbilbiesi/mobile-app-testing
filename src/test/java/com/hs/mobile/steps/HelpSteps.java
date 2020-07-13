@@ -1,26 +1,28 @@
 package com.hs.mobile.steps;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.HelpScreen;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.NonNull;
 import org.apache.commons.lang3.RandomUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class HelpSteps extends BaseSteps {
-  private HelpScreen helpScreen;
 
-    public HelpSteps(AppiumDriver driver, String language) {
-    super(driver);
-    helpScreen = new HelpScreen(driver);
+  @NonNull
+  private final HelpScreen helpScreen;
+
+  public HelpSteps(@NonNull TestSettings settings) {
+    super(settings);
+    helpScreen = new HelpScreen(settings);
   }
 
   private void waitUntilHelpScreenLoaded() {

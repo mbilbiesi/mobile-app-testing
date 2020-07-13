@@ -1,12 +1,14 @@
 package com.hs.mobile.steps;
 
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.TestExecutionException;
 import com.hs.mobile.screens.MyOrdersScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,17 +16,17 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-import static org.assertj.core.api.Assertions.assertThat;
+import lombok.NonNull;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MyOrdersSteps extends BaseSteps {
-  private MyOrdersScreen myOrdersScreen;
 
-    public MyOrdersSteps(AppiumDriver driver, String language) {
-    super(driver);
-    myOrdersScreen = new MyOrdersScreen(driver);
+  @NonNull
+  private final MyOrdersScreen myOrdersScreen;
+
+  public MyOrdersSteps(@NonNull TestSettings settings) {
+    super(settings);
+    myOrdersScreen = new MyOrdersScreen(settings);
   }
 
   @Step("Select an order, and click it")
@@ -104,7 +106,7 @@ public class MyOrdersSteps extends BaseSteps {
 
   @Step("Click the 'Verify' button")
   public void clickVerifyButton() {
-    touchAction.tap(tapOptions().withElement(element(myOrdersScreen.getVerifyButton()))).perform();
+    touchAction.tap(tapOptions().withElement(element(myOrdersScreen.getBtnVerify()))).perform();
   }
 
   @Step("Navigate back to Restaurants")

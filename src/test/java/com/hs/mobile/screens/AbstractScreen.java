@@ -1,14 +1,16 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.PageFactory;
-
 import java.time.Duration;
+import lombok.NonNull;
+import org.openqa.selenium.support.PageFactory;
 
 public abstract class AbstractScreen {
 
-  public AbstractScreen(AppiumDriver driver) {
-    PageFactory.initElements(new AppiumFieldDecorator(driver, Duration.ofSeconds(15)), this);
+  @SuppressWarnings("rawtypes")
+  public AbstractScreen(@NonNull TestSettings settings) {
+    PageFactory.initElements(
+        new AppiumFieldDecorator(settings.getDriver(), Duration.ofSeconds(15)), this);
   }
 }

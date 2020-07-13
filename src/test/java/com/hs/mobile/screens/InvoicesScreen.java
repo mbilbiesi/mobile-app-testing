@@ -1,11 +1,11 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import lombok.Getter;
-import org.openqa.selenium.WebElement;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class InvoicesScreen extends AbstractScreen {
@@ -26,7 +26,7 @@ public class InvoicesScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/no_invoice_message")
   private WebElement lblMessage;
 
-  public InvoicesScreen(AppiumDriver driver) {
-    super(driver);
+  public InvoicesScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

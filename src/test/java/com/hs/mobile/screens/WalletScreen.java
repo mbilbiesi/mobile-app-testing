@@ -1,8 +1,9 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import lombok.Getter;
+import lombok.NonNull;
 import org.openqa.selenium.WebElement;
 
 @Getter
@@ -24,7 +25,7 @@ public class WalletScreen extends AbstractScreen {
   @AndroidFindBy(xpath = "//android.widget.TextView[@text='القيمة' or @text='Amount']")
   private WebElement amountHeader;
 
-  public WalletScreen(AppiumDriver driver) {
-    super(driver);
+  public WalletScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

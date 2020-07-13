@@ -1,16 +1,19 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.MenuItemScreen;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import lombok.NonNull;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MenuItemScreenSteps extends BaseSteps {
-  private MenuItemScreen menuItemScreen;
 
-  public MenuItemScreenSteps(AppiumDriver driver) {
-    super(driver);
-    menuItemScreen = new MenuItemScreen(driver);
+  @NonNull
+  private final MenuItemScreen menuItemScreen;
+
+  public MenuItemScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    menuItemScreen = new MenuItemScreen(settings);
   }
 
   @Step("")

@@ -1,28 +1,28 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.CreateTicketScreen;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import java.util.List;
+import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.List;
-
 public class CreateTicketSteps extends BaseSteps {
-  private CreateTicketScreen createTicketScreen;
 
-    public CreateTicketSteps(AppiumDriver driver, String language) {
-    super(driver);
-    createTicketScreen = new CreateTicketScreen(driver);
+  @NonNull
+  private final CreateTicketScreen createTicketScreen;
+
+  public CreateTicketSteps(@NonNull TestSettings settings) {
+    super(settings);
+    createTicketScreen = new CreateTicketScreen(settings);
   }
 
   @Step("Verify that all 'Create Ticket' screen elements are showing correctly")
   public void verifyCreateTicketScreenLayout() {
-    SoftAssertions soft = new SoftAssertions();
-
     waitUntilCreateTicketScreenLoaded();
-
+    SoftAssertions soft = new SoftAssertions();
     soft.assertThat(createTicketScreen.getBtnSend().size() > 0)
         .as("'Send' button doesn't exist")
         .isTrue();

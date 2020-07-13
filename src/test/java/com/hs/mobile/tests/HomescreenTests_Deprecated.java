@@ -1,6 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
+import com.hs.mobile.tests.base.BaseStepsInitiator;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
 @Issue("HSAP-168")
 @Listeners(TestListener.class)
 @Deprecated
-public class HomescreenTests_Deprecated extends BaseTest {
+public class HomescreenTests_Deprecated extends BaseStepsInitiator {
 
     @BeforeClass
     @Parameters({"platform"})

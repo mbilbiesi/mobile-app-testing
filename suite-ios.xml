@@ -9,7 +9,7 @@
     <!--        <parameter name="userId" value="1"/>-->
     <!--        <classes>-->
     <!--            <class name="com.hs.mobile.tests.HomescreenTests_Deprecated"/>-->
-    <!--            &lt;!&ndash;            <class name="com.hs.mobile.tests.LocationTests"/>&ndash;&gt;-->
+    <!--            &lt;!&ndash;            <class name="com.hs.mobile.tests.LocationITs"/>&ndash;&gt;-->
     <!--        </classes>-->
     <!--    </test>-->
     <test name="ios test">

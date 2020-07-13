@@ -1,14 +1,14 @@
 package com.hs.mobile.screens;
 
 import com.hs.mobile.core.annotation.AssertElementVisibility;
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import lombok.Getter;
-import org.openqa.selenium.WebElement;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class OrderScreen extends AbstractScreen {
@@ -19,12 +19,12 @@ public class OrderScreen extends AbstractScreen {
   private WebElement eleOrderHeader;
 
   @AssertElementVisibility
-  @iOSXCUITFindBy(id = "Back")  //todo:ChangeArabicId
+  @iOSXCUITFindBy(id = "Back") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/back_button")
   private WebElement btnBack;
 
   @AssertElementVisibility
-  @iOSXCUITFindBy(id = "Help")  //todo:ChangeArabicId
+  @iOSXCUITFindBy(id = "Help") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/help_button")
   private WebElement btnHelp;
 
@@ -146,7 +146,7 @@ public class OrderScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/copy_icon")
   private List<WebElement> btnCopyCashbackCode;
 
-  public OrderScreen(AppiumDriver driver) {
-    super(driver);
+  public OrderScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

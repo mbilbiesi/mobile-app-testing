@@ -1,40 +1,47 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.screens.MenuItemScreen;
-import com.hs.mobile.screens.RestaurantScreen;
-import io.appium.java_client.AppiumDriver;
-import io.qameta.allure.Step;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.time.Duration;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import static com.hs.mobile.data.ElementAttribute.CLICKABLE;
 import static com.hs.mobile.data.ElementAttribute.ENABLED;
 import static com.hs.mobile.data.ElementAttribute.FOCUSABLE;
 import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-public class RestaurantScreenSteps extends BaseSteps {
-  private RestaurantScreen restaurantScreen;
-  private MenuItemScreen menuItemScreen;
-  private HomeScreenSteps homeScreenSteps;
-  private LocationScreenSteps locationScreenSteps;
-  private RestaurantListScreenSteps restaurantListScreenSteps;
-  private MenuItemScreenSteps menuItemScreenSteps;
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.MenuItemScreen;
+import com.hs.mobile.screens.RestaurantScreen;
+import io.qameta.allure.Step;
+import java.time.Duration;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import lombok.NonNull;
+import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-  public RestaurantScreenSteps(AppiumDriver driver, String language) {
-    super(driver);
-    restaurantScreen = new RestaurantScreen(driver);
-    menuItemScreen = new MenuItemScreen(driver);
-    homeScreenSteps = new HomeScreenSteps(driver, language);
-    locationScreenSteps = new LocationScreenSteps(driver, language);
-    restaurantListScreenSteps = new RestaurantListScreenSteps(driver, language);
-    menuItemScreenSteps = new MenuItemScreenSteps(driver);
+public class RestaurantScreenSteps extends BaseSteps {
+
+  @NonNull
+  private final RestaurantScreen restaurantScreen;
+  @NonNull
+  private final MenuItemScreen menuItemScreen;
+  @NonNull
+  final HomeScreenSteps homeScreenSteps;
+  @NonNull
+  final LocationScreenSteps locationScreenSteps;
+  @NonNull
+  final RestaurantListScreenSteps restaurantListScreenSteps;
+  @NonNull
+  final MenuItemScreenSteps menuItemScreenSteps;
+
+  public RestaurantScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    restaurantScreen = new RestaurantScreen(settings);
+    menuItemScreen = new MenuItemScreen(settings);
+    homeScreenSteps = new HomeScreenSteps(settings);
+    locationScreenSteps = new LocationScreenSteps(settings);
+    restaurantListScreenSteps = new RestaurantListScreenSteps(settings);
+    menuItemScreenSteps = new MenuItemScreenSteps(settings);
   }
 
   @Step("Go to restaurant screen")

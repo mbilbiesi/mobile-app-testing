@@ -1,12 +1,12 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import lombok.Getter;
-import org.openqa.selenium.WebElement;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class RestaurantScreen extends AbstractScreen {
@@ -15,11 +15,11 @@ public class RestaurantScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
   private List<WebElement> menuItems;
 
-  @iOSXCUITFindBy(accessibility = "Add")  //todo:ChangeArabicId
+  @iOSXCUITFindBy(accessibility = "Add") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
   private WebElement addMenuItemButton;
 
-  @iOSXCUITFindBy(accessibility = "View cart")  //todo:ChangeArabicId
+  @iOSXCUITFindBy(accessibility = "View cart") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/parent_layout")
   private WebElement cartButton;
 
@@ -55,16 +55,15 @@ public class RestaurantScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/delivery_value")
   private WebElement deliveryAmount;
 
-  @iOSXCUITFindBy(accessibility = "View cart")  //todo:ChangeArabicId
+  @iOSXCUITFindBy(accessibility = "View cart") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/primary_label")
   private WebElement viewCart;
 
   //  @iOSXCUITFindBy(id = "")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/pos_button")
-  List<WebElement> btnAcceptOffer;
+  private List<WebElement> btnAcceptOffer;
 
-  public RestaurantScreen(AppiumDriver driver) {
-    super(driver);
+  public RestaurantScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
-
 }

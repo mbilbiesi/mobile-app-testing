@@ -1,24 +1,24 @@
 package com.hs.mobile.screens;
 
 import com.hs.mobile.core.annotation.AssertElementVisibility;
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import lombok.Getter;
-import org.openqa.selenium.WebElement;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class CreateTicketScreen extends AbstractScreen {
 
   @AssertElementVisibility
-  @iOSXCUITFindBy(id = "Back")  //todo:ChangeArabicId
+  @iOSXCUITFindBy(id = "Back") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_close")
   private WebElement btnCancel;
 
   @AssertElementVisibility
-  @iOSXCUITFindBy(id = "Issue Description") //todo:ChangeArabicId
+  @iOSXCUITFindBy(id = "Issue Description") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_title")
   private WebElement txtTicketTitle;
 
@@ -43,7 +43,7 @@ public class CreateTicketScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/snackbar_action")
   private List<WebElement> supportButton;
 
-  public CreateTicketScreen(AppiumDriver driver) {
-    super(driver);
+  public CreateTicketScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

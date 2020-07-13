@@ -14,6 +14,7 @@
         <assertj.version>3.14.0</assertj.version>
         <appium.client.version>7.3.0</appium.client.version>
         <commons.collections4.version>4.4</commons.collections4.version>
+        <common.lang3.version>3.10</common.lang3.version>
         <aspectj.version>1.9.4</aspectj.version>
         <allure.version>2.13.5</allure.version>
         <testng.version>7.1.0</testng.version>
@@ -50,26 +51,33 @@
         <!-- mobile automation tool -->
         <dependency>
             <groupId>io.appium</groupId>
-            <artifactId>java-client</artifactId>
-            <version>${appium.client.version}</version>
+          <artifactId>java-client</artifactId>
+          <version>${appium.client.version}</version>
         </dependency>
 
-        <!-- Collections Utils -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>${commons.collections4.version}</version>
-        </dependency>
+      <!-- Collections Utils -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>${commons.collections4.version}</version>
+      </dependency>
 
-        <!-- Reporting -->
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>${allure.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.testng</groupId>
-                    <artifactId>testng</artifactId>
+      <!-- Utilities -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${common.lang3.version}</version>
+      </dependency>
+
+      <!-- Reporting -->
+      <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-testng</artifactId>
+        <version>${allure.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.slf4j</groupId>

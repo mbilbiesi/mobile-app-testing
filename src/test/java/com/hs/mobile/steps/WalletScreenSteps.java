@@ -1,22 +1,24 @@
 package com.hs.mobile.steps;
 
+import static com.hs.mobile.data.ElementAttribute.TEXT;
+
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.WalletScreen;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.hs.mobile.data.ElementAttribute.TEXT;
-
 public class WalletScreenSteps extends BaseSteps {
-  private WalletScreen walletScreen;
 
-    public WalletScreenSteps(AppiumDriver driver, String language) {
-    super(driver);
-    walletScreen = new WalletScreen(driver);
+  @NonNull
+  private final WalletScreen walletScreen;
+
+  public WalletScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    walletScreen = new WalletScreen(settings);
   }
 
   @Step("Verify that all headers are displayed properly")

@@ -1,20 +1,23 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.screens.VerifyAccountScreen;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.qameta.allure.Step;
-import org.assertj.core.api.SoftAssertions;
-
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-public class VerifyAccountScreenSteps extends BaseSteps {
-  private VerifyAccountScreen verifyAccountScreen;
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.VerifyAccountScreen;
+import io.appium.java_client.MobileElement;
+import io.qameta.allure.Step;
+import lombok.NonNull;
+import org.assertj.core.api.SoftAssertions;
 
-    public VerifyAccountScreenSteps(AppiumDriver driver, String language) {
-    super(driver);
-    verifyAccountScreen = new VerifyAccountScreen(driver);
+public class VerifyAccountScreenSteps extends BaseSteps {
+
+  @NonNull
+  private final VerifyAccountScreen verifyAccountScreen;
+
+  public VerifyAccountScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    verifyAccountScreen = new VerifyAccountScreen(settings);
   }
 
   public boolean isTxtPhoneNumberDisplayed() {

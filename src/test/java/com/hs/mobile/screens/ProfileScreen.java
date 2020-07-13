@@ -1,8 +1,9 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import lombok.Getter;
+import lombok.NonNull;
 import org.openqa.selenium.WebElement;
 
 @Getter
@@ -32,7 +33,7 @@ public class ProfileScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_logout")
   private WebElement logout;
 
-  public ProfileScreen(AppiumDriver driver) {
-    super(driver);
+  public ProfileScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

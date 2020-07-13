@@ -1,8 +1,9 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import lombok.Getter;
+import lombok.NonNull;
 import org.openqa.selenium.WebElement;
 
 @Getter
@@ -20,7 +21,7 @@ public class InvoiceScreen extends AbstractScreen {
   @AndroidFindBy(xpath = "//android.widget.ImageButton[@index='0']")
   private WebElement btnBack;
 
-  public InvoiceScreen(AppiumDriver driver) {
-    super(driver);
+  public InvoiceScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

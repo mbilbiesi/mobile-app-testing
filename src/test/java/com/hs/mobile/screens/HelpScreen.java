@@ -1,13 +1,13 @@
 package com.hs.mobile.screens;
 
 import com.hs.mobile.core.annotation.AssertElementVisibility;
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import lombok.Getter;
-import org.openqa.selenium.WebElement;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class HelpScreen extends AbstractScreen {
@@ -19,12 +19,12 @@ public class HelpScreen extends AbstractScreen {
   private WebElement lblTicketsMainTitle;
 
   @AssertElementVisibility
-  @iOSXCUITFindBy(id = "Mt Tickets")  //todo:ChangeArabicId
+  @iOSXCUITFindBy(id = "Mt Tickets") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_my_tickets")
   private WebElement btnMyTickets;
 
   @AssertElementVisibility
-  @iOSXCUITFindBy(id = "Empty list")  //todo:ChangeArabicId
+  @iOSXCUITFindBy(id = "Empty list") // todo:ChangeArabicId
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/expandable_tickets_list")
   private WebElement eleTicketsList;
 
@@ -36,11 +36,11 @@ public class HelpScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/child_ticket_txt")
   private List<WebElement> eleTicket;
 
-  @iOSXCUITFindBy(className = "Back") //todo:ChangeArabicId
+  @iOSXCUITFindBy(className = "Back") // todo:ChangeArabicId
   @AndroidFindBy(className = "android.widget.ImageButton")
   private WebElement btnBack;
 
-  public HelpScreen(AppiumDriver driver) {
-    super(driver);
+  public HelpScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

@@ -1,6 +1,14 @@
 package com.hs.mobile.steps;
 
+import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofMillis;
+
 import com.hs.mobile.core.annotation.AssertElementVisibility;
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.ElementAttribute;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -8,6 +16,13 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.HideKeyboardStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.time.Duration;
+import javax.imageio.ImageIO;
+import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
@@ -17,27 +32,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.time.Duration;
-
-import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.WaitOptions.waitOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-import static io.appium.java_client.touch.offset.PointOption.point;
-import static java.time.Duration.ofMillis;
-
+@SuppressWarnings("rawtypes")
 public abstract class BaseSteps {
-  private AppiumDriver driver;
+
+  @NonNull
+  private final AppiumDriver<MobileElement> driver;
   protected TouchAction touchAction;
   protected WebDriverWait wait;
 
-  public BaseSteps(AppiumDriver driver) {
-    this.driver = driver;
+  public BaseSteps(@NonNull TestSettings settings) {
+    this.driver = settings.getDriver();
     touchAction = new TouchAction(driver);
     wait = new WebDriverWait(driver, 10);
   }

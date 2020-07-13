@@ -1,12 +1,12 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import lombok.Getter;
-import org.openqa.selenium.WebElement;
-
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class SettingsScreen extends AbstractScreen {
@@ -27,11 +27,11 @@ public class SettingsScreen extends AbstractScreen {
   @AndroidFindBy(id = "android:id/text1")
   private List<WebElement> languages;
 
-  @iOSXCUITFindBy(id = "English") //todo:ChangeArabicId
+  @iOSXCUITFindBy(id = "English") // todo:ChangeArabicId
   @AndroidFindBy(xpath = "//android.widget.CheckedTextView[@index='0']")
   private WebElement english;
 
-  @iOSXCUITFindBy(id = "عربي")  //todo:changeArabicId
+  @iOSXCUITFindBy(id = "عربي") // todo:changeArabicId
   @AndroidFindBy(xpath = "//android.widget.CheckedTextView[@index='1']")
   private WebElement arabic;
 
@@ -43,7 +43,7 @@ public class SettingsScreen extends AbstractScreen {
   @AndroidFindBy(id = "android:id/checkbox")
   private WebElement chkNotifications;
 
-  public SettingsScreen(AppiumDriver driver) {
-    super(driver);
+  public SettingsScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

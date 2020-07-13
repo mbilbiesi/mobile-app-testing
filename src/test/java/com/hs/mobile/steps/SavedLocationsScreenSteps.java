@@ -1,16 +1,19 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.SavedLocationsScreen;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import lombok.NonNull;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SavedLocationsScreenSteps extends BaseSteps {
-  private SavedLocationsScreen savedLocationsScreen;
 
-    public SavedLocationsScreenSteps(AppiumDriver driver, String language) {
-    super(driver);
-    savedLocationsScreen = new SavedLocationsScreen(driver);
+  @NonNull
+  private final SavedLocationsScreen savedLocationsScreen;
+
+  public SavedLocationsScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    savedLocationsScreen = new SavedLocationsScreen(settings);
   }
 
   @Step("Add new location")

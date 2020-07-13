@@ -1,10 +1,11 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
+import lombok.NonNull;
 
 @Getter
 public class PinCodeVerificationScreen extends AbstractScreen {
@@ -13,7 +14,7 @@ public class PinCodeVerificationScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/state_description")
   private MobileElement eleCustomerPhoneNumber;
 
-  @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeTextField'")  //todo:id
+  @iOSXCUITFindBy(iOSNsPredicate = "type == 'XCUIElementTypeTextField'") // todo:id
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/edt_verification_number")
   private MobileElement txtVerificationCode;
 
@@ -29,7 +30,7 @@ public class PinCodeVerificationScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_login")
   private MobileElement btnVerifyNumber;
 
-  public PinCodeVerificationScreen(AppiumDriver driver) {
-    super(driver);
+  public PinCodeVerificationScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }
