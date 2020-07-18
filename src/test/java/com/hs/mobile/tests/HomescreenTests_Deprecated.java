@@ -17,36 +17,36 @@ import org.testng.annotations.Test;
 @Deprecated
 public class HomescreenTests_Deprecated extends BaseStepsInitiator {
 
-    @BeforeClass
-    @Parameters({"platform"})
-    public void skipApplePay(String platformInfo) {
-        String[] platform = platformInfo.split(" ");
+  @BeforeClass
+  @Parameters({"platform"})
+  public void skipApplePay(String platformInfo) {
+    String[] platform = platformInfo.split(" ");
 
-        if (platform[0].equalsIgnoreCase("ios")) {
-            applePaySteps.skipApplePay();
-        }
+    if (platform[0].equalsIgnoreCase("ios")) {
+      applePaySteps.skipApplePay();
     }
+  }
 
-    @Test(description = "Open the application with a new user")
-    void navigateToHomeScreen_allHomeScreenElementsAreDisplayed() {
-        // Given
-        homeScreenSteps.verifyThatAllHomeElementsDisplayed();
-    }
+  @Test(description = "Open the application with a new user")
+  void navigateToHomeScreen_allHomeScreenElementsAreDisplayed() {
+    // Given
+    homeScreenSteps.verifyThatAllHomeElementsDisplayed();
+  }
 
-    @Test(
-            description = "Open the application with an already registered user without any saved place")
-    void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
-        // Given
-        homeScreenSteps.clickMyOrdersButton();
-        myOrdersSteps.clickVerifyButton();
-        verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
-        verifyAccountScreenSteps.clickNextButton();
-        pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
+  @Test(
+      description = "Open the application with an already registered user without any saved place")
+  void verifyThatHomescreenElementsAreDisplayedForRegisteredUsers() {
+    // Given
+    homeScreenSteps.clickMyOrdersButton();
+    myOrdersSteps.clickVerifyButton();
+    verifyAccountScreenSteps.insertMobileNumber(testUser.getMobileNumber());
+    verifyAccountScreenSteps.clickNextButton();
+    pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
 
-        // When
-        myOrdersSteps.navigateToRestaurants();
+    // When
+    myOrdersSteps.navigateToRestaurants();
 
-        // Then
-        homeScreenSteps.verifyThatAllHomeElementsDisplayed();
-    }
+    // Then
+    homeScreenSteps.verifyThatAllHomeElementsDisplayed();
+  }
 }

@@ -16,12 +16,11 @@ import org.testng.annotations.Guice;
 @Guice(moduleFactory = GuiceModuleFactory.class)
 public class BaseInitiator {
 
+  public boolean isLocationValid;
   @Inject
   protected TestUser testUser;
   @Inject
   protected AppiumDriver<MobileElement> driver;
-  public boolean isLocationValid;
-
   protected RestaurantsProvider restaurantsData;
 
   @BeforeClass

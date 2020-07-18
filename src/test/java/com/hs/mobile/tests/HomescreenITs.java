@@ -16,7 +16,6 @@ import org.testng.annotations.Test;
 @Listeners(TestListener.class)
 public class HomescreenITs extends BaseStepsInitiator {
 
-
   @BeforeClass
   @Parameters({"platform"})
   public void skipApplePay(String platformInfo) {
@@ -60,5 +59,5 @@ public class HomescreenITs extends BaseStepsInitiator {
     }
   }
 
-  //ToDo: Cover rest of new homescreen test cases.
+  // ToDo: Cover rest of new homescreen test cases.
 }

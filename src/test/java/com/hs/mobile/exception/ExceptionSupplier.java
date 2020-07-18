@@ -13,6 +13,10 @@ public final class ExceptionSupplier {
   }
 
   public static Supplier<TestException> testException() {
-    return () -> new TestException("filed in test");
+    return () -> new TestException("failed in test");
+  }
+
+  public static Supplier<TestException> testException(String message) {
+    return () -> new TestException(message);
   }
 }

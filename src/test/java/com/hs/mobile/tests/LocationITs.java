@@ -66,7 +66,7 @@ public class LocationITs extends BaseStepsInitiator {
     // When
     locationScreenSteps.saveLocation("test");
     homeScreenSteps.viewSavedLocations();
-//    savedLocationsScreenSteps.editLocation();
+    //    savedLocationsScreenSteps.editLocation();
     homeScreenSteps.editLocation();
 
     // Then

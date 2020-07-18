@@ -3,12 +3,11 @@ package com.hs.mobile.core.appium;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import java.io.IOException;
+import java.net.ServerSocket;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.net.ServerSocket;
 
 public abstract class AppiumServer {
   public static final int APPIUM_PORT = 4723; // todo: generate random available port

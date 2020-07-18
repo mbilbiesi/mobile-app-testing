@@ -1,12 +1,23 @@
 package com.hs.mobile.conf;
 
-import com.google.common.io.Resources;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import com.hs.mobile.conf.annotation.AppFilePath;
-import com.hs.mobile.conf.annotation.AppiumURL;
+import com.hs.mobile.core.settings.TestParameters;
 import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.data.user.TestUser;
+import com.hs.mobile.service.app.AppCenterEndpoints;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+import javax.inject.Qualifier;
+import org.aeonbits.owner.ConfigFactory;
 import org.testng.ITestContext;
 
 @SuppressWarnings("unused")
@@ -24,43 +35,57 @@ public class BaseTestModule extends AbstractModule {
     install(new TestStepsModule());
     install(new CapabilitiesModule());
     install(new DriverModule());
+    install(new EndpointsModule());
+    install(new UtilsModule());
   }
 
   @Provides
   @Singleton
-  public TestSettings testSettings(@AppFilePath String appFilePath, @AppiumURL String appiumURL) {
+  public TestProperties properties() {
+    return ConfigFactory.create(TestProperties.class, System.getProperties());
+  }
+
+  @Provides
+  @Singleton
+  public TestSettings testSettings(AppiumDriver<MobileElement> driver, TestUser testUser) {
+    return TestSettings.builder().driver(driver).testLanguage(testUser.getLanguage()).build();
+  }
+
+  @Provides
+  @Singleton
+  public TestParameters testParameters(TestProperties properties) {
     String platform_name = iTestContext.getCurrentXmlTest().getParameter("platform_name");
     String platform_version = iTestContext.getCurrentXmlTest().getParameter("platform_version");
     String udid = iTestContext.getCurrentXmlTest().getParameter("udid");
     String uniquePort = iTestContext.getCurrentXmlTest().getParameter("uniquePort");
     String assignedTestUserId = iTestContext.getCurrentXmlTest().getParameter("assignedTestUserId");
-    return TestSettings.builder()
+
+    return TestParameters.builder()
         .platformName(platform_name)
         .platformVersion(platform_version)
-        .appFilePath(appFilePath)
-        .appiumURL(appiumURL)
         .deviceUDID(udid)
         .uniquePort(uniquePort)
         .assignedTestUserId(assignedTestUserId)
+        .appiumURL(properties.getAppiumServerUrl())
         .build();
   }
 
   @Provides
   @Singleton
   @AppFilePath
-  public String appFilePath() {
+  public String appFilePath(AppCenterEndpoints appCenterEndpoints) {
     String platformName = iTestContext.getCurrentXmlTest().getParameter("platform_name");
     if (platformName.equalsIgnoreCase("android")) {
-      return Resources.getResource("apps/app-debug.apk").getPath();
+      return appCenterEndpoints.getAndroidDetails().getDownloadUrl();
     } else {
-      return Resources.getResource("apps/HungerStation.app").getPath();
+      return appCenterEndpoints.getIOSDetails().getDownloadUrl();
     }
   }
 
-  @Provides
-  @Singleton
-  @AppiumURL
-  public String appiumURL() {
-    return "http://localhost:4723/wd/hub";
+  @Qualifier
+  @Target({FIELD, PARAMETER, METHOD})
+  @Retention(RUNTIME)
+  public @interface AppFilePath {
+
   }
 }

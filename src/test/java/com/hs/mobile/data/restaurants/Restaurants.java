@@ -6,18 +6,18 @@ import lombok.Getter;
 @Getter
 public class Restaurants {
 
-    @JsonProperty("ar")
-    private String ar;
+  @JsonProperty("ar")
+  private String ar;
 
-    @JsonProperty("restaurantType")
-    private String restaurantType;
+  @JsonProperty("restaurantType")
+  private String restaurantType;
 
-    @JsonProperty("en")
-    private String en;
+  @JsonProperty("en")
+  private String en;
 
-    @JsonProperty("restaurantId")
-    private String restaurantId;
+  @JsonProperty("restaurantId")
+  private String restaurantId;
 
-    @JsonProperty("status")
-    private String status;
+  @JsonProperty("status")
+  private String status;
 }

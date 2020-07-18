@@ -5,7 +5,7 @@ import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
 import static org.openqa.selenium.Platform.ANDROID;
 import static org.openqa.selenium.Platform.IOS;
 
-import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.core.settings.TestParameters;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.NonNull;
@@ -16,15 +16,16 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class CapabilitiesManager {
 
   @NonNull
-  private final TestSettings testSettings;
+  private final TestParameters testParameters;
+  @NonNull
+  private final String appFilePath;
 
   public DesiredCapabilities getDesiredCapabilities() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
-    String uniquePort = testSettings.getUniquePort();
-    String deviceUDID = testSettings.getDeviceUDID();
-    String platformVersion = testSettings.getPlatformVersion();
-    String platformName = testSettings.getPlatformName().toLowerCase();
-    String appFilePath = testSettings.getAppFilePath();
+    String uniquePort = testParameters.getUniquePort();
+    String deviceUDID = testParameters.getDeviceUDID();
+    String platformVersion = testParameters.getPlatformVersion();
+    String platformName = testParameters.getPlatformName().toLowerCase();
 
     switch (platformName) {
       case "android":

@@ -1,8 +1,7 @@
 package com.hs.mobile.data;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Optional;
+import org.apache.commons.lang3.StringUtils;
 
 public enum Language {
   ARABIC("ar", "العربية"),

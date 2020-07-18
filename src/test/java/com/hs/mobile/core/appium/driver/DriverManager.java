@@ -1,6 +1,5 @@
 package com.hs.mobile.core.appium.driver;
 
-import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.ExceptionSupplier;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -18,14 +17,11 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class DriverManager {
 
   @NonNull
-  private final TestSettings testSettings;
-  @NonNull
   private final DesiredCapabilities desiredCapabilities;
 
-  public AppiumDriver<MobileElement> getAppiumDriver() {
+  public AppiumDriver<MobileElement> getAppiumDriver(
+      String platformName, @NonNull String appiumURL) {
     AppiumDriver<MobileElement> driver = null;
-    String platformName = testSettings.getPlatformName();
-    String appiumURL = testSettings.getAppiumURL();
 
     if (platformName.equalsIgnoreCase("android")) {
       try {
@@ -40,6 +36,7 @@ public class DriverManager {
         log.error("unable to initiate iOS driver", e);
       }
     }
-    return Optional.ofNullable(driver).orElseThrow(ExceptionSupplier.testException());
+    return Optional.ofNullable(driver)
+        .orElseThrow(ExceptionSupplier.testException("failed to initiate drive"));
   }
 }
