@@ -21,8 +21,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MyOrdersSteps extends BaseSteps {
 
-  @NonNull
-  private final MyOrdersScreen myOrdersScreen;
+  @NonNull private final MyOrdersScreen myOrdersScreen;
 
   public MyOrdersSteps(@NonNull TestSettings settings) {
     super(settings);

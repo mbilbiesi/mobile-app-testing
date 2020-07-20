@@ -23,7 +23,7 @@ public class CheckoutITs extends BaseStepsInitiator {
       verifyAccountScreenSteps.clickNextButton();
       pinCodeVerificationSteps.insertVerificationCode(testUser.getVerificationCode());
       myOrdersSteps.waitUntilMyOrdersScreenLoaded();
-      homeScreenSteps.clickOnResturantIcon();
+      homeScreenSteps.clickOnRestaurantIcon();
 
       hasFirstTestExecuted = true;
     }

@@ -13,10 +13,8 @@ import org.assertj.core.api.SoftAssertions;
 
 public class InvoicesScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final InvoicesScreen invoicesScreen;
-  @NonNull
-  private final InvoiceScreenSteps invoiceScreenSteps;
+  @NonNull private final InvoicesScreen invoicesScreen;
+  @NonNull private final InvoiceScreenSteps invoiceScreenSteps;
 
   public InvoicesScreenSteps(@NonNull TestSettings settings) {
     super(settings);

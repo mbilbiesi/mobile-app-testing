@@ -10,25 +10,18 @@ import org.assertj.core.api.SoftAssertions;
 
 public class CheckoutScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final CheckoutScreen checkoutScreen;
-  @NonNull
-  private final HomeScreenSteps homeScreenSteps;
-  @NonNull
-  private final LocationScreenSteps locationScreenSteps;
-  @NonNull
-  private final RestaurantListScreenSteps restaurantListScreenSteps;
-  @NonNull
-  private final RestaurantScreenSteps restaurantScreenSteps;
-  @NonNull
-  private final LocationsProvider locationsData;
-  @NonNull
-  private final PaymentOptionsScreen pmtOptions;
+  @NonNull private final CheckoutScreen checkoutScreen;
+  @NonNull private final HomeScreenSteps homeScreenSteps;
+  @NonNull private final LocationScreenSteps locationScreenSteps;
+  @NonNull private final RestaurantListScreenSteps restaurantListScreenSteps;
+  @NonNull private final RestaurantScreenSteps restaurantScreenSteps;
+  @NonNull private final LocationsProvider locationsData;
+  @NonNull private final PaymentOptionsScreen paymentOptionsScreen;
 
   public CheckoutScreenSteps(@NonNull TestSettings settings) {
     super(settings);
     checkoutScreen = new CheckoutScreen(settings);
-    pmtOptions = new PaymentOptionsScreen(settings);
+    paymentOptionsScreen = new PaymentOptionsScreen(settings);
     locationsData = new LocationsProvider(settings);
 
     homeScreenSteps = new HomeScreenSteps(settings);
@@ -63,7 +56,7 @@ public class CheckoutScreenSteps extends BaseSteps {
     restaurantScreenSteps.goToCheckout();
 
     tap(checkoutScreen.getBtnChoosePmtMethod());
-    tap(pmtOptions.getBtnCashOnDelivery());
+    tap(paymentOptionsScreen.getBtnCashOnDelivery());
 
     swipe(checkoutScreen.getDeliveryAmount(), checkoutScreen.getBtnChoosePmtMethod());
 

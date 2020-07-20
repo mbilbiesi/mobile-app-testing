@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.messages.ScreenLabelsProvider;
+import com.hs.mobile.exception.TestExecutionException;
 import com.hs.mobile.screens.HomeScreen;
 import com.hs.mobile.screens.HomeScreenSideMenu;
 import com.hs.mobile.screens.LocationsScreen;
@@ -18,16 +19,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 @Slf4j
 public class HomeScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final HomeScreen homeScreen;
-  @NonNull
-  private final HomeScreenSideMenu homeScreenSideMenu;
-  @NonNull
-  private final RestaurantListScreenSteps restaurantSteps;
-  @NonNull
-  private final ScreenLabelsProvider screenLabel;
-  @NonNull
-  private final LocationsScreen locationsScreen;
+  @NonNull private final HomeScreen homeScreen;
+  @NonNull private final HomeScreenSideMenu homeScreenSideMenu;
+  @NonNull private final RestaurantListScreenSteps restaurantSteps;
+  @NonNull private final ScreenLabelsProvider screenLabel;
+  @NonNull private final LocationsScreen locationsScreen;
 
   public HomeScreenSteps(@NonNull TestSettings settings) {
     super(settings);
@@ -46,11 +42,10 @@ public class HomeScreenSteps extends BaseSteps {
 
   @Step("View saved locations")
   public void viewSavedLocations() {
-    // tap(homeScreen.getUseMyCurrentLocationText());
-    tap(homeScreen.getLstHomescreenAddresses());
+    tap(homeScreen.getLstHomeScreenAddresses());
   }
 
-  @Step("Verify that all 'Homescreen' elements are displayed correctly")
+  @Step("Verify that all 'HomeScreen' elements are displayed correctly")
   public void verifyThatAllHomeElementsDisplayed() {
     verifyScreenElements();
   }
@@ -71,7 +66,7 @@ public class HomeScreenSteps extends BaseSteps {
   }
 
   @Step("Click on restaurant icon")
-  public void clickOnResturantIcon() {
+  public void clickOnRestaurantIcon() {
     tap(homeScreen.getRestaurantsItem());
   }
 
@@ -108,21 +103,21 @@ public class HomeScreenSteps extends BaseSteps {
     assertThat(!locationValue.equals("")).as("Location isn't displayed correctly").isTrue();
   }
 
-  @Step("Verify that homescreen elements are displayed based on location")
-  public void verifyHomescreenElementsBasedOnLocation(boolean isLocationValid) {
+  @Step("Verify that homeScreen elements are displayed based on location")
+  public void verifyHomeScreenElementsBasedOnLocation(boolean isLocationValid) {
     SoftAssertions soft = new SoftAssertions();
 
     if (isLocationValid) {
-      int homescreenBanners = homeScreen.getBannerRestuarantsGrocery().size();
-      soft.assertThat(homescreenBanners > 0)
-          .as("Both restaurants and grocery banners are not showing on Homescreen")
+      int homeScreenBanners = homeScreen.getBannerRestaurantsGrocery().size();
+      soft.assertThat(homeScreenBanners > 0)
+          .as("Both restaurants and grocery banners are not showing on HomeScreen")
           .isTrue();
       soft.assertThat(homeScreen.getBtnRestaurantsOrGrocery().size() > 0)
           .as("Restaurants and Grocery buttons are not displayed")
           .isTrue();
-      if (homescreenBanners > 0) {
-        soft.assertThat(homescreenBanners == 2)
-            .as("Restaurants or Grocery is not showing on homescreen")
+      if (homeScreenBanners > 0) {
+        soft.assertThat(homeScreenBanners == 2)
+            .as("Restaurants or Grocery is not showing on homeScreen")
             .isTrue();
         soft.assertThat(homeScreen.getBtnRestaurantsOrGrocery().size() == 2)
             .as("Find Restaurants or Find Grocery button is not displayed")
@@ -137,11 +132,11 @@ public class HomeScreenSteps extends BaseSteps {
           .isTrue();
       if (homeScreen.getLblMissingLocExplanation().size() > 0) {
         soft.assertThat(
-            homeScreen
-                .getLblMissingLocExplanation()
-                .get(0)
-                .getText()
-                .equalsIgnoreCase(screenLabel.getMessageContent("home.location_not_covered")))
+                homeScreen
+                    .getLblMissingLocExplanation()
+                    .get(0)
+                    .getText()
+                    .equalsIgnoreCase(screenLabel.getMessageContent("home.location_not_covered")))
             .as(
                 "Expected text: "
                     + screenLabel.getMessageContent("home.location_not_covered")
@@ -195,7 +190,7 @@ public class HomeScreenSteps extends BaseSteps {
             location -> {
               tap(homeScreen.getBtnMore().get(0));
               tap(homeScreen.getBtnEditOrDelete().get(1));
-              tap(homeScreen.getLstHomescreenAddresses());
+              tap(homeScreen.getLstHomeScreenAddresses());
             });
   }
 
@@ -230,7 +225,7 @@ public class HomeScreenSteps extends BaseSteps {
     try {
       tap(homeScreen.getLnkSkipPromotion());
     } catch (Exception e) {
-
+      throw new TestExecutionException("Unable to dismiss Promotion", e);
     }
   }
 }

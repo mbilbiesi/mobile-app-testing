@@ -21,7 +21,6 @@ import com.hs.mobile.steps.SettingsScreenSteps;
 import com.hs.mobile.steps.TicketSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
 import com.hs.mobile.steps.WalletScreenSteps;
-import com.hs.mobile.steps.WelcomeApplePaySteps;
 
 @SuppressWarnings("unused")
 public class TestStepsModule extends AbstractModule {
@@ -114,10 +113,5 @@ public class TestStepsModule extends AbstractModule {
   @Provides
   public LocationScreenSteps locationScreenSteps(TestSettings settings) {
     return new LocationScreenSteps(settings);
-  }
-
-  @Provides
-  public WelcomeApplePaySteps applePaySteps(TestSettings settings) {
-    return new WelcomeApplePaySteps(settings);
   }
 }

@@ -12,8 +12,7 @@ import org.assertj.core.api.SoftAssertions;
 
 public class OrdersSteps extends BaseSteps {
 
-  @NonNull
-  private final OrdersScreen ordersScreen;
+  @NonNull private final OrdersScreen ordersScreen;
 
   public OrdersSteps(@NonNull TestSettings settings) {
     super(settings);

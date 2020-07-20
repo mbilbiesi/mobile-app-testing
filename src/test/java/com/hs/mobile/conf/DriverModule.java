@@ -17,7 +17,7 @@ public class DriverModule extends AbstractModule {
   public AppiumDriver<MobileElement> driver(
       DriverManager driverManager, TestParameters testParameters, TestProperties properties) {
     return driverManager.getAppiumDriver(
-        testParameters.getPlatformName(), properties.getAppiumServerUrl());
+        testParameters.getPlatform(), properties.getAppiumServerUrl());
   }
 
   @Provides

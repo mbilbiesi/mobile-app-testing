@@ -29,7 +29,7 @@ public class LocationITs extends BaseStepsInitiator {
       hasFirstTestExecuted = true;
     }
 
-    homeScreenSteps.clickOnResturantIcon();
+    homeScreenSteps.clickOnRestaurantIcon();
     locationScreenSteps.deleteExistingLocations();
   }
 

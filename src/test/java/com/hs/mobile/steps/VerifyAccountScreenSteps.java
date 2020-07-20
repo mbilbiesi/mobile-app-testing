@@ -12,8 +12,7 @@ import org.assertj.core.api.SoftAssertions;
 
 public class VerifyAccountScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final VerifyAccountScreen verifyAccountScreen;
+  @NonNull private final VerifyAccountScreen verifyAccountScreen;
 
   public VerifyAccountScreenSteps(@NonNull TestSettings settings) {
     super(settings);

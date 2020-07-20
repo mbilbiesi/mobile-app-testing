@@ -10,25 +10,23 @@ import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 @RequiredArgsConstructor
 public class CapabilitiesManager {
-
-  @NonNull
-  private final TestParameters testParameters;
-  @NonNull
-  private final String appFilePath;
+  @NonNull private final TestParameters testParameters;
+  @NonNull private final String appFilePath;
 
   public DesiredCapabilities getDesiredCapabilities() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
     String uniquePort = testParameters.getUniquePort();
     String deviceUDID = testParameters.getDeviceUDID();
     String platformVersion = testParameters.getPlatformVersion();
-    String platformName = testParameters.getPlatformName().toLowerCase();
+    Platform platform = testParameters.getPlatform();
 
-    switch (platformName) {
-      case "android":
+    switch (platform) {
+      case ANDROID:
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "DeviceName");
         capabilities.setCapability(MobileCapabilityType.UDID, deviceUDID);
         capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
@@ -36,7 +34,7 @@ public class CapabilitiesManager {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID);
         break;
 
-      case "ios":
+      case IOS:
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11");
         capabilities.setCapability(MobileCapabilityType.UDID, deviceUDID);
         capabilities.setCapability(MobileCapabilityType.APP, appFilePath);

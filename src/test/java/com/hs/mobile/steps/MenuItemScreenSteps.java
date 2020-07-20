@@ -8,8 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MenuItemScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final MenuItemScreen menuItemScreen;
+  @NonNull private final MenuItemScreen menuItemScreen;
 
   public MenuItemScreenSteps(@NonNull TestSettings settings) {
     super(settings);

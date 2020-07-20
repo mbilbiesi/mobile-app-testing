@@ -21,18 +21,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class RestaurantScreenSteps extends BaseSteps {
 
-  @NonNull
-  final HomeScreenSteps homeScreenSteps;
-  @NonNull
-  final LocationScreenSteps locationScreenSteps;
-  @NonNull
-  final RestaurantListScreenSteps restaurantListScreenSteps;
-  @NonNull
-  final MenuItemScreenSteps menuItemScreenSteps;
-  @NonNull
-  private final RestaurantScreen restaurantScreen;
-  @NonNull
-  private final MenuItemScreen menuItemScreen;
+  @NonNull final HomeScreenSteps homeScreenSteps;
+  @NonNull final LocationScreenSteps locationScreenSteps;
+  @NonNull final RestaurantListScreenSteps restaurantListScreenSteps;
+  @NonNull final MenuItemScreenSteps menuItemScreenSteps;
+  @NonNull private final RestaurantScreen restaurantScreen;
+  @NonNull private final MenuItemScreen menuItemScreen;
 
   public RestaurantScreenSteps(@NonNull TestSettings settings) {
     super(settings);

@@ -10,8 +10,7 @@ import lombok.NonNull;
 
 public class AddReferralCodeSteps extends BaseSteps {
 
-  @NonNull
-  private AddReferralCodeScreen addReferralCodeScreen;
+  @NonNull private AddReferralCodeScreen addReferralCodeScreen;
 
   public AddReferralCodeSteps(@NonNull TestSettings settings) {
     super(settings);

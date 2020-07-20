@@ -1,5 +1,6 @@
 package com.hs.mobile.data.messages;
 
+import static com.hs.mobile.data.Language.EN;
 import static com.hs.mobile.exception.ExceptionSupplier.failedToInitializeTest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -18,8 +19,7 @@ public class ScreenLabelsProvider {
 
   private static final String MESSAGES_SOURCE = "data/screenLabels.json";
   private static List<ScreenLabels> screenLabelsList;
-  @NonNull
-  private final TestSettings settings;
+  @NonNull private final TestSettings settings;
 
   public ScreenLabelsProvider(@NonNull TestSettings settings) {
     this.settings = settings;
@@ -28,8 +28,7 @@ public class ScreenLabelsProvider {
       String messagesFile =
           Resources.toString(Resources.getResource(MESSAGES_SOURCE), Charsets.UTF_8);
       screenLabelsList =
-          new ObjectMapper().readValue(messagesFile, new TypeReference<List<ScreenLabels>>() {
-          });
+          new ObjectMapper().readValue(messagesFile, new TypeReference<List<ScreenLabels>>() {});
     } catch (IOException e) {
       log.error("Unable to read messages test data file", e);
     }
@@ -43,7 +42,7 @@ public class ScreenLabelsProvider {
   }
 
   public String getMessageContent(String key) {
-    if (settings.getTestLanguage().equalsIgnoreCase("en")) {
+    if (settings.getTestLanguage().is(EN)) {
       return getMessage(key).getLabelEn();
     } else {
       return getMessage(key).getLabelAr();

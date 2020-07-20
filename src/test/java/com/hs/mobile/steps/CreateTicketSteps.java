@@ -11,8 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CreateTicketSteps extends BaseSteps {
 
-  @NonNull
-  private final CreateTicketScreen createTicketScreen;
+  @NonNull private final CreateTicketScreen createTicketScreen;
 
   public CreateTicketSteps(@NonNull TestSettings settings) {
     super(settings);

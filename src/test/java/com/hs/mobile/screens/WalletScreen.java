@@ -9,19 +9,15 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class WalletScreen extends AbstractScreen {
 
-  // iOSXCUITFindBy(id = "test")  todo:id
   @AndroidFindBy(xpath = "//android.widget.TextView[@text='العمليات' or @text='Transaction']")
   private WebElement transactionHeader;
 
-  // iOSXCUITFindBy(id = "test")  todo:id
   @AndroidFindBy(xpath = "//android.widget.TextView[@text='التاريخ' or @text='Date']")
   private WebElement dateHeader;
 
-  // iOSXCUITFindBy(id = "test")  todo:id
   @AndroidFindBy(xpath = "//android.widget.TextView[@text='تاريخ الانتهاء' or @text='Expiry Date']")
   private WebElement expiryDateHeader;
 
-  // iOSXCUITFindBy(id = "test")  todo:id
   @AndroidFindBy(xpath = "//android.widget.TextView[@text='القيمة' or @text='Amount']")
   private WebElement amountHeader;
 

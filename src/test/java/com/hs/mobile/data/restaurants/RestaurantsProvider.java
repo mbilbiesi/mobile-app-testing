@@ -24,8 +24,7 @@ public class RestaurantsProvider {
       String restaurantsFile =
           Resources.toString(Resources.getResource(RESTAURANTS_SOURCE), Charsets.UTF_8);
       restaurantsList =
-          new ObjectMapper().readValue(restaurantsFile, new TypeReference<List<Restaurants>>() {
-          });
+          new ObjectMapper().readValue(restaurantsFile, new TypeReference<List<Restaurants>>() {});
     } catch (IOException e) {
       LOG.error("Unable to read restaurants test data file", e);
     }

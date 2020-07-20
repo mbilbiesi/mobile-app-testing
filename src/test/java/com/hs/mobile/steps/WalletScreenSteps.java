@@ -13,8 +13,7 @@ import org.openqa.selenium.WebElement;
 
 public class WalletScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final WalletScreen walletScreen;
+  @NonNull private final WalletScreen walletScreen;
 
   public WalletScreenSteps(@NonNull TestSettings settings) {
     super(settings);

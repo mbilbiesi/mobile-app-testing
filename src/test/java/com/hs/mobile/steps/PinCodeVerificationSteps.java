@@ -10,8 +10,7 @@ import lombok.NonNull;
 
 public class PinCodeVerificationSteps extends BaseSteps {
 
-  @NonNull
-  private final PinCodeVerificationScreen pinCodeVerificationScreen;
+  @NonNull private final PinCodeVerificationScreen pinCodeVerificationScreen;
 
   public PinCodeVerificationSteps(@NonNull TestSettings settings) {
     super(settings);

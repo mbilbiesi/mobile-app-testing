@@ -1,5 +1,6 @@
 package com.hs.mobile.data.locations;
 
+import static com.hs.mobile.data.Language.EN;
 import static com.hs.mobile.exception.ExceptionSupplier.failedToInitializeTest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -18,8 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LocationsProvider {
 
   private static final String LOCATIONS_SOURCE = "data/locations.json";
-  @NonNull
-  private final TestSettings settings;
+  @NonNull private final TestSettings settings;
   private List<Locations> locationsList;
 
   public LocationsProvider(TestSettings settings) {
@@ -28,8 +28,7 @@ public class LocationsProvider {
       String locationsFile =
           Resources.toString(Resources.getResource(LOCATIONS_SOURCE), Charsets.UTF_8);
       locationsList =
-          new ObjectMapper().readValue(locationsFile, new TypeReference<List<Locations>>() {
-          });
+          new ObjectMapper().readValue(locationsFile, new TypeReference<List<Locations>>() {});
     } catch (IOException e) {
       log.error("Unable to read locations test data file", e);
     }
@@ -43,7 +42,7 @@ public class LocationsProvider {
   }
 
   public String getLocationValue(String locationType) {
-    if (settings.getTestLanguage().equalsIgnoreCase("en")) {
+    if (settings.getTestLanguage().is(EN)) {
       return getLocation(locationType).getLocationEn();
     } else {
       return getLocation(locationType).getLocationAr();

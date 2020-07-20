@@ -8,8 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SavedLocationsScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final SavedLocationsScreen savedLocationsScreen;
+  @NonNull private final SavedLocationsScreen savedLocationsScreen;
 
   public SavedLocationsScreenSteps(@NonNull TestSettings settings) {
     super(settings);
