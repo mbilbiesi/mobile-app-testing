@@ -1,15 +1,16 @@
 package com.hs.mobile.steps;
 
-import static com.hs.mobile.data.ElementAttribute.TEXT;
-
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.WalletScreen;
+import com.hs.mobile.screens.android.WalletScreen;
 import io.qameta.allure.Step;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.hs.mobile.data.ElementAttribute.TEXT;
 
 public class WalletScreenSteps extends BaseSteps {
 

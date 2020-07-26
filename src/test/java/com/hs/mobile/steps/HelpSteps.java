@@ -1,19 +1,20 @@
 package com.hs.mobile.steps;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.HelpScreen;
+import com.hs.mobile.screens.android.HelpScreen;
 import io.qameta.allure.Step;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.NonNull;
 import org.apache.commons.lang3.RandomUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HelpSteps extends BaseSteps {
 

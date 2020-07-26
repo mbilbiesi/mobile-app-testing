@@ -1,15 +1,16 @@
 package com.hs.mobile.steps;
 
-import static com.hs.mobile.data.ElementAttribute.TEXT;
-
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.InvoicesScreen;
+import com.hs.mobile.screens.android.InvoicesScreen;
 import io.qameta.allure.Step;
-import java.util.Optional;
 import lombok.NonNull;
 import org.apache.commons.collections4.CollectionUtils;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
+
+import java.util.Optional;
+
+import static com.hs.mobile.data.ElementAttribute.TEXT;
 
 public class InvoicesScreenSteps extends BaseSteps {
 

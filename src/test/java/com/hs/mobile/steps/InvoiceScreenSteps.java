@@ -1,10 +1,10 @@
 package com.hs.mobile.steps;
 
-import static com.hs.mobile.data.ElementAttribute.TEXT;
-
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.InvoiceScreen;
+import com.hs.mobile.screens.android.InvoiceScreen;
 import lombok.NonNull;
+
+import static com.hs.mobile.data.ElementAttribute.TEXT;
 
 public class InvoiceScreenSteps extends BaseSteps {
 

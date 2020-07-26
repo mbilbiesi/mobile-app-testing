@@ -2,7 +2,7 @@ package com.hs.mobile.steps;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.TestExecutionException;
-import com.hs.mobile.screens.TicketScreen;
+import com.hs.mobile.screens.android.TicketScreen;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

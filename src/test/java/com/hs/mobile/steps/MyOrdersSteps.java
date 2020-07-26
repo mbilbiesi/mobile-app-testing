@@ -1,23 +1,20 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.exception.TestExecutionException;
+import com.hs.mobile.screens.android.MyOrdersScreen;
+import io.appium.java_client.MobileElement;
+import io.qameta.allure.Step;
+import lombok.NonNull;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.exception.TestExecutionException;
-import com.hs.mobile.screens.MyOrdersScreen;
-import io.appium.java_client.MobileElement;
-import io.qameta.allure.Step;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import lombok.NonNull;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MyOrdersSteps extends BaseSteps {
 

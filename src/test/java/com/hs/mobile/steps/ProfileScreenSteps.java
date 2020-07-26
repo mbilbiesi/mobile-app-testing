@@ -1,15 +1,16 @@
 package com.hs.mobile.steps;
 
-import static com.hs.mobile.data.ElementAttribute.ENABLED;
-import static com.hs.mobile.data.ElementAttribute.TEXT;
-
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.ProfileScreen;
+import com.hs.mobile.screens.android.ProfileScreen;
 import io.qameta.allure.Step;
-import java.nio.charset.StandardCharsets;
 import lombok.NonNull;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.assertj.core.api.SoftAssertions;
+
+import java.nio.charset.StandardCharsets;
+
+import static com.hs.mobile.data.ElementAttribute.ENABLED;
+import static com.hs.mobile.data.ElementAttribute.TEXT;
 
 public class ProfileScreenSteps extends BaseSteps {
 

@@ -1,23 +1,22 @@
 package com.hs.mobile.steps;
 
-import static com.hs.mobile.data.ElementAttribute.CLICKABLE;
-import static com.hs.mobile.data.ElementAttribute.ENABLED;
-import static com.hs.mobile.data.ElementAttribute.FOCUSABLE;
-import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.MenuItemScreen;
-import com.hs.mobile.screens.RestaurantScreen;
+import com.hs.mobile.screens.android.MenuItemScreen;
+import com.hs.mobile.screens.android.RestaurantScreen;
 import io.qameta.allure.Step;
-import java.time.Duration;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static com.hs.mobile.data.ElementAttribute.*;
+import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class RestaurantScreenSteps extends BaseSteps {
 

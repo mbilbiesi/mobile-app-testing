@@ -1,12 +1,10 @@
 package com.hs.mobile.steps;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.messages.ScreenLabelsProvider;
-import com.hs.mobile.screens.HomeScreen;
-import com.hs.mobile.screens.HomeScreenSideMenu;
-import com.hs.mobile.screens.LocationsScreen;
+import com.hs.mobile.screens.android.HomeScreen;
+import com.hs.mobile.screens.android.HomeScreenSideMenu;
+import com.hs.mobile.screens.android.LocationsScreen;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +12,8 @@ import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 public class HomeScreenSteps extends BaseSteps {
