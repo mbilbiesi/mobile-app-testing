@@ -8,8 +8,7 @@ import static com.hs.mobile.data.ElementAttribute.TEXT;
 
 public class InvoiceScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final InvoiceScreen invoiceScreen;
+  @NonNull private final InvoiceScreen invoiceScreen;
 
   public InvoiceScreenSteps(@NonNull TestSettings settings) {
     super(settings);

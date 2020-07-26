@@ -1,5 +1,7 @@
 package com.hs.mobile.service.app;
 
+import static org.openqa.selenium.Platform.ANDROID;
+
 import com.hs.mobile.service.response.AppCenterEndpointExtension;
 import com.hs.mobile.service.response.ServiceResponseDecorator;
 import io.qameta.allure.restassured.AllureRestAssured;
@@ -10,32 +12,20 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.openqa.selenium.Platform;
 
 @RequiredArgsConstructor
 public class AppCenterEndpoints {
-
   private static final String appDetailsEndpoint = "/apps/{ownerName}/{name}/releases/latest";
-  @NonNull
-  private final String url;
-  @NonNull
-  private final String token;
+  @NonNull private final String url;
+  @NonNull private final String token;
 
-  public AppCenterEndpointExtension getAndroidDetails() {
+  public AppCenterEndpointExtension getAppDetails(Platform platform) {
+    String ownerName = platform.equals(ANDROID) ? "HungerStation-Platform" : "apps-054";
     Response response =
         given()
             .header("X-Api-Token", token)
-            .pathParam("ownerName", "HungerStation-Platform")
-            .pathParam("name", "HungerStation")
-            .get(appDetailsEndpoint);
-
-    return new ServiceResponseDecorator(response);
-  }
-
-  public AppCenterEndpointExtension getIOSDetails() {
-    Response response =
-        given()
-            .header("X-Api-Token", token)
-            .pathParam("ownerName", "apps-054")
+            .pathParam("ownerName", ownerName)
             .pathParam("name", "HungerStation")
             .get(appDetailsEndpoint);
 

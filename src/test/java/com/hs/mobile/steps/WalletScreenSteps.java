@@ -14,8 +14,7 @@ import static com.hs.mobile.data.ElementAttribute.TEXT;
 
 public class WalletScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final WalletScreen walletScreen;
+  @NonNull private final WalletScreen walletScreen;
 
   public WalletScreenSteps(@NonNull TestSettings settings) {
     super(settings);

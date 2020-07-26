@@ -130,8 +130,6 @@ public class TicketsITs extends BaseStepsInitiator {
   @AfterMethod
   public void navigateBackToMyOrders() {
     currentScreen = currentScreen.toLowerCase();
-    // ToDo: to look for another way to recognzie which page we currently on, and
-    //  enable appium to navigate back to homescreen (HSAP-337)
     switch (currentScreen) {
       case "create ticket":
         createTicketSteps.cancelTicketCreation();

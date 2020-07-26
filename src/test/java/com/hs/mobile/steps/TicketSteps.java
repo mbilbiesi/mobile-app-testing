@@ -12,8 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 @Slf4j
 public class TicketSteps extends BaseSteps {
 
-  @NonNull
-  private final TicketScreen ticketScreen;
+  @NonNull private final TicketScreen ticketScreen;
 
   public TicketSteps(TestSettings settings) {
     super(settings);

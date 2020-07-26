@@ -12,8 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrdersSteps extends BaseSteps {
 
-  @NonNull
-  private final OrdersScreen ordersScreen;
+  @NonNull private final OrdersScreen ordersScreen;
 
   public OrdersSteps(@NonNull TestSettings settings) {
     super(settings);

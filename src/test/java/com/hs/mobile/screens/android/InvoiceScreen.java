@@ -10,15 +10,12 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class InvoiceScreen extends AbstractScreen {
 
-  // @iOSXCUITFindBy(id = "test")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_download")
   private WebElement btnDownload;
 
-  // @iOSXCUITFindBy(id = "test")
   @AndroidFindBy(xpath = "//android.widget.TextView[@index='1']")
   private WebElement lblTitle;
 
-  // @iOSXCUITFindBy(id = "test")
   @AndroidFindBy(xpath = "//android.widget.ImageButton[@index='0']")
   private WebElement btnBack;
 

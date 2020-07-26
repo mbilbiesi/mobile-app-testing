@@ -22,10 +22,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RestaurantListScreenSteps extends BaseSteps {
 
   private static final int MAX_CAMPAIGNS_NUMBER = 8;
-  @NonNull
-  private final RestaurantsListScreen restaurantsListScreen;
-  @NonNull
-  private final RestaurantScreen restaurant;
+  @NonNull private final RestaurantsListScreen restaurantsListScreen;
+  @NonNull private final RestaurantScreen restaurant;
 
   public RestaurantListScreenSteps(@NonNull TestSettings settings) {
     super(settings);
@@ -35,7 +33,6 @@ public class RestaurantListScreenSteps extends BaseSteps {
 
   @Step("Verify that all restaurants list screen objects are displayed correctly")
   public void verifyRestaurantsListLayout() {
-    //        verifyScreenElements();
     restaurantsListScreen.verifyRestaurantsListElements();
   }
 

@@ -19,46 +19,25 @@ import com.hs.mobile.steps.SettingsScreenSteps;
 import com.hs.mobile.steps.TicketSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
 import com.hs.mobile.steps.WalletScreenSteps;
-import com.hs.mobile.steps.WelcomeApplePaySteps;
 
 public class BaseStepsInitiator extends BaseInitiator {
 
-  @Inject
-  protected HomeScreenSteps homeScreenSteps;
-  @Inject
-  protected LocationScreenSteps locationScreenSteps;
-  @Inject
-  protected RestaurantListScreenSteps restaurantsListSteps;
-  @Inject
-  protected SavedLocationsScreenSteps savedLocationsScreenSteps;
-  @Inject
-  protected RestaurantScreenSteps restaurantScreenSteps;
-  @Inject
-  protected VerifyAccountScreenSteps verifyAccountScreenSteps;
-  @Inject
-  protected PinCodeVerificationSteps pinCodeVerificationSteps;
-  @Inject
-  protected ProfileScreenSteps profileScreenSteps;
-  @Inject
-  protected InvoicesScreenSteps invoicesScreenSteps;
-  @Inject
-  protected SettingsScreenSteps settingsScreenSteps;
-  @Inject
-  protected PaymentOptionsSteps paymentOptionsSteps;
-  @Inject
-  protected WalletScreenSteps walletScreenSteps;
-  @Inject
-  protected MyOrdersSteps myOrdersSteps;
-  @Inject
-  protected OrderSteps orderSteps;
-  @Inject
-  protected HelpSteps helpSteps;
-  @Inject
-  protected TicketSteps ticketSteps;
-  @Inject
-  protected CreateTicketSteps createTicketSteps;
-  @Inject
-  protected CheckoutScreenSteps checkoutScreenSteps;
-  @Inject
-  protected WelcomeApplePaySteps applePaySteps;
+  @Inject protected HomeScreenSteps homeScreenSteps;
+  @Inject protected LocationScreenSteps locationScreenSteps;
+  @Inject protected RestaurantListScreenSteps restaurantsListSteps;
+  @Inject protected SavedLocationsScreenSteps savedLocationsScreenSteps;
+  @Inject protected RestaurantScreenSteps restaurantScreenSteps;
+  @Inject protected VerifyAccountScreenSteps verifyAccountScreenSteps;
+  @Inject protected PinCodeVerificationSteps pinCodeVerificationSteps;
+  @Inject protected ProfileScreenSteps profileScreenSteps;
+  @Inject protected InvoicesScreenSteps invoicesScreenSteps;
+  @Inject protected SettingsScreenSteps settingsScreenSteps;
+  @Inject protected PaymentOptionsSteps paymentOptionsSteps;
+  @Inject protected WalletScreenSteps walletScreenSteps;
+  @Inject protected MyOrdersSteps myOrdersSteps;
+  @Inject protected OrderSteps orderSteps;
+  @Inject protected HelpSteps helpSteps;
+  @Inject protected TicketSteps ticketSteps;
+  @Inject protected CreateTicketSteps createTicketSteps;
+  @Inject protected CheckoutScreenSteps checkoutScreenSteps;
 }

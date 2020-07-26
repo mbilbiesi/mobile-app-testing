@@ -15,10 +15,8 @@ import static com.hs.mobile.data.ElementAttribute.TEXT;
 public class ProfileScreenSteps extends BaseSteps {
 
   private static final String VALID_NAME = RandomStringUtils.randomAlphanumeric(10);
-  @NonNull
-  private final ProfileScreen profileScreen;
-  @NonNull
-  private final HomeScreenSteps homeScreenSteps;
+  @NonNull private final ProfileScreen profileScreen;
+  @NonNull private final HomeScreenSteps homeScreenSteps;
 
   public ProfileScreenSteps(@NonNull TestSettings settings) {
     super(settings);

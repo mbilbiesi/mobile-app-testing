@@ -10,6 +10,7 @@ import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.hs.mobile.core.settings.TestParameters;
 import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.data.Language;
 import com.hs.mobile.data.user.TestUser;
 import com.hs.mobile.service.app.AppCenterEndpoints;
 import io.appium.java_client.AppiumDriver;
@@ -17,13 +18,14 @@ import io.appium.java_client.MobileElement;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import javax.inject.Qualifier;
+import lombok.NonNull;
 import org.aeonbits.owner.ConfigFactory;
+import org.openqa.selenium.Platform;
 import org.testng.ITestContext;
 
 @SuppressWarnings("unused")
 public class BaseTestModule extends AbstractModule {
-
-  private ITestContext iTestContext;
+  @NonNull private final ITestContext iTestContext;
 
   public BaseTestModule(ITestContext iTestContext) {
     this.iTestContext = iTestContext;
@@ -48,21 +50,24 @@ public class BaseTestModule extends AbstractModule {
   @Provides
   @Singleton
   public TestSettings testSettings(AppiumDriver<MobileElement> driver, TestUser testUser) {
-    return TestSettings.builder().driver(driver).testLanguage(testUser.getLanguage()).build();
+    return TestSettings.builder()
+        .driver(driver)
+        .testLanguage(Language.fromString(testUser.getLanguage()))
+        .build();
   }
 
   @Provides
   @Singleton
   public TestParameters testParameters(TestProperties properties) {
-    String platform_name = iTestContext.getCurrentXmlTest().getParameter("platform_name");
-    String platform_version = iTestContext.getCurrentXmlTest().getParameter("platform_version");
+    String platformName = iTestContext.getCurrentXmlTest().getParameter("platformName");
+    String platformVersion = iTestContext.getCurrentXmlTest().getParameter("platformVersion");
     String udid = iTestContext.getCurrentXmlTest().getParameter("udid");
     String uniquePort = iTestContext.getCurrentXmlTest().getParameter("uniquePort");
     String assignedTestUserId = iTestContext.getCurrentXmlTest().getParameter("assignedTestUserId");
 
     return TestParameters.builder()
-        .platformName(platform_name)
-        .platformVersion(platform_version)
+        .platform(Platform.fromString(platformName))
+        .platformVersion(platformVersion)
         .deviceUDID(udid)
         .uniquePort(uniquePort)
         .assignedTestUserId(assignedTestUserId)
@@ -73,19 +78,12 @@ public class BaseTestModule extends AbstractModule {
   @Provides
   @Singleton
   @AppFilePath
-  public String appFilePath(AppCenterEndpoints appCenterEndpoints) {
-    String platformName = iTestContext.getCurrentXmlTest().getParameter("platform_name");
-    if (platformName.equalsIgnoreCase("android")) {
-      return appCenterEndpoints.getAndroidDetails().getDownloadUrl();
-    } else {
-      return appCenterEndpoints.getIOSDetails().getDownloadUrl();
-    }
+  public String appFilePath(AppCenterEndpoints appCenterEndpoints, TestParameters parameters) {
+    return appCenterEndpoints.getAppDetails(parameters.getPlatform()).getDownloadUrl();
   }
 
   @Qualifier
   @Target({FIELD, PARAMETER, METHOD})
   @Retention(RUNTIME)
-  public @interface AppFilePath {
-
-  }
+  public @interface AppFilePath {}
 }

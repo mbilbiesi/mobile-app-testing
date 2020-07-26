@@ -5,8 +5,7 @@ import org.testng.TestException;
 
 public final class ExceptionSupplier {
 
-  private ExceptionSupplier() {
-  }
+  private ExceptionSupplier() {}
 
   public static Supplier<TestInitializationException> failedToInitializeTest(String message) {
     return () -> new TestInitializationException(message);

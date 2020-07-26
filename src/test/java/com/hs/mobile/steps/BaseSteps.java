@@ -35,8 +35,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @SuppressWarnings("rawtypes")
 public abstract class BaseSteps {
 
-  @NonNull
-  private final AppiumDriver<MobileElement> driver;
+  @NonNull private final AppiumDriver<MobileElement> driver;
   protected TouchAction touchAction;
   protected WebDriverWait wait;
 

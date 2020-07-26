@@ -3,55 +3,13 @@
 <suite name="HS Android Smoke Test" verbose="1" parallel="tests"
   thread-count="2" configfailurepolicy="continue">
     <test name="Emulator - Galaxy Nexus">
-        <parameter name="platform_name" value="Android"/>
-        <parameter name="platform_version" value="10.0"/>
+        <parameter name="platformName" value="Android"/>
+        <parameter name="platformVersion" value="10.0"/>
         <parameter name="udid" value="emulator-5554"/>
         <parameter name="uniquePort" value="4723"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <!--            <class name="com.hs.mobile.tests.HomescreenITs"/>-->
-            <!--            <class name="com.hs.mobile.tests.LocationITs" />-->
-            <!--            <class name="com.hs.mobile.tests.RestaurantsITs">-->
-            <!--                <methods>-->
-            <!--                    <include name="clickCampaign_verifyRestaurantsWithCampaignDisplayed"/>-->
-            <!--                    <include name="clickCampaign_verifyTopCampaignWidthRatioIs2_1"/>-->
-            <!--                    <include name="clickToResetSearchCriteria_restaurantListWillBeReset"/>-->
-            <!--                    <include name="navigateToRestaurantListScreen_screenElementAreDisplayed"/>-->
-            <!--                    <include name="navigateToRestaurantList_recommendedBadgeDisplayOnlyForReadyRestaurant"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_verifyCampaignsDisplayedInSeparateCarousel"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_verifyCustomerCanSwipeOnFilters"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_verifyKitchenTypeFiltersAreDisplayed"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_verifyMaxNumberOfCampaignsDisplayed"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_verifyNoCampaignsAreShowedToCustomer"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_verifyRestaurantsSortedByDistance"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_verifyTheAllFilterIsDisplayedAndSelected"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_verifyTopBannerImgRatioIs2_1"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_verifyTopBannerShowsRestaurantOffers"/>-->
-            <!--                    <include name="searchForRestaurant_resultsMatchedSearchCriteria"/>-->
-            <!--                    <include name="navigateToRestaurantsListScreen_checkRecommendedRestaurantsBadge"/>-->
-            <!--                </methods>-->
-            <!--            </class>-->
-            <!--            <class name="com.hs.mobile.tests.InvoicesITs"/>-->
-            <!--            <class name="com.hs.mobile.tests.WalletITs"/>-->
-            <!--            <class name="com.hs.mobile.tests.ProfileITs"/>-->
-            <!--            <class name="com.hs.mobile.tests.SettingsITs"/>-->
             <class name="com.hs.mobile.tests.CheckoutITs"/>
-            <!--            IMPORTANT NOTE:
-                            1. TESTS MENTIONED IN THIS FILE ARE RUNNING CORRECTLY
-                            2. TESTS LIKE MyOrders, and Tickets ARE SIGNIFICANTLY AFFECTED BY UP TO DATE AND ACCURATE TEST DATA
-                               HENCE, IT'S BETTER TO MARK THEM AS DISABLED UNTIL YOU FIGURE A WAY TO FETCH CORRECT AND UP TO DATE TEST DATA
-                            3. TESTS MIGHT BE UNSTABLE SOMETIMES DUE TO SOME UNEXPECTED ISSUES THAT MIGHT OCCUR WHILE RUNNING THE SCRIPTS-->
         </classes>
     </test>
-
-    <!--    <test name="Real Device - Huawei P10 Lite">-->
-    <!--        <parameter name="platform" value="Android 10.0"/>-->
-    <!--        <parameter name="udid" value="2XJDU17814004631"/>-->
-    <!--        <parameter name="systemPort" value="8203"/>-->
-    <!--        <classes>-->
-    <!--            <class name="com.hs.mobile.tests.HomescreenTests_Deprecated"/>-->
-    <!--            <class name="com.hs.mobile.tests.LocationITs"/>-->
-    <!--            <class name="com.hs.mobile.tests.RestaurantsITs"/>-->
-    <!--        </classes>-->
-    <!--        </test>-->
 </suite>

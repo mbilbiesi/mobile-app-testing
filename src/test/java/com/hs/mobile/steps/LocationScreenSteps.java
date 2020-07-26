@@ -19,14 +19,10 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class LocationScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final LocationsScreen locationsScreen;
-  @NonNull
-  private final HomeScreenSteps homeScreenSteps;
-  @NonNull
-  private final HomeScreen homeScreen;
-  @NonNull
-  private final LocationsProvider locationsProvider;
+  @NonNull private final LocationsScreen locationsScreen;
+  @NonNull private final HomeScreenSteps homeScreenSteps;
+  @NonNull private final HomeScreen homeScreen;
+  @NonNull private final LocationsProvider locationsProvider;
 
   public LocationScreenSteps(@NonNull TestSettings settings) {
     super(settings);
@@ -38,13 +34,11 @@ public class LocationScreenSteps extends BaseSteps {
 
   @Step("Verify {description} updated description")
   public void verifyUpdatedDescription(String description) {
-    tap(homeScreen.getLstHomescreenAddresses());
+    tap(homeScreen.getLstHomeScreenAddresses());
     homeScreenSteps.editLocation();
     submitAddress();
     String desc = getDescription();
     submitAddress();
-    //    savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
-    //    navigateBack(1);
 
     Assertions.assertThat(desc)
         .as("Actual updated description does not match expected one.")
@@ -54,7 +48,6 @@ public class LocationScreenSteps extends BaseSteps {
   @Step("Update description to {description}")
   public void updateDescription(String description) {
     homeScreenSteps.viewSavedLocations();
-    //    savedLocationsScreenSteps.editLocation();
     homeScreenSteps.editLocation();
     submitAddress();
     clearDescription();
@@ -65,7 +58,6 @@ public class LocationScreenSteps extends BaseSteps {
 
   @Step("Save location")
   public void saveLocation(String description) {
-    //    homeScreenSteps.clickFindRestaurantsButton();
     homeScreenSteps.clickSelectLocationManually();
     searchForRestaurants();
     insertLocation("Riyadh");
@@ -77,14 +69,11 @@ public class LocationScreenSteps extends BaseSteps {
     }
     saveForLater();
     submitAddress();
-    //    restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
     homeScreenSteps.waitUntilRestaurantsAnGroceryWidgetsLoaded();
-    //    navigateBack(1);
   }
 
   @Step("Search for a landmark")
   public void searchForALandmark() {
-    //    homeScreenSteps.clickFindRestaurantsButton();
     homeScreenSteps.clickSelectLocationManually();
     searchForRestaurants();
     insertLocation("hayah mall");
@@ -95,7 +84,6 @@ public class LocationScreenSteps extends BaseSteps {
 
   @Step("Search for an out of range location")
   public void searchForAnOutOfRangeLocation() {
-    //    homeScreenSteps.clickFindRestaurantsButton();
     homeScreenSteps.clickSelectLocationManually();
     searchForRestaurants();
     insertLocation("Amman");
@@ -106,7 +94,6 @@ public class LocationScreenSteps extends BaseSteps {
   public void verifyNewlyAddedLocations() {
     List<LocationType> allLocationTypes = Arrays.asList(LocationType.values());
     homeScreenSteps.viewSavedLocations();
-    //    int locationsCount = savedLocationsScreen.getSavedLocations().size();
     int locationsCount = homeScreen.getSavedLocations().size();
     navigateBack(1);
     Assertions.assertThat(locationsCount)
@@ -116,7 +103,6 @@ public class LocationScreenSteps extends BaseSteps {
 
   @Step("Verify location can be saved without adding a description")
   public void verifyLocationCanBeSavedWithoutDescription() {
-    //    int savedLocationsCount = savedLocationsScreen.getSavedLocations().size();
     int savedLocationsCount = homeScreen.getSavedLocations().size();
     navigateBack(1);
 
@@ -163,10 +149,7 @@ public class LocationScreenSteps extends BaseSteps {
     try {
       isSearchButtonDisplayed();
     } catch (Exception e) {
-      //      savedLocationsScreenSteps.deleteSavedLocations();
       homeScreenSteps.deleteSavedLocations();
-      //      savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
-      //      homeScreenSteps.waitUntilNewLocationButtonDisplays();
     } finally {
       navigateBack(1);
     }
@@ -253,11 +236,9 @@ public class LocationScreenSteps extends BaseSteps {
 
   private void addNewLocations(List<LocationType> types) {
     homeScreenSteps.clickSelectLocationManually();
-    //    homeScreenSteps.clickFindRestaurantsButton();
     for (int i = 0; i < types.size(); i++) {
       if (i > 0) {
         homeScreenSteps.viewSavedLocations();
-        //        savedLocationsScreenSteps.addNewLocation();
         homeScreenSteps.clickAddNewLocation();
       }
       searchForRestaurants();
@@ -267,9 +248,7 @@ public class LocationScreenSteps extends BaseSteps {
       saveForLater();
       selectLocationType(i);
       submitAddress();
-      //      restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
       homeScreenSteps.waitUntilRestaurantsAnGroceryWidgetsLoaded();
-      //      navigateBack(1);
     }
   }
 }

@@ -6,8 +6,7 @@ import lombok.NonNull;
 
 public class PaymentOptionsSteps extends BaseSteps {
 
-  @NonNull
-  private final PaymentOptionsScreen paymentOptionsScreen;
+  @NonNull private final PaymentOptionsScreen paymentOptionsScreen;
 
   public PaymentOptionsSteps(@NonNull TestSettings settings) {
     super(settings);

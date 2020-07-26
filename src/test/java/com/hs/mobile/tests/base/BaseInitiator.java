@@ -17,10 +17,8 @@ import org.testng.annotations.Guice;
 public class BaseInitiator {
 
   public boolean isLocationValid;
-  @Inject
-  protected TestUser testUser;
-  @Inject
-  protected AppiumDriver<MobileElement> driver;
+  @Inject protected TestUser testUser;
+  @Inject protected AppiumDriver<MobileElement> driver;
   protected RestaurantsProvider restaurantsData;
 
   @BeforeClass
@@ -40,7 +38,7 @@ public class BaseInitiator {
     return location;
   }
 
-  @AfterClass
+  @AfterClass()
   public void teardown() {
     if (driver != null) {
       driver.resetApp();

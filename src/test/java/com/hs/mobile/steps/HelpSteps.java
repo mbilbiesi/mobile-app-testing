@@ -18,8 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HelpSteps extends BaseSteps {
 
-  @NonNull
-  private final HelpScreen helpScreen;
+  @NonNull private final HelpScreen helpScreen;
 
   public HelpSteps(@NonNull TestSettings settings) {
     super(settings);

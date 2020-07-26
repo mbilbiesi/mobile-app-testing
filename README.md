@@ -52,4 +52,6 @@ allure serve
 
 ### Demonstrating how to run test on android emulator 
 
-[![How to run](https://api.media.atlassian.com/file/248af0d5-af89-425f-b10f-49e28f40bdb1/binary?token=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxZDQ2ZmIxYS1lZWFhLTRmZWItYjE4OS05ZDkxYzQ0OTBkNjMiLCJhY2Nlc3MiOnsidXJuOmZpbGVzdG9yZTpmaWxlOjI0OGFmMGQ1LWFmODktNDI1Zi1iMTBmLTQ5ZTI4ZjQwYmRiMSI6WyJyZWFkIl19LCJleHAiOjE1ODE1NDU0NjksIm5iZiI6MTU4MTQ2MjQ4OX0.b2412e-0Hos80N_yR2vmbltEw3fnIAbOCWWsOYegjIQ&client=1d46fb1a-eeaa-4feb-b189-9d91c4490d63&name=poster.png)](https://api.media.atlassian.com/file/1b7b0ef1-a2d2-464b-978d-2a6bffbe4f3c/binary?token=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxZDQ2ZmIxYS1lZWFhLTRmZWItYjE4OS05ZDkxYzQ0OTBkNjMiLCJhY2Nlc3MiOnsidXJuOmZpbGVzdG9yZTpmaWxlOjFiN2IwZWYxLWEyZDItNDY0Yi05NzhkLTJhNmJmZmJlNGYzYyI6WyJyZWFkIl19LCJleHAiOjE1ODE1NDUzNzgsIm5iZiI6MTU4MTQ2MjM5OH0.0IlzM2V34mWClLVkld6F4OVmddJ-KSvf1OSNjU2Aqic&client=1d46fb1a-eeaa-4feb-b189-9d91c4490d63&name=RunTest.mp4 "How to run")
+[![How to run](src/test/resources/media/poster.png)](https://drive.google.com/file/d/1eEXMCLhyi9ZUecf0SZFR6q_HmIfWQQbh/view "How
+ to 
+run")

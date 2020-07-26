@@ -12,8 +12,7 @@ import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class VerifyAccountScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final VerifyAccountScreen verifyAccountScreen;
+  @NonNull private final VerifyAccountScreen verifyAccountScreen;
 
   public VerifyAccountScreenSteps(@NonNull TestSettings settings) {
     super(settings);

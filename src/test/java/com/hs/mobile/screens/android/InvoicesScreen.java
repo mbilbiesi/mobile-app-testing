@@ -12,19 +12,15 @@ import java.util.List;
 @Getter
 public class InvoicesScreen extends AbstractScreen {
 
-  // @iOSXCUITFindBy(id = "test")
   @AndroidFindBy(xpath = "//android.widget.TextView[@index='1']")
   private WebElement lblTitle;
 
-  // @iOSXCUITFindBy(id = "test")
   @AndroidFindBy(xpath = "//android.widget.ImageButton[@index='0']")
   private WebElement btnBack;
 
-  // @iOSXCUITFindBy(id = "test")
   @AndroidFindBy(xpath = "//android.widget.RelativeLayout[@clickable='true']")
   private List<WebElement> lstInvoices;
 
-  // @iOSXCUITFindBy(id = "test")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/no_invoice_message")
   private WebElement lblMessage;
 

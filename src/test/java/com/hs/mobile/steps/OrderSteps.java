@@ -10,8 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class OrderSteps extends BaseSteps {
 
-  @NonNull
-  private final OrderScreen orderScreen;
+  @NonNull private final OrderScreen orderScreen;
 
   public OrderSteps(@NonNull TestSettings settings) {
     super(settings);
