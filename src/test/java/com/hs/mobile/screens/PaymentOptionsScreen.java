@@ -1,19 +1,31 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import java.util.List;
 import lombok.Getter;
+import lombok.NonNull;
 import org.openqa.selenium.WebElement;
 
 @Getter
 public class PaymentOptionsScreen extends AbstractScreen {
 
-  @iOSXCUITFindBy(id = "")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/wallet_recycler_view")
-  private WebElement wallet;
+  private WebElement btnWallet;
 
-  public PaymentOptionsScreen(AppiumDriver driver) {
-    super(driver);
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/title_payment_method_view")
+  private List<WebElement> btnCreditCard;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/rl_add_credit_card")
+  private WebElement btnAddNewCC;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/title_payment_method_view")
+  private WebElement btnRedeemVoucher;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/cash_item")
+  private WebElement btnCashOnDelivery;
+
+  public PaymentOptionsScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

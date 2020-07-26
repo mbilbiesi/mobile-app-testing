@@ -1,25 +1,26 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.screens.ProfileScreen;
-import io.appium.java_client.AppiumDriver;
-import io.qameta.allure.Step;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.assertj.core.api.SoftAssertions;
-
-import java.nio.charset.StandardCharsets;
-
 import static com.hs.mobile.data.ElementAttribute.ENABLED;
 import static com.hs.mobile.data.ElementAttribute.TEXT;
 
-public class ProfileScreenSteps extends BaseSteps {
-  private static final String VALID_NAME = RandomStringUtils.randomAlphanumeric(10);
-  private ProfileScreen profileScreen;
-  private HomeScreenSteps homeScreenSteps;
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.ProfileScreen;
+import io.qameta.allure.Step;
+import java.nio.charset.StandardCharsets;
+import lombok.NonNull;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.assertj.core.api.SoftAssertions;
 
-  public ProfileScreenSteps(AppiumDriver driver) {
-    super(driver);
-    profileScreen = new ProfileScreen(driver);
-    homeScreenSteps = new HomeScreenSteps(driver);
+public class ProfileScreenSteps extends BaseSteps {
+
+  private static final String VALID_NAME = RandomStringUtils.randomAlphanumeric(10);
+  @NonNull private final ProfileScreen profileScreen;
+  @NonNull private final HomeScreenSteps homeScreenSteps;
+
+  public ProfileScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    profileScreen = new ProfileScreen(settings);
+    homeScreenSteps = new HomeScreenSteps(settings);
   }
 
   @Step("Verify profile screen")
@@ -49,11 +50,15 @@ public class ProfileScreenSteps extends BaseSteps {
     waitUntilProfileIsUpdated();
     navigateBack(1);
     homeScreenSteps.clickOnMore().goToProfile();
-    soft.assertThat(profileScreen.getName())
-        .as("Name was not successfully updated.")
+    soft.assertThat(profileScreen.getName().getText())
+        .as(
+            "Name was not successfully updated - Expected name is: "
+                + VALID_NAME
+                + " while actual name was: "
+                + profileScreen.getName().getText())
         .isEqualTo(VALID_NAME);
-    soft.assertThat(profileScreen.getEmail())
-        .as("Name was not successfully updated.")
+    soft.assertThat(profileScreen.getEmail().getText())
+        .as("Email was not successfully updated. ")
         .isEqualTo(email);
     navigateBack(1);
     soft.assertAll();
@@ -66,18 +71,26 @@ public class ProfileScreenSteps extends BaseSteps {
 
     insertName(VALID_NAME);
     insertEmail("");
-    soft.assertThat(isUpdateButtonEnabled()).as("Email is mandatory.").isFalse();
+    soft.assertThat(isUpdateButtonEnabled())
+        .as(
+            "Customer shouldn't be able to update their profile "
+                + "because 'Email' field is mandatory.")
+        .isFalse();
     insertName("");
     insertEmail("ns2@hs.com");
-    soft.assertThat(isUpdateButtonEnabled()).as("Name is not mandatory.").isTrue();
+    soft.assertThat(isUpdateButtonEnabled())
+        .as(
+            "Customer should be able to update their profile "
+                + "because 'Name' field is not mandatory.")
+        .isTrue();
     insertName(invalidName);
     update();
     waitUntilProfileIsUpdated();
     navigateBack(1);
     homeScreenSteps.clickOnMore().goToProfile();
-    soft.assertThat(profileScreen.getName())
-        .as("Name should not exceed 50 characters.")
-        .isNotEqualTo(invalidName);
+    soft.assertThat(profileScreen.getName().getText().equalsIgnoreCase(invalidName))
+        .as("Name should not exceed 50 characters, and it should have been trimmed")
+        .isFalse();
     navigateBack(1);
     soft.assertAll();
   }

@@ -6,9 +6,15 @@ import lombok.Getter;
 @Getter
 public class TestUser {
 
-  @JsonProperty private String id;
+  @JsonProperty("id")
+  private String id;
 
-  @JsonProperty private String mobileNumber;
+  @JsonProperty("mobileNumber")
+  private String mobileNumber;
 
-  @JsonProperty private String verificationCode;
+  @JsonProperty("verificationCode")
+  private String verificationCode;
+
+  @JsonProperty("language")
+  private String language;
 }

@@ -1,34 +1,50 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.data.locations.LocationsProvider;
 import com.hs.mobile.screens.CheckoutScreen;
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.screens.PaymentOptionsScreen;
 import io.qameta.allure.Step;
+import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 
 public class CheckoutScreenSteps extends BaseSteps {
-  private CheckoutScreen checkoutScreen;
-  private HomeScreenSteps homeScreenSteps;
-  private LocationScreenSteps locationScreenSteps;
-  private RestaurantListScreenSteps restaurantListScreenSteps;
-  private RestaurantScreenSteps restaurantScreenSteps;
 
-  public CheckoutScreenSteps(AppiumDriver driver) {
-    super(driver);
-    checkoutScreen = new CheckoutScreen(driver);
-    homeScreenSteps = new HomeScreenSteps(driver);
-    locationScreenSteps = new LocationScreenSteps(driver);
-    restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
-    restaurantScreenSteps = new RestaurantScreenSteps(driver);
+  @NonNull private final CheckoutScreen checkoutScreen;
+  @NonNull private final HomeScreenSteps homeScreenSteps;
+  @NonNull private final LocationScreenSteps locationScreenSteps;
+  @NonNull private final RestaurantListScreenSteps restaurantListScreenSteps;
+  @NonNull private final RestaurantScreenSteps restaurantScreenSteps;
+  @NonNull private final LocationsProvider locationsData;
+  @NonNull private final PaymentOptionsScreen paymentOptionsScreen;
+
+  public CheckoutScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    checkoutScreen = new CheckoutScreen(settings);
+    paymentOptionsScreen = new PaymentOptionsScreen(settings);
+    locationsData = new LocationsProvider(settings);
+
+    homeScreenSteps = new HomeScreenSteps(settings);
+    locationScreenSteps = new LocationScreenSteps(settings);
+    restaurantListScreenSteps = new RestaurantListScreenSteps(settings);
+    restaurantScreenSteps = new RestaurantScreenSteps(settings);
   }
 
   @Step("Add the first menu item to cart")
   public Double addFirstMenuItemToCart(String restaurantName, int count) {
-    homeScreenSteps.viewSavedLocations();
+    //    homeScreenSteps.viewSavedLocations();
+    //    locationScreenSteps.searchForRestaurants();
+    //    locationScreenSteps.insertLocation("Riyadh");
+    //    locationScreenSteps.selectItemArea(0);
+    //    locationScreenSteps.submitAddress();
+    //    locationScreenSteps.submitAddress();
+    homeScreenSteps.clickSelectLocationManually();
     locationScreenSteps.searchForRestaurants();
-    locationScreenSteps.insertLocation("Riyadh");
-    locationScreenSteps.selectItemArea(0);
+    locationScreenSteps.insertLocation(locationsData.getLocationValue("area"));
+    locationScreenSteps.selectItemArea(1);
     locationScreenSteps.submitAddress();
     locationScreenSteps.submitAddress();
+    homeScreenSteps.clickViewRestaurantsButton();
     restaurantListScreenSteps.searchForRestaurant(restaurantName);
     restaurantListScreenSteps.selectDisplayedRestaurant();
     return restaurantScreenSteps.addFirstItemToCart(count);
@@ -38,6 +54,11 @@ public class CheckoutScreenSteps extends BaseSteps {
   public void verifyAmountsOnCheckoutScreen(
       double expectedOrderAmount, double expectedDeliveryAmount) {
     restaurantScreenSteps.goToCheckout();
+
+    tap(checkoutScreen.getBtnChoosePmtMethod());
+    tap(paymentOptionsScreen.getBtnCashOnDelivery());
+
+    swipe(checkoutScreen.getDeliveryAmount(), checkoutScreen.getBtnChoosePmtMethod());
 
     SoftAssertions soft = new SoftAssertions();
     double expectedTotalAmount = expectedOrderAmount + expectedDeliveryAmount;

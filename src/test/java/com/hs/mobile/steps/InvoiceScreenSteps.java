@@ -1,16 +1,18 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.screens.InvoiceScreen;
-import io.appium.java_client.AppiumDriver;
-
 import static com.hs.mobile.data.ElementAttribute.TEXT;
 
-public class InvoiceScreenSteps extends BaseSteps {
-  private InvoiceScreen invoiceScreen;
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.InvoiceScreen;
+import lombok.NonNull;
 
-  public InvoiceScreenSteps(AppiumDriver driver) {
-    super(driver);
-    invoiceScreen = new InvoiceScreen(driver);
+public class InvoiceScreenSteps extends BaseSteps {
+
+  @NonNull private final InvoiceScreen invoiceScreen;
+
+  public InvoiceScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    invoiceScreen = new InvoiceScreen(settings);
   }
 
   public String getInvoiceTitle() {

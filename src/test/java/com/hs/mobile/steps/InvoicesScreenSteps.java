@@ -1,24 +1,25 @@
 package com.hs.mobile.steps;
 
+import static com.hs.mobile.data.ElementAttribute.TEXT;
+
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.InvoicesScreen;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import java.util.Optional;
+import lombok.NonNull;
 import org.apache.commons.collections4.CollectionUtils;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 
-import java.util.Optional;
-
-import static com.hs.mobile.data.ElementAttribute.TEXT;
-
 public class InvoicesScreenSteps extends BaseSteps {
-  private InvoicesScreen invoicesScreen;
-  private InvoiceScreenSteps invoiceScreenSteps;
 
-  public InvoicesScreenSteps(AppiumDriver driver) {
-    super(driver);
-    invoicesScreen = new InvoicesScreen(driver);
-    invoiceScreenSteps = new InvoiceScreenSteps(driver);
+  @NonNull private final InvoicesScreen invoicesScreen;
+  @NonNull private final InvoiceScreenSteps invoiceScreenSteps;
+
+  public InvoicesScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    invoicesScreen = new InvoicesScreen(settings);
+    invoiceScreenSteps = new InvoiceScreenSteps(settings);
   }
 
   public String getTitle() {

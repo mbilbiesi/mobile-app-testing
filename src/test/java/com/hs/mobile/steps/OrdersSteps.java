@@ -1,21 +1,22 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.screens.OrdersScreen;
-import io.appium.java_client.AppiumDriver;
-import io.qameta.allure.Step;
-import lombok.NonNull;
-import org.assertj.core.api.SoftAssertions;
-
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OrdersSteps extends BaseSteps {
-  @NonNull private OrdersScreen ordersScreen;
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.OrdersScreen;
+import io.qameta.allure.Step;
+import lombok.NonNull;
+import org.assertj.core.api.SoftAssertions;
 
-  public OrdersSteps(AppiumDriver driver) {
-    super(driver);
-    ordersScreen = new OrdersScreen(driver);
+public class OrdersSteps extends BaseSteps {
+
+  @NonNull private final OrdersScreen ordersScreen;
+
+  public OrdersSteps(@NonNull TestSettings settings) {
+    super(settings);
+    ordersScreen = new OrdersScreen(settings);
   }
 
   @Step("Make sure that 'Verify Mobile Number' button if customer is not logged in")

@@ -1,11 +1,17 @@
 package com.hs.mobile.steps;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.TestExecutionException;
 import com.hs.mobile.screens.RestaurantScreen;
 import com.hs.mobile.screens.RestaurantsListScreen;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.NonNull;
 import org.apache.commons.lang3.RandomUtils;
 import org.assertj.core.api.Assumptions;
 import org.assertj.core.api.SoftAssertions;
@@ -16,26 +22,21 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class RestaurantListScreenSteps extends BaseSteps {
-  private static final int MAX_CAMPAIGNS_NUMBER = 8;
-  private RestaurantsListScreen restaurantsListScreen;
-  private RestaurantScreen restaurant;
 
-  public RestaurantListScreenSteps(AppiumDriver driver) {
-    super(driver);
-    restaurantsListScreen = new RestaurantsListScreen(driver);
-    restaurant = new RestaurantScreen(driver);
+  private static final int MAX_CAMPAIGNS_NUMBER = 8;
+  @NonNull private final RestaurantsListScreen restaurantsListScreen;
+  @NonNull private final RestaurantScreen restaurant;
+
+  public RestaurantListScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    restaurantsListScreen = new RestaurantsListScreen(settings);
+    restaurant = new RestaurantScreen(settings);
   }
 
   @Step("Verify that all restaurants list screen objects are displayed correctly")
   public void verifyRestaurantsListLayout() {
-    verifyScreenElements();
+    restaurantsListScreen.verifyRestaurantsListElements();
   }
 
   @Step("Search for a restaurant")
@@ -67,6 +68,8 @@ public class RestaurantListScreenSteps extends BaseSteps {
           .isTrue();
     }
 
+    tap(restaurantsListScreen.getBtnClearSearchResult());
+
     soft.assertAll();
   }
 
@@ -94,18 +97,28 @@ public class RestaurantListScreenSteps extends BaseSteps {
   public void checkRecommendedBadge(boolean isRestaurantRecommended) {
     int restaurantCount = getRestaurantsCount(true);
     SoftAssertions soft = new SoftAssertions();
-
-    for (int i = 0; i < restaurantCount; i++) {
-      if (isRestaurantRecommended) {
-        soft.assertThat(restaurantsListScreen.getRecommendedBadge().size() > 0)
-            .as("Recommended badge is not displayed for this restaurant")
-            .isTrue();
-      } else {
-        soft.assertThat(restaurantsListScreen.getRecommendedBadge().size() > 0)
-            .as("Recommended badge is displayed even though the restaurant is not recommended")
-            .isFalse();
+    if (restaurantCount > 0) {
+      for (int i = 0; i < restaurantCount; i++) {
+        if (isRestaurantRecommended) {
+          soft.assertThat(restaurantsListScreen.getRecommendedBadge().size() > 0)
+              .as("Recommended badge is not displayed for this restaurant")
+              .isTrue();
+        } else {
+          soft.assertThat(restaurantsListScreen.getRecommendedBadge().size() > 0)
+              .as("Recommended badge is displayed even though the restaurant is not recommended")
+              .isFalse();
+        }
       }
+    } else {
+      soft.assertThat(restaurantCount > 0)
+          .as(
+              "Unable to verify that recommended badge is displayed since "
+                  + "there are no restaurants matching the searck keyword")
+          .isTrue();
     }
+    clearSearchCriteria();
+
+    soft.assertAll();
   }
 
   public ArrayList<Double> getDistanceOfDisplayedRestaurants(int restaurantCount) {
@@ -123,7 +136,12 @@ public class RestaurantListScreenSteps extends BaseSteps {
   }
 
   @Step("Verify that restaurants are sorted by their distance from the customer")
-  public void checkIfRestaurantsSortedByDistance() {
+  public void checkIfRestaurantsSortedByDistance(boolean restaurantsWithBadges) {
+    Assumptions.assumeThat(restaurantsWithBadges)
+        .as(
+            "Restaurants sorting won't be correct because some restaurants are either recommended or"
+                + "sponsored")
+        .isFalse();
     int restaurantCount = getRestaurantsCount(true);
     boolean listSorted = false;
     ArrayList<Double> restaurantDistance = getDistanceOfDisplayedRestaurants(restaurantCount);
@@ -139,7 +157,7 @@ public class RestaurantListScreenSteps extends BaseSteps {
 
   public int getRestaurantsCount(boolean verifiableElements) {
     int restaurantCount;
-    waitUntilRestaurantsAreLoaded();
+    //    waitUntilRestaurantsAreLoaded();
     restaurantCount = restaurantsListScreen.getRestaurantWidgets().size();
     if (verifiableElements) {
       if (restaurantCount > 2) {
@@ -152,13 +170,24 @@ public class RestaurantListScreenSteps extends BaseSteps {
 
   public void waitUntilRestaurantsAreLoaded() {
     wait.until(
-        ExpectedConditions.visibilityOfAllElements(restaurantsListScreen.getRestaurantList()));
+        ExpectedConditions.visibilityOfAllElements(restaurantsListScreen.getEleLocationValue()));
+  }
+
+  public void waitUntilCampaignRestaurantsAreLoaded() {
+    wait.until(
+        ExpectedConditions.visibilityOfAllElements(restaurantsListScreen.getRestaurantWidgets()));
   }
 
   @Step("Scroll down restaurants list")
-  public void scrollDownRestaurantsList() {
+  public boolean scrollDownRestaurantsList() {
     waitUntilRestaurantsAreLoaded();
     scrollByElement(restaurantsListScreen.getRestaurantsListWidget());
+    if (restaurantsListScreen.getPromotedBadge().size() > 0
+        || restaurantsListScreen.getRecommendedBadge().size() > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Step("Verify promoted restaurants shows at the top")
@@ -174,6 +203,7 @@ public class RestaurantListScreenSteps extends BaseSteps {
     soft.assertThat(promotedRestaurant.size() > 0 && promotedRestaurant.get(0).isDisplayed())
         .as("Promoted restaurants" + "are not displayed at the top of restaurants list")
         .isTrue();
+    soft.assertAll();
   }
 
   public int getFiltersCount() {
@@ -288,11 +318,16 @@ public class RestaurantListScreenSteps extends BaseSteps {
   }
 
   public void verifyCustomerRedirectedToARestaurant() {
-
+    if (restaurant.getBtnAcceptOffer().size() > 0) {
+      tap(restaurant.getBtnAcceptOffer().get(0));
+    }
+    SoftAssertions soft = new SoftAssertions();
     try {
-      assertThat(restaurant.getRestaurantTitle().isDisplayed())
+      soft.assertThat(restaurant.getRestaurantTitle().isDisplayed())
           .as("Top banner doesn't have restaurant offers")
           .isTrue();
+      navigateBack(1);
+      soft.assertAll();
     } catch (ElementNotVisibleException e) {
       e.printStackTrace();
     }
@@ -300,25 +335,26 @@ public class RestaurantListScreenSteps extends BaseSteps {
 
   @Step("Verify that campaigns are displayed in a separate carousel")
   public void verifyCampaignsDisplayInSeparateCarousel(boolean campaginsEnabled) {
-
+    SoftAssertions soft = new SoftAssertions();
     if (campaginsEnabled) {
       try {
-        SoftAssertions soft = new SoftAssertions();
         soft.assertThat(restaurantsListScreen.getCampaignContainer().isDisplayed())
             .as("Campaigns section doesn't exist in the screen")
             .isTrue();
         soft.assertThat(restaurantsListScreen.getCampainBanners().size() > 0)
             .as("No campaigns are displayed inside the campaigns section")
             .isTrue();
-        soft.assertAll();
       } catch (TestExecutionException e) {
         e.printStackTrace();
       }
     } else {
-      assertThat(restaurantsListScreen.getCampainBanners().size() == 0)
+      soft.assertThat(restaurantsListScreen.getCampainBanners().size() == 0)
           .as("Campaigns are displayed even though campaigns are disabled")
           .isTrue();
     }
+    //        navigateBack(1);
+
+    soft.assertAll();
   }
 
   @Step(
@@ -335,10 +371,14 @@ public class RestaurantListScreenSteps extends BaseSteps {
     while (activeScreenCampagins > 4) {
       swipeCampaigns(campaignsCount);
       activeScreenCampagins = getCampaignsCount();
-      campaignsCount = campaignsCount + activeScreenCampagins;
 
       lastVisibleCampaignAfterSwipe =
           restaurantsListScreen.getCampainBanners().get(activeScreenCampagins - 1);
+      if (!lastVisibleCampaignBeforeSwipe
+          .getText()
+          .equalsIgnoreCase(lastVisibleCampaignAfterSwipe.getText())) {
+        campaignsCount = campaignsCount + activeScreenCampagins;
+      }
 
       if (lastVisibleCampaignBeforeSwipe
           .getText()
@@ -380,16 +420,16 @@ public class RestaurantListScreenSteps extends BaseSteps {
     int randomCampaignIndex = getRandomCampaignIndex();
 
     tap(restaurantsListScreen.getCampainBanners().get(randomCampaignIndex));
-    waitUntilRestaurantsAreLoaded();
+    waitUntilCampaignRestaurantsAreLoaded();
   }
 
   @Step("Verify that restaurants are displayed based on the selected campaign")
   public void verifyCampaignRestaurants() {
     // ToDo: Implement an API call to verify that restaurants that display under a
     // campaign actually belong to it
-    assertThat(restaurantsListScreen.getRestaurantWidgets().size() > 0)
-        .as("No restaurants are displayed for this campaign")
-        .isTrue();
+    int restaurantsCount = restaurantsListScreen.getRestaurantWidgets().size();
+    navigateBack(1);
+    assertThat(restaurantsCount > 0).as("No restaurants are displayed for this campaign").isTrue();
   }
 
   private int getRandomCampaignIndex() {
@@ -431,5 +471,8 @@ public class RestaurantListScreenSteps extends BaseSteps {
   @Step("Select displayed restaurant")
   public void selectDisplayedRestaurant() {
     tap(restaurantsListScreen.getRestaurantTitle().get(0));
+    if (restaurant.getBtnAcceptOffer().size() > 0) {
+      tap(restaurant.getBtnAcceptOffer().get(0));
+    }
   }
 }

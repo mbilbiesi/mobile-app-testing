@@ -1,0 +1,34 @@
+[
+  {
+    "locationId": "1",
+    "longitude": "",
+    "latitude": "",
+    "location_ar": "حياة مول",
+    "location_en": "hayah mall",
+    "locationType": "landmark"
+  },
+  {
+    "locationId": "2",
+    "longitude": "",
+    "latitude": "",
+    "location_ar": "الرياض",
+    "location_en": "riyadh",
+    "locationType": "city"
+  },
+  {
+    "locationId": "3",
+    "longitude": "35.930359",
+    "latitude": "31.963158",
+    "location_ar": "عمّان",
+    "location_en": "amman",
+    "locationType": "out of range"
+  },
+  {
+    "locationId": "3",
+    "longitude": "",
+    "latitude": "",
+    "location_ar": "الياسمين",
+    "location_en": "AlYasmeen",
+    "locationType": "area"
+  }
+]

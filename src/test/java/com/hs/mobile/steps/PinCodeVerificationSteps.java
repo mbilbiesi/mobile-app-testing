@@ -1,19 +1,20 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.screens.PinCodeVerificationScreen;
-import io.appium.java_client.AppiumDriver;
-import io.qameta.allure.Step;
-import lombok.NonNull;
-
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-public class PinCodeVerificationSteps extends BaseSteps {
-  @NonNull private PinCodeVerificationScreen pinCodeVerificationScreen;
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.PinCodeVerificationScreen;
+import io.qameta.allure.Step;
+import lombok.NonNull;
 
-  public PinCodeVerificationSteps(@NonNull AppiumDriver driver) {
-    super(driver);
-    pinCodeVerificationScreen = new PinCodeVerificationScreen(driver);
+public class PinCodeVerificationSteps extends BaseSteps {
+
+  @NonNull private final PinCodeVerificationScreen pinCodeVerificationScreen;
+
+  public PinCodeVerificationSteps(@NonNull TestSettings settings) {
+    super(settings);
+    pinCodeVerificationScreen = new PinCodeVerificationScreen(settings);
   }
 
   @Step("Make sure that all Pin code verification screen elements are showing up")

@@ -1,42 +1,43 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.data.Language;
-import com.hs.mobile.exception.TestExecutionException;
-import com.hs.mobile.screens.SettingsScreen;
-import io.appium.java_client.AppiumDriver;
-import io.qameta.allure.Step;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
-
-import java.util.Optional;
-
 import static com.hs.mobile.data.ElementAttribute.CHECKED;
 import static com.hs.mobile.data.ElementAttribute.ENABLED;
 import static com.hs.mobile.data.ElementAttribute.TEXT;
-import static com.hs.mobile.data.Language.ARABIC;
-import static com.hs.mobile.data.Language.ENGLISH;
+import static com.hs.mobile.data.Language.AR;
+import static com.hs.mobile.data.Language.EN;
+
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.data.Language;
+import com.hs.mobile.exception.TestExecutionException;
+import com.hs.mobile.screens.SettingsScreen;
+import io.qameta.allure.Step;
+import java.util.Optional;
+import lombok.NonNull;
+import org.assertj.core.api.SoftAssertions;
+import org.openqa.selenium.WebElement;
 
 public class SettingsScreenSteps extends BaseSteps {
-  private SettingsScreen settingsScreen;
 
-  public SettingsScreenSteps(AppiumDriver driver) {
-    super(driver);
-    settingsScreen = new SettingsScreen(driver);
+  @NonNull private final SettingsScreen settingsScreen;
+
+  public SettingsScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    settingsScreen = new SettingsScreen(settings);
   }
 
   @Step("Set the language to Arabic")
   public void useArabic() {
     Language selectedLanguage = getSelectedLanguage();
-    if (selectedLanguage.equals(ENGLISH)) {
-      selectLanguage(ARABIC);
+    if (selectedLanguage.equals(EN)) {
+      selectLanguage(AR);
     }
   }
 
   @Step("Set the language to English")
   public void useEnglish() {
     Language selectedLanguage = getSelectedLanguage();
-    if (selectedLanguage.equals(ARABIC)) {
-      selectLanguage(ENGLISH);
+    if (selectedLanguage.equals(AR)) {
+      selectLanguage(EN);
     }
   }
 
@@ -49,9 +50,7 @@ public class SettingsScreenSteps extends BaseSteps {
         .as(String.format("Invalid title [%s].", title))
         .isEqualTo(title);
     soft.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
-    soft.assertThat(getSelectedLanguage())
-        .as("Selected language should be Arabic")
-        .isEqualTo(ARABIC);
+    soft.assertThat(getSelectedLanguage()).as("Selected language should be Arabic").isEqualTo(AR);
     navigateBack(1);
     soft.assertAll();
   }
@@ -65,9 +64,7 @@ public class SettingsScreenSteps extends BaseSteps {
         .as(String.format("Invalid title [%s].", title))
         .isEqualTo(title);
     soft.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
-    soft.assertThat(getSelectedLanguage())
-        .as("Selected language should be English")
-        .isEqualTo(ENGLISH);
+    soft.assertThat(getSelectedLanguage()).as("Selected language should be English").isEqualTo(EN);
     navigateBack(1);
     soft.assertAll();
   }
@@ -105,7 +102,7 @@ public class SettingsScreenSteps extends BaseSteps {
   public void selectLanguage(Language desiredLanguage) {
     tap(settingsScreen.getLanguage());
     waitUntilDialogDisplays();
-    if (desiredLanguage.equals(ENGLISH)) {
+    if (desiredLanguage.equals(EN)) {
       tap(settingsScreen.getEnglish());
     } else {
       tap(settingsScreen.getArabic());
@@ -134,11 +131,11 @@ public class SettingsScreenSteps extends BaseSteps {
 
   public Boolean areNotificationsEnabled() {
     return Boolean.parseBoolean(
-        getElementAttributeValue(settingsScreen.getNotifications(), CHECKED));
+        getElementAttributeValue(settingsScreen.getChkNotifications(), CHECKED));
   }
 
   private void tickNotificationsCheckBox() {
-    tap(settingsScreen.getNotifications());
+    tap(settingsScreen.getChkNotifications());
   }
 
   private void waitUntilDialogDisplays() {

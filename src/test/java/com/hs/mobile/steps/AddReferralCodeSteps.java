@@ -1,22 +1,23 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.screens.AddReferralCodeScreen;
-import io.appium.java_client.AppiumDriver;
-import io.qameta.allure.Step;
-import lombok.NonNull;
-
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.AddReferralCodeScreen;
+import io.qameta.allure.Step;
+import lombok.NonNull;
+
 public class AddReferralCodeSteps extends BaseSteps {
+
   @NonNull private AddReferralCodeScreen addReferralCodeScreen;
 
-  public AddReferralCodeSteps(AppiumDriver driver) {
-    super(driver);
+  public AddReferralCodeSteps(@NonNull TestSettings settings) {
+    super(settings);
   }
 
-  @Step("Make sure that all Add Referal Code screen elements are displayed")
-  public void verifyThatAllAddReferalCodeScreenElementsIsDisplayed() {
+  @Step("Make sure that all Add Referral Code screen elements are displayed")
+  public void verifyThatAllAddReferralCodeScreenElementsIsDisplayed() {
     verifyScreenElements();
   }
 

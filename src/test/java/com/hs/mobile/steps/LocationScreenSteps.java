@@ -1,44 +1,43 @@
 package com.hs.mobile.steps;
 
-import com.hs.mobile.data.LocationType;
-import com.hs.mobile.screens.LocationsScreen;
-import com.hs.mobile.screens.SavedLocationsScreen;
-import io.appium.java_client.AppiumDriver;
-import io.qameta.allure.Step;
-import org.assertj.core.api.Assertions;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static com.hs.mobile.data.ElementAttribute.ENABLED;
 import static com.hs.mobile.data.ElementAttribute.TEXT;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
-public class LocationScreenSteps extends BaseSteps {
-  private LocationsScreen locationsScreen;
-  private HomeScreenSteps homeScreenSteps;
-  private SavedLocationsScreen savedLocationsScreen;
-  private SavedLocationsScreenSteps savedLocationsScreenSteps;
-  private RestaurantListScreenSteps restaurantListScreenSteps;
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.data.LocationType;
+import com.hs.mobile.data.locations.LocationsProvider;
+import com.hs.mobile.screens.HomeScreen;
+import com.hs.mobile.screens.LocationsScreen;
+import io.qameta.allure.Step;
+import java.util.Arrays;
+import java.util.List;
+import lombok.NonNull;
+import org.assertj.core.api.Assertions;
 
-  public LocationScreenSteps(AppiumDriver driver) {
-    super(driver);
-    locationsScreen = new LocationsScreen(driver);
-    homeScreenSteps = new HomeScreenSteps(driver);
-    savedLocationsScreen = new SavedLocationsScreen(driver);
-    savedLocationsScreenSteps = new SavedLocationsScreenSteps(driver);
-    restaurantListScreenSteps = new RestaurantListScreenSteps(driver);
+public class LocationScreenSteps extends BaseSteps {
+
+  @NonNull private final LocationsScreen locationsScreen;
+  @NonNull private final HomeScreenSteps homeScreenSteps;
+  @NonNull private final HomeScreen homeScreen;
+  @NonNull private final LocationsProvider locationsProvider;
+
+  public LocationScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    locationsScreen = new LocationsScreen(settings);
+    homeScreen = new HomeScreen(settings);
+    homeScreenSteps = new HomeScreenSteps(settings);
+    locationsProvider = new LocationsProvider(settings);
   }
 
   @Step("Verify {description} updated description")
   public void verifyUpdatedDescription(String description) {
-    savedLocationsScreenSteps.editLocation();
+    tap(homeScreen.getLstHomeScreenAddresses());
+    homeScreenSteps.editLocation();
     submitAddress();
     String desc = getDescription();
     submitAddress();
-    savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
-    navigateBack(1);
 
     Assertions.assertThat(desc)
         .as("Actual updated description does not match expected one.")
@@ -48,16 +47,17 @@ public class LocationScreenSteps extends BaseSteps {
   @Step("Update description to {description}")
   public void updateDescription(String description) {
     homeScreenSteps.viewSavedLocations();
-    savedLocationsScreenSteps.editLocation();
+    homeScreenSteps.editLocation();
     submitAddress();
     clearDescription();
     insertAddressDescription(description);
     submitAddress();
+    homeScreenSteps.waitUntilRestaurantsAnGroceryWidgetsLoaded();
   }
 
   @Step("Save location")
   public void saveLocation(String description) {
-    homeScreenSteps.clickFindRestaurantsButton();
+    homeScreenSteps.clickSelectLocationManually();
     searchForRestaurants();
     insertLocation("Riyadh");
     selectItemArea(0);
@@ -68,13 +68,12 @@ public class LocationScreenSteps extends BaseSteps {
     }
     saveForLater();
     submitAddress();
-    restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
-    navigateBack(1);
+    homeScreenSteps.waitUntilRestaurantsAnGroceryWidgetsLoaded();
   }
 
   @Step("Search for a landmark")
   public void searchForALandmark() {
-    homeScreenSteps.clickFindRestaurantsButton();
+    homeScreenSteps.clickSelectLocationManually();
     searchForRestaurants();
     insertLocation("hayah mall");
     selectItemArea(0);
@@ -84,7 +83,7 @@ public class LocationScreenSteps extends BaseSteps {
 
   @Step("Search for an out of range location")
   public void searchForAnOutOfRangeLocation() {
-    homeScreenSteps.clickFindRestaurantsButton();
+    homeScreenSteps.clickSelectLocationManually();
     searchForRestaurants();
     insertLocation("Amman");
     selectItemArea(0);
@@ -94,7 +93,7 @@ public class LocationScreenSteps extends BaseSteps {
   public void verifyNewlyAddedLocations() {
     List<LocationType> allLocationTypes = Arrays.asList(LocationType.values());
     homeScreenSteps.viewSavedLocations();
-    int locationsCount = savedLocationsScreen.getSavedLocations().size();
+    int locationsCount = homeScreen.getSavedLocations().size();
     navigateBack(1);
     Assertions.assertThat(locationsCount)
         .as("Number of saved locations should be 4.")
@@ -103,7 +102,7 @@ public class LocationScreenSteps extends BaseSteps {
 
   @Step("Verify location can be saved without adding a description")
   public void verifyLocationCanBeSavedWithoutDescription() {
-    int savedLocationsCount = savedLocationsScreen.getSavedLocations().size();
+    int savedLocationsCount = homeScreen.getSavedLocations().size();
     navigateBack(1);
 
     Assertions.assertThat(savedLocationsCount).as("Description is not mandatory.").isEqualTo(1);
@@ -113,7 +112,7 @@ public class LocationScreenSteps extends BaseSteps {
   public void verifyLocationUpdatedSuccessfully() {
     waitUntilSubmitButtonIsEnabled();
     boolean isSubmitButtonEnabled = isSubmitButtonEnabled();
-    navigateBack(2);
+    navigateBack(1);
 
     Assertions.assertThat(isSubmitButtonEnabled)
         .as("User should be directed to the saved location.")
@@ -149,8 +148,7 @@ public class LocationScreenSteps extends BaseSteps {
     try {
       isSearchButtonDisplayed();
     } catch (Exception e) {
-      savedLocationsScreenSteps.deleteSavedLocations();
-      savedLocationsScreenSteps.waitUntilNewLocationButtonDisplays();
+      homeScreenSteps.deleteSavedLocations();
     } finally {
       navigateBack(1);
     }
@@ -164,6 +162,11 @@ public class LocationScreenSteps extends BaseSteps {
   @Step("insert {text} location")
   public void insertLocation(String text) {
     locationsScreen.getSearchTextBox().sendKeys(text);
+  }
+
+  @Step("insert default location")
+  public void insertDefaultLocation() {
+    locationsScreen.getSearchTextBox().sendKeys(locationsProvider.getLocationValue("area"));
   }
 
   @Step("select {index} area")
@@ -231,11 +234,11 @@ public class LocationScreenSteps extends BaseSteps {
   }
 
   private void addNewLocations(List<LocationType> types) {
-    homeScreenSteps.clickFindRestaurantsButton();
+    homeScreenSteps.clickSelectLocationManually();
     for (int i = 0; i < types.size(); i++) {
       if (i > 0) {
         homeScreenSteps.viewSavedLocations();
-        savedLocationsScreenSteps.addNewLocation();
+        homeScreenSteps.clickAddNewLocation();
       }
       searchForRestaurants();
       insertLocation("Riyadh");
@@ -244,8 +247,7 @@ public class LocationScreenSteps extends BaseSteps {
       saveForLater();
       selectLocationType(i);
       submitAddress();
-      restaurantListScreenSteps.waitUntilRestaurantsAreLoaded();
-      navigateBack(1);
+      homeScreenSteps.waitUntilRestaurantsAnGroceryWidgetsLoaded();
     }
   }
 }

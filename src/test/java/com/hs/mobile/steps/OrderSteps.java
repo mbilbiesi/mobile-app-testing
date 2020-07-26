@@ -1,18 +1,20 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.TestExecutionException;
 import com.hs.mobile.screens.OrderScreen;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class OrderSteps extends BaseSteps {
-  private OrderScreen orderScreen;
 
-  public OrderSteps(AppiumDriver driver) {
-    super(driver);
-    orderScreen = new OrderScreen(driver);
+  @NonNull private final OrderScreen orderScreen;
+
+  public OrderSteps(@NonNull TestSettings settings) {
+    super(settings);
+    orderScreen = new OrderScreen(settings);
   }
 
   @Step("Click on 'Help' button")

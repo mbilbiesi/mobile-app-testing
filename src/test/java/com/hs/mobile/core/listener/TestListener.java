@@ -2,18 +2,16 @@ package com.hs.mobile.core.listener;
 
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Attachment;
+import java.lang.reflect.Field;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.lang.reflect.Field;
-
+@Slf4j
 public class TestListener implements ITestListener {
-  private static final Logger LOG = LoggerFactory.getLogger(TestListener.class);
 
   @Override
   public void onTestStart(ITestResult iTestResult) {}
@@ -23,17 +21,15 @@ public class TestListener implements ITestListener {
 
   @Override
   public void onTestFailure(ITestResult iTestResult) {
-    Class clazz = iTestResult.getTestClass().getRealClass();
+    Object clazz = iTestResult.getTestClass().getRealClass();
     try {
-      Field field = clazz.getSuperclass().getDeclaredField("driver");
+      Field field = clazz.getClass().getSuperclass().getDeclaredField("driver");
       field.setAccessible(true);
 
       AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
       saveScreenshot(composeTestName(iTestResult), driver);
-    } catch (NoSuchFieldException e) {
-      LOG.error("Error while taking screenshot: ", e);
-    } catch (IllegalAccessException e) {
-      LOG.error("Error while taking screenshot: ", e);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      log.error("Error while taking screenshot: ", e);
     }
   }
 
@@ -66,7 +62,7 @@ public class TestListener implements ITestListener {
   }
 
   @Attachment(value = "{title}", type = "image/png")
-  public byte[] saveScreenshot(String title, AppiumDriver driver) {
+  private byte[] saveScreenshot(String title, AppiumDriver driver) {
     return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
   }
 }

@@ -1,20 +1,22 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.TestExecutionException;
 import com.hs.mobile.screens.TicketScreen;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @Slf4j
 public class TicketSteps extends BaseSteps {
-  private TicketScreen ticketScreen;
 
-  public TicketSteps(AppiumDriver driver) {
-    super(driver);
-    ticketScreen = new TicketScreen(driver);
+  @NonNull private final TicketScreen ticketScreen;
+
+  public TicketSteps(TestSettings settings) {
+    super(settings);
+    ticketScreen = new TicketScreen(settings);
   }
 
   @Step("Verify that all ticket screen objects are displayed correctly")

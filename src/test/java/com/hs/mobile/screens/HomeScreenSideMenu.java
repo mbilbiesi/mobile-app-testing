@@ -1,30 +1,27 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
+import lombok.NonNull;
 import org.openqa.selenium.WebElement;
 
 @Getter
 public class HomeScreenSideMenu extends AbstractScreen {
-  @iOSXCUITFindBy(id = "")
+
   @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='2']")
-  private WebElement profile;
+  private WebElement btnProfile;
 
-  @iOSXCUITFindBy(id = "")
   @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='3']")
-  private WebElement invoices;
+  private WebElement btnInvoices;
 
-  @iOSXCUITFindBy(id = "")
   @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='4']")
-  private WebElement paymentOptions;
+  private WebElement btnPaymentOptions;
 
-  @iOSXCUITFindBy(id = "")
   @AndroidFindBy(xpath = "//androidx.appcompat.widget.LinearLayoutCompat[@index='6']")
-  private WebElement settings;
+  private WebElement btnSettings;
 
-  public HomeScreenSideMenu(AppiumDriver driver) {
-    super(driver);
+  public HomeScreenSideMenu(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

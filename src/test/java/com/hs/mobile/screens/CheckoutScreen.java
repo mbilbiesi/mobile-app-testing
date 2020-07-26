@@ -1,27 +1,34 @@
 package com.hs.mobile.screens;
 
-import io.appium.java_client.AppiumDriver;
+import com.hs.mobile.core.settings.TestSettings;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import java.util.List;
 import lombok.Getter;
+import lombok.NonNull;
 
 @Getter
 public class CheckoutScreen extends AbstractScreen {
 
-  @iOSXCUITFindBy(id = "")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_order_amount_val")
   private MobileElement orderAmount;
 
-  @iOSXCUITFindBy(id = "")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_delivery_amount_val")
   private MobileElement deliveryAmount;
 
-  @iOSXCUITFindBy(id = "")
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/txt_total_amount_val")
   private MobileElement totalAmount;
 
-  public CheckoutScreen(AppiumDriver driver) {
-    super(driver);
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/payment_container")
+  private MobileElement btnChoosePmtMethod;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_checkout")
+  private List<MobileElement> btnSelectPmtMethod;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_checkout")
+  private MobileElement btnPlaceOrder;
+
+  public CheckoutScreen(@NonNull TestSettings settings) {
+    super(settings);
   }
 }

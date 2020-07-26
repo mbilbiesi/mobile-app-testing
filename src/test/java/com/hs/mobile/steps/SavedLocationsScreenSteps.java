@@ -1,21 +1,23 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.SavedLocationsScreen;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
+import lombok.NonNull;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SavedLocationsScreenSteps extends BaseSteps {
-  private SavedLocationsScreen savedLocationsScreen;
 
-  public SavedLocationsScreenSteps(AppiumDriver driver) {
-    super(driver);
-    savedLocationsScreen = new SavedLocationsScreen(driver);
+  @NonNull private final SavedLocationsScreen savedLocationsScreen;
+
+  public SavedLocationsScreenSteps(@NonNull TestSettings settings) {
+    super(settings);
+    savedLocationsScreen = new SavedLocationsScreen(settings);
   }
 
   @Step("Add new location")
   public void addNewLocation() {
-    tap(savedLocationsScreen.getNewLocation());
+    tap(savedLocationsScreen.getBtnAddNewLocation());
   }
 
   @Step("Delete saved locations")
@@ -36,6 +38,6 @@ public class SavedLocationsScreenSteps extends BaseSteps {
   }
 
   void waitUntilNewLocationButtonDisplays() {
-    wait.until(ExpectedConditions.visibilityOf(savedLocationsScreen.getNewLocation()));
+    wait.until(ExpectedConditions.visibilityOf(savedLocationsScreen.getBtnAddNewLocation()));
   }
 }

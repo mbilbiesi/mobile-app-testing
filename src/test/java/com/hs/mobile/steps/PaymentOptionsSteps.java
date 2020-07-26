@@ -1,17 +1,19 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.PaymentOptionsScreen;
-import io.appium.java_client.AppiumDriver;
+import lombok.NonNull;
 
 public class PaymentOptionsSteps extends BaseSteps {
-  private PaymentOptionsScreen paymentOptionsScreen;
 
-  public PaymentOptionsSteps(AppiumDriver driver) {
-    super(driver);
-    paymentOptionsScreen = new PaymentOptionsScreen(driver);
+  @NonNull private final PaymentOptionsScreen paymentOptionsScreen;
+
+  public PaymentOptionsSteps(@NonNull TestSettings settings) {
+    super(settings);
+    paymentOptionsScreen = new PaymentOptionsScreen(settings);
   }
 
   public void openWallet() {
-    tap(paymentOptionsScreen.getWallet());
+    tap(paymentOptionsScreen.getBtnWallet());
   }
 }

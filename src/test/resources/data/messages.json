@@ -1,0 +1,78 @@
+{
+  "tickets": [
+    {
+      "key": "1",
+      "title": "Ticket Already Opened",
+      "message_en": "",
+      "message_ar": ""
+    }
+  ],
+  "createTicket": [
+    {
+      "key": "2",
+      "title": "Required Description",
+      "message_en": "",
+      "message_ar": "['اكتب لنا تفاصيل ملاحظتك']"
+    },
+    {
+      "key": "3",
+      "title": "Message Created Successfully",
+      "message_en": "",
+      "message_ar": "لتتمكن من متابعة التذكرة قم بالضغط على الدعم"
+    }
+  ],
+  "help": [
+    {
+      "key": "4",
+      "title": "Ticket Type - Order",
+      "message_en": "Order",
+      "message_ar": "الطلب"
+    },
+    {
+      "key": "5",
+      "title": "Ticket Type - Payment",
+      "message_en": "Payment",
+      "message_ar": "الدفع"
+    },
+    {
+      "key": "6",
+      "title": "Ticket Type - Delivery",
+      "message_en": "Delivery",
+      "message_ar": "التوصيل"
+    },
+    {
+      "key": "7",
+      "title": "Ticket Type - Staff",
+      "message_en": "Staff",
+      "message_ar": "الموظف"
+    },
+    {
+      "key": "8",
+      "title": "The Payment - Different Bill",
+      "message_en": "I've received a different bill amount than the app's",
+      "message_ar": "الفاتورة في التطبيق غير مطابقة لفاتورة المطعم"
+    },
+    {
+      "key": "9",
+      "title": "The Staff - Comment on Staff",
+      "message_en": "I have a comment on the restaurant's staff",
+      "message_ar": "ملاحظة على موظف المطعم"
+    }
+  ],
+  "invoices": [
+    {
+      "key": "10",
+      "title": "Invoices - Title",
+      "message_en": "Invoices",
+      "message_ar": "الفواتير"
+    }
+  ],
+  "settings": [
+    {
+      "key": "11",
+      "title": "Settings Title",
+      "message_en": "Settings",
+      "message_ar": "الإعدادات"
+    }
+  ]
+}
