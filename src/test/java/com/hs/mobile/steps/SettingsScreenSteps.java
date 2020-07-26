@@ -12,13 +12,12 @@ import org.openqa.selenium.WebElement;
 import java.util.Optional;
 
 import static com.hs.mobile.data.ElementAttribute.*;
-import static com.hs.mobile.data.Language.ARABIC;
-import static com.hs.mobile.data.Language.ENGLISH;
+import static com.hs.mobile.data.Language.AR;
+import static com.hs.mobile.data.Language.EN;
 
 public class SettingsScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final SettingsScreen settingsScreen;
+  @NonNull private final SettingsScreen settingsScreen;
 
   public SettingsScreenSteps(@NonNull TestSettings settings) {
     super(settings);
@@ -28,16 +27,16 @@ public class SettingsScreenSteps extends BaseSteps {
   @Step("Set the language to Arabic")
   public void useArabic() {
     Language selectedLanguage = getSelectedLanguage();
-    if (selectedLanguage.equals(ENGLISH)) {
-      selectLanguage(ARABIC);
+    if (selectedLanguage.equals(EN)) {
+      selectLanguage(AR);
     }
   }
 
   @Step("Set the language to English")
   public void useEnglish() {
     Language selectedLanguage = getSelectedLanguage();
-    if (selectedLanguage.equals(ARABIC)) {
-      selectLanguage(ENGLISH);
+    if (selectedLanguage.equals(AR)) {
+      selectLanguage(EN);
     }
   }
 
@@ -50,9 +49,7 @@ public class SettingsScreenSteps extends BaseSteps {
         .as(String.format("Invalid title [%s].", title))
         .isEqualTo(title);
     soft.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
-    soft.assertThat(getSelectedLanguage())
-        .as("Selected language should be Arabic")
-        .isEqualTo(ARABIC);
+    soft.assertThat(getSelectedLanguage()).as("Selected language should be Arabic").isEqualTo(AR);
     navigateBack(1);
     soft.assertAll();
   }
@@ -66,9 +63,7 @@ public class SettingsScreenSteps extends BaseSteps {
         .as(String.format("Invalid title [%s].", title))
         .isEqualTo(title);
     soft.assertThat(isBackButtonActive()).as("Return button should be active.").isTrue();
-    soft.assertThat(getSelectedLanguage())
-        .as("Selected language should be English")
-        .isEqualTo(ENGLISH);
+    soft.assertThat(getSelectedLanguage()).as("Selected language should be English").isEqualTo(EN);
     navigateBack(1);
     soft.assertAll();
   }
@@ -106,7 +101,7 @@ public class SettingsScreenSteps extends BaseSteps {
   public void selectLanguage(Language desiredLanguage) {
     tap(settingsScreen.getLanguage());
     waitUntilDialogDisplays();
-    if (desiredLanguage.equals(ENGLISH)) {
+    if (desiredLanguage.equals(EN)) {
       tap(settingsScreen.getEnglish());
     } else {
       tap(settingsScreen.getArabic());
