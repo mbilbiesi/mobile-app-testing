@@ -9,25 +9,25 @@ public class ProfileScreen {
 
 
     //todo implement locator
-    private MobileElement clickableBackBtn;
+    private MobileElement btnBack;
 
     //todo implement locator
     private MobileElement txtMyProfileHeader;
 
     @iOSXCUITFindBy(accessibility = "profile_title")
-    private List<MobileElement> profileTitle;
+    private List<MobileElement> lblProfileTitle;
 
     @iOSXCUITFindBy(accessibility = "profile_name")
-    private List<MobileElement> profileNameTxt;
+    private List<MobileElement> txtProfileName;
 
     @iOSXCUITFindBy(accessibility = "profile_number")
-    private List<MobileElement> profileNumberTxt;
+    private List<MobileElement> txtProfileNumber;
 
     @iOSXCUITFindBy(accessibility = "profile_email")
-    private List<MobileElement> profileEmailTxt;
+    private List<MobileElement> txtProfileEmailTxt;
 
     @iOSXCUITFindBy(accessibility = "profile_update")
-    private List<MobileElement> clickableProfileUpdateBtn;
+    private List<MobileElement> btnUpdateProfile;
 
     @iOSXCUITFindBy(accessibility = "profile_logout")
     private List<MobileElement> clickableProfileLogoutBtn;

@@ -5,10 +5,10 @@ import io.appium.java_client.MobileElement;
 public class InvoicesScreen {
 
     //todo implement locator
-    private MobileElement clickableBackBtn;
+    private MobileElement btnBack;
 
     //todo implement locator
-    private MobileElement invoicesHeaderTxt;
+    private MobileElement lblInvoices;
 
 
 }

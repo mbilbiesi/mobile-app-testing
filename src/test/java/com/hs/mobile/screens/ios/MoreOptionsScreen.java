@@ -9,21 +9,21 @@ public class MoreOptionsScreen {
 
 
     @iOSXCUITFindBy(accessibility = "cell_0")
-    private MobileElement referralCodeBtn;
+    private MobileElement btnReferralCode;
 
     @iOSXCUITFindBy(accessibility = "cell_2")
-    private MobileElement myProfileBtn;
+    private MobileElement btnMyProfile;
 
     @iOSXCUITFindBy(accessibility = "cell_3")
-    private MobileElement paymentOptionsBtn;
+    private MobileElement btnPaymentOptions;
 
     @iOSXCUITFindBy(accessibility = "cell_4")
-    private MobileElement invoicesBtn;
+    private MobileElement btnInvoices;
 
     @iOSXCUITFindBy(accessibility = "cell_5")
-    private MobileElement supportBtn;
+    private MobileElement btnSupport;
 
     @iOSXCUITFindBy(accessibility = "cell_7")
-    private MobileElement settingBtn;
+    private MobileElement btnSettings;
 
 }

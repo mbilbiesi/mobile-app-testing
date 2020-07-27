@@ -8,7 +8,6 @@ public class AllStoresScreen {
     @iOSXCUITFindBy(accessibility = "header_back_icon")
     private MobileElement btnBack;
 
-
     @iOSXCUITFindBy(accessibility = "header_back_icon")
     private MobileElement lblChooseLocation;
 
@@ -23,7 +22,6 @@ public class AllStoresScreen {
 
     @iOSXCUITFindBy(accessibility = "filter_title")
     private MobileElement ClickableFilterTitle;
-
 
     //todo: filter titles by ID
     private MobileElement filterAll;
@@ -47,7 +45,6 @@ public class AllStoresScreen {
 
     //TODO: find a unique identifier - can be applied for multiple restaurants
     private MobileElement restaurantBtn;
-
 
     /*
     // todo: look for how to generate IDs elements in each vertical
