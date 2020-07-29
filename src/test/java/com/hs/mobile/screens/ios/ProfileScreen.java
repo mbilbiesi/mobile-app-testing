@@ -3,8 +3,6 @@ package com.hs.mobile.screens.ios;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
-import java.util.List;
-
 public class ProfileScreen {
 
 
@@ -12,25 +10,27 @@ public class ProfileScreen {
     private MobileElement btnBack;
 
     //todo implement locator
-    private MobileElement txtMyProfileHeader;
+    private MobileElement lblMyProfileHeader;
+
+    private MobileElement lblMyProfileInfo;
 
     @iOSXCUITFindBy(accessibility = "profile_title")
-    private List<MobileElement> lblProfileTitle;
+    private MobileElement lblProfileTitle;
 
     @iOSXCUITFindBy(accessibility = "profile_name")
-    private List<MobileElement> txtProfileName;
+    private MobileElement txtProfileName;
 
     @iOSXCUITFindBy(accessibility = "profile_number")
-    private List<MobileElement> txtProfileNumber;
+    private MobileElement txtProfileNumber;
 
     @iOSXCUITFindBy(accessibility = "profile_email")
-    private List<MobileElement> txtProfileEmailTxt;
+    private MobileElement txtProfileEmail;
 
     @iOSXCUITFindBy(accessibility = "profile_update")
-    private List<MobileElement> btnUpdateProfile;
+    private MobileElement btnUpdateProfile;
 
     @iOSXCUITFindBy(accessibility = "profile_logout")
-    private List<MobileElement> clickableProfileLogoutBtn;
+    private MobileElement btnProfileLogout;
 
 
 

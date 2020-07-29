@@ -5,15 +5,15 @@ import io.appium.java_client.MobileElement;
 public class SettingsScreen {
 
     //todo implement locator
-    private MobileElement clickableBackBtn;
+    private MobileElement btnBack;
 
     //todo implement locator
-    private MobileElement settingsHeaderTxt;
+    private MobileElement lblSettings;
 
     //todo implement locator
-    private MobileElement languageBtn;
+    private MobileElement btnLanguage;
 
     //todo implement locator
-    private MobileElement offersNotificationToggleBtn;
+    private MobileElement btnOffersNotification;
 
 }

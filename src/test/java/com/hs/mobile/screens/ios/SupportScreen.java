@@ -5,31 +5,31 @@ import io.appium.java_client.MobileElement;
 public class SupportScreen {
 
     //todo implement locator
-    private MobileElement clickableBackBtn;
+    private MobileElement btnBack;
 
     //todo implement locator
-    private MobileElement paymentSupportHeaderTxt;
+    private MobileElement lblSupportHeader;
 
     //todo implement locator
-    private MobileElement myTicketsBtn;
+    private MobileElement btnMyTickets;
 
     //todo implement locator
-    private MobileElement generalBtn;
+    private MobileElement btnGeneral;
 
     //todo implement locator
-    private MobileElement orderRelatedBtn;
+    private MobileElement btnOrderRelated;
 
     //todo implement locator
-    private MobileElement technicalBtn;
+    private MobileElement btnTechnical;
 
     //todo implement locator
-    private MobileElement aboutHungerStationBtn;
+    private MobileElement btnAboutHungerStation;
 
     //todo implement locator
-    private MobileElement termsBtn;
+    private MobileElement btnTerms;
 
     //todo implement locator
-    private MobileElement contactUsBtn;
+    private MobileElement btnContactUs;
 
 
 
