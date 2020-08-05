@@ -5,8 +5,8 @@ import io.appium.java_client.MobileElement;
 public class OrderedScreen {
 
     //todo: generate unique ID
-    private MobileElement orderedHeaderTxt;
+    private MobileElement lblOrderedHeader;
     //todo: generate unique ID
-    private MobileElement previousOrderCell;
+    private MobileElement btnPreviousOrderCell;
 
 }

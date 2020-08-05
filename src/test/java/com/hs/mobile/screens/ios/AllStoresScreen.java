@@ -8,9 +8,6 @@ public class AllStoresScreen {
     @iOSXCUITFindBy(accessibility = "header_back_icon")
     private MobileElement btnBack;
 
-    @iOSXCUITFindBy(accessibility = "header_back_icon")
-    private MobileElement lblChooseLocation;
-
     @iOSXCUITFindBy(accessibility = "header_location")
     private MobileElement txtLocationHeaderTxt;
 
@@ -24,27 +21,27 @@ public class AllStoresScreen {
     private MobileElement ClickableFilterTitle;
 
     //todo: filter titles by ID
-    private MobileElement filterAll;
-    private MobileElement filterFastFood;
-    private MobileElement filterDesert;
-    private MobileElement filterArabianFood;
-    private MobileElement filterItalian;
-    private MobileElement filterSandwiches;
-    private MobileElement filterGrills;
-    private MobileElement filterAsianFood;
-    private MobileElement filterBakery;
-    private MobileElement filterAmericanFood;
-    private MobileElement filterSeaFood;
-    private MobileElement filterIndianFood;
-    private MobileElement filterMexicanFood;
-    private MobileElement filterBeverages;
-    private MobileElement filterTurkish;
-    private MobileElement filterCoffee;
-    private MobileElement filterGrocery;
+    private MobileElement btnFilterAll;
+    private MobileElement btnFilterFastFood;
+    private MobileElement btnFilterDesert;
+    private MobileElement btnFilterArabianFood;
+    private MobileElement btnFilterItalian;
+    private MobileElement btnFilterSandwiches;
+    private MobileElement btnFilterGrills;
+    private MobileElement btnFilterAsianFood;
+    private MobileElement btnFilterBakery;
+    private MobileElement btnFilterAmericanFood;
+    private MobileElement btnFilterSeaFood;
+    private MobileElement btnFilterIndianFood;
+    private MobileElement btnFilterMexicanFood;
+    private MobileElement btnFilterBeverages;
+    private MobileElement btnFilterTurkish;
+    private MobileElement btnFilterCoffee;
+    private MobileElement btnFilterGrocery;
 
 
     //TODO: find a unique identifier - can be applied for multiple restaurants
-    private MobileElement restaurantBtn;
+    private MobileElement btnSelectedRestaurant;
 
     /*
     // todo: look for how to generate IDs elements in each vertical
