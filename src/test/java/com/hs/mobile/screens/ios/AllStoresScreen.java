@@ -18,7 +18,7 @@ public class AllStoresScreen {
   private MobileElement carouselCell;
 
   @iOSXCUITFindBy(accessibility = "filter_title")
-  private MobileElement ClickableFilterTitle;
+  private MobileElement btnFilterTitle;
 
   //todo: filter titles by ID
   private MobileElement btnFilterAll;
@@ -44,7 +44,6 @@ public class AllStoresScreen {
   private MobileElement btnSelectedRestaurant;
 
   //todo: look for how to generate IDs elements in each vertical
-
   private MobileElement firstVerticalTitle;
   private MobileElement firstVerticalStatusLabel;
 }
