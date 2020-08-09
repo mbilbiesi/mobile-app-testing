@@ -5,47 +5,46 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
 public class AllStoresScreen {
 
-    @iOSXCUITFindBy(accessibility = "header_back_icon")
-    private MobileElement btnBack;
+  @iOSXCUITFindBy(accessibility = "header_back_icon")
+  private MobileElement btnBack;
 
-    @iOSXCUITFindBy(accessibility = "header_location")
-    private MobileElement txtLocationHeaderTxt;
+  @iOSXCUITFindBy(accessibility = "header_location")
+  private MobileElement txtLocationHeaderTxt;
 
-    @iOSXCUITFindBy(accessibility = "header_search_icon")
-    private MobileElement btnSearchIcon;
+  @iOSXCUITFindBy(accessibility = "header_search_icon")
+  private MobileElement btnSearchIcon;
 
-    @iOSXCUITFindBy(accessibility = "cell_carousel")
-    private MobileElement carouselCell;
+  @iOSXCUITFindBy(accessibility = "cell_carousel")
+  private MobileElement carouselCell;
 
-    @iOSXCUITFindBy(accessibility = "filter_title")
-    private MobileElement ClickableFilterTitle;
+  @iOSXCUITFindBy(accessibility = "filter_title")
+  private MobileElement ClickableFilterTitle;
 
-    //todo: filter titles by ID
-    private MobileElement btnFilterAll;
-    private MobileElement btnFilterFastFood;
-    private MobileElement btnFilterDesert;
-    private MobileElement btnFilterArabianFood;
-    private MobileElement btnFilterItalian;
-    private MobileElement btnFilterSandwiches;
-    private MobileElement btnFilterGrills;
-    private MobileElement btnFilterAsianFood;
-    private MobileElement btnFilterBakery;
-    private MobileElement btnFilterAmericanFood;
-    private MobileElement btnFilterSeaFood;
-    private MobileElement btnFilterIndianFood;
-    private MobileElement btnFilterMexicanFood;
-    private MobileElement btnFilterBeverages;
-    private MobileElement btnFilterTurkish;
-    private MobileElement btnFilterCoffee;
-    private MobileElement btnFilterGrocery;
+  //todo: filter titles by ID
+  private MobileElement btnFilterAll;
+  private MobileElement btnFilterFastFood;
+  private MobileElement btnFilterDesert;
+  private MobileElement btnFilterArabianFood;
+  private MobileElement btnFilterItalian;
+  private MobileElement btnFilterSandwiches;
+  private MobileElement btnFilterGrills;
+  private MobileElement btnFilterAsianFood;
+  private MobileElement btnFilterBakery;
+  private MobileElement btnFilterAmericanFood;
+  private MobileElement btnFilterSeaFood;
+  private MobileElement btnFilterIndianFood;
+  private MobileElement btnFilterMexicanFood;
+  private MobileElement btnFilterBeverages;
+  private MobileElement btnFilterTurkish;
+  private MobileElement btnFilterCoffee;
+  private MobileElement btnFilterGrocery;
 
 
-    //TODO: find a unique identifier - can be applied for multiple restaurants
-    private MobileElement btnSelectedRestaurant;
+  //todo: find a unique identifier - can be applied for multiple restaurants
+  private MobileElement btnSelectedRestaurant;
 
-    /*
-    // todo: look for how to generate IDs elements in each vertical
-     */
-    private MobileElement firstVerticalTitle;
-    private MobileElement firstVerticalStatusLabel;
+  //todo: look for how to generate IDs elements in each vertical
+
+  private MobileElement firstVerticalTitle;
+  private MobileElement firstVerticalStatusLabel;
 }

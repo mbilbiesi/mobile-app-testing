@@ -10,13 +10,13 @@ import lombok.NonNull;
 @Getter
 public class VerifyAccountScreen extends AbstractScreen {
 
-    @iOSXCUITFindBy(accessibility = "phone_number")
-    private MobileElement txtPhoneNumber;
+  @iOSXCUITFindBy(accessibility = "phone_number")
+  private MobileElement txtPhoneNumber;
 
-    @iOSXCUITFindBy(accessibility = "next-button")
-    private MobileElement btnNext;
+  @iOSXCUITFindBy(accessibility = "next-button")
+  private MobileElement btnNext;
 
-    public VerifyAccountScreen(@NonNull TestSettings settings) {
-        super(settings);
-    }
+  public VerifyAccountScreen(@NonNull TestSettings settings) {
+    super(settings);
+  }
 }
