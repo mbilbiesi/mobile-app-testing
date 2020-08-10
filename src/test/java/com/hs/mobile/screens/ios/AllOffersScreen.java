@@ -4,7 +4,7 @@ import io.appium.java_client.MobileElement;
 
 public class AllOffersScreen {
 
-  //todo implement or find a way to make it  unique
+  //todo implement or find a way to make it  unique -
   private MobileElement lblOffersHeader;
 
   //Offers listed
