@@ -2,7 +2,7 @@ package com.hs.mobile.steps;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.TestExecutionException;
-import com.hs.mobile.screens.OrderScreen;
+import com.hs.mobile.screens.android.OrderScreen;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;

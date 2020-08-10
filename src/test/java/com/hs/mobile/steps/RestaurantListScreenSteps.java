@@ -4,8 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.TestExecutionException;
-import com.hs.mobile.screens.RestaurantScreen;
-import com.hs.mobile.screens.RestaurantsListScreen;
+
+import com.hs.mobile.screens.android.RestaurantScreen;
+import com.hs.mobile.screens.android.RestaurantsListScreen;
 import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 import java.util.ArrayList;

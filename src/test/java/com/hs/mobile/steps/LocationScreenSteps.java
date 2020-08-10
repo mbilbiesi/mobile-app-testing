@@ -1,20 +1,21 @@
 package com.hs.mobile.steps;
 
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.data.LocationType;
+import com.hs.mobile.data.locations.LocationsProvider;
+import com.hs.mobile.screens.android.HomeScreen;
+import com.hs.mobile.screens.android.LocationsScreen;
+import io.qameta.allure.Step;
+import lombok.NonNull;
+import org.assertj.core.api.Assertions;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static com.hs.mobile.data.ElementAttribute.ENABLED;
 import static com.hs.mobile.data.ElementAttribute.TEXT;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
-
-import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.data.LocationType;
-import com.hs.mobile.data.locations.LocationsProvider;
-import com.hs.mobile.screens.HomeScreen;
-import com.hs.mobile.screens.LocationsScreen;
-import io.qameta.allure.Step;
-import java.util.Arrays;
-import java.util.List;
-import lombok.NonNull;
-import org.assertj.core.api.Assertions;
 
 public class LocationScreenSteps extends BaseSteps {
 

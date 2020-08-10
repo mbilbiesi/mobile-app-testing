@@ -1,7 +1,7 @@
 package com.hs.mobile.steps;
 
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.PaymentOptionsScreen;
+import com.hs.mobile.screens.android.PaymentOptionsScreen;
 import lombok.NonNull;
 
 public class PaymentOptionsSteps extends BaseSteps {

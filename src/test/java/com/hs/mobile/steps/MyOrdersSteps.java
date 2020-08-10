@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.TestExecutionException;
-import com.hs.mobile.screens.MyOrdersScreen;
+import com.hs.mobile.screens.android.MyOrdersScreen;
 import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 import java.text.ParseException;

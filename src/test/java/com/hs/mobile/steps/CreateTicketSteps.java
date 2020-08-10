@@ -1,13 +1,14 @@
 package com.hs.mobile.steps;
 
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.CreateTicketScreen;
+import com.hs.mobile.screens.android.CreateTicketScreen;
 import io.qameta.allure.Step;
-import java.util.List;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class CreateTicketSteps extends BaseSteps {
 

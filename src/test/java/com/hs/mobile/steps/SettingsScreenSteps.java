@@ -9,7 +9,7 @@ import static com.hs.mobile.data.Language.EN;
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.Language;
 import com.hs.mobile.exception.TestExecutionException;
-import com.hs.mobile.screens.SettingsScreen;
+import com.hs.mobile.screens.android.SettingsScreen;
 import io.qameta.allure.Step;
 import java.util.Optional;
 import lombok.NonNull;

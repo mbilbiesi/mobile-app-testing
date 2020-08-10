@@ -2,8 +2,8 @@ package com.hs.mobile.steps;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.locations.LocationsProvider;
-import com.hs.mobile.screens.CheckoutScreen;
-import com.hs.mobile.screens.PaymentOptionsScreen;
+import com.hs.mobile.screens.android.CheckoutScreen;
+import com.hs.mobile.screens.android.PaymentOptionsScreen;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;

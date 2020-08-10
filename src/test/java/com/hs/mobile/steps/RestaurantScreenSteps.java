@@ -7,8 +7,8 @@ import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.MenuItemScreen;
-import com.hs.mobile.screens.RestaurantScreen;
+import com.hs.mobile.screens.android.MenuItemScreen;
+import com.hs.mobile.screens.android.RestaurantScreen;
 import io.qameta.allure.Step;
 import java.time.Duration;
 import java.util.List;

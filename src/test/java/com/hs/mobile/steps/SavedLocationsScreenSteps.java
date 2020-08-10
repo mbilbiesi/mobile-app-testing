@@ -1,7 +1,7 @@
 package com.hs.mobile.steps;
 
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.SavedLocationsScreen;
+import com.hs.mobile.screens.android.SavedLocationsScreen;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import org.openqa.selenium.support.ui.ExpectedConditions;

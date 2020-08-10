@@ -1,14 +1,14 @@
 package com.hs.mobile.steps;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.OrdersScreen;
+import com.hs.mobile.screens.android.OrdersScreen;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
+
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrdersSteps extends BaseSteps {
 

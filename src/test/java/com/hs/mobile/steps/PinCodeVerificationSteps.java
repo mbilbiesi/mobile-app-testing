@@ -1,12 +1,12 @@
 package com.hs.mobile.steps;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.PinCodeVerificationScreen;
+import com.hs.mobile.screens.android.PinCodeVerificationScreen;
 import io.qameta.allure.Step;
 import lombok.NonNull;
+
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class PinCodeVerificationSteps extends BaseSteps {
 

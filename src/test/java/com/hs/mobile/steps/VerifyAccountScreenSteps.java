@@ -1,14 +1,14 @@
 package com.hs.mobile.steps;
 
-import static io.appium.java_client.touch.TapOptions.tapOptions;
-import static io.appium.java_client.touch.offset.ElementOption.element;
-
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.VerifyAccountScreen;
+import com.hs.mobile.screens.android.VerifyAccountScreen;
 import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
+
+import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class VerifyAccountScreenSteps extends BaseSteps {
 
