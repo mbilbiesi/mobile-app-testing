@@ -4,7 +4,7 @@ import io.appium.java_client.MobileElement;
 
 public class OfferScreen {
 
-  private MobileElement clickableCloseButton;
+  private MobileElement btnClose;
 
   private MobileElement firstRestaurantOffer;
 

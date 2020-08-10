@@ -7,7 +7,6 @@ public class MoreOptionsScreen {
 
   //Note for improvements - changing the name of the ID to a more descriptive name relates to the btn
 
-
   @iOSXCUITFindBy(accessibility = "cell_0")
   private MobileElement btnReferralCode;
 

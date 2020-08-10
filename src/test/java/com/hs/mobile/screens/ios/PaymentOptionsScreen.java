@@ -9,7 +9,7 @@ public class PaymentOptionsScreen {
   private MobileElement btnBack;
 
   //todo implement locator
-  private MobileElement paymentOptionsHeaderTxt;
+  private MobileElement txtPaymentOptionsHeader;
 
   @iOSXCUITFindBy(accessibility = "option_credit_card")
   private MobileElement btnCreditCardPaymentOption;

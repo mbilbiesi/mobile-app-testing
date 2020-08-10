@@ -18,7 +18,7 @@ public class AllStoresScreen {
   private MobileElement carouselCell;
 
   @iOSXCUITFindBy(accessibility = "filter_title")
-  private MobileElement ClickableFilterTitle;
+  private MobileElement btnFilterTitle;
 
   //todo: filter titles by ID
   private MobileElement btnFilterAll;
