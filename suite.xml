@@ -1,16 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="HS Android Smoke Test" verbose="1" configfailurepolicy="continue">
-    <test name="Test One ">
-        <parameter name="username" value="Fahad"></parameter>
+<suite name="HS Android Smoke Test" verbose="1" parallel="tests"
+  thread-count="2" configfailurepolicy="continue">
+    <test name="Emulator - Galaxy Nexus">
+        <parameter name="platformName" value="Android"/>
+        <parameter name="platformVersion" value="10.0"/>
+        <parameter name="udid" value="emulator-5554"/>
+        <parameter name="uniquePort" value="4723"/>
+        <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <class name="com.hs.mobile.tests.Fahad"></class>
-        </classes>
-    </test>
-    <test name="Test Two">
-        <parameter name="username" value="Mazen"></parameter>
-        <classes>
-            <class name="com.hs.mobile.tests.Fahad"></class>
+            <class name="com.hs.mobile.tests.CheckoutITs"/>
         </classes>
     </test>
 </suite>
