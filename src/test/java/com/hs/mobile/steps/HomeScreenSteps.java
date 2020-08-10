@@ -1,7 +1,10 @@
 package com.hs.mobile.steps;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.messages.ScreenLabelsProvider;
+import com.hs.mobile.exception.TestExecutionException;
 import com.hs.mobile.screens.android.HomeScreen;
 import com.hs.mobile.screens.android.HomeScreenSideMenu;
 import com.hs.mobile.screens.android.LocationsScreen;
@@ -12,8 +15,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 public class HomeScreenSteps extends BaseSteps {
@@ -189,7 +190,7 @@ public class HomeScreenSteps extends BaseSteps {
             location -> {
               tap(homeScreen.getBtnMore().get(0));
               tap(homeScreen.getBtnEditOrDelete().get(1));
-              //tap(homeScreen.getLstHomescreenAddresses());
+              tap(homeScreen.getLstHomeScreenAddresses());
             });
   }
 
@@ -224,7 +225,7 @@ public class HomeScreenSteps extends BaseSteps {
     try {
       tap(homeScreen.getLnkSkipPromotion());
     } catch (Exception e) {
-
+      throw new TestExecutionException("Unable to dismiss Promotion", e);
     }
   }
 }

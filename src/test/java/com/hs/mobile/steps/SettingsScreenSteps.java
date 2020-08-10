@@ -1,19 +1,20 @@
 package com.hs.mobile.steps;
 
+import static com.hs.mobile.data.ElementAttribute.CHECKED;
+import static com.hs.mobile.data.ElementAttribute.ENABLED;
+import static com.hs.mobile.data.ElementAttribute.TEXT;
+import static com.hs.mobile.data.Language.AR;
+import static com.hs.mobile.data.Language.EN;
+
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.Language;
 import com.hs.mobile.exception.TestExecutionException;
 import com.hs.mobile.screens.android.SettingsScreen;
 import io.qameta.allure.Step;
+import java.util.Optional;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
-
-import java.util.Optional;
-
-import static com.hs.mobile.data.ElementAttribute.*;
-import static com.hs.mobile.data.Language.AR;
-import static com.hs.mobile.data.Language.EN;
 
 public class SettingsScreenSteps extends BaseSteps {
 
