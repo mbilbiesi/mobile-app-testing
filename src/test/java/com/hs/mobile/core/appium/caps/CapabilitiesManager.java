@@ -6,6 +6,7 @@ import static org.openqa.selenium.Platform.ANDROID;
 import static org.openqa.selenium.Platform.IOS;
 
 import com.hs.mobile.core.settings.TestParameters;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.NonNull;
@@ -32,20 +33,21 @@ public class CapabilitiesManager {
         capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ANDROID_UIAUTOMATOR2);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID);
+        capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, uniquePort);
         break;
 
       case IOS:
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Pro Max");
         capabilities.setCapability(MobileCapabilityType.UDID, deviceUDID);
         capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOS_XCUI_TEST);
         capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS);
+        capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
         break;
     }
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-    capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
     capabilities.setCapability("autoGrantPermissions", true);
     return capabilities;
   }
