@@ -79,7 +79,8 @@ public class BaseTestModule extends AbstractModule {
   @Singleton
   @AppFilePath
   public String appFilePath(AppCenterEndpoints appCenterEndpoints, TestParameters parameters) {
-    return appCenterEndpoints.getAppDetails(parameters.getPlatform()).getDownloadUrl();
+    //return appCenterEndpoints.getAppDetails(parameters.getPlatform()).getDownloadUrl();
+    return "/Users/fahadalshehri/Downloads/HungerStation2.app";
   }
 
   @Qualifier

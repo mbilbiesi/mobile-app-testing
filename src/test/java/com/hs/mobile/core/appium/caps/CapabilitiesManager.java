@@ -44,11 +44,13 @@ public class CapabilitiesManager {
         capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS);
         capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
+        //capabilities.setCapability("autoAcceptAlerts", true);
+        //capabilities.setCapability("autoDismissAlerts", true);
         break;
     }
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-    capabilities.setCapability("autoGrantPermissions", true);
+    //capabilities.setCapability("autoGrantPermissions", true);
     return capabilities;
   }
 }

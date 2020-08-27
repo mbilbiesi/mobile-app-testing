@@ -1,17 +1,23 @@
 package com.hs.mobile.screens.ios;
 
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import java.util.List;
+import lombok.Getter;
+import lombok.NonNull;
 
-public class HomeScreen {
+@Getter
+public class LandingScreen extends AbstractScreen {
 
   //DONE HOMEPAGE:
   @iOSXCUITFindBy(accessibility = "custom_button")
   private List<MobileElement> btnDifferentLocation;
 
   @iOSXCUITFindBy(accessibility = "delivery_to")
-  private MobileElement lblDeliveryTo;
+  private IOSElement lblDeliveryTo;
 
   @iOSXCUITFindBy(accessibility = "choose")
   private MobileElement lblChooseLocation;
@@ -30,4 +36,7 @@ public class HomeScreen {
   private MobileElement btnMoreMenuNavBar; //todo: look at providing id
 
 
+  public LandingScreen(@NonNull TestSettings settings) {
+    super(settings);
+  }
 }

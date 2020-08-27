@@ -2,6 +2,7 @@ package com.hs.mobile.tests.base;
 
 import com.google.inject.Inject;
 import com.hs.mobile.conf.GuiceModuleFactory;
+import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.restaurants.RestaurantsProvider;
 import com.hs.mobile.data.user.TestUser;
 import io.appium.java_client.AppiumDriver;
@@ -17,9 +18,13 @@ import org.testng.annotations.Guice;
 public class BaseInitiator {
 
   public boolean isLocationValid;
-  @Inject protected TestUser testUser;
-  @Inject protected AppiumDriver<MobileElement> driver;
+  @Inject
+  protected TestUser testUser;
+  @Inject
+  protected AppiumDriver<MobileElement> driver;
+
   protected RestaurantsProvider restaurantsData;
+
 
   @BeforeClass
   void startAppiumServer() {
@@ -41,7 +46,7 @@ public class BaseInitiator {
   @AfterClass()
   public void teardown() {
     if (driver != null) {
-      driver.resetApp();
+      //driver.resetApp();
       driver.quit();
     }
   }

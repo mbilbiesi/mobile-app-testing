@@ -3,6 +3,7 @@ package com.hs.mobile.conf;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.ios.LandingScreen;
 import com.hs.mobile.steps.CheckoutScreenSteps;
 import com.hs.mobile.steps.CreateTicketSteps;
 import com.hs.mobile.steps.HelpSteps;
@@ -21,6 +22,7 @@ import com.hs.mobile.steps.SettingsScreenSteps;
 import com.hs.mobile.steps.TicketSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
 import com.hs.mobile.steps.WalletScreenSteps;
+import org.testng.annotations.Test;
 
 @SuppressWarnings("unused")
 public class TestStepsModule extends AbstractModule {
@@ -113,5 +115,10 @@ public class TestStepsModule extends AbstractModule {
   @Provides
   public LocationScreenSteps locationScreenSteps(TestSettings settings) {
     return new LocationScreenSteps(settings);
+  }
+
+  @Provides
+  public LandingScreen landingScreen(TestSettings testSettings){
+    return new LandingScreen(testSettings);
   }
 }
