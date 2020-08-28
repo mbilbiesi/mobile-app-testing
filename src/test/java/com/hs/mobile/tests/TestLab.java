@@ -16,7 +16,7 @@ public class TestLab extends BaseStepsInitiator {
 
     @Test(description = "just checking test lab")
     void verifyTestLab() {
-        System.out.println("nothing");
+        System.out.println("Thread>>>" + Thread.currentThread().getId());
         // Given
         driver.findElementById("xx").click();
 

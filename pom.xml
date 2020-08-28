@@ -143,13 +143,16 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+                    <properties>
+                        <property>
+                            <name>suitethreadpoolsize</name>
+                            <value>2</value>
+                        </property>
+                    </properties>
                     <suiteXmlFiles>
-                        <suiteXmlFile>suite.xml</suiteXmlFile>
+                        <suiteXmlFile>suites.xml</suiteXmlFile>
                     </suiteXmlFiles>
                     <skipITs>${skipITs}</skipITs>
-                    <systemPropertyVariables>
-                        <testng.dtd.http>true</testng.dtd.http>
-                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>

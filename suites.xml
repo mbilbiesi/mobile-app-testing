@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Android Tests"  >
+    <suite-files>
+        <suite-file path="src/test/resources/suites/android.xml" />
+<!--        <suite-file path="src/test/resources/suites/android/samsung_galaxy_s20_plus.xml" />-->
+    </suite-files>
+</suite>
