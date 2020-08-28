@@ -26,6 +26,7 @@ public class DriverManager {
 
     if (platform.is(ANDROID)) {
       try {
+        System.out.println(desiredCapabilities.asMap());
         driver = new AndroidDriver<>(new URL(appiumURL), desiredCapabilities);
       } catch (Exception e) {
         log.error("unable to initiate Android driver", e);

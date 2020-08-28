@@ -1,15 +1,60 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="HS Android Smoke Test" verbose="1" parallel="tests"
-  thread-count="2" configfailurepolicy="continue">
-    <test name="Emulator - Galaxy Nexus">
+<suite name="HS Android Smoke Test" verbose="10" parallel="tests"
+  thread-count="10" configfailurepolicy="continue">
+    <test name="Huawei P30 pro">
+        <parameter name="deviceName" value="Huawei P30 pro"></parameter>
         <parameter name="platformName" value="Android"/>
-        <parameter name="platformVersion" value="10.0"/>
-        <parameter name="udid" value="emulator-5554"/>
-        <parameter name="uniquePort" value="4723"/>
+        <parameter name="platformVersion" value="9.0"/>
+        <parameter name="udid" value="22X0220113003013"/>
+        <parameter name="uniquePort" value="8200"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <class name="com.hs.mobile.tests.CheckoutITs"/>
+            <class name="com.hs.mobile.tests.TestLab"/>
         </classes>
     </test>
+    <test name="Samsung Galaxy S20 Plus">
+        <parameter name="deviceName" value="Samsung Galaxy S20 Plus"></parameter>
+        <parameter name="platformName" value="Android"/>
+        <parameter name="platformVersion" value="10.0"/>
+        <parameter name="udid" value="R58N21FXAVB"/>
+        <parameter name="uniquePort" value="8201"/>
+        <parameter name="assignedTestUserId" value="1"/>
+        <classes>
+            <class name="com.hs.mobile.tests.TestLab"/>
+        </classes>
+    </test>
+    <test name="Samsung Note 9">
+        <parameter name="deviceName" value="Samsung Note 9"></parameter>
+        <parameter name="platformName" value="Android"/>
+        <parameter name="platformVersion" value="9.0"/>
+        <parameter name="udid" value="281166b9e5217ece"/>
+        <parameter name="uniquePort" value="8202"/>
+        <parameter name="assignedTestUserId" value="1"/>
+        <classes>
+            <class name="com.hs.mobile.tests.TestLab"/>
+        </classes>
+    </test>
+    <test name="Samsung Galaxy S10 Plus">
+        <parameter name="deviceName" value="Samsung Galaxy S10 Plus"></parameter>
+        <parameter name="platformName" value="Android"/>
+        <parameter name="platformVersion" value="9.0"/>
+        <parameter name="udid" value="R58M87RXZMJ"/>
+        <parameter name="uniquePort" value="8203"/>
+        <parameter name="assignedTestUserId" value="1"/>
+        <classes>
+            <class name="com.hs.mobile.tests.TestLab"/>
+        </classes>
+    </test>
+<!--    <test name="Iphone 11 Xs Max">-->
+<!--        <parameter name="deviceName" value="Iphone 11 Xs Max"></parameter>-->
+<!--        <parameter name="platformName" value="iOS"/>-->
+<!--        <parameter name="platformVersion" value="12.2"/>-->
+<!--        <parameter name="udid" value="00008020-001A78D83C89002E"/>-->
+<!--        <parameter name="uniquePort" value="8100"/>-->
+<!--        <parameter name="assignedTestUserId" value="1"/>-->
+<!--        <classes>-->
+<!--            <class name="com.hs.mobile.tests.TestLab"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

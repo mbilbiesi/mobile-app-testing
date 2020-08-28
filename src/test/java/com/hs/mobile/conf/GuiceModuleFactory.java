@@ -8,6 +8,7 @@ public class GuiceModuleFactory implements IModuleFactory {
 
   @Override
   public Module createModule(ITestContext context, Class<?> testClass) {
+    System.out.println("Parent>>>>>>" + context.getCurrentXmlTest().getParameter("deviceName"));
     return new BaseTestModule(context);
   }
 }

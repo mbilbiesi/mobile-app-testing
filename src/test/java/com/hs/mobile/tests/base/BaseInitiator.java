@@ -24,8 +24,8 @@ public class BaseInitiator {
   @BeforeClass
   void startAppiumServer() {
     String language = testUser.getLanguage();
-    Location location = setDeviceLocation(31.963158, 35.930359, false); // Amman
-    driver.setLocation(location);
+   // Location location = setDeviceLocation(31.963158, 35.930359, false); // Amman
+    //driver.setLocation(location);
     restaurantsData = new RestaurantsProvider(language);
   }
 
@@ -41,7 +41,7 @@ public class BaseInitiator {
   @AfterClass()
   public void teardown() {
     if (driver != null) {
-      driver.resetApp();
+     // driver.resetApp();
       driver.quit();
     }
   }

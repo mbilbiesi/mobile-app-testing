@@ -29,6 +29,7 @@ public class BaseTestModule extends AbstractModule {
 
   public BaseTestModule(ITestContext iTestContext) {
     this.iTestContext = iTestContext;
+    System.out.println("child >>>>" + iTestContext.getCurrentXmlTest().getParameter("deviceName"));
   }
 
   @Override
