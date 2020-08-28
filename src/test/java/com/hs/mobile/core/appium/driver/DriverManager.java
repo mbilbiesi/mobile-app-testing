@@ -26,13 +26,14 @@ public class DriverManager {
 
     if (platform.is(ANDROID)) {
       try {
-        System.out.println(desiredCapabilities.asMap());
+        log.debug("Attempt to create android driver with following capabilities : " + desiredCapabilities.asMap());
         driver = new AndroidDriver<>(new URL(appiumURL), desiredCapabilities);
       } catch (Exception e) {
         log.error("unable to initiate Android driver", e);
       }
     } else if (platform.is(IOS)) {
       try {
+        log.debug("Attempt to create iOS driver with following capabilities : " + desiredCapabilities.asMap());
         driver = new IOSDriver<>(new URL(appiumURL), desiredCapabilities);
       } catch (Exception e) {
         log.error("unable to initiate iOS driver", e);

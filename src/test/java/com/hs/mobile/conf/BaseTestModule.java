@@ -19,17 +19,20 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import javax.inject.Qualifier;
 import lombok.NonNull;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Platform;
 import org.testng.ITestContext;
 
+@Slf4j
 @SuppressWarnings("unused")
 public class BaseTestModule extends AbstractModule {
   @NonNull private final ITestContext iTestContext;
 
   public BaseTestModule(ITestContext iTestContext) {
     this.iTestContext = iTestContext;
-    System.out.println("child >>>>" + iTestContext.getCurrentXmlTest().getParameter("deviceName"));
+    log.debug("create module for device : " + iTestContext.getCurrentXmlTest().getParameter("deviceName"));
   }
 
   @Override

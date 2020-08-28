@@ -1,7 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.tests.base.BaseStepsInitiator;
+import com.hs.mobile.tests.base.BaseSteps;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 @Story("Cover restaurant menu smoke test cases")
 @Issue("HSAP-208")
 @Listeners(TestListener.class)
-public class MenusITs extends BaseStepsInitiator {
+public class MenusITs extends BaseSteps {
 
   @Test(description = "While swiping through menu groups, they should display properly")
   public void navigateToRestaurantScreen_menuGroupsShouldDisplayProperly() {

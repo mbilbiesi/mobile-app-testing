@@ -1,7 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.tests.base.BaseStepsInitiator;
+import com.hs.mobile.tests.base.BaseSteps;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @Feature("Restaurants List Tests")
 @Story("Restaurant verification cases")
 @Listeners(TestListener.class)
-public class RestaurantsITs extends BaseStepsInitiator {
+public class RestaurantsITs extends BaseSteps {
 
   // ToDo: Some test here have to be skipped based on whether campaigns are enabled
   // or not or whether the location has campaigns or not. We need to implement a way

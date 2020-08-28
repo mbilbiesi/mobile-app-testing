@@ -3,6 +3,6 @@
 <suite name="Android Tests"  >
     <suite-files>
         <suite-file path="src/test/resources/suites/android.xml" />
-<!--        <suite-file path="src/test/resources/suites/android/samsung_galaxy_s20_plus.xml" />-->
+<!--        <suite-file path="src/test/resources/suites/ios.xml" />-->
     </suite-files>
 </suite>

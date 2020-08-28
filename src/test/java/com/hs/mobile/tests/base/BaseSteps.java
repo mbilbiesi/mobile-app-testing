@@ -20,7 +20,7 @@ import com.hs.mobile.steps.TicketSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
 import com.hs.mobile.steps.WalletScreenSteps;
 
-public class BaseStepsInitiator extends BaseInitiator {
+public class BaseSteps extends Base {
 
   @Inject protected HomeScreenSteps homeScreenSteps;
   @Inject protected LocationScreenSteps locationScreenSteps;
