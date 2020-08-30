@@ -47,6 +47,8 @@ public class CapabilitiesManager {
                 capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
                 capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS);
+                capabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "WK247W7C8M");
+                capabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                 break;
         }
 

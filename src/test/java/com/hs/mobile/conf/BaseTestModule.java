@@ -19,7 +19,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import javax.inject.Qualifier;
 import lombok.NonNull;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Platform;
@@ -32,7 +31,9 @@ public class BaseTestModule extends AbstractModule {
 
   public BaseTestModule(ITestContext iTestContext) {
     this.iTestContext = iTestContext;
-    log.debug("create module for device : " + iTestContext.getCurrentXmlTest().getParameter("deviceName"));
+    log.debug(
+        "create module for device : "
+            + iTestContext.getCurrentXmlTest().getParameter("deviceName"));
   }
 
   @Override
@@ -63,6 +64,7 @@ public class BaseTestModule extends AbstractModule {
   @Provides
   @Singleton
   public TestParameters testParameters(TestProperties properties) {
+    String deviceName = iTestContext.getCurrentXmlTest().getParameter("deviceName");
     String platformName = iTestContext.getCurrentXmlTest().getParameter("platformName");
     String platformVersion = iTestContext.getCurrentXmlTest().getParameter("platformVersion");
     String udid = iTestContext.getCurrentXmlTest().getParameter("udid");
@@ -70,6 +72,7 @@ public class BaseTestModule extends AbstractModule {
     String assignedTestUserId = iTestContext.getCurrentXmlTest().getParameter("assignedTestUserId");
 
     return TestParameters.builder()
+        .deviceName(deviceName)
         .platform(Platform.fromString(platformName))
         .platformVersion(platformVersion)
         .deviceUDID(udid)

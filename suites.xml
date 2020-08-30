@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Android Tests"  >
     <suite-files>
-        <suite-file path="src/test/resources/suites/android.xml" />
-<!--        <suite-file path="src/test/resources/suites/ios.xml" />-->
+<!--        <suite-file path="src/test/resources/suites/android.xml" />-->
+        <suite-file path="src/test/resources/suites/ios.xml" />
     </suite-files>
 </suite>

@@ -4,7 +4,7 @@
 <suite name="iOS" verbose="10" parallel="tests"
   thread-count="4" configfailurepolicy="continue">
     <test name="Iphone 11 Xs Max">
-        <parameter name="deviceName" value="Iphone 11 Xs Max"></parameter>
+        <parameter name="deviceName" value="Iphone 11 Xs Max"/>
         <parameter name="platformName" value="iOS"/>
         <parameter name="platformVersion" value="12.2"/>
         <parameter name="udid" value="00008020-001A78D83C89002E"/>
