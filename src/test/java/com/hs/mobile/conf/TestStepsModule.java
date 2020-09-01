@@ -4,6 +4,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.ios.LandingScreen;
+import com.hs.mobile.screens.ios.SelectLocationScreen;
+import com.hs.mobile.screens.ios.VerticalsScreen;
 import com.hs.mobile.steps.CheckoutScreenSteps;
 import com.hs.mobile.steps.CreateTicketSteps;
 import com.hs.mobile.steps.HelpSteps;
@@ -121,4 +123,17 @@ public class TestStepsModule extends AbstractModule {
   public LandingScreen landingScreen(TestSettings testSettings){
     return new LandingScreen(testSettings);
   }
+
+
+  @Provides
+  public SelectLocationScreen selectLocationScreen(TestSettings testSettings){
+    return new SelectLocationScreen(testSettings);
+  }
+
+  @Provides
+  public VerticalsScreen verticalScreen(TestSettings testSettings){
+    return new VerticalsScreen(testSettings);
+  }
+
+
 }

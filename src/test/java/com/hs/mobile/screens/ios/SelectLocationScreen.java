@@ -1,9 +1,14 @@
 package com.hs.mobile.screens.ios;
 
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import lombok.Getter;
+import lombok.NonNull;
 
-public class SelectLocationScreen {
+@Getter
+public class SelectLocationScreen extends AbstractScreen {
 
   @iOSXCUITFindBy(accessibility = "back_button")
   private MobileElement btnClose;
@@ -13,6 +18,9 @@ public class SelectLocationScreen {
 
   @iOSXCUITFindBy(accessibility = "search_button")
   private MobileElement btnSearch;
+
+  @iOSXCUITFindBy(accessibility = "searchBar")
+  private MobileElement searchBar;
 
   private MobileElement txtAddress;
 
@@ -24,4 +32,10 @@ public class SelectLocationScreen {
   private MobileElement btnSelectAddress;
 
 
+  @iOSXCUITFindBy(accessibility = "save_button")
+  private MobileElement btnDone;
+
+  public SelectLocationScreen(@NonNull TestSettings settings) {
+    super(settings);
+  }
 }

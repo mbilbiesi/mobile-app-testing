@@ -3,15 +3,12 @@ package com.hs.mobile.screens.ios;
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
 
 @Getter
-public class LandingScreen extends AbstractScreen {
-
+public class VerticalsScreen extends AbstractScreen {
 
   //_______________________
   //Start Address entry bar
@@ -29,32 +26,22 @@ public class LandingScreen extends AbstractScreen {
   @iOSXCUITFindBy(accessibility = "arrow_icon")
   private MobileElement btnArrow;
 
+  @iOSXCUITFindBy(accessibility = "add_icon")
+  private MobileElement btnAdd;
   //_______________________
   //End Address entry bar
   //_______________________
 
+  @iOSXCUITFindBy(accessibility = "homeRow_0")
+  private MobileElement lblAllStores;
 
-  @iOSXCUITFindBy(accessibility = "header_logo")
-  private MobileElement imgHeaderIcon;
+  @iOSXCUITFindBy(accessibility = "homeRow_1")
+  private MobileElement lblQuickMarket;
 
-  //Allow Location Access
-  @iOSXCUITFindBy(accessibility = "custom_button")
-  private MobileElement btnAllowAccess;
+  @iOSXCUITFindBy(accessibility = "homeRow_2")
+  private MobileElement lblOrderAnything;
 
-  //Allow Location Access
-  @iOSXCUITFindBy(accessibility = "custom_button")
-  private MobileElement btnManualLocation;
-
-
-
-  @iOSXCUITFindBy(accessibility = "searchBar")
-  private MobileElement searchBar;
-
-  @iOSXCUITFindBy(accessibility = "Search")
-  private MobileElement keyboardInputSearch;
-
-
-  public LandingScreen(@NonNull TestSettings settings) {
+  public VerticalsScreen(@NonNull TestSettings settings) {
     super(settings);
   }
 }

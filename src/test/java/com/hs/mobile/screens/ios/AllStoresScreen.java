@@ -9,10 +9,13 @@ public class AllStoresScreen {
   private MobileElement btnBack;
 
   @iOSXCUITFindBy(accessibility = "header_location")
-  private MobileElement txtLocationHeaderTxt;
+  private MobileElement txtLocationHeader;
 
   @iOSXCUITFindBy(accessibility = "header_search_icon")
   private MobileElement btnSearchIcon;
+
+  @iOSXCUITFindBy(accessibility = "offer_image")
+  private MobileElement imgOffer;
 
   @iOSXCUITFindBy(accessibility = "cell_carousel")
   private MobileElement carouselCell;
