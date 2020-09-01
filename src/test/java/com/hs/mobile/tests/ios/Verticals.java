@@ -1,20 +1,18 @@
 package com.hs.mobile.tests.ios;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.google.inject.Inject;
-import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.ios.LandingScreen;
 import com.hs.mobile.screens.ios.SelectLocationScreen;
 import com.hs.mobile.screens.ios.VerticalsScreen;
 import com.hs.mobile.tests.base.BaseStepsInitiator;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSElement;
 import java.util.concurrent.TimeUnit;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
 
 public class Verticals extends BaseStepsInitiator {
@@ -41,10 +39,7 @@ public class Verticals extends BaseStepsInitiator {
     }
 
 
-    //
     MobileElement choose = landingScreen.getBtnChoose();
-
-    //MobileElement choose = landingScreen.getLblDeliveryTo();
     choose.click();
 
 
@@ -79,9 +74,9 @@ public class Verticals extends BaseStepsInitiator {
     MobileElement lblOrderAnything = verticalsScreen.getLblOrderAnything();
     soft.assertThat(lblOrderAnything.isDisplayed()).isTrue();
 
-
+    soft.assertAll();
     System.out.println("Verticals are present");
-    verifyVerticalsBasedOnLocations();
+    //verifyVerticalsBasedOnLocations();
   }
 
   @Test(description = "Verify all verticals are displayed based on location", priority = 1)
@@ -109,27 +104,27 @@ public class Verticals extends BaseStepsInitiator {
     MobileElement jeddah = driver.findElementByXPath("//XCUIElementTypeStaticText[@name=\"Jeddah\"]");
     jeddah.click();
 
-
     MobileElement select = selectLocationScreen.getBtnSelectAddress();
     select.click();
-
 
     MobileElement btnDone = selectLocationScreen.getBtnDone();
     btnDone.click();
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-
-    MobileElement lblAllStores = verticalsScreen.getLblAllStores();
-
-    SoftAssertions softCheck = new SoftAssertions();
-    softCheck.assertThat(lblAllStores.isDisplayed())
+    SoftAssertions soft = new SoftAssertions();
+    soft.assertThat(verticalsScreen.getLblAllStores().isDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
 
-    softCheck.assertThat(lblAllStores.isDisplayed())
+    soft.assertThat(verticalsScreen.getLblQuickMarket().isDisplayed())
         .as("Quick Market vertical is not displayed")
         .isTrue();
+
+    soft.assertAll();
+    assertThatExceptionOfType(NoSuchElementException.class)
+        .as("OrderAnything should not be displayed")
+        .isThrownBy(() -> verticalsScreen.getLblOrderAnything().isDisplayed());
 
 
   }
