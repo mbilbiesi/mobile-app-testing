@@ -10,11 +10,10 @@ import org.testng.annotations.Test;
 public class TestLab extends BaseSteps {
 
     @Test(description = "just checking test lab")
-    void verifyTestLab() {
+    void verifyTestLab() throws InterruptedException {
         System.out.println("Thread>>>" + Thread.currentThread().getId());
         // Given
-        driver.findElementById("xx").click();
-
-
+        Thread.sleep(60000);
+        //driver.findElementById("xx").click();
     }
 }

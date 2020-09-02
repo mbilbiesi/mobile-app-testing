@@ -37,6 +37,7 @@ public class CapabilitiesManager {
                 capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ANDROID_UIAUTOMATOR2);
                 capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, uniquePort);
                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID);
+                capabilities.setCapability("autoGrantPermissions", true);
                 break;
 
             case IOS:
@@ -47,13 +48,15 @@ public class CapabilitiesManager {
                 capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
                 capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
                 capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS);
+                capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
+             //   capabilities.setCapability("permissions","{\"com.hungerstation.ios.hungerstationapp\": {\"location\": \"always\"}}");
                 capabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, "WK247W7C8M");
                 capabilities.setCapability(IOSMobileCapabilityType.XCODE_SIGNING_ID, "iPhone Developer");
                 break;
         }
 
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability("newCommandTimeout", 70);
         return capabilities;
     }
 }

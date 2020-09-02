@@ -2,12 +2,9 @@ package com.hs.mobile.core.listener;
 
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Attachment;
-
 import java.lang.reflect.Field;
-
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
@@ -23,6 +20,16 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+        Class clazz = iTestResult.getTestClass().getRealClass();
+        try {
+            Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
+            field.setAccessible(true);
+
+            AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
+            saveScreenshot(composeTestName(iTestResult), driver);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            log.info("Error while taking screenshot: ", e);
+        }
     }
 
     @Override
@@ -35,7 +42,7 @@ public class TestListener implements ITestListener {
             AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
             saveScreenshot(composeTestName(iTestResult), driver);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            log.error("Error while taking screenshot: ", e);
+            log.info("Error while taking screenshot: ", e);
         }
     }
 

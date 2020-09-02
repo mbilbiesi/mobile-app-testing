@@ -2,13 +2,24 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="iOS" verbose="10" parallel="tests"
-  thread-count="4" configfailurepolicy="continue">
+  thread-count="2" configfailurepolicy="continue">
     <test name="Iphone 11 Xs Max">
         <parameter name="deviceName" value="Iphone 11 Xs Max"/>
         <parameter name="platformName" value="iOS"/>
         <parameter name="platformVersion" value="12.2"/>
         <parameter name="udid" value="00008020-001A78D83C89002E"/>
         <parameter name="uniquePort" value="8100"/>
+        <parameter name="assignedTestUserId" value="1"/>
+        <classes>
+            <class name="com.hs.mobile.tests.TestLab"/>
+        </classes>
+    </test>
+    <test name="Iphone 11 Pro Max">
+        <parameter name="deviceName" value="Iphone 11 Pro Max"/>
+        <parameter name="platformName" value="iOS"/>
+        <parameter name="platformVersion" value="13.3"/>
+        <parameter name="udid" value="00008030-000C68A00C32802E"/>
+        <parameter name="uniquePort" value="8101"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
             <class name="com.hs.mobile.tests.TestLab"/>
