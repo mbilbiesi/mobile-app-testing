@@ -11,7 +11,7 @@
         <parameter name="uniquePort" value="8100"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <class name="com.hs.mobile.tests.TestLab"/>
+            <class name="com.hs.mobile.tests.TestParallel"/>
         </classes>
     </test>
     <test name="Iphone 11 Pro Max">
@@ -22,7 +22,7 @@
         <parameter name="uniquePort" value="8101"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <class name="com.hs.mobile.tests.TestLab"/>
+            <class name="com.hs.mobile.tests.TestParallel"/>
         </classes>
     </test>
 </suite>

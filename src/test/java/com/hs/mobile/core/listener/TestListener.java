@@ -14,72 +14,67 @@ import org.testng.ITestResult;
 @Slf4j
 public class TestListener implements ITestListener {
 
-    @Override
-    public void onTestStart(ITestResult iTestResult) {
+  @Override
+  public void onTestStart(ITestResult iTestResult) {}
+
+  @Override
+  public void onTestSuccess(ITestResult iTestResult) {
+    Class clazz = iTestResult.getTestClass().getRealClass();
+    try {
+      Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
+      field.setAccessible(true);
+
+      AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
+      saveScreenshot(composeTestName(iTestResult), driver);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      log.info("Error while taking screenshot: ", e);
+    }
+  }
+
+  @Override
+  public void onTestFailure(ITestResult iTestResult) {
+    Class clazz = iTestResult.getTestClass().getRealClass();
+    try {
+      Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
+      field.setAccessible(true);
+
+      AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
+      saveScreenshot(composeTestName(iTestResult), driver);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      log.info("Error while taking screenshot: ", e);
+    }
+  }
+
+  @Override
+  public void onTestSkipped(ITestResult iTestResult) {}
+
+  @Override
+  public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {}
+
+  @Override
+  public void onStart(ITestContext iTestContext) {}
+
+  @Override
+  public void onFinish(ITestContext iTestContext) {}
+
+  private String composeTestName(ITestResult iTestResult) {
+    StringBuffer completeFileName = new StringBuffer();
+
+    completeFileName.append(iTestResult.getTestClass().getRealClass().getSimpleName());
+    completeFileName.append("_");
+    completeFileName.append(iTestResult.getName() + "_" + RandomStringUtils.randomAlphanumeric(10));
+
+    Object[] parameters = iTestResult.getParameters();
+    for (Object parameter : parameters) {
+      completeFileName.append("_");
+      completeFileName.append(parameter);
     }
 
-    @Override
-    public void onTestSuccess(ITestResult iTestResult) {
-        Class clazz = iTestResult.getTestClass().getRealClass();
-        try {
-            Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
-            field.setAccessible(true);
+    return completeFileName.toString().replace(":", "-");
+  }
 
-            AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
-            saveScreenshot(composeTestName(iTestResult), driver);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            log.info("Error while taking screenshot: ", e);
-        }
-    }
-
-    @Override
-    public void onTestFailure(ITestResult iTestResult) {
-        Class clazz = iTestResult.getTestClass().getRealClass();
-        try {
-            Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
-            field.setAccessible(true);
-
-            AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
-            saveScreenshot(composeTestName(iTestResult), driver);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            log.info("Error while taking screenshot: ", e);
-        }
-    }
-
-    @Override
-    public void onTestSkipped(ITestResult iTestResult) {
-    }
-
-    @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-    }
-
-    @Override
-    public void onStart(ITestContext iTestContext) {
-    }
-
-    @Override
-    public void onFinish(ITestContext iTestContext) {
-    }
-
-    private String composeTestName(ITestResult iTestResult) {
-        StringBuffer completeFileName = new StringBuffer();
-
-        completeFileName.append(iTestResult.getTestClass().getRealClass().getSimpleName());
-        completeFileName.append("_");
-        completeFileName.append(iTestResult.getName() + "_" + RandomStringUtils.randomAlphanumeric(10));
-
-        Object[] parameters = iTestResult.getParameters();
-        for (Object parameter : parameters) {
-            completeFileName.append("_");
-            completeFileName.append(parameter);
-        }
-
-        return completeFileName.toString().replace(":", "-");
-    }
-
-    @Attachment(value = "{title}", type = "image/png")
-    private byte[] saveScreenshot(String title, AppiumDriver driver) {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }
+  @Attachment(value = "{title}", type = "image/png")
+  private byte[] saveScreenshot(String title, AppiumDriver driver) {
+    return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+  }
 }

@@ -11,7 +11,7 @@
         <parameter name="uniquePort" value="8200"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <class name="com.hs.mobile.tests.TestLab"/>
+            <class name="com.hs.mobile.tests.TestParallel"/>
         </classes>
     </test>
     <test name="Samsung Galaxy S20 Plus">
@@ -22,7 +22,7 @@
         <parameter name="uniquePort" value="8201"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <class name="com.hs.mobile.tests.TestLab"/>
+            <class name="com.hs.mobile.tests.TestParallel"/>
         </classes>
     </test>
     <test name="Samsung Note 9">
@@ -33,7 +33,7 @@
         <parameter name="uniquePort" value="8202"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <class name="com.hs.mobile.tests.TestLab"/>
+            <class name="com.hs.mobile.tests.TestParallel"/>
         </classes>
     </test>
     <test name="Samsung Galaxy S10 Plus">
@@ -44,7 +44,7 @@
         <parameter name="uniquePort" value="8203"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <class name="com.hs.mobile.tests.TestLab"/>
+            <class name="com.hs.mobile.tests.TestParallel"/>
         </classes>
     </test>
 </suite>
