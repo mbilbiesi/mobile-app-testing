@@ -2,7 +2,6 @@ package com.hs.mobile.tests.base;
 
 import com.google.inject.Inject;
 import com.hs.mobile.conf.GuiceModuleFactory;
-import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.restaurants.RestaurantsProvider;
 import com.hs.mobile.data.user.TestUser;
 import io.appium.java_client.AppiumDriver;
@@ -47,7 +46,7 @@ public class BaseInitiator {
   public void teardown() {
     if (driver != null) {
       //driver.resetApp();
-      driver.quit();
+      // driver.quit();
     }
   }
 }

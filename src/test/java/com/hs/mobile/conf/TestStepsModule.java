@@ -3,9 +3,7 @@ package com.hs.mobile.conf;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.ios.LandingScreen;
 import com.hs.mobile.screens.ios.SelectLocationScreen;
-import com.hs.mobile.screens.ios.VerticalsScreen;
 import com.hs.mobile.steps.CheckoutScreenSteps;
 import com.hs.mobile.steps.CreateTicketSteps;
 import com.hs.mobile.steps.HelpSteps;
@@ -24,7 +22,9 @@ import com.hs.mobile.steps.SettingsScreenSteps;
 import com.hs.mobile.steps.TicketSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
 import com.hs.mobile.steps.WalletScreenSteps;
-import org.testng.annotations.Test;
+import com.hs.mobile.steps.ios.LandingScreenSteps;
+import com.hs.mobile.steps.ios.SelectLocationScreenSteps;
+import com.hs.mobile.steps.ios.VerticalsScreenSteps;
 
 @SuppressWarnings("unused")
 public class TestStepsModule extends AbstractModule {
@@ -120,20 +120,30 @@ public class TestStepsModule extends AbstractModule {
   }
 
   @Provides
-  public LandingScreen landingScreen(TestSettings testSettings){
-    return new LandingScreen(testSettings);
+  public LandingScreenSteps landingScreenSteps(TestSettings testSettings) {
+    return new LandingScreenSteps(testSettings);
+  }
+
+  @Provides
+  public SelectLocationScreenSteps selectLocationScreenSteps(TestSettings testSettings) {
+    return new SelectLocationScreenSteps(testSettings);
   }
 
 
   @Provides
-  public SelectLocationScreen selectLocationScreen(TestSettings testSettings){
+  public VerticalsScreenSteps verticalsScreenSteps(TestSettings testSettings) {
+    return new VerticalsScreenSteps(testSettings);
+  }
+
+  @Provides
+  public SelectLocationScreen selectLocationScreen(TestSettings testSettings) {
     return new SelectLocationScreen(testSettings);
   }
 
-  @Provides
-  public VerticalsScreen verticalScreen(TestSettings testSettings){
-    return new VerticalsScreen(testSettings);
-  }
+//  @Provides
+//  public VerticalsScreen verticalScreen(TestSettings testSettings) {
+//    return new VerticalsScreen(testSettings);
+//  }
 
 
 }

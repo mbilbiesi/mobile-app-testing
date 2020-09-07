@@ -3,9 +3,7 @@ package com.hs.mobile.screens.ios;
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -44,14 +42,6 @@ public class LandingScreen extends AbstractScreen {
   //Allow Location Access
   @iOSXCUITFindBy(accessibility = "custom_button")
   private MobileElement btnManualLocation;
-
-
-
-  @iOSXCUITFindBy(accessibility = "searchBar")
-  private MobileElement searchBar;
-
-  @iOSXCUITFindBy(accessibility = "Search")
-  private MobileElement keyboardInputSearch;
 
 
   public LandingScreen(@NonNull TestSettings settings) {

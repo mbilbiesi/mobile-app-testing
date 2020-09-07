@@ -1,131 +1,165 @@
 package com.hs.mobile.tests.ios;
 
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-
 import com.google.inject.Inject;
-import com.hs.mobile.screens.ios.LandingScreen;
-import com.hs.mobile.screens.ios.SelectLocationScreen;
-import com.hs.mobile.screens.ios.VerticalsScreen;
+import com.hs.mobile.steps.ios.LandingScreenSteps;
+import com.hs.mobile.steps.ios.SelectLocationScreenSteps;
+import com.hs.mobile.steps.ios.VerticalsScreenSteps;
 import com.hs.mobile.tests.base.BaseStepsInitiator;
 import io.appium.java_client.MobileElement;
 import java.util.concurrent.TimeUnit;
-import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
 
 public class Verticals extends BaseStepsInitiator {
 
   @Inject
-  LandingScreen landingScreen;
-  @Inject
-  SelectLocationScreen selectLocationScreen;
-  @Inject
-  VerticalsScreen verticalsScreen;
+  private LandingScreenSteps landingScreenSteps;
 
+  @Inject
+  private SelectLocationScreenSteps selectLocationScreenSteps;
 
+  @Inject
+  private VerticalsScreenSteps verticalsScreenSteps;
 
   //@Inject
   //VerticalsScreen todo
 
   @Test(description = "Verify all verticals are displayed", priority = 0)
-  public void navigateToHomeScreen_VerifyLocationIsChosen() {
-    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+  public void navigateToHomeScreen_VerifyLocationIsChosen() throws InterruptedException {
+    // Given
     try {
       driver.switchTo().alert().accept();
-    }catch (NoAlertPresentException e){
+      //driver.switchTo().defaultContent();
+    } catch (NoAlertPresentException e) {
       System.out.println(e.getMessage());
     }
+    waiting();
 
+    // When
+    landingScreenSteps.selectNewAddress();
 
-    MobileElement choose = landingScreen.getBtnChoose();
-    choose.click();
+    waiting();
+    selectLocationScreenSteps.clickOnSearchIcon();
+    selectLocationScreenSteps.sendCityViaIosKeyboard();
+    selectLocationScreenSteps.enterSearchUsingKeyboard();
+    selectLocationScreenSteps.clickOnCity();
+    selectLocationScreenSteps.clickOnSelectBtn();
+    selectLocationScreenSteps.clickOnDoneBtn();
 
-
-    MobileElement btnSearch = selectLocationScreen.getBtnSearch();
-    btnSearch.click();
-
-    MobileElement searchBar = landingScreen.getSearchBar();
-    searchBar.sendKeys("Riyadh");
-
-    MobileElement keyboardSearch = landingScreen.getKeyboardInputSearch();
-    keyboardSearch.click();
-
-    MobileElement city = driver.findElementByXPath("//XCUIElementTypeStaticText[@name=\"Riyadh\"]");
-    city.click();
-
-    MobileElement btnSelectAddress = selectLocationScreen.getBtnSelectAddress();
-    btnSelectAddress.click();
-
-    MobileElement btnDone = selectLocationScreen.getBtnDone();
-        //.findElementByXPath("//XCUIElementTypeStaticText[@name=\"Done\"]");
-    btnDone.click();
-
-    SoftAssertions soft = new SoftAssertions();
-    MobileElement lblAllStores = verticalsScreen.getLblAllStores();
-    soft.assertThat(lblAllStores.isDisplayed())
-        .as("'All stores' vertical is not displayed")
-        .isTrue();
-
-    MobileElement lblQuickMarket = verticalsScreen.getLblQuickMarket();
-    soft.assertThat(lblQuickMarket.isDisplayed()).isTrue();
-
-    MobileElement lblOrderAnything = verticalsScreen.getLblOrderAnything();
-    soft.assertThat(lblOrderAnything.isDisplayed()).isTrue();
-
-    soft.assertAll();
-    System.out.println("Verticals are present");
-    //verifyVerticalsBasedOnLocations();
+    // Then
+    verticalsScreenSteps.assertAllVerticals();
   }
 
+  //enabled = false,
   @Test(description = "Verify all verticals are displayed based on location", priority = 1)
-  public void verifyVerticalsBasedOnLocations(){
+  public void verifyVerticalsBasedOnLocations() {
 
-    //test case only homeRow_1 present (All-Stores Vertical)
-    MobileElement btnArrow = verticalsScreen.getBtnArrow();
-    btnArrow.click();
+    //given
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
 
-    MobileElement btnAddLocation = verticalsScreen.getBtnAdd();
-    btnAddLocation.click();
+    verticalsScreenSteps.clickOnArrow();
 
-    MobileElement btnSearch_1 = selectLocationScreen.getBtnSearch();
-    btnSearch_1.click();
+    verticalsScreenSteps.clickOnAdd();
 
-    MobileElement searchBar = selectLocationScreen.getSearchBar();
+    selectLocationScreenSteps.clickOnSearchIcon();
 
-    //Using iOS keyboard
-    searchBar.sendKeys("Jeddah");
+    selectLocationScreenSteps.sendCityViaIosKeyboard2();
 
-    //iOS Keyboard Input
-    MobileElement keyboardSearch = driver.findElementById("Search");
-    keyboardSearch.click();
+    selectLocationScreenSteps.enterSearchUsingKeyboard();
 
-    MobileElement jeddah = driver.findElementByXPath("//XCUIElementTypeStaticText[@name=\"Jeddah\"]");
+    MobileElement jeddah = driver
+        .findElementByXPath("//XCUIElementTypeStaticText[@name=\"Jeddah\"]");
     jeddah.click();
 
-    MobileElement select = selectLocationScreen.getBtnSelectAddress();
-    select.click();
+    selectLocationScreenSteps.clickOnSelectBtn();
 
-    MobileElement btnDone = selectLocationScreen.getBtnDone();
-    btnDone.click();
+    //when
+    selectLocationScreenSteps.clickOnDoneBtn();
 
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-    SoftAssertions soft = new SoftAssertions();
-    soft.assertThat(verticalsScreen.getLblAllStores().isDisplayed())
-        .as("'All stores' vertical is not displayed")
-        .isTrue();
+    waiting();
 
-    soft.assertThat(verticalsScreen.getLblQuickMarket().isDisplayed())
-        .as("Quick Market vertical is not displayed")
-        .isTrue();
-
-    soft.assertAll();
-    assertThatExceptionOfType(NoSuchElementException.class)
-        .as("OrderAnything should not be displayed")
-        .isThrownBy(() -> verticalsScreen.getLblOrderAnything().isDisplayed());
-
+    //then
+    verticalsScreenSteps.assertTwoVerticalsAreDisplayed();
 
   }
+
+  //enabled = false,
+  @Test(description = "Verify only All Stores Vertical is displayed", priority = 2)
+  public void verifyAllStoresVertical_isDisplayed() {
+    //test case only homeRow_1 present (All-Stores Vertical)
+
+    //given
+    waiting();
+
+    verticalsScreenSteps.clickOnArrow();
+
+    verticalsScreenSteps.clickOnAdd();
+
+    selectLocationScreenSteps.clickOnSearchIcon();
+
+    selectLocationScreenSteps.sendCityViaIosKeyboard3();
+
+    selectLocationScreenSteps.enterSearchUsingKeyboard();
+
+    MobileElement khobar = driver
+        .findElementByXPath("//XCUIElementTypeStaticText[@name=\"Khobar\"]");
+    khobar.click();
+
+    selectLocationScreenSteps.clickOnSelectBtn();
+
+    waiting();
+    //when
+    selectLocationScreenSteps.clickOnDoneBtn();
+
+    //then
+    verticalsScreenSteps.verifyAllStoresVertical();
+
+  }
+
+  @Test(description = "Verify cities with uncovered verticals", priority = 3)
+  public void verifyCityAreaIsNotCovered_isNotDisplayed() {
+
+    //given
+    waiting();
+
+    verticalsScreenSteps.clickOnArrow();
+
+    verticalsScreenSteps.clickOnAdd();
+
+    selectLocationScreenSteps.clickOnSearchIcon();
+
+    selectLocationScreenSteps.sendCityViaIosKeyboard4();
+
+    selectLocationScreenSteps.enterSearchUsingKeyboard();
+
+    MobileElement btnNamasCity = driver
+        .findElementByXPath("//XCUIElementTypeStaticText[@name=\"Al Namas\"]");
+    //when
+    btnNamasCity.click();
+
+    waiting();
+
+    //then
+    selectLocationScreenSteps.verifyNotCoveredArea();
+
+    waiting();
+    waiting();
+
+  }
+
+  public void waiting() {
+    try {
+      Thread.sleep(3000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+
 }
