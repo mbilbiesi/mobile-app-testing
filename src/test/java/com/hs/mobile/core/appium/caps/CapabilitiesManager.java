@@ -19,10 +19,8 @@ public class CapabilitiesManager {
 
   private static final String XCODE_ORG_ID_VALUE = "WK247W7C8M";
   private static final String XCODE_SIGNING_ID_VALUE = "iPhone Developer";
-  @NonNull
-  private final TestParameters testParameters;
-  @NonNull
-  private final String appFilePath;
+  @NonNull private final TestParameters testParameters;
+  @NonNull private final String appFilePath;
 
   public DesiredCapabilities getDesiredCapabilities() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
