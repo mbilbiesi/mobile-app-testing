@@ -14,6 +14,6 @@ public class TestParallel extends BaseSteps {
     @Test(description = "just checking test lab")
     void verifyTestLab() throws InterruptedException {
         // Given
-        Thread.sleep(60000);
+        Thread.sleep(40000);
     }
 }

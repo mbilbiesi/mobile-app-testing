@@ -17,10 +17,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 @RequiredArgsConstructor
 public class CapabilitiesManager {
 
-  public static final String XCODE_ORG_ID_VALUE = "WK247W7C8M";
-  public static final String XCODE_SIGNING_ID_VALUE = "iPhone Developer";
-  @NonNull private final TestParameters testParameters;
-  @NonNull private final String appFilePath;
+  private static final String XCODE_ORG_ID_VALUE = "WK247W7C8M";
+  private static final String XCODE_SIGNING_ID_VALUE = "iPhone Developer";
+  @NonNull
+  private final TestParameters testParameters;
+  @NonNull
+  private final String appFilePath;
 
   public DesiredCapabilities getDesiredCapabilities() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -57,7 +59,7 @@ public class CapabilitiesManager {
     }
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-    capabilities.setCapability("newCommandTimeout", 100);
+    capabilities.setCapability("newCommandTimeout", 300);
     return capabilities;
   }
 }

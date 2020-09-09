@@ -19,10 +19,9 @@ public class TestListener implements ITestListener {
 
   @Override
   public void onTestSuccess(ITestResult iTestResult) {
-    Class clazz = iTestResult.getTestClass().getRealClass();
+    Class<?> clazz = iTestResult.getTestClass().getRealClass();
     try {
       Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
-      field.setAccessible(true);
 
       AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
       saveScreenshot(composeTestName(iTestResult), driver);
@@ -33,7 +32,7 @@ public class TestListener implements ITestListener {
 
   @Override
   public void onTestFailure(ITestResult iTestResult) {
-    Class clazz = iTestResult.getTestClass().getRealClass();
+    Class<?> clazz = iTestResult.getTestClass().getRealClass();
     try {
       Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
       field.setAccessible(true);
@@ -58,7 +57,7 @@ public class TestListener implements ITestListener {
   public void onFinish(ITestContext iTestContext) {}
 
   private String composeTestName(ITestResult iTestResult) {
-    StringBuffer completeFileName = new StringBuffer();
+    StringBuilder completeFileName = new StringBuilder();
 
     completeFileName.append(iTestResult.getTestClass().getRealClass().getSimpleName());
     completeFileName.append("_");
@@ -74,7 +73,7 @@ public class TestListener implements ITestListener {
   }
 
   @Attachment(value = "{title}", type = "image/png")
-  private byte[] saveScreenshot(String title, AppiumDriver driver) {
+  private byte[] saveScreenshot(String title, AppiumDriver<?> driver) {
     return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
   }
 }

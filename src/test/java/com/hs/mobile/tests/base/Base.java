@@ -29,9 +29,9 @@ public class Base {
   public void setup(ITestContext context) {
     Injector injector = Guice.createInjector(new BaseTestModule(context));
     injector.injectMembers(this);
-    log.debug("Injector created for the following test context " + context.getCurrentXmlTest().getAllParameters());
-    String language = testUser.getLanguage();
-    restaurantsData = new RestaurantsProvider(language);
+    log.debug("Injector created for the following test context " + context.getCurrentXmlTest()
+        .getAllParameters());
+    restaurantsData = new RestaurantsProvider(testUser.getLanguage());
   }
 
   @AfterClass()
