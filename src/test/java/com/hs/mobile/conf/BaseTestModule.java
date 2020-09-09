@@ -80,7 +80,7 @@ public class BaseTestModule extends AbstractModule {
   @AppFilePath
   public String appFilePath(AppCenterEndpoints appCenterEndpoints, TestParameters parameters) {
     //return appCenterEndpoints.getAppDetails(parameters.getPlatform()).getDownloadUrl();
-    return "/Users/fahadalshehri/Downloads/HungerStation2.app";
+    return "/Users/bilbiesim/Library/Developer/Xcode/DerivedData/HungerStation-bimrfstdryvmmzblfktbovsoiszf/Build/Products/HSAlpha Debug-iphonesimulator/HungerStation.app";
   }
 
   @Qualifier

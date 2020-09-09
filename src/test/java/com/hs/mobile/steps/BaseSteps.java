@@ -185,7 +185,6 @@ public abstract class BaseSteps {
 
   public void waitUntilAnElementIsUpdated(
       WebElement element, ElementAttribute attribute, String expectedValue) {
-    WebDriverWait wait = new WebDriverWait(driver, 5);
     wait.until(ExpectedConditions.attributeToBe(element, attribute.getName(), expectedValue));
   }
 

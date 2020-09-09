@@ -1,7 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.tests.base.BaseStepsInitiator;
+import com.hs.mobile.tests.base.BaseAndroidSteps;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @Feature("Orders Smoke Test")
 @Story("Verify Orders test cases")
 @Listeners(TestListener.class)
-class MyOrdersITs extends BaseStepsInitiator {
+class MyOrdersITs extends BaseAndroidSteps {
 
   boolean hasFirstTestExecuted = false;
 

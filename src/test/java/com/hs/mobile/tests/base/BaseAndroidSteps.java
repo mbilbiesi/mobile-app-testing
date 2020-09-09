@@ -20,17 +20,26 @@ import com.hs.mobile.steps.TicketSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
 import com.hs.mobile.steps.WalletScreenSteps;
 
-public class BaseStepsInitiator extends BaseInitiator {
+public class BaseAndroidSteps extends BaseInitiator {
 
-  @Inject protected HomeScreenSteps homeScreenSteps;
-  @Inject protected LocationScreenSteps locationScreenSteps;
-  @Inject protected RestaurantListScreenSteps restaurantsListSteps;
-  @Inject protected SavedLocationsScreenSteps savedLocationsScreenSteps;
-  @Inject protected RestaurantScreenSteps restaurantScreenSteps;
-  @Inject protected VerifyAccountScreenSteps verifyAccountScreenSteps;
-  @Inject protected PinCodeVerificationSteps pinCodeVerificationSteps;
-  @Inject protected ProfileScreenSteps profileScreenSteps;
-  @Inject protected InvoicesScreenSteps invoicesScreenSteps;
+  @Inject
+  protected HomeScreenSteps homeScreenSteps;
+  @Inject
+  protected LocationScreenSteps locationScreenSteps;
+  @Inject
+  protected RestaurantListScreenSteps restaurantsListSteps;
+  @Inject
+  protected SavedLocationsScreenSteps savedLocationsScreenSteps;
+  @Inject
+  protected RestaurantScreenSteps restaurantScreenSteps;
+  @Inject
+  protected VerifyAccountScreenSteps verifyAccountScreenSteps;
+  @Inject
+  protected PinCodeVerificationSteps pinCodeVerificationSteps;
+  @Inject
+  protected ProfileScreenSteps profileScreenSteps;
+  @Inject
+  protected InvoicesScreenSteps invoicesScreenSteps;
   @Inject protected SettingsScreenSteps settingsScreenSteps;
   @Inject protected PaymentOptionsSteps paymentOptionsSteps;
   @Inject protected WalletScreenSteps walletScreenSteps;

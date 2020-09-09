@@ -54,6 +54,7 @@ public class CapabilitiesManager {
     }
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
+    capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 240);
     //capabilities.setCapability("autoGrantPermissions", true);
     return capabilities;
   }

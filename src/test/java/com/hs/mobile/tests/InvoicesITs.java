@@ -1,7 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.tests.base.BaseStepsInitiator;
+import com.hs.mobile.tests.base.BaseAndroidSteps;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @Story("Verify elements of the invoices screen ")
 @Issue("HSAP-182")
 @Listeners(TestListener.class)
-public class InvoicesITs extends BaseStepsInitiator {
+public class InvoicesITs extends BaseAndroidSteps {
 
   boolean hasFirstTestExecuted = false;
 

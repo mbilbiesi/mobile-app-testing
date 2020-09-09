@@ -3,7 +3,7 @@ package com.hs.mobile.tests;
 import static org.assertj.core.api.Assumptions.assumeThat;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.tests.base.BaseStepsInitiator;
+import com.hs.mobile.tests.base.BaseAndroidSteps;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 @Story("Verify HomeScreen")
 @Issue("HSAP-354")
 @Listeners(TestListener.class)
-public class HomeScreenITs extends BaseStepsInitiator {
+public class HomeScreenITs extends BaseAndroidSteps {
 
   @Test(description = "Accept location permission")
   void navigateToHomeScreen_acceptLocation_allHomeScreenElementsAreDisplayed() {

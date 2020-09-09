@@ -33,16 +33,11 @@ public class SelectLocationScreen extends AbstractScreen {
   @iOSXCUITFindBy(accessibility = "select_address_button")
   private MobileElement btnSelectAddress;
 
-
   @iOSXCUITFindBy(accessibility = "save_button")
   private MobileElement btnDone;
 
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Riyadh\"]")
   private MobileElement lblCity;
-
-  @iOSXCUITFindBy(tagName = "Area not covered")
-  private MobileElement btnAreaNotCovered;
-
 
   public SelectLocationScreen(@NonNull TestSettings settings) {
     super(settings);

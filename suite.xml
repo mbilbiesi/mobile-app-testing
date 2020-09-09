@@ -1,15 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="HS Android Smoke Test" verbose="1" parallel="tests"
-  thread-count="2" configfailurepolicy="continue">
+  thread-count="2">
     <test name="iPhone Max Pro">
         <parameter name="platformName" value="iOS"/>
-        <parameter name="platformVersion" value="13.6"/>
-        <parameter name="udid" value="E611FFC5-2CC7-4569-9166-4CB1DC81CF89"/>
+        <parameter name="platformVersion" value="13.7"/>
+        <parameter name="udid" value="9A42F8D6-526D-4213-AB5B-415596D91281"/>
         <parameter name="uniquePort" value="8100"/>
         <parameter name="assignedTestUserId" value="1"/>
         <classes>
-            <class name="com.hs.mobile.tests.ios.Verticals"/>
+            <class name="com.hs.mobile.tests.ios.VerticalsExistenceTest"/>
         </classes>
     </test>
 </suite>

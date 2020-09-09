@@ -3,6 +3,7 @@ package com.hs.mobile.steps.ios;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
+import static org.assertj.core.api.Assumptions.assumeThat;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.ios.LandingScreen;
@@ -17,20 +18,19 @@ public class LandingScreenSteps extends BaseSteps {
   @NonNull
   private final LandingScreen landingScreen;
 
-
   public LandingScreenSteps(@NonNull TestSettings testSettings) {
     super(testSettings);
     landingScreen = new LandingScreen(testSettings);
   }
 
-
-  @Step("click on 'Select' to chose new address")
+  @Step("click on 'Select' to choose new address")
   public void selectNewAddress() {
     MobileElement btnDeliver = landingScreen.getBtnDeliveryTo();
-    //btnDeliver.click();
-    touchAction.tap(tapOptions().withElement(element(btnDeliver)))
-        .waitAction(waitOptions(Duration.ofMillis(250))).perform();
+    assumeThat(btnDeliver.isDisplayed()).as("select address button is not displayed").isTrue();
+
+    touchAction
+        .tap(tapOptions().withElement(element(btnDeliver)))
+        .waitAction(waitOptions(Duration.ofMillis(250)))
+        .perform();
   }
-
-
 }
