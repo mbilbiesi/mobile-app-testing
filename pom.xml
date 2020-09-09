@@ -21,10 +21,11 @@
         <guice.version>4.2.3</guice.version>
         <lombok.version>1.18.12</lombok.version>
         <owner.java8.version>1.0.12</owner.java8.version>
-        <testng.version>7.1.0</testng.version>
+        <testng.version>7.3.0</testng.version>
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <maven.failsafe.version>2.22.2</maven.failsafe.version>
         <skipITs>false</skipITs>
+        <suiteXmlFile>suites.xml</suiteXmlFile>
     </properties>
 
     <dependencies>
@@ -102,12 +103,19 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Dependency Injection -->
+        <!-- Dependency Injection-->
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
             <version>${guice.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Logging binder -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
         </dependency>
 
         <!-- Parse property files -->
@@ -143,8 +151,14 @@
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+                    <properties>
+                        <property>
+                            <name>suitethreadpoolsize</name>
+                            <value>2</value>
+                        </property>
+                    </properties>
                     <suiteXmlFiles>
-                        <suiteXmlFile>suite.xml</suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                     <skipITs>${skipITs}</skipITs>
                 </configuration>
