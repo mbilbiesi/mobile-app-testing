@@ -1,26 +1,43 @@
 package com.hs.mobile.tests.base;
 
+import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.hs.mobile.conf.GuiceModuleFactory;
+import com.google.inject.Injector;
+import com.hs.mobile.conf.BaseTestModule;
+import com.hs.mobile.core.listener.TestListener;
+import com.hs.mobile.data.restaurants.RestaurantsProvider;
 import com.hs.mobile.data.user.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import lombok.extern.slf4j.Slf4j;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.Guice;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 
 @Slf4j
-@Guice(moduleFactory = GuiceModuleFactory.class)
+@Listeners(TestListener.class)
 public class Base {
 
   public boolean isLocationValid;
   @Inject protected TestUser testUser;
   @Inject protected AppiumDriver<MobileElement> driver;
+  protected RestaurantsProvider restaurantsData;
+
+
+  @BeforeClass
+  public void setup(ITestContext context) {
+    Injector injector = Guice.createInjector(new BaseTestModule(context));
+    injector.injectMembers(this);
+    log.debug("Injector created for the following test context " + context.getCurrentXmlTest()
+        .getAllParameters());
+    restaurantsData = new RestaurantsProvider(testUser.getLanguage());
+  }
 
   @AfterClass()
   public void teardown() {
     if (driver != null) {
-       driver.quit();
+      driver.quit();
     }
   }
 }

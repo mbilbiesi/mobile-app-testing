@@ -159,6 +159,9 @@ fabric.properties
 .allure/
 allure-results
 
+# GitHub
+.github/
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup

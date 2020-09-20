@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Attachment;
 import java.lang.reflect.Field;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
@@ -17,19 +18,29 @@ public class TestListener implements ITestListener {
   public void onTestStart(ITestResult iTestResult) {}
 
   @Override
-  public void onTestSuccess(ITestResult iTestResult) {}
+  public void onTestSuccess(ITestResult iTestResult) {
+    Class<?> clazz = iTestResult.getTestClass().getRealClass();
+    try {
+      Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
+
+      AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
+      saveScreenshot(composeTestName(iTestResult), driver);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      log.info("Error while taking screenshot: ", e);
+    }
+  }
 
   @Override
   public void onTestFailure(ITestResult iTestResult) {
-    Object clazz = iTestResult.getTestClass().getRealClass();
+    Class<?> clazz = iTestResult.getTestClass().getRealClass();
     try {
-      Field field = clazz.getClass().getSuperclass().getDeclaredField("driver");
+      Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
       field.setAccessible(true);
 
       AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
       saveScreenshot(composeTestName(iTestResult), driver);
     } catch (NoSuchFieldException | IllegalAccessException e) {
-      log.error("Error while taking screenshot: ", e);
+      log.info("Error while taking screenshot: ", e);
     }
   }
 
@@ -46,11 +57,11 @@ public class TestListener implements ITestListener {
   public void onFinish(ITestContext iTestContext) {}
 
   private String composeTestName(ITestResult iTestResult) {
-    StringBuffer completeFileName = new StringBuffer();
+    StringBuilder completeFileName = new StringBuilder();
 
     completeFileName.append(iTestResult.getTestClass().getRealClass().getSimpleName());
     completeFileName.append("_");
-    completeFileName.append(iTestResult.getName());
+    completeFileName.append(iTestResult.getName() + "_" + RandomStringUtils.randomAlphanumeric(10));
 
     Object[] parameters = iTestResult.getParameters();
     for (Object parameter : parameters) {
@@ -62,7 +73,7 @@ public class TestListener implements ITestListener {
   }
 
   @Attachment(value = "{title}", type = "image/png")
-  private byte[] saveScreenshot(String title, AppiumDriver driver) {
+  private byte[] saveScreenshot(String title, AppiumDriver<?> driver) {
     return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
   }
 }

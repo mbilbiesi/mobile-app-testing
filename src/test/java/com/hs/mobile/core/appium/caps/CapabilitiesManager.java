@@ -17,10 +17,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 @RequiredArgsConstructor
 public class CapabilitiesManager {
 
-  @NonNull
-  private final TestParameters testParameters;
-  @NonNull
-  private final String appFilePath;
+  private static final String XCODE_ORG_ID_VALUE = "WK247W7C8M";
+  private static final String XCODE_SIGNING_ID_VALUE = "iPhone Developer";
+  @NonNull private final TestParameters testParameters;
+  @NonNull private final String appFilePath;
 
   public DesiredCapabilities getDesiredCapabilities() {
     DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -28,34 +28,36 @@ public class CapabilitiesManager {
     String deviceUDID = testParameters.getDeviceUDID();
     String platformVersion = testParameters.getPlatformVersion();
     Platform platform = testParameters.getPlatform();
+    String deviceName = testParameters.getDeviceName();
 
     switch (platform) {
       case ANDROID:
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "DeviceName");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
         capabilities.setCapability(MobileCapabilityType.UDID, deviceUDID);
         capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ANDROID_UIAUTOMATOR2);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID.name());
         capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, uniquePort);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID);
+        capabilities.setCapability("autoGrantPermissions", true);
         break;
 
       case IOS:
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone Pro Max");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
         capabilities.setCapability(MobileCapabilityType.UDID, deviceUDID);
         capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOS_XCUI_TEST);
         capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS.name());
         capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
-
-        //capabilities.setCapability("autoAcceptAlerts", true);
-        //capabilities.setCapability("autoDismissAlerts", true);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS);
+        capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
+        capabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, XCODE_ORG_ID_VALUE);
+        capabilities.setCapability(
+            IOSMobileCapabilityType.XCODE_SIGNING_ID, XCODE_SIGNING_ID_VALUE);
         break;
     }
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-    capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 240);
-    //capabilities.setCapability("autoGrantPermissions", true);
+    capabilities.setCapability("newCommandTimeout", 300);
     return capabilities;
   }
 }

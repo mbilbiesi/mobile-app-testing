@@ -1,7 +1,6 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.data.restaurants.RestaurantsProvider;
 import com.hs.mobile.tests.base.BaseSteps;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -61,7 +60,6 @@ public class RestaurantsITs extends BaseSteps {
   @Test(description = "Verify all restaurants that meet the search criteria are returned")
   public void searchForRestaurant_resultsMatchedSearchCriteria() {
     // When
-    var restaurantsData = new RestaurantsProvider(testUser.getLanguage());
     restaurantCount = restaurantsListSteps.getRestaurantsCount(false);
     keyword =
         restaurantsListSteps.searchForRestaurant(restaurantsData.getRestaurantName("sponsored"));

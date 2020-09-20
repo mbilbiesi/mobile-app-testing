@@ -7,7 +7,7 @@ import org.openqa.selenium.Platform;
 @Builder
 @Getter
 public class TestParameters {
-
+  private final String deviceName;
   private final String deviceUDID;
   private final Platform platform;
   private final String platformVersion;
