@@ -1,7 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.tests.base.BaseAndroidSteps;
+import com.hs.mobile.tests.base.BaseSteps;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 @Feature("Tickets Tests")
 @Story("Tickets types conditions")
 @Listeners(TestListener.class)
-public class TicketsITs extends BaseAndroidSteps {
+public class TicketsITs extends BaseSteps {
 
   boolean hasFirstTestExecuted = false;
   String currentScreen;

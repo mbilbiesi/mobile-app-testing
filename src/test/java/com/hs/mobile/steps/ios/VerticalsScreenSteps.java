@@ -14,8 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VerticalsScreenSteps extends BaseSteps {
 
-  @NonNull
-  private final VerticalsScreen verticalsScreen;
+  @NonNull private final VerticalsScreen verticalsScreen;
 
   public VerticalsScreenSteps(@NonNull TestSettings testSettings) {
     super(testSettings);

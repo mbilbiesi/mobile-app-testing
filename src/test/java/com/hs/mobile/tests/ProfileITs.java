@@ -1,7 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.tests.base.BaseAndroidSteps;
+import com.hs.mobile.tests.base.BaseSteps;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 @Story("Verify elements, updates, and field boundaries of the profile screen")
 @Issue("HSAP-181")
 @Listeners(TestListener.class)
-public class ProfileITs extends BaseAndroidSteps {
+public class ProfileITs extends BaseSteps {
 
   boolean hasFirstTestExecuted = false;
 

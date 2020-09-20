@@ -1,10 +1,10 @@
 package com.hs.mobile.tests;
 
-import com.hs.mobile.tests.base.BaseAndroidSteps;
+import com.hs.mobile.tests.base.BaseSteps;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class CheckoutITs extends BaseAndroidSteps {
+public class CheckoutITs extends BaseSteps {
 
   boolean hasFirstTestExecuted = false;
 

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 @Getter
+@SuppressWarnings("unused")
 public class SelectLocationScreen extends AbstractScreen {
 
   @iOSXCUITFindBy(accessibility = "back_button")
@@ -35,9 +36,6 @@ public class SelectLocationScreen extends AbstractScreen {
 
   @iOSXCUITFindBy(accessibility = "save_button")
   private MobileElement btnDone;
-
-  @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Riyadh\"]")
-  private MobileElement lblCity;
 
   public SelectLocationScreen(@NonNull TestSettings settings) {
     super(settings);

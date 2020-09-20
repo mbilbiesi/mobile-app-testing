@@ -1,7 +1,8 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.tests.base.BaseAndroidSteps;
+import com.hs.mobile.data.restaurants.RestaurantsProvider;
+import com.hs.mobile.tests.base.BaseSteps;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 @Feature("Restaurants List Tests")
 @Story("Restaurant verification cases")
 @Listeners(TestListener.class)
-public class RestaurantsITs extends BaseAndroidSteps {
+public class RestaurantsITs extends BaseSteps {
 
   // ToDo: Some test here have to be skipped based on whether campaigns are enabled
   // or not or whether the location has campaigns or not. We need to implement a way
@@ -60,6 +61,7 @@ public class RestaurantsITs extends BaseAndroidSteps {
   @Test(description = "Verify all restaurants that meet the search criteria are returned")
   public void searchForRestaurant_resultsMatchedSearchCriteria() {
     // When
+    var restaurantsData = new RestaurantsProvider(testUser.getLanguage());
     restaurantCount = restaurantsListSteps.getRestaurantsCount(false);
     keyword =
         restaurantsListSteps.searchForRestaurant(restaurantsData.getRestaurantName("sponsored"));

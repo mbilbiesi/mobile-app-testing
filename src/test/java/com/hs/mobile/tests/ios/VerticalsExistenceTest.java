@@ -1,21 +1,23 @@
 package com.hs.mobile.tests.ios;
 
-import com.hs.mobile.tests.base.BaseIosSteps;
-import io.appium.java_client.MobileElement;
+import com.hs.mobile.tests.base.BaseSteps;
 import org.testng.annotations.Test;
 
-public class VerticalsExistenceTest extends BaseIosSteps {
+public class VerticalsExistenceTest extends BaseSteps {
 
   @Test(description = "Verify all verticals are displayed")
   public void navigateToHomeScreen_VerifyLocationIsChosen() {
+    // Given
+    var cityToSearch = "Riyadh";
+
     // When
     landingScreenSteps.selectNewAddress();
     selectLocationScreenSteps.clickOnSearchIcon();
-    selectLocationScreenSteps.sendCityViaIosKeyboard("Riyadh");
+    selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
     selectLocationScreenSteps.enterSearchUsingKeyboard();
-    selectLocationScreenSteps.clickOnCity();
-    selectLocationScreenSteps.clickOnSelectBtn();
-    selectLocationScreenSteps.clickOnDoneBtn();
+    selectLocationScreenSteps.selectCity(cityToSearch);
+    selectLocationScreenSteps.clickOnSelectAddressButton();
+    selectLocationScreenSteps.clickOnDoneButton();
 
     // Then
     verticalsScreenSteps.assertAllVerticals();
@@ -25,53 +27,39 @@ public class VerticalsExistenceTest extends BaseIosSteps {
       description = "Verify all verticals are displayed based on location",
       dependsOnMethods = {"navigateToHomeScreen_VerifyLocationIsChosen"})
   public void verifyVerticalsBasedOnLocations() {
+    // Given
+    var cityToSearch = "Jeddah";
+
     // When
     verticalsScreenSteps.clickOnArrow();
     verticalsScreenSteps.clickOnAdd();
     selectLocationScreenSteps.clickOnSearchIcon();
-    selectLocationScreenSteps.sendCityViaIosKeyboard("Jeddah");
+    selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
     selectLocationScreenSteps.enterSearchUsingKeyboard();
-
-    MobileElement jeddah =
-        driver.findElementByXPath("//XCUIElementTypeStaticText[@name=\"Jeddah\"]");
-    jeddah.click();
-
-    selectLocationScreenSteps.clickOnSelectBtn();
-
-    // when
-    selectLocationScreenSteps.clickOnDoneBtn();
+    selectLocationScreenSteps.selectCity(cityToSearch);
+    selectLocationScreenSteps.clickOnSelectAddressButton();
+    selectLocationScreenSteps.clickOnDoneButton();
 
     // then
     verticalsScreenSteps.assertTwoVerticalsAreDisplayed();
   }
 
-  // enabled = false,
   @Test(
       description = "Verify only All Stores Vertical is displayed",
       dependsOnMethods = {"verifyVerticalsBasedOnLocations"})
-  public void verifyAllStoresVertical_isDisplayed() {
-    // test case only homeRow_1 present (All-Stores Vertical)
+  public void verifyOnlyAllStoresVertical_isDisplayed() {
+    // Given
+    var cityToSearch = "Khobar";
 
-    // given
-
+    // When
     verticalsScreenSteps.clickOnArrow();
-
     verticalsScreenSteps.clickOnAdd();
-
     selectLocationScreenSteps.clickOnSearchIcon();
-
-    selectLocationScreenSteps.sendCityViaIosKeyboard("Khobar");
-
+    selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
     selectLocationScreenSteps.enterSearchUsingKeyboard();
-
-    MobileElement khobar =
-        driver.findElementByXPath("//XCUIElementTypeStaticText[@name=\"Khobar\"]");
-    khobar.click();
-
-    selectLocationScreenSteps.clickOnSelectBtn();
-
-    // when
-    selectLocationScreenSteps.clickOnDoneBtn();
+    selectLocationScreenSteps.selectCity(cityToSearch);
+    selectLocationScreenSteps.clickOnSelectAddressButton();
+    selectLocationScreenSteps.clickOnDoneButton();
 
     // then
     verticalsScreenSteps.verifyAllStoresVertical();
@@ -79,25 +67,18 @@ public class VerticalsExistenceTest extends BaseIosSteps {
 
   @Test(
       description = "Verify cities with uncovered verticals",
-      dependsOnMethods = {"verifyAllStoresVertical_isDisplayed"})
+      dependsOnMethods = {"verifyOnlyAllStoresVertical_isDisplayed"})
   public void verifyCityAreaIsNotCovered_isNotDisplayed() {
+    // Given
+    var cityToSearch = "Alnamas";
 
     // When
-
     verticalsScreenSteps.clickOnArrow();
-
     verticalsScreenSteps.clickOnAdd();
-
     selectLocationScreenSteps.clickOnSearchIcon();
-
-    selectLocationScreenSteps.sendCityViaIosKeyboard("Alnamas");
-
+    selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
     selectLocationScreenSteps.enterSearchUsingKeyboard();
-
-    MobileElement btnNamasCity =
-        driver.findElementByXPath("//XCUIElementTypeStaticText[@name=\"Al Namas\"]");
-    // when
-    btnNamasCity.click();
+    selectLocationScreenSteps.selectCity(cityToSearch);
 
     // then
     selectLocationScreenSteps.verifyNotCoveredArea();

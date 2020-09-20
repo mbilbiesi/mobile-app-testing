@@ -1,7 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.tests.base.BaseAndroidSteps;
+import com.hs.mobile.tests.base.BaseSteps;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 @Story("Verify updates of language and notifications on the settings screen")
 @Issue("HSAP-183")
 @Listeners(TestListener.class)
-public class SettingsITs extends BaseAndroidSteps {
+public class SettingsITs extends BaseSteps {
 
   boolean hasFirstTestExecuted = false;
 
