@@ -8,18 +8,14 @@ import lombok.Getter;
 import lombok.NonNull;
 
 @Getter
+@SuppressWarnings("unused")
 public class LandingScreen extends AbstractScreen {
 
-
-  //_______________________
-  //Start Address entry bar
-  //_______________________
   @iOSXCUITFindBy(accessibility = "pin_icon")
   private MobileElement btnPinIcon;
 
   @iOSXCUITFindBy(accessibility = "delivery_to")
   private MobileElement btnDeliveryTo;
-
 
   @iOSXCUITFindBy(accessibility = "choose")
   private MobileElement btnChoose;
@@ -27,22 +23,14 @@ public class LandingScreen extends AbstractScreen {
   @iOSXCUITFindBy(accessibility = "arrow_icon")
   private MobileElement btnArrow;
 
-  //_______________________
-  //End Address entry bar
-  //_______________________
-
-
   @iOSXCUITFindBy(accessibility = "header_logo")
   private MobileElement imgHeaderIcon;
 
-  //Allow Location Access
   @iOSXCUITFindBy(accessibility = "custom_button")
   private MobileElement btnAllowAccess;
 
-  //Allow Location Access
   @iOSXCUITFindBy(accessibility = "custom_button")
   private MobileElement btnManualLocation;
-
 
   public LandingScreen(@NonNull TestSettings settings) {
     super(settings);

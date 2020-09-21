@@ -6,9 +6,10 @@ import org.testng.annotations.Test;
 public class VerticalsExistenceTest extends BaseSteps {
 
   @Test(description = "Verify all verticals are displayed")
-  public void navigateToHomeScreen_VerifyLocationIsChosen() {
+  public void verifyAllVerticalsAreDisplayed() {
     // Given
     var cityToSearch = "Riyadh";
+    landingScreenSteps.handleLocationPopup();
 
     // When
     landingScreenSteps.selectNewAddress();
@@ -24,9 +25,9 @@ public class VerticalsExistenceTest extends BaseSteps {
   }
 
   @Test(
-      description = "Verify all verticals are displayed based on location",
-      dependsOnMethods = {"navigateToHomeScreen_VerifyLocationIsChosen"})
-  public void verifyVerticalsBasedOnLocations() {
+      description = "Verify specific verticals are displayed",
+      dependsOnMethods = {"verifyAllVerticalsAreDisplayed"})
+  public void verifySpecificVerticalsBasedOnLocations() {
     // Given
     var cityToSearch = "Jeddah";
 
@@ -45,9 +46,9 @@ public class VerticalsExistenceTest extends BaseSteps {
   }
 
   @Test(
-      description = "Verify only All Stores Vertical is displayed",
-      dependsOnMethods = {"verifyVerticalsBasedOnLocations"})
-  public void verifyOnlyAllStoresVertical_isDisplayed() {
+      description = "Verify only 'All Stores' vertical is displayed",
+      dependsOnMethods = {"verifySpecificVerticalsBasedOnLocations"})
+  public void verifyOnlyAllStoresVerticalIsDisplayed() {
     // Given
     var cityToSearch = "Khobar";
 
@@ -67,8 +68,8 @@ public class VerticalsExistenceTest extends BaseSteps {
 
   @Test(
       description = "Verify cities with uncovered verticals",
-      dependsOnMethods = {"verifyOnlyAllStoresVertical_isDisplayed"})
-  public void verifyCityAreaIsNotCovered_isNotDisplayed() {
+      dependsOnMethods = {"verifyOnlyAllStoresVerticalIsDisplayed"})
+  public void verifyCityAreaIsNotCoveredBasedOnLocation() {
     // Given
     var cityToSearch = "Alnamas";
 

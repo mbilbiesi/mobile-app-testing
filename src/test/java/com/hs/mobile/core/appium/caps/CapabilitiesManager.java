@@ -37,7 +37,7 @@ public class CapabilitiesManager {
         capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ANDROID_UIAUTOMATOR2);
         capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, uniquePort);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID.name());
         capabilities.setCapability("autoGrantPermissions", true);
         break;
 
@@ -48,7 +48,7 @@ public class CapabilitiesManager {
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOS_XCUI_TEST);
         capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
         capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS.name());
         capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
         capabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, XCODE_ORG_ID_VALUE);
         capabilities.setCapability(

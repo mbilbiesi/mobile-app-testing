@@ -3,7 +3,6 @@ package com.hs.mobile.conf;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.screens.ios.SelectLocationScreen;
 import com.hs.mobile.steps.CheckoutScreenSteps;
 import com.hs.mobile.steps.CreateTicketSteps;
 import com.hs.mobile.steps.HelpSteps;
@@ -129,21 +128,8 @@ public class TestStepsModule extends AbstractModule {
     return new SelectLocationScreenSteps(testSettings);
   }
 
-
   @Provides
   public VerticalsScreenSteps verticalsScreenSteps(TestSettings testSettings) {
     return new VerticalsScreenSteps(testSettings);
   }
-
-  @Provides
-  public SelectLocationScreen selectLocationScreen(TestSettings testSettings) {
-    return new SelectLocationScreen(testSettings);
-  }
-
-//  @Provides
-//  public VerticalsScreen verticalScreen(TestSettings testSettings) {
-//    return new VerticalsScreen(testSettings);
-//  }
-
-
 }
