@@ -58,6 +58,7 @@ public class CapabilitiesManager {
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
     capabilities.setCapability("newCommandTimeout", 300);
+    capabilities.setCapability (MobileCapabilityType.CLEAR_SYSTEM_FILES, true);
     return capabilities;
   }
 }

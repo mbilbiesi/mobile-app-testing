@@ -6,7 +6,11 @@ import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.ios.VerticalsScreen;
 import com.hs.mobile.steps.BaseSteps;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.qameta.allure.Step;
+import java.time.Duration;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.NoSuchElementException;
@@ -23,6 +27,7 @@ public class VerticalsScreenSteps extends BaseSteps {
 
   @Step("verify all verticals are displayed")
   public void assertAllVerticals() {
+    wait.until(ExpectedConditions.elementToBeClickable(verticalsScreen.getLblAllStores()));
     SoftAssertions soft = new SoftAssertions();
     MobileElement lblAllStores = verticalsScreen.getLblAllStores();
     soft.assertThat(lblAllStores.isDisplayed())
@@ -33,19 +38,22 @@ public class VerticalsScreenSteps extends BaseSteps {
     soft.assertAll();
   }
 
-  @Step("click on arrow button")
-  public void clickOnArrow() {
-    verticalsScreen.getBtnArrow().click();
+  @Step("click on the address from the address bar")
+  public void clickOnAddress() {
+    verticalsScreen.getBtnChoose().click();
   }
 
   @Step("Click on add new address from the verticals page")
-  public void clickOnAdd() {
-    verticalsScreen.getBtnAdd().click();
+  public void clickOnAddNewLocation() {
+    touchAction.tap(TapOptions.tapOptions()
+        .withElement(ElementOption.element(verticalsScreen.getLblNewLocation())))
+        .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
+        .perform();
   }
 
   @Step("Verify two verticals are displayed and order-anything verticals is not present")
   public void assertTwoVerticalsAreDisplayed() {
-    wait.until(ExpectedConditions.visibilityOf(verticalsScreen.getLblAllStores()));
+    wait.until(ExpectedConditions.elementToBeClickable(verticalsScreen.getLblAllStores()));
 
     SoftAssertions soft = new SoftAssertions();
     soft.assertThat(verticalsScreen.getLblAllStores().isDisplayed())

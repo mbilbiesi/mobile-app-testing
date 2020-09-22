@@ -3,22 +3,20 @@ package com.hs.mobile.screens.ios;
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
 import lombok.NonNull;
 
 @Getter
+@SuppressWarnings("unused")
 public class VerticalsScreen extends AbstractScreen {
 
-  //_______________________
-  //Start Address entry bar
-  //_______________________
   @iOSXCUITFindBy(accessibility = "pin_icon")
   private MobileElement btnPinIcon;
 
   @iOSXCUITFindBy(accessibility = "delivery_to")
   private MobileElement btnDeliveryTo;
-
 
   @iOSXCUITFindBy(accessibility = "choose")
   private MobileElement btnChoose;
@@ -28,9 +26,9 @@ public class VerticalsScreen extends AbstractScreen {
 
   @iOSXCUITFindBy(accessibility = "add_icon")
   private MobileElement btnAdd;
-  //_______________________
-  //End Address entry bar
-  //_______________________
+
+  @iOSXCUITFindBy(id = "new_location_label")
+  private IOSElement lblNewLocation;
 
   @iOSXCUITFindBy(accessibility = "homeRow_0")
   private MobileElement lblAllStores;
