@@ -171,8 +171,16 @@
                 </dependencies>
                 <executions>
                     <execution>
+                        <id>functional-tests</id>
+                        <phase>test</phase>
                         <goals>
                             <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <phase>verify</phase>
+                        <goals>
                             <goal>verify</goal>
                         </goals>
                     </execution>
