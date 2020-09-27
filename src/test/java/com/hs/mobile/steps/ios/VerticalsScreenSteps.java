@@ -31,6 +31,11 @@ public class VerticalsScreenSteps extends BaseSteps {
 
   @Step("verify all verticals are displayed")
   public void assertAllVerticals() {
+    try {
+      Thread.sleep(2000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     wait.until(ExpectedConditions.numberOfElementsToBe(By.name("title_label"), 3));
     SoftAssertions soft = new SoftAssertions();
     soft.assertThat(verticalsScreen.getLblAllStores().isDisplayed())
