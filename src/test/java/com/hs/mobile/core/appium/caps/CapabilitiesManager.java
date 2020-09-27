@@ -44,7 +44,7 @@ public class CapabilitiesManager {
       case IOS:
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
         capabilities.setCapability(MobileCapabilityType.UDID, deviceUDID);
-        capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
+        capabilities.setCapability(MobileCapabilityType.APP, "/Users/qa-macmini01/Desktop/ios_app/HungerStation.ipa");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOS_XCUI_TEST);
         capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
         capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
