@@ -19,6 +19,9 @@ import com.hs.mobile.steps.SettingsScreenSteps;
 import com.hs.mobile.steps.TicketSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
 import com.hs.mobile.steps.WalletScreenSteps;
+import com.hs.mobile.steps.ios.LandingScreenSteps;
+import com.hs.mobile.steps.ios.SelectLocationScreenSteps;
+import com.hs.mobile.steps.ios.VerticalsScreenSteps;
 
 public class BaseSteps extends Base {
 
@@ -40,4 +43,9 @@ public class BaseSteps extends Base {
   @Inject protected TicketSteps ticketSteps;
   @Inject protected CreateTicketSteps createTicketSteps;
   @Inject protected CheckoutScreenSteps checkoutScreenSteps;
+
+  // todo: create interfaces https://hungerstation.atlassian.net/browse/HSAP-426
+  @Inject protected LandingScreenSteps landingScreenSteps;
+  @Inject protected SelectLocationScreenSteps selectLocationScreenSteps;
+  @Inject protected VerticalsScreenSteps verticalsScreenSteps;
 }

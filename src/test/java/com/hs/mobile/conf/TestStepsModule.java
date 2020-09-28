@@ -21,6 +21,9 @@ import com.hs.mobile.steps.SettingsScreenSteps;
 import com.hs.mobile.steps.TicketSteps;
 import com.hs.mobile.steps.VerifyAccountScreenSteps;
 import com.hs.mobile.steps.WalletScreenSteps;
+import com.hs.mobile.steps.ios.LandingScreenSteps;
+import com.hs.mobile.steps.ios.SelectLocationScreenSteps;
+import com.hs.mobile.steps.ios.VerticalsScreenSteps;
 
 @SuppressWarnings("unused")
 public class TestStepsModule extends AbstractModule {
@@ -113,5 +116,20 @@ public class TestStepsModule extends AbstractModule {
   @Provides
   public LocationScreenSteps locationScreenSteps(TestSettings settings) {
     return new LocationScreenSteps(settings);
+  }
+
+  @Provides
+  public LandingScreenSteps landingScreenSteps(TestSettings testSettings) {
+    return new LandingScreenSteps(testSettings);
+  }
+
+  @Provides
+  public SelectLocationScreenSteps selectLocationScreenSteps(TestSettings testSettings) {
+    return new SelectLocationScreenSteps(testSettings);
+  }
+
+  @Provides
+  public VerticalsScreenSteps verticalsScreenSteps(TestSettings testSettings) {
+    return new VerticalsScreenSteps(testSettings);
   }
 }

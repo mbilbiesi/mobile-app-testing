@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.hs.mobile.conf.BaseTestModule;
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.data.restaurants.RestaurantsProvider;
 import com.hs.mobile.data.user.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -19,19 +18,16 @@ import org.testng.annotations.Listeners;
 @Listeners(TestListener.class)
 public class Base {
 
-  public boolean isLocationValid;
   @Inject protected TestUser testUser;
   @Inject protected AppiumDriver<MobileElement> driver;
-  protected RestaurantsProvider restaurantsData;
-
 
   @BeforeClass
   public void setup(ITestContext context) {
     Injector injector = Guice.createInjector(new BaseTestModule(context));
     injector.injectMembers(this);
-    log.debug("Injector created for the following test context " + context.getCurrentXmlTest()
-        .getAllParameters());
-    restaurantsData = new RestaurantsProvider(testUser.getLanguage());
+    log.debug(
+        "Injector created for the following test context "
+            + context.getCurrentXmlTest().getAllParameters());
   }
 
   @AfterClass()

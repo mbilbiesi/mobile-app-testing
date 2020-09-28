@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 @Issue("HSAP-354")
 @Listeners(TestListener.class)
 public class HomeScreenITs extends BaseSteps {
+  private final boolean isLocationValid = true ;
 
   @Test(description = "Accept location permission")
   void navigateToHomeScreen_acceptLocation_allHomeScreenElementsAreDisplayed() {

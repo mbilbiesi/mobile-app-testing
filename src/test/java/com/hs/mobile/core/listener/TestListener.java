@@ -22,6 +22,7 @@ public class TestListener implements ITestListener {
     Class<?> clazz = iTestResult.getTestClass().getRealClass();
     try {
       Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
+      field.setAccessible(true);
 
       AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
       saveScreenshot(composeTestName(iTestResult), driver);
