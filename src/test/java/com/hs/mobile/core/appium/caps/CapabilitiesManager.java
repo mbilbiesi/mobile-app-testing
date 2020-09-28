@@ -35,13 +35,13 @@ public class CapabilitiesManager {
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ANDROID_UIAUTOMATOR2);
         capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, uniquePort);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID.name());
-        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
         break;
 
       case IOS:
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
         capabilities.setCapability(MobileCapabilityType.UDID, deviceUDID);
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/qa-macmini01/Desktop/ios_app/HungerStation.ipa");
+        capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOS_XCUI_TEST);
         capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
         capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
@@ -52,7 +52,7 @@ public class CapabilitiesManager {
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
     capabilities.setCapability("newCommandTimeout", 60);
-    capabilities.setCapability (MobileCapabilityType.CLEAR_SYSTEM_FILES, true);
+    capabilities.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, true);
     return capabilities;
   }
 }
