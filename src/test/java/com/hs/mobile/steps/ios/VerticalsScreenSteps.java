@@ -27,23 +27,6 @@ public class VerticalsScreenSteps extends BaseSteps {
     driver = testSettings.getDriver();
   }
 
-  @Step("verify all verticals are displayed")
-  public void assertAllVerticals() {
-    wait.until(ExpectedConditions.numberOfElementsToBe(By.name("title_label"), 3));
-
-    SoftAssertions soft = new SoftAssertions();
-    soft.assertThat(verticalsScreen.getLblAllStores().isEnabled())
-        .as("'All stores' vertical is not displayed")
-        .isTrue();
-    soft.assertThat(verticalsScreen.getLblQuickMarket().isEnabled())
-        .as("'Quick Market' vertical is not displayed")
-        .isTrue();
-    soft.assertThat(verticalsScreen.getLblOrderAnything().isEnabled())
-        .as("'Order Anything' vertical is not displayed")
-        .isTrue();
-    soft.assertAll();
-  }
-
   @Step("click on the address from the address bar")
   public void clickOnAddress() {
     verticalsScreen.getBtnChoose().click();
@@ -59,8 +42,27 @@ public class VerticalsScreenSteps extends BaseSteps {
         .perform();
   }
 
+  @Step("verify all verticals are displayed")
+  public void assertAllVerticals() {
+    expectedNumberOfVerticals(3);
+
+    SoftAssertions soft = new SoftAssertions();
+    soft.assertThat(verticalsScreen.getLblAllStores().isEnabled())
+        .as("'All stores' vertical is not displayed")
+        .isTrue();
+    soft.assertThat(verticalsScreen.getLblQuickMarket().isEnabled())
+        .as("'Quick Market' vertical is not displayed")
+        .isTrue();
+    soft.assertThat(verticalsScreen.getLblOrderAnything().isEnabled())
+        .as("'Order Anything' vertical is not displayed")
+        .isTrue();
+    soft.assertAll();
+  }
+
   @Step("Verify two verticals are displayed and order-anything verticals is not present")
   public void assertTwoVerticalsAreDisplayed() {
+    expectedNumberOfVerticals(2);
+
     SoftAssertions soft = new SoftAssertions();
     soft.assertThat(verticalsScreen.getLblAllStores().isEnabled())
         .as("'All stores' vertical is not displayed")
@@ -68,16 +70,26 @@ public class VerticalsScreenSteps extends BaseSteps {
     soft.assertThat(verticalsScreen.getLblQuickMarket().isEnabled())
         .as("Quick Market vertical is not displayed")
         .isTrue();
-    soft.assertThat(verticalsScreen.getListAllVerticals().size())
-        .as("OrderAnything should not be displayed")
-        .isEqualTo(2);
     soft.assertAll();
   }
 
   @Step("Verify all-stores vertical is displayed")
   public void verifyAllStoresVertical() {
-    assertThat(verticalsScreen.getLblAllStores().isDisplayed())
+    expectedNumberOfVerticals(1);
+
+    assertThat(verticalsScreen.getLblAllStores().isEnabled())
         .as("'All stores' vertical is not displayed")
         .isTrue();
+  }
+
+  private void expectedNumberOfVerticals(@NonNull int expectedNumberOfVerticals) {
+    var failureMessage =
+        String.format(
+            "Expected only %s vertical(s) to be displayed for the provided address",
+            expectedNumberOfVerticals);
+    wait.withMessage(failureMessage)
+        .until(
+            ExpectedConditions.numberOfElementsToBe(
+                By.name("title_label"), expectedNumberOfVerticals));
   }
 }
