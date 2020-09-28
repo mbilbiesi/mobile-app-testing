@@ -16,7 +16,7 @@ import org.openqa.selenium.Platform;
 
 @RequiredArgsConstructor
 public class AppCenterEndpoints {
-  private static final String appDetailsEndpoint = "/apps/{ownerName}/{name}/releases/905";
+  private static final String appDetailsEndpoint = "/apps/{ownerName}/{name}/releases/latest";
   @NonNull private final String url;
   @NonNull private final String token;
 
