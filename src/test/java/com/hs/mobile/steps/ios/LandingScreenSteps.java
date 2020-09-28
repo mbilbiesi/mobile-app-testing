@@ -3,7 +3,6 @@ package com.hs.mobile.steps.ios;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
-import static org.assertj.core.api.Assumptions.assumeThat;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.ios.LandingScreen;
@@ -16,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LandingScreenSteps extends BaseSteps {
 
@@ -42,7 +42,8 @@ public class LandingScreenSteps extends BaseSteps {
   @Step("click on 'Select' to choose new address")
   public void selectNewAddress() {
     MobileElement btnDeliver = landingScreen.getBtnDeliveryTo();
-    assumeThat(btnDeliver.isDisplayed()).as("select address button is not displayed").isTrue();
+    wait.withMessage("select address button is not displayed")
+        .until(ExpectedConditions.visibilityOf(btnDeliver));
 
     touchAction
         .tap(tapOptions().withElement(element(btnDeliver)))

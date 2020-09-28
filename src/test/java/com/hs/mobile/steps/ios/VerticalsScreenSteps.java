@@ -1,12 +1,11 @@
 package com.hs.mobile.steps.ios;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.ios.VerticalsScreen;
 import com.hs.mobile.steps.BaseSteps;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
@@ -15,7 +14,6 @@ import java.time.Duration;
 import lombok.NonNull;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VerticalsScreenSteps extends BaseSteps {
@@ -31,12 +29,8 @@ public class VerticalsScreenSteps extends BaseSteps {
 
   @Step("verify all verticals are displayed")
   public void assertAllVerticals() {
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
     wait.until(ExpectedConditions.numberOfElementsToBe(By.name("title_label"), 3));
+
     SoftAssertions soft = new SoftAssertions();
     soft.assertThat(verticalsScreen.getLblAllStores().isDisplayed())
         .as("'All stores' vertical is not displayed")
@@ -57,17 +51,16 @@ public class VerticalsScreenSteps extends BaseSteps {
 
   @Step("Click on add new address from the verticals page")
   public void clickOnAddNewLocation() {
-    touchAction.tap(TapOptions.tapOptions()
-        .withElement(ElementOption.element(verticalsScreen.getLblNewLocation())))
+    touchAction
+        .tap(
+            TapOptions.tapOptions()
+                .withElement(ElementOption.element(verticalsScreen.getLblNewLocation())))
         .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
         .perform();
   }
 
   @Step("Verify two verticals are displayed and order-anything verticals is not present")
   public void assertTwoVerticalsAreDisplayed() {
-    wait.until(ExpectedConditions.visibilityOf(verticalsScreen.getLblAllStores()));
-    wait.until(ExpectedConditions.visibilityOf(verticalsScreen.getLblQuickMarket()));
-
     SoftAssertions soft = new SoftAssertions();
     soft.assertThat(verticalsScreen.getLblAllStores().isDisplayed())
         .as("'All stores' vertical is not displayed")
@@ -75,16 +68,16 @@ public class VerticalsScreenSteps extends BaseSteps {
     soft.assertThat(verticalsScreen.getLblQuickMarket().isDisplayed())
         .as("Quick Market vertical is not displayed")
         .isTrue();
-    assertThatExceptionOfType(NoSuchElementException.class)
+    soft.assertThat(verticalsScreen.getListAllVerticals().size())
         .as("OrderAnything should not be displayed")
-        .isThrownBy(() -> verticalsScreen.getLblOrderAnything().isDisplayed());
+        .isEqualTo(2);
     soft.assertAll();
   }
 
   @Step("Verify all-stores vertical is displayed")
   public void verifyAllStoresVertical() {
-    SoftAssertions soft = new SoftAssertions();
-    MobileElement allStores = verticalsScreen.getLblAllStores();
-    soft.assertThat(allStores.isDisplayed()).as("'All stores' vertical is not displayed").isTrue();
+    assertThat(verticalsScreen.getLblAllStores().isDisplayed())
+        .as("'All stores' vertical is not displayed")
+        .isTrue();
   }
 }

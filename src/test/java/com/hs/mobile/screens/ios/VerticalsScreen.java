@@ -5,8 +5,10 @@ import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
+import org.openqa.selenium.support.FindBy;
 
 @Getter
 @SuppressWarnings("unused")
@@ -38,6 +40,9 @@ public class VerticalsScreen extends AbstractScreen {
 
   @iOSXCUITFindBy(accessibility = "homeRow_2")
   private MobileElement lblOrderAnything;
+
+  @FindBy(name = "title_label")
+  private List<MobileElement> listAllVerticals;
 
   public VerticalsScreen(@NonNull TestSettings settings) {
     super(settings);
