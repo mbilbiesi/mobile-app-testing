@@ -50,9 +50,9 @@ public class CapabilitiesManager {
         capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS.name());
         capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
-        capabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, XCODE_ORG_ID_VALUE);
-        capabilities.setCapability(
-            IOSMobileCapabilityType.XCODE_SIGNING_ID, XCODE_SIGNING_ID_VALUE);
+        //capabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, XCODE_ORG_ID_VALUE);
+//        capabilities.setCapability(
+//            IOSMobileCapabilityType.XCODE_SIGNING_ID, XCODE_SIGNING_ID_VALUE);
         break;
     }
 

@@ -2,9 +2,15 @@ package com.hs.mobile.core.listener;
 
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Attachment;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.lang.reflect.Field;
+import javax.imageio.ImageIO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.imgscalr.Scalr;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
@@ -75,6 +81,25 @@ public class TestListener implements ITestListener {
 
   @Attachment(value = "{title}", type = "image/png")
   private byte[] saveScreenshot(String title, AppiumDriver<?> driver) {
+    byte[] screenshotByteArray = driver.getScreenshotAs(OutputType.BYTES);
+
+    try {
+      return resizeImage(screenshotByteArray, 1200);
+    } catch (Exception e) {
+      log.info("There was an issue in resizing screenshot :", e);
+    }
+
     return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+  }
+
+  private byte[] resizeImage(byte[] imageInByte, int targetWidth) throws Exception {
+    InputStream inputStream = new ByteArrayInputStream(imageInByte);
+    BufferedImage bufferedImageFromConvert = ImageIO.read(inputStream);
+
+    BufferedImage bufferedImageResized = Scalr.resize(bufferedImageFromConvert, targetWidth);
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    ImageIO.write(bufferedImageResized, "png", outputStream);
+
+    return outputStream.toByteArray();
   }
 }

@@ -25,7 +25,7 @@
         <maven.surefire.version>2.22.2</maven.surefire.version>
         <maven.failsafe.version>2.22.2</maven.failsafe.version>
         <skipITs>false</skipITs>
-        <suiteXmlFile>src/test/resources/suites/ios.xml</suiteXmlFile>
+        <suiteXmlFile>src/test/resources/suites/local.xml</suiteXmlFile>
     </properties>
 
     <dependencies>
@@ -131,6 +131,13 @@
             <artifactId>allure-rest-assured</artifactId>
             <version>${allure.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Image Resizing Utility -->
+        <dependency>
+            <groupId>org.imgscalr</groupId>
+            <artifactId>imgscalr-lib</artifactId>
+            <version>4.2</version>
         </dependency>
     </dependencies>
 

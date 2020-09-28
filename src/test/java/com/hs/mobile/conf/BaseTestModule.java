@@ -86,7 +86,8 @@ public class BaseTestModule extends AbstractModule {
   @Singleton
   @AppFilePath
   public String appFilePath(AppCenterEndpoints appCenterEndpoints, TestParameters parameters) {
-    return appCenterEndpoints.getAppDetails(parameters.getPlatform()).getDownloadUrl();
+    //return appCenterEndpoints.getAppDetails(parameters.getPlatform()).getDownloadUrl();
+    return "/Users/bilbiesim/Library/Developer/Xcode/DerivedData/HungerStation-bimrfstdryvmmzblfktbovsoiszf/Build/Products/HSAlpha Debug-iphonesimulator/HungerStation.app";
   }
 
   @Qualifier
