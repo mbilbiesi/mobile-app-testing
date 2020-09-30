@@ -16,9 +16,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 @RequiredArgsConstructor
 public class CapabilitiesManager {
-
-  private static final String XCODE_ORG_ID_VALUE = "WK247W7C8M";
-  private static final String XCODE_SIGNING_ID_VALUE = "iPhone Developer";
   @NonNull private final TestParameters testParameters;
   @NonNull private final String appFilePath;
 
@@ -38,7 +35,7 @@ public class CapabilitiesManager {
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ANDROID_UIAUTOMATOR2);
         capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, uniquePort);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID.name());
-        capabilities.setCapability("autoGrantPermissions", true);
+        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
         break;
 
       case IOS:
@@ -50,14 +47,12 @@ public class CapabilitiesManager {
         capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS.name());
         capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
-        capabilities.setCapability(IOSMobileCapabilityType.XCODE_ORG_ID, XCODE_ORG_ID_VALUE);
-        capabilities.setCapability(
-            IOSMobileCapabilityType.XCODE_SIGNING_ID, XCODE_SIGNING_ID_VALUE);
         break;
     }
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-    capabilities.setCapability("newCommandTimeout", 300);
+    capabilities.setCapability("newCommandTimeout", 60);
+    capabilities.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, true);
     return capabilities;
   }
 }

@@ -11,6 +11,8 @@ import io.qameta.allure.Step;
 import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SelectLocationScreenSteps extends BaseSteps {
 
@@ -31,7 +33,9 @@ public class SelectLocationScreenSteps extends BaseSteps {
 
   @Step("Click on magnifying search icon")
   public void clickOnSearchIcon() {
-    selectLocationScreen.getBtnSearch().click();
+    MobileElement btnSearch = selectLocationScreen.getBtnSearch();
+    assertThat(btnSearch.isDisplayed()).as("search icon is not displayed").isTrue();
+    btnSearch.click();
   }
 
   @Step("Type {0} in search bar")
@@ -46,7 +50,9 @@ public class SelectLocationScreenSteps extends BaseSteps {
 
   @Step("Click on select address button")
   public void clickOnSelectAddressButton() {
-    selectLocationScreen.getBtnSelectAddress().click();
+    WebElement selectButton = selectLocationScreen.getBtnSelectAddress();
+    wait.until(ExpectedConditions.elementToBeClickable(selectButton));
+    selectButton.click();
   }
 
   @Step("Click on done button")
@@ -56,7 +62,11 @@ public class SelectLocationScreenSteps extends BaseSteps {
 
   @Step("Verify 'Area not covered' label is visible in select button")
   public void verifyNotCoveredArea() {
-    String buttonText = selectLocationScreen.getBtnSelectAddress().getText();
-    assertThat(buttonText).as("select button has wrong label").isEqualTo("Area not covered");
+    MobileElement btnSelectAddress = selectLocationScreen.getBtnSelectAddress();
+    wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(btnSelectAddress)));
+
+    assertThat(btnSelectAddress.getText())
+        .as("select button has wrong label")
+        .isEqualTo("Area not covered");
   }
 }

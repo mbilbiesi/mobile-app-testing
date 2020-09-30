@@ -32,8 +32,8 @@ public class VerticalsExistenceTest extends BaseSteps {
     var cityToSearch = "Jeddah";
 
     // When
-    verticalsScreenSteps.clickOnArrow();
-    verticalsScreenSteps.clickOnAdd();
+    verticalsScreenSteps.clickOnAddress();
+    verticalsScreenSteps.clickOnAddNewLocation();
     selectLocationScreenSteps.clickOnSearchIcon();
     selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
     selectLocationScreenSteps.enterSearchUsingKeyboard();
@@ -53,8 +53,8 @@ public class VerticalsExistenceTest extends BaseSteps {
     var cityToSearch = "Khobar";
 
     // When
-    verticalsScreenSteps.clickOnArrow();
-    verticalsScreenSteps.clickOnAdd();
+    verticalsScreenSteps.clickOnAddress();
+    verticalsScreenSteps.clickOnAddNewLocation();
     selectLocationScreenSteps.clickOnSearchIcon();
     selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
     selectLocationScreenSteps.enterSearchUsingKeyboard();
@@ -74,8 +74,8 @@ public class VerticalsExistenceTest extends BaseSteps {
     var cityToSearch = "Alnamas";
 
     // When
-    verticalsScreenSteps.clickOnArrow();
-    verticalsScreenSteps.clickOnAdd();
+    verticalsScreenSteps.clickOnAddress();
+    verticalsScreenSteps.clickOnAddNewLocation();
     selectLocationScreenSteps.clickOnSearchIcon();
     selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
     selectLocationScreenSteps.enterSearchUsingKeyboard();
