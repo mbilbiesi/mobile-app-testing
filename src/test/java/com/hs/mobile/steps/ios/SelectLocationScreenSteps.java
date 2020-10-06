@@ -62,11 +62,9 @@ public class SelectLocationScreenSteps extends BaseSteps {
 
   @Step("Verify 'Area not covered' label is visible in select button")
   public void verifyNotCoveredArea() {
-    MobileElement btnSelectAddress = selectLocationScreen.getBtnSelectAddress();
-    wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(btnSelectAddress)));
-
-    assertThat(btnSelectAddress.getText())
-        .as("select button has wrong label")
-        .isEqualTo("Area not covered");
+    wait.withMessage("select button has wrong label")
+        .until(
+            ExpectedConditions.textToBePresentInElement(
+                selectLocationScreen.getBtnSelectAddress(), "Area not covered"));
   }
 }

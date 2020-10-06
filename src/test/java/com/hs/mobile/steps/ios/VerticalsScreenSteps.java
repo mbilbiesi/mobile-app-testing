@@ -1,19 +1,15 @@
 package com.hs.mobile.steps.ios;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static io.appium.java_client.touch.TapOptions.tapOptions;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.ios.VerticalsScreen;
 import com.hs.mobile.steps.BaseSteps;
+import com.hs.mobile.util.CustomConditions;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.touch.TapOptions;
-import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.qameta.allure.Step;
-import java.time.Duration;
 import lombok.NonNull;
-import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VerticalsScreenSteps extends BaseSteps {
@@ -34,62 +30,39 @@ public class VerticalsScreenSteps extends BaseSteps {
 
   @Step("Click on add new address from the verticals page")
   public void clickOnAddNewLocation() {
-    touchAction
-        .tap(
-            TapOptions.tapOptions()
-                .withElement(ElementOption.element(verticalsScreen.getLblNewLocation())))
-        .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2)))
+    touchAction.tap(
+        tapOptions().withElement(ElementOption.element(verticalsScreen.getLblNewLocation())))
+        .waitAction()
         .perform();
   }
 
   @Step("verify all verticals are displayed")
   public void assertAllVerticals() {
-    expectedNumberOfVerticals(3);
-
-    SoftAssertions soft = new SoftAssertions();
-    soft.assertThat(verticalsScreen.getLblAllStores().isEnabled())
-        .as("'All stores' vertical is not displayed")
-        .isTrue();
-    soft.assertThat(verticalsScreen.getLblQuickMarket().isEnabled())
-        .as("'Quick Market' vertical is not displayed")
-        .isTrue();
-    soft.assertThat(verticalsScreen.getLblOrderAnything().isEnabled())
-        .as("'Order Anything' vertical is not displayed")
-        .isTrue();
-    soft.assertAll();
+    wait.withMessage("'All stores' vertical is not displayed")
+        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblAllStores()));
+    wait.withMessage("Quick Market vertical is not displayed")
+        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblQuickMarket()));
+    wait.withMessage("'Order Anything' vertical is not displayed")
+        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblOrderAnything()));
   }
 
   @Step("Verify two verticals are displayed and order-anything verticals is not present")
   public void assertTwoVerticalsAreDisplayed() {
-    expectedNumberOfVerticals(2);
-
-    SoftAssertions soft = new SoftAssertions();
-    soft.assertThat(verticalsScreen.getLblAllStores().isEnabled())
-        .as("'All stores' vertical is not displayed")
-        .isTrue();
-    soft.assertThat(verticalsScreen.getLblQuickMarket().isEnabled())
-        .as("Quick Market vertical is not displayed")
-        .isTrue();
-    soft.assertAll();
+    wait.withMessage("'All stores' vertical is not displayed")
+        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblAllStores()));
+    wait.withMessage("Quick Market vertical is not displayed")
+        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblQuickMarket()));
+    wait.withMessage("'Order Anything' vertical expect not to be displayed")
+        .until(CustomConditions.elementIsNotDisplayed(verticalsScreen.getLblOrderAnything()));
   }
 
   @Step("Verify all-stores vertical is displayed")
   public void verifyAllStoresVertical() {
-    expectedNumberOfVerticals(1);
-
-    assertThat(verticalsScreen.getLblAllStores().isEnabled())
-        .as("'All stores' vertical is not displayed")
-        .isTrue();
-  }
-
-  private void expectedNumberOfVerticals(@NonNull int expectedNumberOfVerticals) {
-    var failureMessage =
-        String.format(
-            "Expected only %s vertical(s) to be displayed for the provided address",
-            expectedNumberOfVerticals);
-    wait.withMessage(failureMessage)
-        .until(
-            ExpectedConditions.numberOfElementsToBe(
-                By.name("title_label"), expectedNumberOfVerticals));
+    wait.withMessage("'All stores' vertical is not displayed")
+        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblAllStores()));
+    wait.withMessage("Quick Market vertical expect no to be displayed")
+        .until(CustomConditions.elementIsNotDisplayed(verticalsScreen.getLblQuickMarket()));
+    wait.withMessage("'Order Anything' vertical expect not to be displayed")
+        .until(CustomConditions.elementIsNotDisplayed(verticalsScreen.getLblOrderAnything()));
   }
 }
