@@ -9,7 +9,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class TestSettings {
-
   private final AppiumDriver<MobileElement> driver;
   private final Language testLanguage;
 }

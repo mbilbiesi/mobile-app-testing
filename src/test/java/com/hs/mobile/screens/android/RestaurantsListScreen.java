@@ -5,14 +5,10 @@ import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.qameta.allure.Step;
+import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
-import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
-
-import java.lang.reflect.Field;
-import java.util.List;
 
 @Getter
 public class RestaurantsListScreen extends AbstractScreen {
@@ -131,26 +127,5 @@ public class RestaurantsListScreen extends AbstractScreen {
 
   public RestaurantsListScreen(@NonNull TestSettings settings) {
     super(settings);
-  }
-
-  @Step("Verify that all restaurants list screen objects are displayed correctly")
-  public void verifyRestaurantsListElements() {
-    SoftAssertions soft = new SoftAssertions();
-
-    Class<?> clazz = this.getClass();
-    for (Field field : clazz.getDeclaredFields()) {
-      if (field.isAnnotationPresent(AssertElementVisibility.class)
-          && field.getType().isAssignableFrom(MobileElement.class)) {
-        try {
-          field.setAccessible(true);
-          WebElement element = (WebElement) field.get(this);
-          soft.assertThat(element.isDisplayed()).as(field.getName() + " is not displayed").isTrue();
-        } catch (IllegalAccessException e) {
-          e.printStackTrace();
-        }
-      }
-    }
-
-    soft.assertAll();
   }
 }

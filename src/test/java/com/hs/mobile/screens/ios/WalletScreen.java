@@ -4,19 +4,19 @@ import io.appium.java_client.MobileElement;
 
 public class WalletScreen {
 
-  //todo implement locator
+  // todo implement locator
   private MobileElement btnBackPaymentOptions;
 
-  //todo implement locator
+  // todo implement locator
   private MobileElement lblWalletHeader;
 
-  //todo implement locator
+  // todo implement locator
   private MobileElement txtWalletBalance;
 
-  //todo implement locator
+  // todo implement locator
   private MobileElement lblWalletBalance;
 
-  //todo implement locator
+  // todo implement locator
   private MobileElement txtCurrency;
 
   private MobileElement lblExpiringSoon;
@@ -29,8 +29,6 @@ public class WalletScreen {
 
   private MobileElement lblAmount;
 
-  //todo implement locator
+  // todo implement locator
   private MobileElement txtWalletHistoryRow;
-
-
 }

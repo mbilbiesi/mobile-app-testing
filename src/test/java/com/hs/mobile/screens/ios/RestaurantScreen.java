@@ -14,7 +14,6 @@ public class RestaurantScreen {
   @iOSXCUITFindBy(accessibility = "rating_score")
   private MobileElement txtRestaurantRating;
 
-
   @iOSXCUITFindBy(accessibility = "kitchen_label")
   private MobileElement lblKitchenType;
 
@@ -29,10 +28,7 @@ public class RestaurantScreen {
 
   private MobileElement btnFilerMenuItem;
 
-
-  //todo implement or find a way to make it  unique -
+  // todo implement or find a way to make it  unique -
   @iOSXCUITFindBy(accessibility = "menu_item_0")
   private MobileElement txtMenuItem;
-
-
 }

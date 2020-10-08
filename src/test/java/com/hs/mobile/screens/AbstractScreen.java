@@ -6,11 +6,11 @@ import java.time.Duration;
 import lombok.NonNull;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class AbstractScreen {
+public abstract class AbstractScreen<T extends AbstractScreen<T>> {
 
   @SuppressWarnings("rawtypes")
   public AbstractScreen(@NonNull TestSettings settings) {
     PageFactory.initElements(
-        new AppiumFieldDecorator(settings.getDriver(), Duration.ofSeconds(15)), this);
+        new AppiumFieldDecorator(settings.getDriver(), Duration.ofSeconds(10)), this);
   }
 }

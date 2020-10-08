@@ -5,7 +5,8 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
 public class MoreOptionsScreen {
 
-  //Note for improvements - changing the name of the ID to a more descriptive name relates to the btn
+  // Note for improvements - changing the name of the ID to a more descriptive name relates to the
+  // btn
 
   @iOSXCUITFindBy(accessibility = "cell_0")
   private MobileElement btnReferralCode;
@@ -24,5 +25,4 @@ public class MoreOptionsScreen {
 
   @iOSXCUITFindBy(accessibility = "cell_7")
   private MobileElement btnSettings;
-
 }

@@ -1,9 +1,9 @@
 package com.hs.mobile.core.appium.driver;
 
+import static com.hs.mobile.exception.ExceptionSupplier.testException;
 import static org.openqa.selenium.Platform.ANDROID;
 import static org.openqa.selenium.Platform.IOS;
 
-import com.hs.mobile.exception.ExceptionSupplier;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -26,20 +26,19 @@ public class DriverManager {
 
     if (platform.is(ANDROID)) {
       try {
-        log.debug("Attempt to create android driver with following capabilities : " + desiredCapabilities.asMap());
+        log.debug("Android driver with following capabilities : {}", desiredCapabilities.asMap());
         driver = new AndroidDriver<>(new URL(appiumURL), desiredCapabilities);
       } catch (Exception e) {
         log.error("unable to initiate Android driver", e);
       }
     } else if (platform.is(IOS)) {
       try {
-        log.debug("Attempt to create iOS driver with following capabilities : " + desiredCapabilities.asMap());
+        log.debug("iOS driver with following capabilities : {}", desiredCapabilities.asMap());
         driver = new IOSDriver<>(new URL(appiumURL), desiredCapabilities);
       } catch (Exception e) {
         log.error("unable to initiate iOS driver", e);
       }
     }
-    return Optional.ofNullable(driver)
-        .orElseThrow(ExceptionSupplier.testException("failed to initiate drive"));
+    return Optional.ofNullable(driver).orElseThrow(testException("failed to initiate drive"));
   }
 }

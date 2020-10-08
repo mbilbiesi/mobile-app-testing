@@ -9,6 +9,4 @@ public class OfferScreen {
   private MobileElement firstRestaurantOffer;
 
   private MobileElement secondRestaurantOffer;
-
-
 }

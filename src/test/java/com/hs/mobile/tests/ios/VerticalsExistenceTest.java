@@ -1,6 +1,6 @@
 package com.hs.mobile.tests.ios;
 
-import com.hs.mobile.tests.base.BaseSteps;
+import com.hs.mobile.tests.BaseSteps;
 import org.testng.annotations.Test;
 
 public class VerticalsExistenceTest extends BaseSteps {
@@ -14,8 +14,8 @@ public class VerticalsExistenceTest extends BaseSteps {
     // When
     landingScreenSteps.selectNewAddress();
     selectLocationScreenSteps.clickOnSearchIcon();
-    selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
-    selectLocationScreenSteps.enterSearchUsingKeyboard();
+    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
+    selectLocationScreenSteps.enterSearch();
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
@@ -35,8 +35,8 @@ public class VerticalsExistenceTest extends BaseSteps {
     verticalsScreenSteps.clickOnAddress();
     verticalsScreenSteps.clickOnAddNewLocation();
     selectLocationScreenSteps.clickOnSearchIcon();
-    selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
-    selectLocationScreenSteps.enterSearchUsingKeyboard();
+    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
+    selectLocationScreenSteps.enterSearch();
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
@@ -56,8 +56,8 @@ public class VerticalsExistenceTest extends BaseSteps {
     verticalsScreenSteps.clickOnAddress();
     verticalsScreenSteps.clickOnAddNewLocation();
     selectLocationScreenSteps.clickOnSearchIcon();
-    selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
-    selectLocationScreenSteps.enterSearchUsingKeyboard();
+    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
+    selectLocationScreenSteps.enterSearch();
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
@@ -77,8 +77,8 @@ public class VerticalsExistenceTest extends BaseSteps {
     verticalsScreenSteps.clickOnAddress();
     verticalsScreenSteps.clickOnAddNewLocation();
     selectLocationScreenSteps.clickOnSearchIcon();
-    selectLocationScreenSteps.sendCityViaIosKeyboard(cityToSearch);
-    selectLocationScreenSteps.enterSearchUsingKeyboard();
+    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
+    selectLocationScreenSteps.enterSearch();
     selectLocationScreenSteps.selectCity(cityToSearch);
 
     // then

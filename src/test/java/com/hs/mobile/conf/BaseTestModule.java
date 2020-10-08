@@ -38,8 +38,8 @@ public class BaseTestModule extends AbstractModule {
 
   @Override
   protected void configure() {
+    binder().requireExplicitBindings();
     install(new DataProviderModule());
-    install(new TestStepsModule());
     install(new CapabilitiesModule());
     install(new DriverModule());
     install(new EndpointsModule());

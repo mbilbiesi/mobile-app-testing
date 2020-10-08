@@ -23,7 +23,7 @@ public class AllStoresScreen {
   @iOSXCUITFindBy(accessibility = "filter_title")
   private MobileElement btnFilterTitle;
 
-  //todo: filter titles by ID
+  // todo: filter titles by ID
   private MobileElement btnFilterAll;
   private MobileElement btnFilterFastFood;
   private MobileElement btnFilterDesert;
@@ -42,11 +42,10 @@ public class AllStoresScreen {
   private MobileElement btnFilterCoffee;
   private MobileElement btnFilterGrocery;
 
-
-  //todo: find a unique identifier - can be applied for multiple restaurants
+  // todo: find a unique identifier - can be applied for multiple restaurants
   private MobileElement btnSelectedRestaurant;
 
-  //todo: look for how to generate IDs elements in each vertical
+  // todo: look for how to generate IDs elements in each vertical
 
   private MobileElement firstVerticalTitle;
   private MobileElement firstVerticalStatusLabel;

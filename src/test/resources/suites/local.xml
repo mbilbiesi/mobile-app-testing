@@ -3,15 +3,15 @@
 
 <suite name="local" verbose="10" parallel="tests"
   thread-count="1" configfailurepolicy="continue">
-  <test name="Iphone 11 Pro Max">
-    <parameter name="deviceName" value="Iphone 11 Pro Max"/>
-    <parameter name="platformName" value="iOS"/>
-    <parameter name="platformVersion" value="14.0"/>
-    <parameter name="udid" value="CADD654D-51E9-4317-9E4C-CF765D1DFE31"/>
-    <parameter name="uniquePort" value="8100"/>
+  <test name="Android">
+    <parameter name="deviceName" value="android phone"/>
+    <parameter name="platformName" value="Android"/>
+    <parameter name="platformVersion" value="11.0"/>
+    <parameter name="udid" value="emulator-5554"/>
+    <parameter name="uniquePort" value="8200"/>
     <parameter name="assignedTestUserId" value="1"/>
     <classes>
-      <class name="com.hs.mobile.tests.ios.VerticalsExistenceTest"/>
+      <class name="com.hs.mobile.tests.android.VerticalsExistenceTest"/>
     </classes>
   </test>
 </suite>

@@ -10,6 +10,7 @@ import static java.time.Duration.ofMillis;
 import com.hs.mobile.core.annotation.AssertElementVisibility;
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.data.ElementAttribute;
+import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -23,6 +24,7 @@ import java.lang.reflect.Field;
 import java.time.Duration;
 import javax.imageio.ImageIO;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
@@ -32,16 +34,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-@SuppressWarnings("rawtypes")
-public abstract class BaseSteps {
+@Slf4j
+public abstract class BaseSteps<T extends BaseSteps<T>> {
 
   @NonNull private final AppiumDriver<MobileElement> driver;
-  protected TouchAction touchAction;
+  protected TouchAction<?> touchAction;
   protected WebDriverWait wait;
 
   public BaseSteps(@NonNull TestSettings settings) {
     this.driver = settings.getDriver();
-    touchAction = new TouchAction(driver);
+    touchAction = new TouchAction<>(driver);
     wait = new WebDriverWait(driver, 10);
   }
 
@@ -49,7 +51,7 @@ public abstract class BaseSteps {
     if (isAndroid()) {
       driver.hideKeyboard();
     } else {
-      IOSDriver iosDriver = (IOSDriver) driver;
+      IOSDriver<MobileElement> iosDriver = (IOSDriver<MobileElement>) driver;
       iosDriver.hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Done");
     }
   }
@@ -70,48 +72,27 @@ public abstract class BaseSteps {
     return element.getAttribute(attribute.getName());
   }
 
-  public void verifyScreenElements() {
+  public <T extends AbstractScreen> void verifyScreenElements(T screen) {
     SoftAssertions soft = new SoftAssertions();
-
-    Class<?> clazz = this.getClass();
+    Class<?> clazz = screen.getClass();
     for (Field field : clazz.getDeclaredFields()) {
       if (field.isAnnotationPresent(AssertElementVisibility.class)) {
         if (field.getType().isAssignableFrom(MobileElement.class)) {
+          field.setAccessible(true);
           try {
-            field.setAccessible(true);
-            WebElement element = (WebElement) field.get(this);
+            WebElement element = (WebElement) field.get(screen);
             soft.assertThat(element.isDisplayed())
                 .as(field.getName() + " is not displayed")
                 .isTrue();
           } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            log.error("Cannot verify element", e);
+          } finally {
+            field.setAccessible(false);
           }
         }
       }
     }
-
     soft.assertAll();
-  }
-
-  public void verifyScreenElements(SoftAssertions soft) {
-    // Method has been created in case we want to verify other things before closing the soft
-    // assertion
-    Class<?> clazz = this.getClass();
-    for (Field field : clazz.getDeclaredFields()) {
-      if (field.isAnnotationPresent(AssertElementVisibility.class)) {
-        if (field.getType().isAssignableFrom(MobileElement.class)) {
-          try {
-            field.setAccessible(true);
-            WebElement element = (WebElement) field.get(this);
-            soft.assertThat(element.isDisplayed())
-                .as(field.getName() + " is not displayed")
-                .isTrue();
-          } catch (IllegalAccessException e) {
-            e.printStackTrace();
-          }
-        }
-      }
-    }
   }
 
   public void scrollByElement(WebElement element) {

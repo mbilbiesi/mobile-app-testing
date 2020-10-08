@@ -3,11 +3,10 @@ package com.hs.mobile.screens.android;
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 @Getter
 public class PaymentOptionsScreen extends AbstractScreen {

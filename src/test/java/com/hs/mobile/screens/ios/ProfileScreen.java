@@ -5,11 +5,10 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
 public class ProfileScreen {
 
-
-  //todo implement locator
+  // todo implement locator
   private MobileElement btnBack;
 
-  //todo implement locator
+  // todo implement locator
   private MobileElement lblMyProfileHeader;
 
   private MobileElement lblMyProfileInfo;
@@ -31,6 +30,4 @@ public class ProfileScreen {
 
   @iOSXCUITFindBy(accessibility = "profile_logout")
   private MobileElement btnProfileLogout;
-
-
 }

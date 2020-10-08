@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 @Getter
-public class VerifyAccountScreen extends AbstractScreen {
+public class VerifyAccountScreen extends AbstractScreen<VerifyAccountScreen> {
 
   @iOSXCUITFindBy(accessibility = "phone_number")
   private MobileElement txtPhoneNumber;

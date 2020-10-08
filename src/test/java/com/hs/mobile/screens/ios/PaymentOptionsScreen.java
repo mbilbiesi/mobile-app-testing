@@ -5,10 +5,10 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
 public class PaymentOptionsScreen {
 
-  //todo implement locator
+  // todo implement locator
   private MobileElement btnBack;
 
-  //todo implement locator
+  // todo implement locator
   private MobileElement txtPaymentOptionsHeader;
 
   @iOSXCUITFindBy(accessibility = "option_credit_card")
@@ -22,6 +22,4 @@ public class PaymentOptionsScreen {
 
   @iOSXCUITFindBy(accessibility = "option_voucher")
   private MobileElement btnVoucherBt;
-
-
 }
