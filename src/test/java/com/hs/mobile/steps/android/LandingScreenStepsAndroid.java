@@ -7,7 +7,10 @@ import com.hs.mobile.steps.LandingScreenSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
+import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 
 public class LandingScreenStepsAndroid extends BaseSteps<LandingScreenStepsAndroid>
     implements LandingScreenSteps {
@@ -23,6 +26,18 @@ public class LandingScreenStepsAndroid extends BaseSteps<LandingScreenStepsAndro
 
   @Override
   public void handleLocationPopup() {}
+
+  @Override
+  @Step("Handle promotion popup")
+  public void handlePromotionPopup() {
+    try {
+      driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+      driver.findElement(By.xpath("//android.view.View[@content-desc=\"تخطى الإعلان\"]")).click();
+    } catch (NoSuchElementException ignored) {
+    } finally {
+      driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+    }
+  }
 
   @Step("click on 'Select' to choose new address")
   public void selectNewAddress() {

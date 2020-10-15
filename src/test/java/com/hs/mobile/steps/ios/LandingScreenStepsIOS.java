@@ -25,11 +25,23 @@ public class LandingScreenStepsIOS extends BaseSteps<LandingScreenStepsIOS>
     driver = testSettings.getDriver();
   }
 
-  @Step("Handling Location popup")
+  @Step("Handling Location permission popup")
   public void handleLocationPopup() {
     try {
       driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
       driver.findElement(By.id("Allow Once")).click();
+    } catch (NoSuchElementException ignored) {
+    } finally {
+      driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+    }
+  }
+
+  @Override
+  @Step("Handle promotion popup")
+  public void handlePromotionPopup() {
+    try {
+      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+      driver.findElement(By.id("content information")).click();
     } catch (NoSuchElementException ignored) {
     } finally {
       driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);

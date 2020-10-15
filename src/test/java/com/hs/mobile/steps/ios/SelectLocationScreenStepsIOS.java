@@ -1,5 +1,6 @@
 package com.hs.mobile.steps.ios;
 
+import static com.hs.mobile.util.CustomConditions.elementIsClicked;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hs.mobile.core.settings.TestSettings;
@@ -59,7 +60,8 @@ public class SelectLocationScreenStepsIOS extends BaseSteps<SelectLocationScreen
 
   @Step("Click on done button")
   public void clickOnDoneButton() {
-    selectLocationScreen.getBtnDone().click();
+    wait.withMessage("could not click on Done")
+        .until(elementIsClicked(selectLocationScreen.getBtnDone()));
   }
 
   @Step("Verify 'Area not covered' label is visible in select button")

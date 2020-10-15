@@ -10,6 +10,7 @@ public class VerticalsExistenceTest extends BaseSteps {
     // Given
     var cityToSearch = "Riyadh";
     landingScreenSteps.handleLocationPopup();
+    landingScreenSteps.handlePromotionPopup();
 
     // When
     landingScreenSteps.selectNewAddress();

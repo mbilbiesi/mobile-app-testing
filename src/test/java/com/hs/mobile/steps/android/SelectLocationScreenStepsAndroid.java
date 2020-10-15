@@ -6,8 +6,6 @@ import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.android.SelectLocationScreen;
 import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.steps.SelectLocationScreenSteps;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import org.openqa.selenium.By;
@@ -17,12 +15,10 @@ public class SelectLocationScreenStepsAndroid extends BaseSteps<SelectLocationSc
     implements SelectLocationScreenSteps {
 
   @NonNull private final SelectLocationScreen selectLocationScreen;
-  @NonNull private final AppiumDriver<MobileElement> driver;
 
   public SelectLocationScreenStepsAndroid(@NonNull TestSettings testSettings) {
     super(testSettings);
     selectLocationScreen = new SelectLocationScreen(testSettings);
-    driver = testSettings.getDriver();
   }
 
   @Override
@@ -37,6 +33,7 @@ public class SelectLocationScreenStepsAndroid extends BaseSteps<SelectLocationSc
 
   @Step("Type {0} in search bar")
   public void insertDesiredCity(String cityName) {
+    selectLocationScreen.searchTextField().click();
     selectLocationScreen.searchTextField().sendKeys(cityName);
   }
 

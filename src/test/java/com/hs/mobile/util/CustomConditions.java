@@ -1,7 +1,5 @@
 package com.hs.mobile.util;
 
-import static java.util.Objects.requireNonNull;
-
 import io.appium.java_client.AppiumDriver;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
@@ -13,13 +11,33 @@ public final class CustomConditions {
 
   private CustomConditions() {}
 
+  public static ExpectedCondition<Boolean> elementIsClicked(WebElement elementToClickOn) {
+    {
+      By byFromWebElement = LocatorUtils.getByFromWebElement(elementToClickOn);
+      return driver -> {
+        AppiumDriver<?> appiumDriver = (AppiumDriver<?>) driver;
+        try {
+          assert appiumDriver != null;
+          appiumDriver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS);
+          driver.findElement(byFromWebElement).click();
+          return true;
+        } catch (NoSuchElementException ignore) {
+        }
+        return false;
+      };
+    }
+  }
+
   public static ExpectedCondition<Boolean> elementIsClicked(
       WebElement elementToClickOn, WebElement expectedElementAfterClick) {
     {
       By byFromWebElement = LocatorUtils.getByFromWebElement(expectedElementAfterClick);
       return driver -> {
+        AppiumDriver<?> appiumDriver = (AppiumDriver<?>) driver;
         try {
-          requireNonNull(driver).findElement(byFromWebElement);
+          assert appiumDriver != null;
+          appiumDriver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS);
+          driver.findElement(byFromWebElement);
           return true;
         } catch (NoSuchElementException ignore) {
           try {
@@ -39,7 +57,7 @@ public final class CustomConditions {
         AppiumDriver<?> appiumDriver = (AppiumDriver<?>) driver;
         try {
           assert appiumDriver != null;
-          appiumDriver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);
+          appiumDriver.manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS);
           appiumDriver.findElement(elementBy);
           return false;
         } catch (NoSuchElementException ignored) {
