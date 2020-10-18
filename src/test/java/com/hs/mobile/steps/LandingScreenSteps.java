@@ -7,6 +7,4 @@ public interface LandingScreenSteps {
   void handlePromotionPopup();
 
   void selectNewAddress();
-
-
 }

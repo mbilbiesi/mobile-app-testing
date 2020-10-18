@@ -9,12 +9,10 @@ import lombok.NonNull;
 
 @Getter
 @SuppressWarnings("unused")
-public class SelectLocationScreen extends AbstractScreen {
+public class SelectLocationScreen extends AbstractScreen<SelectLocationScreen> {
 
   @iOSXCUITFindBy(accessibility = "back_button")
   private MobileElement btnClose;
-
-  private MobileElement lblSelectLocation;
 
   @iOSXCUITFindBy(accessibility = "Search")
   private MobileElement btnSearch;
@@ -24,12 +22,6 @@ public class SelectLocationScreen extends AbstractScreen {
 
   @iOSXCUITFindBy(accessibility = "Search")
   private MobileElement keyboardInputSearch;
-
-  private MobileElement txtAddress;
-
-  private MobileElement imgLocationMarker;
-
-  private MobileElement imgCurrentLocation;
 
   @iOSXCUITFindBy(accessibility = "select_address_button")
   private MobileElement btnSelectAddress;

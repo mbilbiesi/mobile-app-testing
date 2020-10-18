@@ -6,9 +6,13 @@ public interface VerticalsScreenSteps {
 
   void clickOnAddNewLocation();
 
+  boolean isAllStoresVerticalDisplayed();
+
   void assertAllVerticals();
 
   void assertTwoVerticalsAreDisplayed();
 
   void verifyAllStoresVertical();
+
+  void clickOnAllRestaurants();
 }

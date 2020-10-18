@@ -1,25 +1,22 @@
 package com.hs.mobile.screens.ios;
 
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import lombok.Getter;
+import lombok.NonNull;
 
-public class PaymentOptionsScreen {
+@Getter
+public class PaymentOptionsScreen extends AbstractScreen<PaymentOptionsScreen> {
 
-  // todo implement locator
-  private MobileElement btnBack;
+  @iOSXCUITFindBy(iOSNsPredicate = "label == 'Mada Card'")
+  private MobileElement madaPaymentOption;
 
-  // todo implement locator
-  private MobileElement txtPaymentOptionsHeader;
+  @iOSXCUITFindBy(accessibility = "option_cash")
+  private MobileElement btnCashOnDelivery;
 
-  @iOSXCUITFindBy(accessibility = "option_credit_card")
-  private MobileElement btnCreditCardPaymentOption;
-
-  @iOSXCUITFindBy(accessibility = "paymentOptionAddCard")
-  private MobileElement btnAddCard;
-
-  @iOSXCUITFindBy(accessibility = "option_wallet")
-  private MobileElement btnWalletOption;
-
-  @iOSXCUITFindBy(accessibility = "option_voucher")
-  private MobileElement btnVoucherBt;
+  public PaymentOptionsScreen(@NonNull TestSettings settings) {
+    super(settings);
+  }
 }

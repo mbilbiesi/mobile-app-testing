@@ -1,8 +1,14 @@
 package com.hs.mobile.tests.android;
 
 import com.hs.mobile.tests.BaseSteps;
+import com.hs.mobile.util.annotation.SearchAndDiscovery;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
+@SearchAndDiscovery
+@Feature("Verticals")
+@Story("Vertical existence based on selected location")
 public class VerticalsExistenceTest extends BaseSteps {
 
   @Test(description = "Verify all verticals are displayed")

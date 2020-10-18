@@ -1,9 +1,14 @@
 package com.hs.mobile.screens.ios;
 
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import lombok.Getter;
+import lombok.NonNull;
 
-public class AllStoresScreen {
+@Getter
+public class AllStoresScreen extends AbstractScreen {
 
   @iOSXCUITFindBy(accessibility = "header_back_icon")
   private MobileElement btnBack;
@@ -41,12 +46,13 @@ public class AllStoresScreen {
   private MobileElement btnFilterTurkish;
   private MobileElement btnFilterCoffee;
   private MobileElement btnFilterGrocery;
-
   // todo: find a unique identifier - can be applied for multiple restaurants
   private MobileElement btnSelectedRestaurant;
-
   // todo: look for how to generate IDs elements in each vertical
-
   private MobileElement firstVerticalTitle;
   private MobileElement firstVerticalStatusLabel;
+
+  public AllStoresScreen(@NonNull TestSettings settings) {
+    super(settings);
+  }
 }

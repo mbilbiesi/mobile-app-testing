@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 
 @Getter
 @SuppressWarnings("unused")
-public class VerticalsScreen extends AbstractScreen {
+public class VerticalsScreen extends AbstractScreen<VerticalsScreen> {
 
   @iOSXCUITFindBy(accessibility = "pin_icon")
   private MobileElement btnPinIcon;
@@ -29,7 +29,7 @@ public class VerticalsScreen extends AbstractScreen {
   @iOSXCUITFindBy(accessibility = "add_icon")
   private MobileElement btnAdd;
 
-  @iOSXCUITFindBy(id = "new_location_label")
+  @iOSXCUITFindBy(accessibility = "new_location_label")
   private IOSElement lblNewLocation;
 
   @iOSXCUITFindBy(accessibility = "homeRow_0")

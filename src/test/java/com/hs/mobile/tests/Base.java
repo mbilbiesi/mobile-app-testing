@@ -11,6 +11,7 @@ import com.hs.mobile.core.listener.TestListener;
 import com.hs.mobile.data.user.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Platform;
 import org.testng.ITestContext;
@@ -25,16 +26,19 @@ public abstract class Base {
   @Inject protected AppiumDriver<MobileElement> driver;
 
   @BeforeClass
-  public void setup(ITestContext context) {
+  public void initiateInjectors(ITestContext context) {
     Injector injector = Guice.createInjector(new BaseTestModule(context), getStepsModule(context));
     log.debug("Injector created for : {}", context.getCurrentXmlTest().getAllParameters());
     injector.injectMembers(this);
   }
 
-  @AfterClass()
+  @AfterClass(alwaysRun = true)
+  @Step("close the app")
   public void teardown() {
-    if (driver != null) {
+    try {
       driver.quit();
+    } catch (Exception exception) {
+      log.info("session is not exist or already terminated");
     }
   }
 

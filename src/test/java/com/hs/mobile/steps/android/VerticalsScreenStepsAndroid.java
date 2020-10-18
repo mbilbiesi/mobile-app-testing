@@ -32,6 +32,11 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
     tap(verticalsScreen.btnNewLocation());
   }
 
+  @Override
+  public boolean isAllStoresVerticalDisplayed() {
+    return false;
+  }
+
   @Step("verify all verticals are displayed")
   public void assertAllVerticals() {
     assertThat(verticalsScreen.verticals().size())
@@ -52,4 +57,7 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
         .as("Expected only 'All stores' vertical for the provided address")
         .isEqualTo(1);
   }
+
+  @Override
+  public void clickOnAllRestaurants() {}
 }

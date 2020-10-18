@@ -1,8 +1,14 @@
 package com.hs.mobile.tests.ios;
 
 import com.hs.mobile.tests.BaseSteps;
+import com.hs.mobile.util.annotation.SearchAndDiscovery;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
+@SearchAndDiscovery
+@Feature("Verticals")
+@Story("Vertical existence based on selected location")
 public class VerticalsExistenceTest extends BaseSteps {
 
   @Test(description = "Verify all verticals are displayed")
@@ -42,7 +48,7 @@ public class VerticalsExistenceTest extends BaseSteps {
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
 
-    // then
+    // Then
     verticalsScreenSteps.assertTwoVerticalsAreDisplayed();
   }
 
@@ -63,7 +69,7 @@ public class VerticalsExistenceTest extends BaseSteps {
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
 
-    // then
+    // Then
     verticalsScreenSteps.verifyAllStoresVertical();
   }
 
@@ -82,7 +88,7 @@ public class VerticalsExistenceTest extends BaseSteps {
     selectLocationScreenSteps.enterSearch();
     selectLocationScreenSteps.selectCity(cityToSearch);
 
-    // then
+    // Then
     selectLocationScreenSteps.verifyNotCoveredArea();
   }
 }

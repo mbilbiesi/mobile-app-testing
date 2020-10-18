@@ -25,6 +25,7 @@ public class LandingScreenStepsIOS extends BaseSteps<LandingScreenStepsIOS>
     driver = testSettings.getDriver();
   }
 
+  @Override
   @Step("Handling Location permission popup")
   public void handleLocationPopup() {
     try {
@@ -48,6 +49,7 @@ public class LandingScreenStepsIOS extends BaseSteps<LandingScreenStepsIOS>
     }
   }
 
+  @Override
   @Step("click on 'Select' to choose new address")
   public void selectNewAddress() {
     MobileElement btnDeliver = landingScreen.getBtnDeliveryTo();

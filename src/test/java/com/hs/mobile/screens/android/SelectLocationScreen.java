@@ -28,7 +28,8 @@ public class SelectLocationScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_search_bar")
   private AndroidElement searchTextField;
 
-  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_prediction_primary_text")
+  @AndroidFindBy(
+      id = "com.hungerstation.android.web.debug:id/places_autocomplete_prediction_primary_text")
   private AndroidElement searchResult;
 
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/marker_location")
