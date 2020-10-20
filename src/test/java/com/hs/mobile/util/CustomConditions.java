@@ -18,7 +18,7 @@ public final class CustomConditions {
         AppiumDriver<?> appiumDriver = (AppiumDriver<?>) driver;
         try {
           assert appiumDriver != null;
-          appiumDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+          appiumDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
           driver.findElement(byFromWebElement).click();
           return true;
         } catch (NoSuchElementException ignore) {
@@ -36,7 +36,7 @@ public final class CustomConditions {
         AppiumDriver<?> appiumDriver = (AppiumDriver<?>) driver;
         try {
           assert appiumDriver != null;
-          appiumDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+          appiumDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
           driver.findElement(byFromWebElement);
           return true;
         } catch (NoSuchElementException ignore) {
@@ -57,7 +57,7 @@ public final class CustomConditions {
         AppiumDriver<?> appiumDriver = (AppiumDriver<?>) driver;
         try {
           assert appiumDriver != null;
-          appiumDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+          appiumDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
           appiumDriver.findElement(elementBy);
           return false;
         } catch (NoSuchElementException ignored) {
