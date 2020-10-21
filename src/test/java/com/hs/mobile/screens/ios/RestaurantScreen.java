@@ -15,6 +15,9 @@ public class RestaurantScreen extends AbstractScreen<RestaurantScreen> {
   @iOSXCUITFindBy(accessibility = "header_close")
   private MobileElement btnClose;
 
+  @iOSXCUITFindBy(accessibility = "header_location")
+  private MobileElement headerLocation;
+
   @iOSXCUITFindBy(accessibility = "restaurant_name")
   private MobileElement txtRestaurantName;
 

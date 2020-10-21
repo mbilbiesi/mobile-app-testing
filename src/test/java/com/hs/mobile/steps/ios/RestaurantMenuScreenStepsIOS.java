@@ -21,7 +21,7 @@ public class RestaurantMenuScreenStepsIOS extends BaseSteps<RestaurantMenuScreen
   }
 
   @Override
-  @Step("verify restaurant name")
+  @Step("verify restaurant name is '{0}'")
   public void verifyRestaurantName(String restaurantName) {
     assertThat(restaurantMenuScreen.getRestaurantName().getText())
         .as("Wrong restaurant name displayed")

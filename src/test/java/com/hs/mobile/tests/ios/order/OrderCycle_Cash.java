@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 import com.hs.mobile.tests.BaseSteps;
 import com.hs.mobile.util.annotation.OrderAndTracking;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.testng.annotations.BeforeClass;
@@ -17,7 +18,7 @@ public class OrderCycle_Cash extends BaseSteps {
 
   @BeforeClass
   @Step("User is on Restaurant screen")
-  public void setup() {
+  public void testPrecondition() {
     // Given
     var cityToSearch = "Riyadh";
     landingScreenSteps.handleLocationPopup();
@@ -34,13 +35,24 @@ public class OrderCycle_Cash extends BaseSteps {
         .isTrue();
   }
 
-  @Test(description = "Click on a selected restaurant")
-  void clickOnRestaurant_VerifyRestaurantMenuLoads() {
+  @Issue("HSAP-513")
+  @Test(description = "Verify that user is directed to vendor screen")
+  void userNavigateToVendorScreen_verifyUserIsOnVendorScreen() {
+    // When
+    verticalsScreenSteps.clickOnAllRestaurants();
+
+    // Then
+    restaurantScreenSteps.verifyLocationIsAppearedScreenHeader();
+  }
+
+  @Test(
+      description = "Verify user can navigate into restaurant",
+      dependsOnMethods = "userNavigateToVendorScreen_verifyUserIsOnVendorScreen")
+  void clickOnRestaurant_verifyRestaurantMenuLoads() {
     // Given
     var restaurantName = "Al Reef Al Hindi";
 
     // When
-    verticalsScreenSteps.clickOnAllRestaurants();
     restaurantScreenSteps.selectRestaurantByName(restaurantName);
 
     // Then
@@ -49,8 +61,8 @@ public class OrderCycle_Cash extends BaseSteps {
 
   @Test(
       description = "Verify menu items are added to cart",
-      dependsOnMethods = {"clickOnRestaurant_VerifyRestaurantMenuLoads"})
-  void orderFood_VerifyItemsAdded() {
+      dependsOnMethods = {"clickOnRestaurant_verifyRestaurantMenuLoads"})
+  void orderFood_verifyItemsAdded() {
     // When
     restaurantMenuScreenSteps.selectMenuItemByName("Chicken 65");
     menuItemScreenSteps.addMoreItems(4);
@@ -61,8 +73,8 @@ public class OrderCycle_Cash extends BaseSteps {
   }
 
   @Test(
-      description = "order using cash on delivery",
-      dependsOnMethods = {"clickOnRestaurant_VerifyRestaurantMenuLoads"})
+      description = "place order using cash on delivery",
+      dependsOnMethods = {"clickOnRestaurant_verifyRestaurantMenuLoads"})
   void placeOrderUsingCashMethod_orderIsSubmitted() {
     // Given
     menuItemScreenSteps.clickOnViewCart();

@@ -1,5 +1,7 @@
 package com.hs.mobile.steps.ios;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.ExceptionSupplier;
 import com.hs.mobile.screens.ios.RestaurantScreen;
@@ -27,9 +29,11 @@ public class RestaurantScreenStepsIOS extends BaseSteps<RestaurantScreenStepsIOS
         .click();
   }
 
-  @Step("Verify rating icons are displayed")
-  public void verifyRatingIcons() {
-    restaurantScreen.getLblRating().isDisplayed();
-    restaurantScreen.getImgRatingIcon().isDisplayed();
+  @Override
+  @Step("verify location is appeared in screen header")
+  public void verifyLocationIsAppearedScreenHeader() {
+    assertThat(restaurantScreen.getHeaderLocation().getText())
+        .as("Wrong value in header screen")
+        .isNotEmpty();
   }
 }

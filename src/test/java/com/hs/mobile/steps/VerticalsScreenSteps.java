@@ -8,6 +8,8 @@ public interface VerticalsScreenSteps {
 
   boolean isAllStoresVerticalDisplayed();
 
+  void assertDistrictIsAppearedInSearchField();
+
   void assertAllVerticals();
 
   void assertTwoVerticalsAreDisplayed();

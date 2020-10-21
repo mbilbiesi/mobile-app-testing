@@ -1,5 +1,7 @@
 package com.hs.mobile.steps.ios;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.ios.VerticalsScreen;
 import com.hs.mobile.steps.BaseSteps;
@@ -39,6 +41,15 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
   @Step("verify 'All Stores' vertical is displayed")
   public boolean isAllStoresVerticalDisplayed() {
     return verticalsScreen.getLblAllStores().isDisplayed();
+  }
+
+  @Override
+  @Step("verify district is appeared in search field")
+  public void assertDistrictIsAppearedInSearchField() {
+    assertThat(verticalsScreen.getBtnChoose().getText())
+        .as("search field has a wrong value")
+        .isNotEmpty()
+        .doesNotContain("Select");
   }
 
   @Override

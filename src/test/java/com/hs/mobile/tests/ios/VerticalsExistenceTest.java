@@ -3,6 +3,7 @@ package com.hs.mobile.tests.ios;
 import com.hs.mobile.tests.BaseSteps;
 import com.hs.mobile.util.annotation.SearchAndDiscovery;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
@@ -11,6 +12,7 @@ import org.testng.annotations.Test;
 @Story("Vertical existence based on selected location")
 public class VerticalsExistenceTest extends BaseSteps {
 
+  @Issue("HSAP-480")
   @Test(description = "Verify all verticals are displayed")
   public void verifyAllVerticalsAreDisplayed() {
     // Given
@@ -29,6 +31,7 @@ public class VerticalsExistenceTest extends BaseSteps {
 
     // Then
     verticalsScreenSteps.assertAllVerticals();
+    verticalsScreenSteps.assertDistrictIsAppearedInSearchField();
   }
 
   @Test(

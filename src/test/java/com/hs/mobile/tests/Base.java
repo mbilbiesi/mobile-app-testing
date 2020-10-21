@@ -8,7 +8,6 @@ import com.hs.mobile.conf.BaseTestModule;
 import com.hs.mobile.conf.android.TestStepsAndroidModule;
 import com.hs.mobile.conf.ios.TestStepsIOSModule;
 import com.hs.mobile.core.listener.TestListener;
-import com.hs.mobile.data.user.TestUser;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
@@ -22,11 +21,11 @@ import org.testng.annotations.Listeners;
 @Slf4j
 @Listeners(TestListener.class)
 public abstract class Base {
-  @Inject protected TestUser testUser;
   @Inject protected AppiumDriver<MobileElement> driver;
 
   @BeforeClass
-  public void initiateInjectors(ITestContext context) {
+  @Step("prepare test configuration")
+  public void prepareTestRun(ITestContext context) {
     Injector injector = Guice.createInjector(new BaseTestModule(context), getStepsModule(context));
     log.debug("Injector created for : {}", context.getCurrentXmlTest().getAllParameters());
     injector.injectMembers(this);
@@ -34,7 +33,7 @@ public abstract class Base {
 
   @AfterClass(alwaysRun = true)
   @Step("close the app")
-  public void teardown() {
+  public void quiteApp() {
     try {
       driver.quit();
     } catch (Exception exception) {

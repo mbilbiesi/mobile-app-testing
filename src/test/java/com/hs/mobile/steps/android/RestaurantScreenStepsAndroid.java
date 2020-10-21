@@ -13,12 +13,8 @@ public class RestaurantScreenStepsAndroid extends BaseSteps<RestaurantScreenStep
   }
 
   @Override
-  public void selectRestaurantByName(String name) {
-
-  }
+  public void selectRestaurantByName(String name) {}
 
   @Override
-  public void verifyRatingIcons() {
-
-  }
+  public void verifyLocationIsAppearedScreenHeader() {}
 }

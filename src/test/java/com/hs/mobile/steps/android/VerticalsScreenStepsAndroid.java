@@ -22,11 +22,13 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
     driver = testSettings.getDriver();
   }
 
+  @Override
   @Step("click on the address from the address bar")
   public void clickOnAddress() {
     tap(verticalsScreen.txtDeliveryValue());
   }
 
+  @Override
   @Step("Click on add new address from the verticals page")
   public void clickOnAddNewLocation() {
     tap(verticalsScreen.btnNewLocation());
@@ -37,6 +39,16 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
     return false;
   }
 
+  @Override
+  @Step("verify district is appeared in search field")
+  public void assertDistrictIsAppearedInSearchField() {
+    assertThat(verticalsScreen.txtDeliveryValue().getText())
+        .as("search field has a wrong value")
+        .isNotEmpty()
+        .doesNotContain("Select");
+  }
+
+  @Override
   @Step("verify all verticals are displayed")
   public void assertAllVerticals() {
     assertThat(verticalsScreen.verticals().size())
@@ -44,6 +56,7 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
         .isEqualTo(3);
   }
 
+  @Override
   @Step("Verify two verticals are displayed and order-anything verticals is not present")
   public void assertTwoVerticalsAreDisplayed() {
     assertThat(verticalsScreen.verticals().size())
@@ -51,6 +64,7 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
         .isEqualTo(2);
   }
 
+  @Override
   @Step("Verify `All stores' vertical is displayed")
   public void verifyAllStoresVertical() {
     assertThat(verticalsScreen.verticals().size())

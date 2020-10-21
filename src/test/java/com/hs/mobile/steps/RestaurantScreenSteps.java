@@ -4,5 +4,5 @@ public interface RestaurantScreenSteps {
 
   void selectRestaurantByName(String name);
 
-  void verifyRatingIcons();
+  void verifyLocationIsAppearedScreenHeader();
 }
