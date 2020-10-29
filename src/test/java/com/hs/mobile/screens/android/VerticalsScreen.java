@@ -32,6 +32,12 @@ public class VerticalsScreen extends AbstractScreen<VerticalsScreen> {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/new_location_clickable_view")
   private AndroidElement btnNewLocation;
 
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/gradient_overlay")
+  private AndroidElement btnAllStoresVertical;
+
+  @AndroidFindBy(xpath = "//android.widget.Button[@text='Fast Food']")
+  private AndroidElement filter;
+
   public VerticalsScreen(@NonNull TestSettings settings) {
     super(settings);
   }

@@ -6,7 +6,6 @@ import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.android.VerticalsScreen;
 import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 
@@ -14,12 +13,10 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
     implements VerticalsScreenSteps {
 
   @NonNull private final VerticalsScreen verticalsScreen;
-  AppiumDriver<?> driver;
 
   public VerticalsScreenStepsAndroid(@NonNull TestSettings testSettings) {
     super(testSettings);
     verticalsScreen = new VerticalsScreen(testSettings);
-    driver = testSettings.getDriver();
   }
 
   @Override
@@ -35,8 +32,9 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
   }
 
   @Override
+  @Step("verify 'All Stores' vertical is displayed")
   public boolean isAllStoresVerticalDisplayed() {
-    return false;
+    return verticalsScreen.verticals().size() > 0;
   }
 
   @Override
@@ -73,5 +71,8 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
   }
 
   @Override
-  public void clickOnAllRestaurants() {}
+  @Step("Click on 'All Stores'")
+  public void clickOnAllStores() {
+    verticalsScreen.verticals().get(0).click();
+  }
 }

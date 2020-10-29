@@ -11,12 +11,12 @@ import com.hs.mobile.steps.RestaurantMenuScreenSteps;
 import com.hs.mobile.steps.RestaurantScreenSteps;
 import com.hs.mobile.steps.SelectLocationScreenSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
+import com.hs.mobile.steps.android.AllStoresScreenStepsAndroid;
 import com.hs.mobile.steps.android.CheckoutScreenStepsAndroid;
 import com.hs.mobile.steps.android.LandingScreenStepsAndroid;
 import com.hs.mobile.steps.android.MenuItemStepsAndroid;
 import com.hs.mobile.steps.android.PaymentOptionsScreenStepsAndroid;
 import com.hs.mobile.steps.android.RestaurantMenuScreenStepsAndroid;
-import com.hs.mobile.steps.android.RestaurantScreenStepsAndroid;
 import com.hs.mobile.steps.android.SelectLocationScreenStepsAndroid;
 import com.hs.mobile.steps.android.VerticalsScreenStepsAndroid;
 
@@ -40,7 +40,7 @@ public class TestStepsAndroidModule extends AbstractModule {
 
   @Provides
   public RestaurantScreenSteps restaurantScreenSteps(TestSettings testSettings) {
-    return new RestaurantScreenStepsAndroid(testSettings);
+    return new AllStoresScreenStepsAndroid(testSettings);
   }
 
   @Provides

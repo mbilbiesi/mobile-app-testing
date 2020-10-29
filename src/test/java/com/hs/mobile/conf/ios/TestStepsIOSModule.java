@@ -11,12 +11,12 @@ import com.hs.mobile.steps.RestaurantMenuScreenSteps;
 import com.hs.mobile.steps.RestaurantScreenSteps;
 import com.hs.mobile.steps.SelectLocationScreenSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
+import com.hs.mobile.steps.ios.AllStoresScreenStepsIOS;
 import com.hs.mobile.steps.ios.CheckoutScreenStepsIOS;
 import com.hs.mobile.steps.ios.LandingScreenStepsIOS;
 import com.hs.mobile.steps.ios.MenuItemStepsIOS;
 import com.hs.mobile.steps.ios.PaymentOptionsScreenStepsIOS;
 import com.hs.mobile.steps.ios.RestaurantMenuScreenStepsIOS;
-import com.hs.mobile.steps.ios.RestaurantScreenStepsIOS;
 import com.hs.mobile.steps.ios.SelectLocationScreenStepsIOS;
 import com.hs.mobile.steps.ios.VerticalsScreenStepsIOS;
 
@@ -40,7 +40,7 @@ public class TestStepsIOSModule extends AbstractModule {
 
   @Provides
   public RestaurantScreenSteps restaurantScreenSteps(TestSettings testSettings) {
-    return new RestaurantScreenStepsIOS(testSettings);
+    return new AllStoresScreenStepsIOS(testSettings);
   }
 
   @Provides

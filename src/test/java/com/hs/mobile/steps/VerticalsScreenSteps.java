@@ -16,5 +16,5 @@ public interface VerticalsScreenSteps {
 
   void verifyAllStoresVertical();
 
-  void clickOnAllRestaurants();
+  void clickOnAllStores();
 }

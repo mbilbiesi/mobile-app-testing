@@ -39,7 +39,7 @@ public class OrderCycle_Mada extends BaseSteps {
   @Test(description = "Verify that user is directed to vendor screen")
   void userNavigateToVendorScreen_verifyUserIsOnVendorScreen() {
     // When
-    verticalsScreenSteps.clickOnAllRestaurants();
+    verticalsScreenSteps.clickOnAllStores();
 
     // Then
     restaurantScreenSteps.verifyLocationIsAppearedScreenHeader();

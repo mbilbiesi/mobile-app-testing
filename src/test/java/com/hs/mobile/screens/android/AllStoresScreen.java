@@ -2,6 +2,7 @@ package com.hs.mobile.screens.android;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.AbstractScreen;
+import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import java.util.List;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.NonNull;
 import org.openqa.selenium.WebElement;
 
 @Getter
-public class RestaurantScreen extends AbstractScreen {
+public class AllStoresScreen extends AbstractScreen<AllStoresScreen> {
 
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/menu_item_name")
   private List<WebElement> menuItems;
@@ -50,7 +51,10 @@ public class RestaurantScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/pos_button")
   private List<WebElement> btnAcceptOffer;
 
-  public RestaurantScreen(@NonNull TestSettings settings) {
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/filter_name")
+  private List<AndroidElement> lstFilters;
+
+  public AllStoresScreen(@NonNull TestSettings settings) {
     super(settings);
   }
 }
