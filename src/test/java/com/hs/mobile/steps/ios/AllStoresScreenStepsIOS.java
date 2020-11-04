@@ -5,14 +5,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.exception.ExceptionSupplier;
 import com.hs.mobile.screens.ios.AllStoresScreen;
+import com.hs.mobile.steps.AllStoresScreenSteps;
 import com.hs.mobile.steps.BaseSteps;
-import com.hs.mobile.steps.RestaurantScreenSteps;
 import com.hs.mobile.util.CustomConditions;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 
 public class AllStoresScreenStepsIOS extends BaseSteps<AllStoresScreenStepsIOS>
-    implements RestaurantScreenSteps {
+    implements AllStoresScreenSteps {
 
   @NonNull private final AllStoresScreen allStoresScreen;
 

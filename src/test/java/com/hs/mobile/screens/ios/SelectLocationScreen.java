@@ -26,6 +26,15 @@ public class SelectLocationScreen extends AbstractScreen<SelectLocationScreen> {
   @iOSXCUITFindBy(accessibility = "select_address_button")
   private MobileElement btnSelectAddress;
 
+  @iOSXCUITFindBy(accessibility = "show_icon_switch")
+  private MobileElement btnSwitchSaveForLater;
+
+  @iOSXCUITFindBy(accessibility = "home_icon")
+  private MobileElement btnHomeIcon;
+
+  @iOSXCUITFindBy(accessibility = "pin img ic")
+  private MobileElement iconMapPin;
+
   @iOSXCUITFindBy(accessibility = "save_button")
   private MobileElement btnDone;
 

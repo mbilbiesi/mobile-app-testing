@@ -1,6 +1,6 @@
 package com.hs.mobile.steps;
 
-public interface RestaurantScreenSteps {
+public interface AllStoresScreenSteps {
 
   void selectRestaurantByName(String name);
 

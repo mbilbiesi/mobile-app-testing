@@ -13,15 +13,6 @@ public class CheckoutScreen extends AbstractScreen<CheckoutScreen> {
   @iOSXCUITFindBy(accessibility = "hint_text")
   private MobileElement txtNoteHint;
 
-  @iOSXCUITFindBy(accessibility = "phone_number")
-  private MobileElement txtPhoneNumber;
-
-  @iOSXCUITFindBy(accessibility = "next_button")
-  private MobileElement btnNext;
-
-  @iOSXCUITFindBy(accessibility = "code_text")
-  private MobileElement txtCode;
-
   @iOSXCUITFindBy(accessibility = "button_title")
   private MobileElement btnPlaceOrder;
 

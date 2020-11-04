@@ -57,4 +57,48 @@ public class LandingScreenStepsIOS extends BaseSteps<LandingScreenStepsIOS>
         .until(ExpectedConditions.visibilityOf(btnDeliver));
     btnDeliver.click();
   }
+
+  @Override
+  @Step("click on 'More' from tab bar")
+  public void clickOnMore() {
+    landingScreen.getBtnMore().click();
+  }
+
+  @Override
+  @Step("Click on more actions")
+  public void clickOnMoreActions() {
+    landingScreen.getBtnMoreAction().click();
+  }
+
+  @Override
+  @Step("Get address label")
+  public String getAddressLabel() {
+    return landingScreen.getAddressLabel().getText();
+  }
+
+  @Override
+  @Step("Click on 'Edit' address")
+  public void clickOnEditAddress() {
+    landingScreen.getBtnEditAddress().click();
+  }
+
+  @Override
+  @Step("Click on 'Delete' address")
+  public void clickOnDeleteAddress() {
+    landingScreen.getBtnDeleteAddress().click();
+  }
+
+  @Override
+  @Step("Confirm remove address")
+  public void confirmRemoveAddress() {
+    landingScreen.getBtnRemove().click();
+  }
+
+  @Override
+  @Step("Verify '{0}' address type is appeared in search field")
+  public void verifySearchFieldValueIsEqualTo(String value) {
+    wait.withMessage("Address type is not displayed in search field")
+        .until(
+            ExpectedConditions.textToBePresentInElementValue(landingScreen.getBtnChoose(), value));
+  }
 }

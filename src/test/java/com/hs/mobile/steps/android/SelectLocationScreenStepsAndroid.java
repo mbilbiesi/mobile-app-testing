@@ -47,6 +47,21 @@ public class SelectLocationScreenStepsAndroid extends BaseSteps<SelectLocationSc
     tap(selectLocationScreen.btnSelect());
   }
 
+  @Override
+  @Step("Switch 'Save for later' on")
+  public void clickOnSaveForLater() {
+    selectLocationScreen.btnSwitchSaveForLater().click();
+  }
+
+  @Override
+  public void clickOnHomeIcon() {
+    selectLocationScreen.btnHomeIcon().click();
+  }
+
+  @Override
+  public void moveMapPinToNewLocationPoint() {
+  }
+
   @Step("Click on done button")
   public void clickOnDoneButton() {
     tap(selectLocationScreen.btnSelect());

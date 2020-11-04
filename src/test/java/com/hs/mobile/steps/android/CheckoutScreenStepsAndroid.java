@@ -15,15 +15,6 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   public void skipNoteHint() {}
 
   @Override
-  public void enterPhoneNumber(String phoneNumber) {}
-
-  @Override
-  public void clickOnNext() {}
-
-  @Override
-  public void enterOtpCode(String otpCode) {}
-
-  @Override
   public void enterMadaSecurityCode(String securityCode) {}
 
   @Override

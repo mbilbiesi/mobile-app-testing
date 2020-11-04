@@ -2,6 +2,7 @@ package com.hs.mobile.core.appium.caps;
 
 import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
 import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
+import static java.lang.Boolean.TRUE;
 import static org.openqa.selenium.Platform.ANDROID;
 import static org.openqa.selenium.Platform.IOS;
 
@@ -35,7 +36,7 @@ public class CapabilitiesManager {
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ANDROID_UIAUTOMATOR2);
         capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, uniquePort);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID.name());
-        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, TRUE);
         break;
 
       case IOS:
@@ -43,16 +44,17 @@ public class CapabilitiesManager {
         capabilities.setCapability(MobileCapabilityType.UDID, deviceUDID);
         capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, IOS_XCUI_TEST);
-        capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
         capabilities.setCapability(IOSMobileCapabilityType.WDA_LOCAL_PORT, uniquePort);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, IOS.name());
-        capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, Boolean.TRUE);
+        capabilities.setCapability(IOSMobileCapabilityType.LOCATION_SERVICES_AUTHORIZED, TRUE);
+        capabilities.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, TRUE);
+        capabilities.setCapability(IOSMobileCapabilityType.WAIT_FOR_APP_SCRIPT, "true");
         break;
     }
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-    capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
-    capabilities.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, true);
+    capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 500);
+    capabilities.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, TRUE);
     return capabilities;
   }
 }

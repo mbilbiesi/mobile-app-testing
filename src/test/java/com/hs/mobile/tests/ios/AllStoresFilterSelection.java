@@ -2,13 +2,19 @@ package com.hs.mobile.tests.ios;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
-import com.hs.mobile.tests.BaseSteps;
+import com.hs.mobile.tests.BaseTestSteps;
+import com.hs.mobile.util.annotation.SearchAndDiscovery;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class AllStoresFilterSelection extends BaseSteps {
+@SearchAndDiscovery
+@Feature("All Stores vertical")
+@Story("Filters verification")
+public class AllStoresFilterSelection extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on Restaurant screen")
@@ -34,10 +40,10 @@ public class AllStoresFilterSelection extends BaseSteps {
   public void userSelectFilter_filterIsSelected() {
     // When
     verticalsScreenSteps.clickOnAllStores();
-    restaurantScreenSteps.clickOnFirstFilter();
+    allStoresScreenSteps.clickOnFirstFilter();
 
     // Then
-    restaurantScreenSteps.assertFilterSelection();
+    allStoresScreenSteps.assertFilterSelection();
   }
 
   @Issue("HSAP-469")
@@ -46,9 +52,9 @@ public class AllStoresFilterSelection extends BaseSteps {
       dependsOnMethods = "userSelectFilter_filterIsSelected")
   public void userDeselectFilter_filterIsDeselected() {
     // When
-    restaurantScreenSteps.deselectFilter();
+    allStoresScreenSteps.deselectFilter();
 
     // Then
-    restaurantScreenSteps.assertFilterDeselected();
+    allStoresScreenSteps.assertFilterDeselected();
   }
 }

@@ -12,6 +12,12 @@ public interface SelectLocationScreenSteps {
 
   void clickOnSelectAddressButton();
 
+  void clickOnSaveForLater();
+
+  void clickOnHomeIcon();
+
+  void moveMapPinToNewLocationPoint();
+
   void clickOnDoneButton();
 
   void verifyNotCoveredArea();

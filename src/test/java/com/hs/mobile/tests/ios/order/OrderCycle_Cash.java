@@ -2,7 +2,7 @@ package com.hs.mobile.tests.ios.order;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
-import com.hs.mobile.tests.BaseSteps;
+import com.hs.mobile.tests.BaseTestSteps;
 import com.hs.mobile.util.annotation.OrderAndTracking;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 @OrderAndTracking
 @Feature("Ordering")
 @Story("Create order using 'Cash on Delivery'")
-public class OrderCycle_Cash extends BaseSteps {
+public class OrderCycle_Cash extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on Restaurant screen")
@@ -42,7 +42,7 @@ public class OrderCycle_Cash extends BaseSteps {
     verticalsScreenSteps.clickOnAllStores();
 
     // Then
-    restaurantScreenSteps.verifyLocationIsAppearedScreenHeader();
+    allStoresScreenSteps.verifyLocationIsAppearedScreenHeader();
   }
 
   @Test(
@@ -53,7 +53,7 @@ public class OrderCycle_Cash extends BaseSteps {
     var restaurantName = "Al Reef Al Hindi";
 
     // When
-    restaurantScreenSteps.selectRestaurantByName(restaurantName);
+    allStoresScreenSteps.selectRestaurantByName(restaurantName);
 
     // Then
     restaurantMenuScreenSteps.verifyRestaurantName(restaurantName);
@@ -78,9 +78,9 @@ public class OrderCycle_Cash extends BaseSteps {
   void placeOrderUsingCashMethod_orderIsSubmitted() {
     // Given
     menuItemScreenSteps.clickOnViewCart();
-    checkoutScreenSteps.enterPhoneNumber("501020010");
-    checkoutScreenSteps.clickOnNext();
-    checkoutScreenSteps.enterOtpCode("000000");
+    loginScreenSteps.enterPhoneNumber("501020010");
+    loginScreenSteps.clickOnNext();
+    loginScreenSteps.enterOtpCode("000000");
 
     // When
     checkoutScreenSteps.skipNoteHint();

@@ -3,18 +3,22 @@ package com.hs.mobile.conf.android;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.steps.AllStoresScreenSteps;
 import com.hs.mobile.steps.CheckoutScreenSteps;
 import com.hs.mobile.steps.LandingScreenSteps;
+import com.hs.mobile.steps.LoginScreenSteps;
 import com.hs.mobile.steps.MenuItemScreenSteps;
+import com.hs.mobile.steps.MoreScreenSteps;
 import com.hs.mobile.steps.PaymentOptionsScreenSteps;
 import com.hs.mobile.steps.RestaurantMenuScreenSteps;
-import com.hs.mobile.steps.RestaurantScreenSteps;
 import com.hs.mobile.steps.SelectLocationScreenSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
 import com.hs.mobile.steps.android.AllStoresScreenStepsAndroid;
 import com.hs.mobile.steps.android.CheckoutScreenStepsAndroid;
 import com.hs.mobile.steps.android.LandingScreenStepsAndroid;
+import com.hs.mobile.steps.android.LoginScreenStepsAndroid;
 import com.hs.mobile.steps.android.MenuItemStepsAndroid;
+import com.hs.mobile.steps.android.MoreScreenStepsAndroid;
 import com.hs.mobile.steps.android.PaymentOptionsScreenStepsAndroid;
 import com.hs.mobile.steps.android.RestaurantMenuScreenStepsAndroid;
 import com.hs.mobile.steps.android.SelectLocationScreenStepsAndroid;
@@ -39,7 +43,7 @@ public class TestStepsAndroidModule extends AbstractModule {
   }
 
   @Provides
-  public RestaurantScreenSteps restaurantScreenSteps(TestSettings testSettings) {
+  public AllStoresScreenSteps restaurantScreenSteps(TestSettings testSettings) {
     return new AllStoresScreenStepsAndroid(testSettings);
   }
 
@@ -61,5 +65,15 @@ public class TestStepsAndroidModule extends AbstractModule {
   @Provides
   public PaymentOptionsScreenSteps paymentOptionsScreenSteps(TestSettings settings) {
     return new PaymentOptionsScreenStepsAndroid(settings);
+  }
+
+  @Provides
+  public LoginScreenSteps loginScreenSteps(TestSettings settings) {
+    return new LoginScreenStepsAndroid(settings);
+  }
+
+  @Provides
+  public MoreScreenSteps moreScreenSteps(TestSettings settings) {
+    return new MoreScreenStepsAndroid(settings);
   }
 }

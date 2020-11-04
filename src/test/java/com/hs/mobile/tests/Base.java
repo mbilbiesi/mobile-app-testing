@@ -20,7 +20,7 @@ import org.testng.annotations.Listeners;
 
 @Slf4j
 @Listeners(TestListener.class)
-public abstract class Base {
+abstract class Base {
   @Inject protected AppiumDriver<MobileElement> driver;
 
   @BeforeClass
@@ -35,7 +35,7 @@ public abstract class Base {
   @Step("close the app")
   public void quiteApp() {
     try {
-      driver.quit();
+     // driver.quit();
     } catch (Exception exception) {
       log.info("session is not exist or already terminated");
     }

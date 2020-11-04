@@ -1,18 +1,20 @@
 package com.hs.mobile.screens.ios;
 
+import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.screens.AbstractScreen;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import lombok.Getter;
+import lombok.NonNull;
 
-public class MoreOptionsScreen {
-
-  // Note for improvements - changing the name of the ID to a more descriptive name relates to the
-  // btn
+@Getter
+public class MoreScreen extends AbstractScreen<MoreScreen> {
 
   @iOSXCUITFindBy(accessibility = "cell_0")
   private MobileElement btnReferralCode;
 
   @iOSXCUITFindBy(accessibility = "cell_2")
-  private MobileElement btnMyProfile;
+  private MobileElement btnLogin;
 
   @iOSXCUITFindBy(accessibility = "cell_3")
   private MobileElement btnPaymentOptions;
@@ -25,4 +27,11 @@ public class MoreOptionsScreen {
 
   @iOSXCUITFindBy(accessibility = "cell_7")
   private MobileElement btnSettings;
+
+  @iOSXCUITFindBy(accessibility = "Home")
+  private MobileElement btnHome;
+
+  public MoreScreen(@NonNull TestSettings settings) {
+    super(settings);
+  }
 }

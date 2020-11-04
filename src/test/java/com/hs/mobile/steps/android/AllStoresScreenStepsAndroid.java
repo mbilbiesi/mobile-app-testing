@@ -4,13 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.android.AllStoresScreen;
+import com.hs.mobile.steps.AllStoresScreenSteps;
 import com.hs.mobile.steps.BaseSteps;
-import com.hs.mobile.steps.RestaurantScreenSteps;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 
 public class AllStoresScreenStepsAndroid extends BaseSteps<AllStoresScreenStepsAndroid>
-    implements RestaurantScreenSteps {
+    implements AllStoresScreenSteps {
 
   @NonNull private final AllStoresScreen allStoresScreen;
 

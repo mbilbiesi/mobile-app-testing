@@ -11,16 +11,10 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Accessors(fluent = true)
-public class SelectLocationScreen extends AbstractScreen {
+public class SelectLocationScreen extends AbstractScreen<SelectLocationScreen> {
 
   @AndroidFindBy(accessibility = "Navigate up")
   private MobileElement btnNavigationUp;
-
-  // todo: ask developer to unique accessibility locator
-  private MobileElement lblSelectDeliveryLocation;
-
-  // todo: ask developer to unique accessibility locator
-  private MobileElement imgSearch;
 
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/searchBarLocationName")
   private MobileElement searchBar;
@@ -46,6 +40,15 @@ public class SelectLocationScreen extends AbstractScreen {
 
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/BtnAddAddress")
   private MobileElement btnSelect;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/save_location_switch")
+  private MobileElement btnSwitchSaveForLater;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/home_rb")
+  private MobileElement btnHomeIcon;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/marker_location")
+  private MobileElement iconMapPin;
 
   public SelectLocationScreen(@NonNull TestSettings settings) {
     super(settings);

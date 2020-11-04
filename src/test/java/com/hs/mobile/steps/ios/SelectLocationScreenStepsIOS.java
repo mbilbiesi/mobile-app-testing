@@ -1,6 +1,7 @@
 package com.hs.mobile.steps.ios;
 
 import static com.hs.mobile.util.CustomConditions.elementIsClicked;
+import static io.appium.java_client.touch.offset.ElementOption.element;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hs.mobile.core.settings.TestSettings;
@@ -9,6 +10,7 @@ import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.steps.SelectLocationScreenSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.touch.offset.PointOption;
 import io.qameta.allure.Step;
 import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
@@ -61,6 +63,26 @@ public class SelectLocationScreenStepsIOS extends BaseSteps<SelectLocationScreen
     WebElement selectButton = selectLocationScreen.getBtnSelectAddress();
     wait.until(ExpectedConditions.elementToBeClickable(selectButton));
     selectButton.click();
+  }
+
+  @Override
+  @Step("Switch 'Save for later' on")
+  public void clickOnSaveForLater() {
+    selectLocationScreen.getBtnSwitchSaveForLater().click();
+  }
+
+  @Override
+  public void clickOnHomeIcon() {
+    selectLocationScreen.getBtnHomeIcon().click();
+  }
+
+  @Override
+  @Step("Move 'Map Pin' to a new location")
+  public void moveMapPinToNewLocationPoint() {
+    touchAction
+        .longPress(element(selectLocationScreen.getIconMapPin()))
+        .moveTo(PointOption.point(0, 100))
+        .perform();
   }
 
   @Override
