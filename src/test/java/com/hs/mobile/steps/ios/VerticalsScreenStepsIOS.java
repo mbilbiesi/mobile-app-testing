@@ -7,7 +7,6 @@ import com.hs.mobile.screens.ios.VerticalsScreen;
 import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
 import com.hs.mobile.util.CustomConditions;
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,12 +15,10 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
     implements VerticalsScreenSteps {
 
   @NonNull private final VerticalsScreen verticalsScreen;
-  AppiumDriver<?> driver;
 
   public VerticalsScreenStepsIOS(@NonNull TestSettings testSettings) {
     super(testSettings);
     verticalsScreen = new VerticalsScreen(testSettings);
-    driver = testSettings.getDriver();
   }
 
   @Override
@@ -41,6 +38,12 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
   @Step("verify 'All Stores' vertical is displayed")
   public boolean isAllStoresVerticalDisplayed() {
     return verticalsScreen.getLblAllStores().isDisplayed();
+  }
+
+  @Override
+  @Step("verify 'OrderAnything' vertical is displayed")
+  public boolean isOrderAnythingVerticalDisplayed() {
+    return verticalsScreen.getLblOrderAnything().isDisplayed();
   }
 
   @Override
@@ -89,5 +92,10 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
   @Step("click on all-stores vertical")
   public void clickOnAllStores() {
     verticalsScreen.getLblAllStores().click();
+  }
+
+  @Override
+  public void clickOrderAnything() {
+    verticalsScreen.getLblOrderAnything().click();
   }
 }

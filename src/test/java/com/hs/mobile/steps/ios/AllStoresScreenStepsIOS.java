@@ -66,4 +66,36 @@ public class AllStoresScreenStepsIOS extends BaseSteps<AllStoresScreenStepsIOS>
         .as("deselect filter is not working")
         .isTrue();
   }
+
+  @Override
+  @Step("verify campaign banners are displayed")
+  public void verifyCampaignBannersAreDisplayed() {
+    assertThat(allStoresScreen.getFirstCampaignBanner().isDisplayed())
+        .as("campaign banners are not displayed")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Click on search for restaurant button")
+  public void clickOnSearch() {
+    allStoresScreen.getBtnSearchIcon().click();
+  }
+
+  @Override
+  @Step("Type search keyword in the search bar")
+  public void typeSearchKeyword(String searchKeyword) {
+    allStoresScreen.getTxtSearch().sendKeys(searchKeyword);
+  }
+
+  @Override
+  @Step("Click on 'try now' to navigate to Order Anything")
+  public void clickOnTryOrderAnything() {
+    allStoresScreen.getBtnOrderAnything().click();
+  }
+
+  @Override
+  @Step("Click on first campaign banner")
+  public void clickOnCampaign() {
+    allStoresScreen.getFirstCampaignBanner().click();
+  }
 }

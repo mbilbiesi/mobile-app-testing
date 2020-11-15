@@ -52,4 +52,36 @@ public class AllStoresScreenStepsAndroid extends BaseSteps<AllStoresScreenStepsA
         .as("deselect filter button is not working")
         .isGreaterThan(1);
   }
+
+  @Override
+  @Step("verify campaign banners are displayed")
+  public void verifyCampaignBannersAreDisplayed() {
+    assertThat(allStoresScreen.getCampaignBannerList().size())
+        .as("campaign banners are not displayed")
+        .isGreaterThan(0);
+  }
+
+  @Override
+  @Step("Click on search for restaurant button")
+  public void clickOnSearch() {
+    allStoresScreen.getBtnSearchIcon().click();
+  }
+
+  @Override
+  @Step("Type search keyword in the search bar")
+  public void typeSearchKeyword(String searchKeyword) {
+    allStoresScreen.getSearchBar().sendKeys(searchKeyword);
+  }
+
+  @Override
+  @Step("Click on 'try now' to navigate to Order Anything")
+  public void clickOnTryOrderAnything() {
+    allStoresScreen.getBtnTryOrderAnything().click();
+  }
+
+  @Override
+  @Step("Click on first campaign banner")
+  public void clickOnCampaign() {
+    allStoresScreen.getCampaignBannerList().get(0).click();
+  }
 }

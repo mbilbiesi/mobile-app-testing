@@ -55,6 +55,21 @@ public class AllStoresScreen extends AbstractScreen<AllStoresScreen> {
   @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == 'Fast Food'`][2]")
   private MobileElement fastFoodFilter;
 
+  @iOSXCUITFindBy(accessibility = "campaignCell_0")
+  private MobileElement firstCampaignBanner;
+
+  @iOSXCUITFindBy(accessibility = "back button icon")
+  private MobileElement btnBack;
+
+  @iOSXCUITFindBy(accessibility = "header_search_icon")
+  private MobileElement btnSearchIcon;
+
+  @iOSXCUITFindBy(accessibility = "header_search_text")
+  private MobileElement txtSearch;
+
+  @iOSXCUITFindBy(accessibility = "custom_button")
+  private MobileElement btnOrderAnything;
+
   public AllStoresScreen(@NonNull TestSettings settings) {
     super(settings);
   }

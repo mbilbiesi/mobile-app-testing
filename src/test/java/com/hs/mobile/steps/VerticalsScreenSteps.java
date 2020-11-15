@@ -8,6 +8,8 @@ public interface VerticalsScreenSteps {
 
   boolean isAllStoresVerticalDisplayed();
 
+  boolean isOrderAnythingVerticalDisplayed();
+
   void assertDistrictIsAppearedInSearchField();
 
   void assertAllVerticals();
@@ -17,4 +19,6 @@ public interface VerticalsScreenSteps {
   void verifyAllStoresVertical();
 
   void clickOnAllStores();
+
+  void clickOrderAnything();
 }

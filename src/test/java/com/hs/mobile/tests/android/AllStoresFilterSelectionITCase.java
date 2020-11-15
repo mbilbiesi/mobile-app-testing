@@ -8,7 +8,7 @@ import io.qameta.allure.Step;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class AllStoresFilterSelection extends BaseTestSteps {
+public class AllStoresFilterSelectionITCase extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on 'All stores' screen")

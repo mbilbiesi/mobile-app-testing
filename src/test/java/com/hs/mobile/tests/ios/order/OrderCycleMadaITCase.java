@@ -13,8 +13,8 @@ import org.testng.annotations.Test;
 
 @OrderAndTracking
 @Feature("Ordering")
-@Story("Create order using 'Cash on Delivery'")
-public class OrderCycle_Cash extends BaseTestSteps {
+@Story("Create order using 'Mada'")
+public class OrderCycleMadaITCase extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on Restaurant screen")
@@ -60,7 +60,7 @@ public class OrderCycle_Cash extends BaseTestSteps {
   }
 
   @Test(
-      description = "Verify menu items are added to cart",
+      description = "Verify menu items are added to chart",
       dependsOnMethods = {"clickOnRestaurant_verifyRestaurantMenuLoads"})
   void orderFood_verifyItemsAdded() {
     // When
@@ -73,9 +73,9 @@ public class OrderCycle_Cash extends BaseTestSteps {
   }
 
   @Test(
-      description = "place order using cash on delivery",
+      description = "place order using Mada credit card ",
       dependsOnMethods = {"clickOnRestaurant_verifyRestaurantMenuLoads"})
-  void placeOrderUsingCashMethod_orderIsSubmitted() {
+  void orderViaMadaCreditCard() {
     // Given
     menuItemScreenSteps.clickOnViewCart();
     loginScreenSteps.enterPhoneNumber("501020010");
@@ -85,8 +85,11 @@ public class OrderCycle_Cash extends BaseTestSteps {
     // When
     checkoutScreenSteps.skipNoteHint();
     checkoutScreenSteps.changePaymentMethod();
-    paymentOptionsScreenSteps.clickOnCashOnDeliveryPayment();
+    paymentOptionsScreenSteps.clickOnMadaPaymentOption();
     checkoutScreenSteps.placeOrder();
+    checkoutScreenSteps.enterMadaSecurityCode("257");
+    checkoutScreenSteps.typeVerificationCodeOnGatewaySimulator("Checkout1!");
+    checkoutScreenSteps.clickOnContinue();
 
     // Then
     checkoutScreenSteps.verifyOrderIsSubmitted();

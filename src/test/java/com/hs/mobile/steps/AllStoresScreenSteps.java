@@ -13,4 +13,14 @@ public interface AllStoresScreenSteps {
   void deselectFilter();
 
   void assertFilterDeselected();
+
+  void verifyCampaignBannersAreDisplayed();
+
+  void clickOnSearch();
+
+  void typeSearchKeyword(String searchKeyword);
+
+  void clickOnTryOrderAnything();
+
+  void clickOnCampaign();
 }

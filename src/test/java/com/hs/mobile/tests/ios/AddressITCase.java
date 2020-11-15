@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 @SearchAndDiscovery
 @Feature("Address")
 @Story("Update and Save address")
-public class AddressVerification extends BaseTestSteps {
+public class AddressITCase extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is logged-in")

@@ -35,7 +35,7 @@ abstract class Base {
   @Step("close the app")
   public void quiteApp() {
     try {
-     // driver.quit();
+      driver.quit();
     } catch (Exception exception) {
       log.info("session is not exist or already terminated");
     }

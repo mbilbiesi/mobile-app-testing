@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.ios;
+package com.hs.mobile.tests.android;
 
 import com.hs.mobile.tests.BaseTestSteps;
 import com.hs.mobile.util.annotation.SearchAndDiscovery;
@@ -10,14 +10,13 @@ import org.testng.annotations.Test;
 @SearchAndDiscovery
 @Feature("Verticals")
 @Story("Vertical existence based on selected location")
-public class VerticalsExistenceTest extends BaseTestSteps {
+public class VerticalsExistenceITCase extends BaseTestSteps {
 
   @Issue("HSAP-480")
   @Test(description = "Verify all verticals are displayed")
   public void verifyAllVerticalsAreDisplayed() {
     // Given
     var cityToSearch = "Riyadh";
-    landingScreenSteps.handleLocationPopup();
     landingScreenSteps.handlePromotionPopup();
 
     // When
@@ -25,7 +24,6 @@ public class VerticalsExistenceTest extends BaseTestSteps {
     selectLocationScreenSteps.clickOnSearchIcon();
     selectLocationScreenSteps.insertDesiredCity(cityToSearch);
     selectLocationScreenSteps.enterSearch();
-    selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
 
@@ -51,7 +49,7 @@ public class VerticalsExistenceTest extends BaseTestSteps {
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
 
-    // Then
+    // then
     verticalsScreenSteps.assertTwoVerticalsAreDisplayed();
   }
 
@@ -72,7 +70,7 @@ public class VerticalsExistenceTest extends BaseTestSteps {
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
 
-    // Then
+    // then
     verticalsScreenSteps.verifyAllStoresVertical();
   }
 
@@ -81,7 +79,7 @@ public class VerticalsExistenceTest extends BaseTestSteps {
       dependsOnMethods = {"verifyOnlyAllStoresVerticalIsDisplayed"})
   public void verifyCityAreaIsNotCoveredBasedOnLocation() {
     // Given
-    var cityToSearch = "Alnamas";
+    var cityToSearch = "Arar";
 
     // When
     verticalsScreenSteps.clickOnAddress();
@@ -91,7 +89,7 @@ public class VerticalsExistenceTest extends BaseTestSteps {
     selectLocationScreenSteps.enterSearch();
     selectLocationScreenSteps.selectCity(cityToSearch);
 
-    // Then
+    // then
     selectLocationScreenSteps.verifyNotCoveredArea();
   }
 }

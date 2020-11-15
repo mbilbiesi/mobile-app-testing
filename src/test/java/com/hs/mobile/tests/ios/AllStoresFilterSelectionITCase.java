@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 @SearchAndDiscovery
 @Feature("All Stores vertical")
 @Story("Filters verification")
-public class AllStoresFilterSelection extends BaseTestSteps {
+public class AllStoresFilterSelectionITCase extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on Restaurant screen")

@@ -4,21 +4,25 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.steps.AllStoresScreenSteps;
+import com.hs.mobile.steps.CampaignScreenSteps;
 import com.hs.mobile.steps.CheckoutScreenSteps;
 import com.hs.mobile.steps.LandingScreenSteps;
 import com.hs.mobile.steps.LoginScreenSteps;
 import com.hs.mobile.steps.MenuItemScreenSteps;
 import com.hs.mobile.steps.MoreScreenSteps;
+import com.hs.mobile.steps.OrderAnythingScreenSteps;
 import com.hs.mobile.steps.PaymentOptionsScreenSteps;
 import com.hs.mobile.steps.RestaurantMenuScreenSteps;
 import com.hs.mobile.steps.SelectLocationScreenSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
 import com.hs.mobile.steps.ios.AllStoresScreenStepsIOS;
+import com.hs.mobile.steps.ios.CampaignScreenStepsIOS;
 import com.hs.mobile.steps.ios.CheckoutScreenStepsIOS;
 import com.hs.mobile.steps.ios.LandingScreenStepsIOS;
 import com.hs.mobile.steps.ios.LoginScreenStepsIOS;
 import com.hs.mobile.steps.ios.MenuItemStepsIOS;
 import com.hs.mobile.steps.ios.MoreScreenStepsIOS;
+import com.hs.mobile.steps.ios.OrderAnythingStepsIOS;
 import com.hs.mobile.steps.ios.PaymentOptionsScreenStepsIOS;
 import com.hs.mobile.steps.ios.RestaurantMenuScreenStepsIOS;
 import com.hs.mobile.steps.ios.SelectLocationScreenStepsIOS;
@@ -43,7 +47,7 @@ public class TestStepsIOSModule extends AbstractModule {
   }
 
   @Provides
-  public AllStoresScreenSteps restaurantScreenSteps(TestSettings testSettings) {
+  public AllStoresScreenSteps allStoresScreenSteps(TestSettings testSettings) {
     return new AllStoresScreenStepsIOS(testSettings);
   }
 
@@ -75,5 +79,15 @@ public class TestStepsIOSModule extends AbstractModule {
   @Provides
   public MoreScreenSteps moreScreenSteps(TestSettings settings) {
     return new MoreScreenStepsIOS(settings);
+  }
+
+  @Provides
+  public CampaignScreenSteps campaignScreenSteps(TestSettings settings){
+    return new CampaignScreenStepsIOS(settings);
+  }
+
+  @Provides
+  public OrderAnythingScreenSteps orderAnythingScreenSteps(TestSettings settings) {
+    return new OrderAnythingStepsIOS(settings);
   }
 }
