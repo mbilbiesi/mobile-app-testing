@@ -25,4 +25,6 @@ public interface CheckoutScreenSteps {
   void verifyChangePaymentButton();
 
   void clickOnContinueToFailedPayment();
+
+  void verifyCrossSellSectionIsDisplayed();
 }

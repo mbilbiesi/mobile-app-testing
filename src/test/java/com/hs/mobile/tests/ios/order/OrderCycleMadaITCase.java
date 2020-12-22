@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @OrderAndTracking
 @Feature("Ordering")
 @Story("Create order using 'Mada'")
-@Issues({@Issue("HSAP-492"), @Issue("HSAP-493"), @Issue("HSAP-465")})
+@Issues({@Issue("HSAP-492"), @Issue("HSAP-493"), @Issue("HSAP-465"), @Issue("HSAP-496")})
 public class OrderCycleMadaITCase extends BaseTestSteps {
 
   @BeforeClass
@@ -95,7 +95,8 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
     loginScreenSteps.enterOtpCode("000000");
 
     // When
-    // checkoutScreenSteps.skipNoteHint();
+    // checkoutScreenSteps.skipNoteHint(); //does not exist on old app version
+    checkoutScreenSteps.verifyCrossSellSectionIsDisplayed();
     checkoutScreenSteps.changePaymentMethod();
     paymentOptionsScreenSteps.clickOnMadaPaymentOption();
     checkoutScreenSteps.placeOrder();

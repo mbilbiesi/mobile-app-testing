@@ -55,6 +55,9 @@ public class CheckoutScreen extends AbstractScreen<CheckoutScreen> {
   @iOSXCUITFindBy(accessibility = "Change payment method")
   private MobileElement btnChangePaymentMethod;
 
+  @iOSXCUITFindBy(iOSNsPredicate = "label == 'Popular with your order'")
+  private MobileElement lblCrossSellSection;
+
   public CheckoutScreen(@NonNull TestSettings settings) {
     super(settings);
   }

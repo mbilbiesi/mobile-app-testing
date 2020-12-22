@@ -19,7 +19,6 @@ public class MenuItemStepsAndroid extends BaseSteps<MenuItemStepsAndroid>
     menuItemScreen = new MenuItemScreen(settings);
   }
 
-  @Override
   @Step("Increase items' count to {0}")
   public void addMoreItems(int itemsCounter) {
     for (int i = 1; i < itemsCounter; i++) {
@@ -51,7 +50,7 @@ public class MenuItemStepsAndroid extends BaseSteps<MenuItemStepsAndroid>
   }
 
   @Override
-  @Step("Click on menu seach icon")
+  @Step("Click on menu search icon")
   public void clickOnMenuSearchIcon() {
     menuItemScreen.getBtnMenuSearchIcon().click();
   }

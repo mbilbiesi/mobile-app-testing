@@ -29,7 +29,7 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   }
 
   @Override
-  @Step("Click on place order ")
+  @Step("Click on place order")
   public void placeOrder() {
     checkoutScreen.getBtnPlaceOrder().click();
   }
@@ -58,6 +58,17 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   }
 
   @Override
+  @Step("Type `{0}` message via CC simulator")
+  public void typeVerificationCodeOnGatewaySimulator(String verificationMessage) {
+    checkoutScreen.getTxtCheckoutViaSimulator().sendKeys(verificationMessage);
+  }
+
+  @Step("Click on continue via simulator")
+  public void clickOnContinueViaSimulator() {
+    checkoutScreen.getBtnContinueViaSimulator().click();
+  }
+
+  @Override
   public void verifyCancelOrderButton() {}
 
   @Override
@@ -76,14 +87,10 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   }
 
   @Override
-  @Step("Type `{0}` message via CC simulator")
-  public void typeVerificationCodeOnGatewaySimulator(String verificationMessage) {
-    checkoutScreen.getTxtCheckoutViaSimulator().sendKeys(verificationMessage);
-  }
-
-  @Override
-  @Step("Click on continue via simulator")
-  public void clickOnContinueViaSimulator() {
-    checkoutScreen.getBtnContinueViaSimulator().click();
+  @Step("Verify cross-sell section is displayed")
+  public void verifyCrossSellSectionIsDisplayed() {
+    assertThat(checkoutScreen.getLblCrossSellSection().isDisplayed())
+        .as("cross sell suggested items are not displayed")
+        .isTrue();
   }
 }

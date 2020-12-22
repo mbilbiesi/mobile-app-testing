@@ -43,7 +43,7 @@ public class CheckoutScreenStepsIOS extends BaseSteps<CheckoutScreenStepsIOS>
   }
 
   @Override
-  @Step("Type `{0}` message via CC simulator")
+  @Step("enter check out via web credit card simulator")
   public void typeVerificationCodeOnGatewaySimulator(String verificationMessage) {
     checkoutScreen.getWebTxtCheckout().sendKeys(verificationMessage);
   }
@@ -93,4 +93,12 @@ public class CheckoutScreenStepsIOS extends BaseSteps<CheckoutScreenStepsIOS>
 
   @Override
   public void clickOnContinueToFailedPayment() {}
+
+  @Override
+  @Step("Verify cross-sell section is displayed")
+  public void verifyCrossSellSectionIsDisplayed() {
+    assertThat(checkoutScreen.getLblCrossSellSection().isDisplayed())
+        .as("Cross-sell section is not displayed")
+        .isTrue();
+  }
 }
