@@ -10,6 +10,7 @@ import com.hs.mobile.steps.MenuItemScreenSteps;
 import com.hs.mobile.steps.MoreScreenSteps;
 import com.hs.mobile.steps.OrderAnythingScreenSteps;
 import com.hs.mobile.steps.PaymentOptionsScreenSteps;
+import com.hs.mobile.steps.QuickMarketScreenSteps;
 import com.hs.mobile.steps.RestaurantMenuScreenSteps;
 import com.hs.mobile.steps.SelectLocationScreenSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
@@ -27,4 +28,5 @@ public abstract class BaseTestSteps extends Base {
   @Inject protected MoreScreenSteps moreScreenSteps;
   @Inject protected CampaignScreenSteps campaignScreenSteps;
   @Inject protected OrderAnythingScreenSteps orderAnythingScreenSteps;
+  @Inject protected QuickMarketScreenSteps quickMarketScreenSteps;
 }

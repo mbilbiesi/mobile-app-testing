@@ -101,4 +101,10 @@ public class LandingScreenStepsIOS extends BaseSteps<LandingScreenStepsIOS>
         .until(
             ExpectedConditions.textToBePresentInElementValue(landingScreen.getBtnChoose(), value));
   }
+
+  @Override
+  @Step("Click on orders button")
+  public void clickOnOrders() {
+    landingScreen.getBtnOrders().click();
+  }
 }

@@ -50,6 +50,9 @@ public class LandingScreen extends AbstractScreen<LandingScreen> {
   @iOSXCUITFindBy(accessibility = "address_label")
   private MobileElement addressLabel;
 
+  @iOSXCUITFindBy(accessibility = "Orders")
+  private MobileElement btnOrders;
+
   public LandingScreen(@NonNull TestSettings settings) {
     super(settings);
   }

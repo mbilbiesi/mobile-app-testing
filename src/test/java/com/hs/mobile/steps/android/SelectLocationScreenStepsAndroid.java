@@ -28,7 +28,11 @@ public class SelectLocationScreenStepsAndroid extends BaseSteps<SelectLocationSc
   public void clickOnSearchIcon() {
     var elementToClickOn = selectLocationScreen.searchBar();
     var expectedElementAfterClick = selectLocationScreen.searchTextField();
-    wait.until(elementIsClicked(elementToClickOn, expectedElementAfterClick));
+    try {
+      wait.until(elementIsClicked(elementToClickOn, expectedElementAfterClick));
+    } catch (org.openqa.selenium.TimeoutException e) {
+
+    }
   }
 
   @Step("Type {0} in search bar")
@@ -44,7 +48,7 @@ public class SelectLocationScreenStepsAndroid extends BaseSteps<SelectLocationSc
 
   @Step("Click on select address button")
   public void clickOnSelectAddressButton() {
-    tap(selectLocationScreen.btnSelect());
+    selectLocationScreen.btnSelect().click();
   }
 
   @Override
@@ -59,12 +63,11 @@ public class SelectLocationScreenStepsAndroid extends BaseSteps<SelectLocationSc
   }
 
   @Override
-  public void moveMapPinToNewLocationPoint() {
-  }
+  public void moveMapPinToNewLocationPoint() {}
 
   @Step("Click on done button")
   public void clickOnDoneButton() {
-    tap(selectLocationScreen.btnSelect());
+    selectLocationScreen.btnSelect().click();
   }
 
   @Step("Verify 'Area not covered' label is visible in select button")
@@ -73,4 +76,22 @@ public class SelectLocationScreenStepsAndroid extends BaseSteps<SelectLocationSc
     wait.withMessage("Expected not covered area based on the provided area")
         .until(ExpectedConditions.textToBe(selectButtonLocatorId, "Area not covered"));
   }
+
+  @Override
+  @Step("Click on order-anything select location")
+  public void clickOnSearchBarOA() {
+    selectLocationScreen.btnSearchLocationOA().click();
+  }
+
+  @Override
+  @Step("Enter desired address")
+  public void enterSearchAddressOA(String address) {
+    selectLocationScreen.enterPickUpAddressOA().sendKeys(address);
+  }
+
+  @Override
+  public void clickOnSelectedAddressOA() {}
+
+  @Override
+  public void clickOnSelectOA() {}
 }

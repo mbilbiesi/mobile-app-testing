@@ -70,6 +70,15 @@ public class AllStoresScreen extends AbstractScreen<AllStoresScreen> {
   @iOSXCUITFindBy(accessibility = "custom_button")
   private MobileElement btnOrderAnything;
 
+  @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeCell[`name == 'cell_delivery'`]")
+  private List<MobileElement> lstStores;
+
+  @iOSXCUITFindBy(accessibility = "cell_banner")
+  private MobileElement btnTopPromotedStore;
+
+  @iOSXCUITFindBy(accessibility = "cell_swimlane")
+  private List<MobileElement> lstSwimlane;
+
   public AllStoresScreen(@NonNull TestSettings settings) {
     super(settings);
   }

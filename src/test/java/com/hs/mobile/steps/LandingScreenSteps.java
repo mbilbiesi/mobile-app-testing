@@ -21,4 +21,6 @@ public interface LandingScreenSteps {
   void confirmRemoveAddress();
 
   void verifySearchFieldValueIsEqualTo(String value);
+
+  void clickOnOrders();
 }

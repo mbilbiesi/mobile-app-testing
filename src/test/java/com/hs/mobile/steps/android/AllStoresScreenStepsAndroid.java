@@ -84,4 +84,24 @@ public class AllStoresScreenStepsAndroid extends BaseSteps<AllStoresScreenStepsA
   public void clickOnCampaign() {
     allStoresScreen.getCampaignBannerList().get(0).click();
   }
+
+  @Override
+  @Step("Assert that one store is displayed ")
+  public void verifyStoreSelectedIsAppeared() {
+    assertThat(allStoresScreen.getLblSearchResults().getText().contains("Al Reef"))
+        .as("There isn't a matching store")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Click on top banner")
+  public void clickOnTopPromotedStore() {
+    allStoresScreen.getBtnTopPromotedStore().click();
+  }
+
+  @Override
+  @Step("Click on swimlane store")
+  public void selectStoreFromSwimlane() {
+    allStoresScreen.getBtnSwimLaneStore().click();
+  }
 }

@@ -47,6 +47,7 @@ public class AddressITCase extends BaseTestSteps {
     landingScreenSteps.verifySearchFieldValueIsEqualTo("Home");
   }
 
+
   @Issue("HSAP-")
   @Test(
       description = "Update saved address",

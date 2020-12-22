@@ -15,6 +15,9 @@ public class OrderAnythingScreen extends AbstractScreen<OrderAnythingScreen> {
   @iOSXCUITFindBy(accessibility = "Shop from")
   private MobileElement lblShopFrom;
 
+  @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == 'Delivery Fees'`]")
+  private MobileElement lblDeliveryFeesOA;
+
   public OrderAnythingScreen(@NonNull TestSettings settings) {
     super(settings);
   }

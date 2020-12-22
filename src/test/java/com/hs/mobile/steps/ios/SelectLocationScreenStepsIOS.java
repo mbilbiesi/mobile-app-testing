@@ -72,6 +72,7 @@ public class SelectLocationScreenStepsIOS extends BaseSteps<SelectLocationScreen
   }
 
   @Override
+  @Step("Click on home button")
   public void clickOnHomeIcon() {
     selectLocationScreen.getBtnHomeIcon().click();
   }
@@ -99,5 +100,29 @@ public class SelectLocationScreenStepsIOS extends BaseSteps<SelectLocationScreen
         .until(
             ExpectedConditions.textToBePresentInElement(
                 selectLocationScreen.getBtnSelectAddress(), "Area not covered"));
+  }
+
+  @Override
+  @Step("click on search bar")
+  public void clickOnSearchBarOA() {
+    selectLocationScreen.getBtnSearchAddressOA().click();
+  }
+
+  @Override
+  @Step("Search for a specific location via search bar")
+  public void enterSearchAddressOA(String address) {
+    selectLocationScreen.getSearchBar().sendKeys(address);
+  }
+
+  @Override
+  @Step("Click on select address in order-anything location screen")
+  public void clickOnSelectedAddressOA() {
+    selectLocationScreen.getLblLocationOA().click();
+  }
+
+  @Override
+  @Step("Click on select address in order anything location screen")
+  public void clickOnSelectOA() {
+    selectLocationScreen.getBtnSelectAddressOA().click();
   }
 }

@@ -26,4 +26,22 @@ public class OrderAnythingStepsIOS extends BaseSteps<OrderAnythingStepsIOS>
         .as("Order anything screen is not displayed")
         .isTrue();
   }
+
+  @Override
+  @Step("Click on a store on the map")
+  public void clickFindStore() {
+    orderAnythingScreen.lblShopFrom().click();
+  }
+
+  @Override
+  @Step("Assert that 'order anything' delivery fees are present")
+  public void verifyDeliveryFeeIsPresent() {
+    assertThat(orderAnythingScreen.lblDeliveryFeesOA().isDisplayed())
+        .as("Delivery fee is not present")
+        .isFalse();
+  }
+
+  @Override
+  // todo to be resumed in order and tracking test cases
+  public void clickOnContinue() {}
 }

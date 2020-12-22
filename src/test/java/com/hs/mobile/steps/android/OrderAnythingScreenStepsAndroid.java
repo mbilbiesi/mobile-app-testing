@@ -26,4 +26,24 @@ public class OrderAnythingScreenStepsAndroid extends BaseSteps<OrderAnythingScre
         .as("Order-anything page is not displayed")
         .isTrue();
   }
+
+  @Override
+  @Step("Click on pick up location button in order-anything")
+  public void clickFindStore() {
+    orderAnythingScreen.lblPickUpLocation().click();
+  }
+
+  @Override
+  @Step("Assert delivery fees are present for order anything")
+  public void verifyDeliveryFeeIsPresent() {
+    assertThat(orderAnythingScreen.lblDeliveryFee().isDisplayed())
+        .as("Delivery fee is not present")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Click on continue")
+  public void clickOnContinue() {
+    orderAnythingScreen.btnContinue().click();
+  }
 }

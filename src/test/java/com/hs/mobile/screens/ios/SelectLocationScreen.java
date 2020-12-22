@@ -38,6 +38,21 @@ public class SelectLocationScreen extends AbstractScreen<SelectLocationScreen> {
   @iOSXCUITFindBy(accessibility = "save_button")
   private MobileElement btnDone;
 
+  @iOSXCUITFindBy(accessibility = "Search Address")
+  private MobileElement btnSearchAddressOA;
+
+  @iOSXCUITFindBy(accessibility = "Select")
+  private MobileElement btnSelectAddressOA;
+
+  @iOSXCUITFindBy(accessibility = "Riyadh Park | الرياض بارك")
+  private MobileElement lblLocationOA;
+
+  @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`label == 'Continue'`]")
+  private MobileElement btnContinueOA;
+
+  @iOSXCUITFindBy(iOSNsPredicate = "searchBar")
+  private MobileElement searchBarOA;
+
   public SelectLocationScreen(@NonNull TestSettings settings) {
     super(settings);
   }

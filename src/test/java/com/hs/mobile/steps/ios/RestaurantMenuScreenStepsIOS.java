@@ -37,4 +37,12 @@ public class RestaurantMenuScreenStepsIOS extends BaseSteps<RestaurantMenuScreen
         .orElseThrow(ExceptionSupplier.testException("Could not find desired menu item"))
         .click();
   }
+
+  @Override
+  @Step("Assert that restaurant menu is displayed")
+  public void verifyThatCloseButtonExist() {
+    assertThat(restaurantMenuScreen.getBtnClose().isDisplayed())
+        .as("Menu is not displayed")
+        .isTrue();
+  }
 }

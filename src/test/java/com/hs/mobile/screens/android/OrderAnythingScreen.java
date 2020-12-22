@@ -15,6 +15,12 @@ public class OrderAnythingScreen extends AbstractScreen<OrderAnythingScreen> {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/pickupLocationLabel")
   private MobileElement lblPickUpLocation;
 
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/deliveryFeeLabel")
+  private MobileElement lblDeliveryFee;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/primary_label")
+  private MobileElement btnContinue;
+
   public OrderAnythingScreen(@NonNull TestSettings settings) {
     super(settings);
   }

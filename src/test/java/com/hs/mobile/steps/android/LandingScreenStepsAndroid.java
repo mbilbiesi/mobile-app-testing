@@ -5,6 +5,7 @@ import static org.springframework.util.CollectionUtils.lastElement;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.android.LandingScreen;
+import com.hs.mobile.screens.ios.MoreScreen;
 import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.steps.LandingScreenSteps;
 import io.appium.java_client.AppiumDriver;
@@ -21,10 +22,12 @@ public class LandingScreenStepsAndroid extends BaseSteps<LandingScreenStepsAndro
 
   @NonNull private final LandingScreen landingScreen;
   @NonNull private final AppiumDriver<MobileElement> driver;
+  @NonNull private final MoreScreen moreScreen;
 
   public LandingScreenStepsAndroid(@NonNull TestSettings testSettings) {
     super(testSettings);
     landingScreen = new LandingScreen(testSettings);
+    moreScreen = new MoreScreen(testSettings);
     driver = testSettings.getDriver();
   }
 
@@ -85,7 +88,12 @@ public class LandingScreenStepsAndroid extends BaseSteps<LandingScreenStepsAndro
   public void verifySearchFieldValueIsEqualTo(String value) {
     wait.withMessage("Address type is not displayed in search field")
         .until(
-            ExpectedConditions.attributeToBe(
-                landingScreen.getLblDeliveryValue(),"text", value));
+            ExpectedConditions.attributeToBe(landingScreen.getLblDeliveryValue(), "text", value));
+  }
+
+  @Override
+  @Step("Click on more screen")
+  public void clickOnOrders() {
+    moreScreen.getBtnLogin().click();
   }
 }

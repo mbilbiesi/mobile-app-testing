@@ -21,4 +21,12 @@ public interface SelectLocationScreenSteps {
   void clickOnDoneButton();
 
   void verifyNotCoveredArea();
+
+  void clickOnSearchBarOA();
+
+  void enterSearchAddressOA(String address);
+
+  void clickOnSelectedAddressOA();
+
+  void clickOnSelectOA();
 }

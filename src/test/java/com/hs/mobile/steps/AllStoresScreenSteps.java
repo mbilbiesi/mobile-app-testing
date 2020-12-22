@@ -23,4 +23,10 @@ public interface AllStoresScreenSteps {
   void clickOnTryOrderAnything();
 
   void clickOnCampaign();
+
+  void verifyStoreSelectedIsAppeared();
+
+  void clickOnTopPromotedStore();
+
+  void selectStoreFromSwimlane();
 }

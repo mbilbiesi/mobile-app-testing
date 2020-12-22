@@ -98,4 +98,24 @@ public class AllStoresScreenStepsIOS extends BaseSteps<AllStoresScreenStepsIOS>
   public void clickOnCampaign() {
     allStoresScreen.getFirstCampaignBanner().click();
   }
+
+  @Override
+  @Step("Assert that one store is displayed ")
+  public void verifyStoreSelectedIsAppeared() {
+    assertThat(allStoresScreen.getLstStores().size() == 1)
+        .as("There isn't a matching store")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Click on top banner promoted store")
+  public void clickOnTopPromotedStore() {
+    allStoresScreen.getBtnTopPromotedStore().click();
+  }
+
+  @Override
+  @Step("Click on a store form the swimlane section")
+  public void selectStoreFromSwimlane() {
+    allStoresScreen.getLstSwimlane().get(1).click();
+  }
 }

@@ -11,7 +11,9 @@ import com.hs.mobile.steps.LoginScreenSteps;
 import com.hs.mobile.steps.MenuItemScreenSteps;
 import com.hs.mobile.steps.MoreScreenSteps;
 import com.hs.mobile.steps.OrderAnythingScreenSteps;
+import com.hs.mobile.steps.OrdersScreenSteps;
 import com.hs.mobile.steps.PaymentOptionsScreenSteps;
+import com.hs.mobile.steps.QuickMarketScreenSteps;
 import com.hs.mobile.steps.RestaurantMenuScreenSteps;
 import com.hs.mobile.steps.SelectLocationScreenSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
@@ -23,7 +25,9 @@ import com.hs.mobile.steps.ios.LoginScreenStepsIOS;
 import com.hs.mobile.steps.ios.MenuItemStepsIOS;
 import com.hs.mobile.steps.ios.MoreScreenStepsIOS;
 import com.hs.mobile.steps.ios.OrderAnythingStepsIOS;
+import com.hs.mobile.steps.ios.OrdersScreenStepsIOS;
 import com.hs.mobile.steps.ios.PaymentOptionsScreenStepsIOS;
+import com.hs.mobile.steps.ios.QuickMarketScreenStepsIOS;
 import com.hs.mobile.steps.ios.RestaurantMenuScreenStepsIOS;
 import com.hs.mobile.steps.ios.SelectLocationScreenStepsIOS;
 import com.hs.mobile.steps.ios.VerticalsScreenStepsIOS;
@@ -82,12 +86,22 @@ public class TestStepsIOSModule extends AbstractModule {
   }
 
   @Provides
-  public CampaignScreenSteps campaignScreenSteps(TestSettings settings){
+  public CampaignScreenSteps campaignScreenSteps(TestSettings settings) {
     return new CampaignScreenStepsIOS(settings);
   }
 
   @Provides
   public OrderAnythingScreenSteps orderAnythingScreenSteps(TestSettings settings) {
     return new OrderAnythingStepsIOS(settings);
+  }
+
+  @Provides
+  public QuickMarketScreenSteps quickMarketScreenSteps(TestSettings settings) {
+    return new QuickMarketScreenStepsIOS(settings);
+  }
+
+  @Provides
+  public OrdersScreenSteps ordersScreenSteps(TestSettings settings) {
+    return new OrdersScreenStepsIOS(settings);
   }
 }

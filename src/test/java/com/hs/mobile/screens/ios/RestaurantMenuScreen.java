@@ -19,6 +19,9 @@ public class RestaurantMenuScreen extends AbstractScreen<RestaurantMenuScreen> {
   @iOSXCUITFindBy(accessibility = "item_name")
   private List<MobileElement> menuItemNameList;
 
+  @iOSXCUITFindBy(accessibility = "header_close")
+  private MobileElement btnClose;
+
   public RestaurantMenuScreen(@NonNull TestSettings settings) {
     super(settings);
   }

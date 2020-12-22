@@ -32,6 +32,9 @@ public class MenuItemScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/secondary_label")
   private MobileElement amount;
 
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/close_icon")
+  private MobileElement btnClose;
+
   public MenuItemScreen(@NonNull TestSettings settings) {
     super(settings);
   }

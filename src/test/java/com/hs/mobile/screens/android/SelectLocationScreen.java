@@ -50,6 +50,12 @@ public class SelectLocationScreen extends AbstractScreen<SelectLocationScreen> {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/marker_location")
   private MobileElement iconMapPin;
 
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/searchBar")
+  private MobileElement btnSearchLocationOA;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/places_autocomplete_search_bar")
+  private MobileElement enterPickUpAddressOA;
+
   public SelectLocationScreen(@NonNull TestSettings settings) {
     super(settings);
   }
