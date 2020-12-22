@@ -27,4 +27,10 @@ public interface CheckoutScreenSteps {
   void clickOnContinueToFailedPayment();
 
   void verifyCrossSellSectionIsDisplayed();
+
+  void verifyItemName(String name);
+
+  void verifyItemQuantity(String quantity);
+
+  void verifyItemsTotalPrice(String price);
 }

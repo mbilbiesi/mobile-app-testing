@@ -69,7 +69,6 @@ public class CheckoutScreenStepsIOS extends BaseSteps<CheckoutScreenStepsIOS>
   }
 
   @Override
-  @Step("Click on done button")
   public void clickOnDone() {}
 
   @Override
@@ -93,6 +92,30 @@ public class CheckoutScreenStepsIOS extends BaseSteps<CheckoutScreenStepsIOS>
 
   @Override
   public void clickOnContinueToFailedPayment() {}
+
+  @Override
+  @Step("Verify item added name is {0}")
+  public void verifyItemName(String name) {
+    assertThat(checkoutScreen.getLblItemName().getText().equals(name))
+        .as("Item name does not match the item added")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify checked out items quantity is {0}")
+  public void verifyItemQuantity(String quantity) {
+    assertThat(checkoutScreen.getLblItemQuantity().getText().equals(quantity))
+        .as("Item quantity does not match actual result")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify item total price is {0}")
+  public void verifyItemsTotalPrice(String price) {
+    assertThat(checkoutScreen.getLblTotalPrice().getText().equals(price))
+        .as("Item total price does not match actual result")
+        .isTrue();
+  }
 
   @Override
   @Step("Verify cross-sell section is displayed")

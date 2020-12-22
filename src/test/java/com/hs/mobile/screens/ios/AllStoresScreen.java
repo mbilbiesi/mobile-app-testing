@@ -79,11 +79,6 @@ public class AllStoresScreen extends AbstractScreen<AllStoresScreen> {
   @iOSXCUITFindBy(accessibility = "cell_swimlane")
   private List<MobileElement> lstSwimlane;
 
-  @iOSXCUITFindBy(
-      iOSClassChain =
-          "**/XCUIElementTypeButton[`label == \"Al Reef Al HindiSandwiches Promoted Free Delivery Store Delivery Rating 0.0 \"`]")
-  private MobileElement btnAlreef;
-
   public AllStoresScreen(@NonNull TestSettings settings) {
     super(settings);
   }

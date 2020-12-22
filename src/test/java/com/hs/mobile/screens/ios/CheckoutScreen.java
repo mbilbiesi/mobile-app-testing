@@ -58,6 +58,15 @@ public class CheckoutScreen extends AbstractScreen<CheckoutScreen> {
   @iOSXCUITFindBy(iOSNsPredicate = "label == 'Popular with your order'")
   private MobileElement lblCrossSellSection;
 
+  @iOSXCUITFindBy(accessibility = "price_label")
+  private MobileElement lblTotalPrice;
+
+  @iOSXCUITFindBy(accessibility = "name_label")
+  private MobileElement lblItemName;
+
+  @iOSXCUITFindBy(accessibility = "quantity_label")
+  private MobileElement lblItemQuantity;
+
   public CheckoutScreen(@NonNull TestSettings settings) {
     super(settings);
   }

@@ -13,7 +13,13 @@ import org.testng.annotations.Test;
 @OrderAndTracking
 @Feature("Ordering")
 @Story("Create order using 'Mada'")
-@Issues({@Issue("HSAP-492"), @Issue("HSAP-493"), @Issue("HSAP-465"), @Issue("HSAP-496")})
+@Issues({
+  @Issue("HSAP-492"),
+  @Issue("HSAP-493"),
+  @Issue("HSAP-465"),
+  @Issue("HSAP-496"),
+  @Issue("HSAP-494")
+})
 public class OrderCycleMadaITCase extends BaseTestSteps {
 
   @BeforeClass
@@ -40,20 +46,63 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
   @Test(description = "Verify user can navigate to a restaurant and menu items load as expected")
   public void clickOnRestaurant_verifyMenuItems() {
     // When
-
     allStoresScreenSteps.selectFirstStore();
+
+    // Then
     menuItemScreenSteps.verifyCaloriesLabel();
+  }
+
+  @Test(
+      description = "Search for menu item and items to cart",
+      dependsOnMethods = "clickOnRestaurant_verifyMenuItems")
+  void searchForMenuItem_AddItemsToCart() {
+    // Given
+    var itemName = "Chicken 65";
+
+    // When
     menuItemScreenSteps.clickOnMenuSearchIcon();
-    menuItemScreenSteps.searchForMenuItem("Chicken 65");
+    menuItemScreenSteps.searchForMenuItem(itemName);
     menuItemScreenSteps.clickSearchResultItem();
     menuItemScreenSteps.addMoreItems(4);
     menuItemScreenSteps.addToCart();
     menuItemScreenSteps.clickCancelSearch();
     menuItemScreenSteps.clickOnViewCart();
-    loginScreenSteps.enterPhoneNumber("501020010");
+  }
+
+  @Test(
+      description = "Enter phone verification",
+      dependsOnMethods = "searchForMenuItem_AddItemsToCart")
+  void enterPhoneVerification() {
+    // Given
+    var phoneNo = "501020010";
+    var otpCode = "000000";
+
+    // When
+    loginScreenSteps.enterPhoneNumber(phoneNo);
     loginScreenSteps.clickOnNext();
-    loginScreenSteps.enterOtpCode("000000");
+    loginScreenSteps.enterOtpCode(otpCode);
+  }
+
+  @Test(description = "Verify checkout screen items", dependsOnMethods = "enterPhoneVerification")
+  void verifyCheckoutScreen() {
+    // Given
+    var totalPrice = "92.0";
+    var itemQuantity = "4 x";
+    var itemName = "Chicken 65";
+
+    // Then
     checkoutScreenSteps.verifyCrossSellSectionIsDisplayed();
+    checkoutScreenSteps.verifyItemsTotalPrice(totalPrice);
+    checkoutScreenSteps.verifyItemQuantity(itemQuantity);
+    checkoutScreenSteps.verifyItemName(itemName);
+  }
+
+  @Test(
+      description = "Place order and verify order submission",
+      dependsOnMethods = "verifyCheckoutScreen")
+  void placeOrder_verifyOrderSubmission() {
+
+    // When
     checkoutScreenSteps.placeOrder();
     checkoutScreenSteps.enterMadaSecurityCode("257");
     checkoutScreenSteps.clickOnContinue();

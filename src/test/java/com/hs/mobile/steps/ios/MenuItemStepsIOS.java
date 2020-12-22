@@ -46,12 +46,6 @@ public class MenuItemStepsIOS extends BaseSteps<MenuItemStepsIOS> implements Men
   }
 
   @Override
-  @Step("Click on cancel search results")
-  public void clickCancelSearch() {
-    menuItemScreen.getBtnCancelSearch().click();
-  }
-
-  @Override
   @Step("Verify menu calories label")
   public void verifyCaloriesLabel() {
     assertThat(menuItemScreen.getLblCalories().isDisplayed())
@@ -63,6 +57,12 @@ public class MenuItemStepsIOS extends BaseSteps<MenuItemStepsIOS> implements Men
   @Step("Click on menu search icon")
   public void clickOnMenuSearchIcon() {
     menuItemScreen.getBtnMenuSearchIcon().click();
+  }
+
+  @Override
+  @Step("Click on cancel search results")
+  public void clickCancelSearch() {
+    menuItemScreen.getBtnCancelSearch().click();
   }
 
   @Override

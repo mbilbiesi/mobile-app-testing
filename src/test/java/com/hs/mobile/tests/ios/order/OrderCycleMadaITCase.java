@@ -15,7 +15,13 @@ import org.testng.annotations.Test;
 @OrderAndTracking
 @Feature("Ordering")
 @Story("Create order using 'Mada'")
-@Issues({@Issue("HSAP-492"), @Issue("HSAP-493"), @Issue("HSAP-465"), @Issue("HSAP-496")})
+@Issues({
+  @Issue("HSAP-492"),
+  @Issue("HSAP-493"),
+  @Issue("HSAP-465"),
+  @Issue("HSAP-496"),
+  @Issue("HSAP-494")
+})
 public class OrderCycleMadaITCase extends BaseTestSteps {
 
   @BeforeClass
@@ -75,8 +81,9 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
       dependsOnMethods = "userNavigateToVendorScreen_verifyUserIsOnVendorScreen")
   void orderFood_verifyItemsAdded() {
     // When
+    var searchItem = "Chicken 65";
     menuItemScreenSteps.clickOnMenuSearchIcon();
-    menuItemScreenSteps.searchForMenuItem("Chicken 65");
+    menuItemScreenSteps.searchForMenuItem(searchItem);
     menuItemScreenSteps.clickSearchResultItem();
     menuItemScreenSteps.addMoreItems(4);
     menuItemScreenSteps.addToCart();
@@ -85,24 +92,42 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
   }
 
   @Test(
-      description = "place order using Mada credit card ",
+      description = "Enter phone verification",
       dependsOnMethods = {"orderFood_verifyItemsAdded"})
-  void orderViaMadaCreditCard() {
-    // Given
-    // menuItemScreenSteps.clickOnViewCart();
+  void enterPhoneVerification() {
     loginScreenSteps.enterPhoneNumber("501020010");
     loginScreenSteps.clickOnNext();
     loginScreenSteps.enterOtpCode("000000");
+  }
+
+  @Test(
+      description = "Choose payment method and verify checkout screen",
+      dependsOnMethods = {"enterPhoneVerification"})
+  void choosePaymentMethod_VerifyCheckoutScreen() {
+    // Given
+    var itemName = "Chicken 65";
+    var quantity = "x4";
+    var price = "92.00";
 
     // When
-    // checkoutScreenSteps.skipNoteHint(); //does not exist on old app version
+    // checkoutScreenSteps.skipNoteHint(); //todo apply id on new version
     checkoutScreenSteps.verifyCrossSellSectionIsDisplayed();
     checkoutScreenSteps.changePaymentMethod();
     paymentOptionsScreenSteps.clickOnMadaPaymentOption();
+
+    // Then
+    checkoutScreenSteps.verifyItemName(itemName);
+    checkoutScreenSteps.verifyItemQuantity(quantity);
+    checkoutScreenSteps.verifyItemsTotalPrice(price);
+  }
+
+  @Test(
+      description = "Place order and verify order is submitted",
+      dependsOnMethods = {"choosePaymentMethod_VerifyCheckoutScreen"})
+  void placeOrder_verifyOrderSubmission() {
+    // When
     checkoutScreenSteps.placeOrder();
     checkoutScreenSteps.enterMadaSecurityCode("257");
-    checkoutScreenSteps.typeVerificationCodeOnGatewaySimulator("Checkout1!");
-    checkoutScreenSteps.clickOnContinue();
 
     // Then
     checkoutScreenSteps.verifyOrderIsSubmitted();

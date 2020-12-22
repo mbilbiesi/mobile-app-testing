@@ -19,6 +19,7 @@ public class MenuItemStepsAndroid extends BaseSteps<MenuItemStepsAndroid>
     menuItemScreen = new MenuItemScreen(settings);
   }
 
+  @Override
   @Step("Increase items' count to {0}")
   public void addMoreItems(int itemsCounter) {
     for (int i = 1; i < itemsCounter; i++) {
@@ -42,23 +43,9 @@ public class MenuItemStepsAndroid extends BaseSteps<MenuItemStepsAndroid>
   }
 
   @Override
-  @Step("Verify that calories label is displayed")
-  public void verifyCaloriesLabel() {
-    assertThat(menuItemScreen.getLblCalories().isDisplayed())
-        .as("calories label is not displayed")
-        .isTrue();
-  }
-
-  @Override
   @Step("Click on menu search icon")
   public void clickOnMenuSearchIcon() {
     menuItemScreen.getBtnMenuSearchIcon().click();
-  }
-
-  @Override
-  @Step("Click the first menu item in the search result")
-  public void clickSearchResultItem() {
-    menuItemScreen.getLblFirstItemInSearchResult().click();
   }
 
   @Override
@@ -71,6 +58,19 @@ public class MenuItemStepsAndroid extends BaseSteps<MenuItemStepsAndroid>
   public void clickOnCheckoutFromMenuScreen() {}
 
   @Override
+  @Step("Verify that calories label is displayed")
+  public void verifyCaloriesLabel() {
+    assertThat(menuItemScreen.getLblCalories().isDisplayed())
+        .as("calories label is not displayed")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Click the first menu item in the search result")
+  public void clickSearchResultItem() {
+    menuItemScreen.getLblFirstItemInSearchResult().click();
+  }
+
   @Step("Search for '{0}' menu item")
   public void searchForMenuItem(String menuItem) {
     menuItemScreen.getTxtSearchMenuInput().sendKeys(menuItem);

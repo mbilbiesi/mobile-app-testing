@@ -29,7 +29,7 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   }
 
   @Override
-  @Step("Click on place order")
+  @Step("Click on place order ")
   public void placeOrder() {
     checkoutScreen.getBtnPlaceOrder().click();
   }
@@ -58,18 +58,15 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   }
 
   @Override
-  @Step("Type `{0}` message via CC simulator")
-  public void typeVerificationCodeOnGatewaySimulator(String verificationMessage) {
-    checkoutScreen.getTxtCheckoutViaSimulator().sendKeys(verificationMessage);
-  }
-
   @Step("Click on continue via simulator")
   public void clickOnContinueViaSimulator() {
     checkoutScreen.getBtnContinueViaSimulator().click();
   }
 
-  @Override
-  public void verifyCancelOrderButton() {}
+  @Step("Type `{0}` message via CC simulator")
+  public void typeVerificationCodeOnGatewaySimulator(String verificationMessage) {
+    checkoutScreen.getTxtCheckoutViaSimulator().sendKeys(verificationMessage);
+  }
 
   @Override
   @Step("Verify that change payment button is displayed when payment is failed")
@@ -80,13 +77,37 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   }
 
   @Override
+  @Step("Verify item name is {0}")
+  public void verifyItemName(String name) {
+    assertThat(checkoutScreen.getLblItemName().getText().equals(name))
+        .as("Item name does not match the item added")
+        .isTrue();
+  }
+
+  public void verifyCancelOrderButton() {}
+
+  @Override
   @Step("Click on continue to failed payment screen")
   public void clickOnContinueToFailedPayment() {
-    // valid for Android only
     checkoutScreen.getBtnContinueToFailedPaymentScreen().click();
   }
 
   @Override
+  @Step("Verify item total quantity is {0}")
+  public void verifyItemQuantity(String quantity) {
+    assertThat(checkoutScreen.getLblItemQuantity().getText().equals(quantity))
+        .as("Item quantity does not match actual result")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify item total price is {0}")
+  public void verifyItemsTotalPrice(String price) {
+    assertThat(checkoutScreen.getLblTotalPrice().getText().equals(price))
+        .as("Item total price does not match actual result")
+        .isTrue();
+  }
+
   @Step("Verify cross-sell section is displayed")
   public void verifyCrossSellSectionIsDisplayed() {
     assertThat(checkoutScreen.getLblCrossSellSection().isDisplayed())
