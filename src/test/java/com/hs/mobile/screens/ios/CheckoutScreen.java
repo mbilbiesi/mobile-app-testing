@@ -49,6 +49,12 @@ public class CheckoutScreen extends AbstractScreen<CheckoutScreen> {
   @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Home\"]")
   private MobileElement btnHome;
 
+  @iOSXCUITFindBy(accessibility = "Cancel Order")
+  private MobileElement btnCancelOrder;
+
+  @iOSXCUITFindBy(accessibility = "Change payment method")
+  private MobileElement btnChangePaymentMethod;
+
   public CheckoutScreen(@NonNull TestSettings settings) {
     super(settings);
   }

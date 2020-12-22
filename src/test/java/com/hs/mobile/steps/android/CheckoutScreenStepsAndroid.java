@@ -58,6 +58,24 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   }
 
   @Override
+  public void verifyCancelOrderButton() {}
+
+  @Override
+  @Step("Verify that change payment button is displayed when payment is failed")
+  public void verifyChangePaymentButton() {
+    assertThat(checkoutScreen.getBtnChangePayment().isDisplayed())
+        .as("cancel order button is not displayed")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Click on continue to failed payment screen")
+  public void clickOnContinueToFailedPayment() {
+    // valid for Android only
+    checkoutScreen.getBtnContinueToFailedPaymentScreen().click();
+  }
+
+  @Override
   @Step("Type `{0}` message via CC simulator")
   public void typeVerificationCodeOnGatewaySimulator(String verificationMessage) {
     checkoutScreen.getTxtCheckoutViaSimulator().sendKeys(verificationMessage);

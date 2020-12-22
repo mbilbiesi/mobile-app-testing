@@ -51,15 +51,9 @@ public class MenuItemStepsAndroid extends BaseSteps<MenuItemStepsAndroid>
   }
 
   @Override
-  @Step("Click on menu search icon")
+  @Step("Click on menu seach icon")
   public void clickOnMenuSearchIcon() {
     menuItemScreen.getBtnMenuSearchIcon().click();
-  }
-
-  @Override
-  @Step("Search for '{0}' menu item")
-  public void searchForMenuItem(String menuItem) {
-    menuItemScreen.getTxtSearchMenuInput().sendKeys(menuItem);
   }
 
   @Override
@@ -76,4 +70,10 @@ public class MenuItemStepsAndroid extends BaseSteps<MenuItemStepsAndroid>
 
   @Override
   public void clickOnCheckoutFromMenuScreen() {}
+
+  @Override
+  @Step("Search for '{0}' menu item")
+  public void searchForMenuItem(String menuItem) {
+    menuItemScreen.getTxtSearchMenuInput().sendKeys(menuItem);
+  }
 }

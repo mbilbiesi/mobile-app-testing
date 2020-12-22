@@ -70,12 +70,27 @@ public class CheckoutScreenStepsIOS extends BaseSteps<CheckoutScreenStepsIOS>
 
   @Override
   @Step("Click on done button")
-  public void clickOnDone() {
+  public void clickOnDone() {}
 
+  @Override
+  public void clickOnContinueViaSimulator() {}
+
+  @Override
+  @Step("Verify cancel button is displayed when payment is failed")
+  public void verifyCancelOrderButton() {
+    assertThat(checkoutScreen.getBtnCancelOrder().isDisplayed())
+        .as("cancel order button is not displayed")
+        .isTrue();
   }
 
   @Override
-  public void clickOnContinueViaSimulator() {
-
+  @Step("Verify that change payment button is displayed when payment is failed")
+  public void verifyChangePaymentButton() {
+    assertThat(checkoutScreen.getBtnChangePaymentMethod().isDisplayed())
+        .as("cancel order button is not displayed")
+        .isTrue();
   }
+
+  @Override
+  public void clickOnContinueToFailedPayment() {}
 }

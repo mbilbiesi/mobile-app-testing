@@ -19,4 +19,10 @@ public interface CheckoutScreenSteps {
   void clickOnDone();
 
   void clickOnContinueViaSimulator();
+
+  void verifyCancelOrderButton();
+
+  void verifyChangePaymentButton();
+
+  void clickOnContinueToFailedPayment();
 }
