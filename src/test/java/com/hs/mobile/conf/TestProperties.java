@@ -13,4 +13,13 @@ public interface TestProperties extends Config {
 
   @Key("fun.play")
   String getFunPlay();
+
+  @Key("device.farmer.url")
+  String getDeviceFarmerUrl();
+
+  @Key("device.farmer.token")
+  String getDeviceFarmerToken();
+
+  @Key("app.path")
+  String getAppPath();
 }

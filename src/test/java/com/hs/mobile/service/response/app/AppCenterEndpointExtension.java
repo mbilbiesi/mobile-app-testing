@@ -1,4 +1,4 @@
-package com.hs.mobile.service.response;
+package com.hs.mobile.service.response.app;
 
 import io.restassured.response.Response;
 

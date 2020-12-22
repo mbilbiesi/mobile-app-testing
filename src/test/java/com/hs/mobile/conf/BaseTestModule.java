@@ -20,7 +20,6 @@ import java.lang.annotation.Target;
 import javax.inject.Qualifier;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Platform;
 import org.testng.ITestContext;
 
@@ -42,14 +41,8 @@ public class BaseTestModule extends AbstractModule {
     install(new DataProviderModule());
     install(new CapabilitiesModule());
     install(new DriverModule());
-    install(new EndpointsModule());
+    install(new ServicesModule());
     install(new UtilsModule());
-  }
-
-  @Provides
-  @Singleton
-  public TestProperties properties() {
-    return ConfigFactory.create(TestProperties.class, System.getProperties());
   }
 
   @Provides
@@ -85,8 +78,14 @@ public class BaseTestModule extends AbstractModule {
   @Provides
   @Singleton
   @AppFilePath
-  public String appFilePath(AppCenterEndpoints appCenterEndpoints, TestParameters parameters) {
-    return appCenterEndpoints.getAppDetails(parameters.getPlatform()).getDownloadUrl();
+  public String appFilePath(
+      AppCenterEndpoints appCenterEndpoints, TestParameters parameters, TestProperties properties) {
+    String appPath = properties.getAppPath();
+    if (appPath.isEmpty()) {
+      return appCenterEndpoints.getAppDetails(parameters.getPlatform()).getDownloadUrl();
+    } else {
+      return appPath;
+    }
   }
 
   @Qualifier

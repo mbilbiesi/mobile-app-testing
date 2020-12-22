@@ -8,6 +8,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import java.net.URL;
 import java.util.Optional;
 import lombok.NonNull;
@@ -39,6 +40,10 @@ public class DriverManager {
         log.error("unable to initiate iOS driver", e);
       }
     }
-    return Optional.ofNullable(driver).orElseThrow(testException("failed to initiate drive"));
+    return Optional.ofNullable(driver)
+        .orElseThrow(
+            testException(
+                "failed to initiate drive for "
+                    + desiredCapabilities.getCapability(MobileCapabilityType.DEVICE_NAME)));
   }
 }
