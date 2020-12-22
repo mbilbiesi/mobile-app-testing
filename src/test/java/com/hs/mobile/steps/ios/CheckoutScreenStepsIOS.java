@@ -43,7 +43,7 @@ public class CheckoutScreenStepsIOS extends BaseSteps<CheckoutScreenStepsIOS>
   }
 
   @Override
-  @Step("enter check out via web credit card simulator")
+  @Step("Type `{0}` message via CC simulator")
   public void typeVerificationCodeOnGatewaySimulator(String verificationMessage) {
     checkoutScreen.getWebTxtCheckout().sendKeys(verificationMessage);
   }
@@ -66,5 +66,16 @@ public class CheckoutScreenStepsIOS extends BaseSteps<CheckoutScreenStepsIOS>
     assertThat(orderDetailsScreen.getStatusSubTitleList().size())
         .as("Order is not submitted successfully")
         .isEqualTo(3);
+  }
+
+  @Override
+  @Step("Click on done button")
+  public void clickOnDone() {
+
+  }
+
+  @Override
+  public void clickOnContinueViaSimulator() {
+
   }
 }

@@ -9,4 +9,17 @@ public interface MenuItemScreenSteps {
   void verifyViewCartButtonIsDisplayed();
 
   void clickOnViewCart();
+
+  void verifyCaloriesLabel();
+
+  void clickOnMenuSearchIcon();
+
+  void searchForMenuItem(String menuItem);
+
+  void clickSearchResultItem();
+
+  void clickCancelSearch();
+
+  void clickOnCheckoutFromMenuScreen();
+
 }

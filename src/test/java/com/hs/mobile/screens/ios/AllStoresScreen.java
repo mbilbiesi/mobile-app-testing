@@ -43,7 +43,7 @@ public class AllStoresScreen extends AbstractScreen<AllStoresScreen> {
   private MobileElement txtMenuItem;
 
   @CacheLookup
-  @iOSXCUITFindBy(accessibility = "restaurant_cell")
+  @iOSXCUITFindBy(accessibility = "cell_delivery")
   private List<MobileElement> restaurantList;
 
   @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeOther[`name == 'All'`]")
@@ -78,6 +78,11 @@ public class AllStoresScreen extends AbstractScreen<AllStoresScreen> {
 
   @iOSXCUITFindBy(accessibility = "cell_swimlane")
   private List<MobileElement> lstSwimlane;
+
+  @iOSXCUITFindBy(
+      iOSClassChain =
+          "**/XCUIElementTypeButton[`label == \"Al Reef Al HindiSandwiches Promoted Free Delivery Store Delivery Rating 0.0 \"`]")
+  private MobileElement btnAlreef;
 
   public AllStoresScreen(@NonNull TestSettings settings) {
     super(settings);

@@ -76,6 +76,9 @@ public class AllStoresScreen extends AbstractScreen<AllStoresScreen> {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/horizontal_scroll")
   private AndroidElement btnSwimLaneStore;
 
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/constrain_parent")
+  private AndroidElement btnFirstStore;
+
   public AllStoresScreen(@NonNull TestSettings settings) {
     super(settings);
   }

@@ -18,7 +18,7 @@ public class MenuItemStepsIOS extends BaseSteps<MenuItemStepsIOS> implements Men
   }
 
   @Override
-  @Step("Add more items from the menu : {0}")
+  @Step("Increase items' count to {0}")
   public void addMoreItems(int itemsCounter) {
     for (int i = 1; i < itemsCounter; i++) {
       menuItemScreen.getBtnAddMoreItems().click();
@@ -43,5 +43,43 @@ public class MenuItemStepsIOS extends BaseSteps<MenuItemStepsIOS> implements Men
   @Step("Click on view cart")
   public void clickOnViewCart() {
     menuItemScreen.getBtnViewCart().click();
+  }
+
+  @Override
+  @Step("Verify menu calories label")
+  public void verifyCaloriesLabel() {
+    assertThat(menuItemScreen.getLblCalories().isDisplayed())
+        .as("calories label is not displayed")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Click on menu search icon")
+  public void clickOnMenuSearchIcon() {
+    menuItemScreen.getBtnMenuSearchIcon().click();
+  }
+
+  @Override
+  @Step("Search for '{0}' menu item")
+  public void searchForMenuItem(String menuItem) {
+    menuItemScreen.getMenuSearchBar().sendKeys(menuItem);
+  }
+
+  @Override
+  @Step("Click on a specific searched menu item")
+  public void clickSearchResultItem() {
+    menuItemScreen.getTxtSearchResultItem().click();
+  }
+
+  @Override
+  @Step("Click on cancel search results")
+  public void clickCancelSearch() {
+    menuItemScreen.getBtnCancelSearch().click();
+  }
+
+  @Override
+  @Step("Click on checkout from menu screen")
+  public void clickOnCheckoutFromMenuScreen() {
+    menuItemScreen.getBtnCheckoutFromMenuScreen().click();
   }
 }

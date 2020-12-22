@@ -21,6 +21,24 @@ public class MenuItemScreen extends AbstractScreen<MenuItemScreen> {
   @iOSXCUITFindBy(accessibility = "checkout_left_text")
   private MobileElement btnViewCart;
 
+  @iOSXCUITFindBy(accessibility = "calories_label")
+  private MobileElement lblCalories;
+
+  @iOSXCUITFindBy(accessibility = "search_icon_view")
+  private MobileElement btnMenuSearchIcon;
+
+  @iOSXCUITFindBy(accessibility = "menu_search_text")
+  private MobileElement menuSearchBar;
+
+  @iOSXCUITFindBy(accessibility = "search_result_item_0")
+  private MobileElement txtSearchResultItem;
+
+  @iOSXCUITFindBy(accessibility = "menu_search_cancel")
+  private MobileElement btnCancelSearch;
+
+  @iOSXCUITFindBy(accessibility = "checkout_view")
+  private MobileElement btnCheckoutFromMenuScreen;
+
   public MenuItemScreen(@NonNull TestSettings settings) {
     super(settings);
   }

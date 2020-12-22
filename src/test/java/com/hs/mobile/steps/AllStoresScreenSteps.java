@@ -29,4 +29,6 @@ public interface AllStoresScreenSteps {
   void clickOnTopPromotedStore();
 
   void selectStoreFromSwimlane();
+
+  void selectFirstStore();
 }

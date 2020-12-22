@@ -7,6 +7,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import java.util.List;
 import lombok.Getter;
 import lombok.NonNull;
+import org.openqa.selenium.WebElement;
 
 @Getter
 public class CheckoutScreen extends AbstractScreen {
@@ -28,6 +29,27 @@ public class CheckoutScreen extends AbstractScreen {
 
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_checkout")
   private MobileElement btnPlaceOrder;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/phone_number")
+  private MobileElement txtPhoneNumber;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/input_edit")
+  private MobileElement txtCvvCode;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/continue_button")
+  private MobileElement btnContinue;
+
+  @AndroidFindBy(className = "android.widget.EditText")
+  private WebElement txtCheckoutViaSimulator;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/primary_label")
+  private MobileElement btnDone;
+
+  @AndroidFindBy(className = "android.widget.Button")
+  private WebElement btnContinueViaSimulator;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/order_number")
+  private MobileElement lblOrderNumber;
 
   public CheckoutScreen(@NonNull TestSettings settings) {
     super(settings);

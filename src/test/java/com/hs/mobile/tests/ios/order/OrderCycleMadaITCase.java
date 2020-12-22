@@ -6,6 +6,7 @@ import com.hs.mobile.tests.BaseTestSteps;
 import com.hs.mobile.util.annotation.OrderAndTracking;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
+import io.qameta.allure.Issues;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.testng.annotations.BeforeClass;
@@ -14,6 +15,7 @@ import org.testng.annotations.Test;
 @OrderAndTracking
 @Feature("Ordering")
 @Story("Create order using 'Mada'")
+@Issues({@Issue("HSAP-492"), @Issue("HSAP-493"), @Issue("HSAP-465")})
 public class OrderCycleMadaITCase extends BaseTestSteps {
 
   @BeforeClass
@@ -59,31 +61,41 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
     restaurantMenuScreenSteps.verifyRestaurantName(restaurantName);
   }
 
+  @Issue("HSAP-465")
   @Test(
-      description = "Verify menu items are added to chart",
-      dependsOnMethods = {"clickOnRestaurant_verifyRestaurantMenuLoads"})
+      description = "Verify calories label",
+      dependsOnMethods = "clickOnRestaurant_verifyRestaurantMenuLoads")
+  void verifyCaloriesLabel() {
+    // When
+    menuItemScreenSteps.verifyCaloriesLabel();
+  }
+
+  @Test(
+      description = "Verify menu items are added to cart",
+      dependsOnMethods = "userNavigateToVendorScreen_verifyUserIsOnVendorScreen")
   void orderFood_verifyItemsAdded() {
     // When
-    restaurantMenuScreenSteps.selectMenuItemByName("Chicken 65");
+    menuItemScreenSteps.clickOnMenuSearchIcon();
+    menuItemScreenSteps.searchForMenuItem("Chicken 65");
+    menuItemScreenSteps.clickSearchResultItem();
     menuItemScreenSteps.addMoreItems(4);
     menuItemScreenSteps.addToCart();
-
-    // Then
-    menuItemScreenSteps.verifyViewCartButtonIsDisplayed();
+    menuItemScreenSteps.clickCancelSearch();
+    menuItemScreenSteps.clickOnCheckoutFromMenuScreen();
   }
 
   @Test(
       description = "place order using Mada credit card ",
-      dependsOnMethods = {"clickOnRestaurant_verifyRestaurantMenuLoads"})
+      dependsOnMethods = {"orderFood_verifyItemsAdded"})
   void orderViaMadaCreditCard() {
     // Given
-    menuItemScreenSteps.clickOnViewCart();
+    // menuItemScreenSteps.clickOnViewCart();
     loginScreenSteps.enterPhoneNumber("501020010");
     loginScreenSteps.clickOnNext();
     loginScreenSteps.enterOtpCode("000000");
 
     // When
-    checkoutScreenSteps.skipNoteHint();
+    // checkoutScreenSteps.skipNoteHint();
     checkoutScreenSteps.changePaymentMethod();
     paymentOptionsScreenSteps.clickOnMadaPaymentOption();
     checkoutScreenSteps.placeOrder();

@@ -35,6 +35,30 @@ public class MenuItemScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/close_icon")
   private MobileElement btnClose;
 
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/tv_calories_total")
+  private MobileElement lblCalories;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/search_icon")
+  private MobileElement btnMenuSearchIcon;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/input")
+  private MobileElement txtSearchMenuInput;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/search_recycler")
+  private MobileElement lblFirstItemInSearchResult;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/image_plus")
+  private MobileElement btnAddMoreItems;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btn_add_to_cart")
+  private MobileElement btnAddToCart;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/checkout_btn")
+  private MobileElement btnViewCart;
+
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/back_button")
+  private MobileElement btnCancelSearchResult;
+
   public MenuItemScreen(@NonNull TestSettings settings) {
     super(settings);
   }

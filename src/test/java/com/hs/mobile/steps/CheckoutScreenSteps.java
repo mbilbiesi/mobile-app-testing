@@ -15,4 +15,8 @@ public interface CheckoutScreenSteps {
   void changePaymentMethod();
 
   void verifyOrderIsSubmitted();
+
+  void clickOnDone();
+
+  void clickOnContinueViaSimulator();
 }

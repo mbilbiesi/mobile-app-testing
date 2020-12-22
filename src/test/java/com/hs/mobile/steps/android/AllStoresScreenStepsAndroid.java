@@ -25,6 +25,11 @@ public class AllStoresScreenStepsAndroid extends BaseSteps<AllStoresScreenStepsA
   @Override
   public void verifyLocationIsAppearedScreenHeader() {}
 
+
+  @Step("Click on the first store")
+  public void selectFirstStore(){
+    allStoresScreen.getBtnFirstStore().click();
+  }
   @Override
   @Step("select first filter")
   public void clickOnFirstFilter() {

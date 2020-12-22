@@ -3,11 +3,12 @@ package com.hs.mobile.steps.ios;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.hs.mobile.core.settings.TestSettings;
-import com.hs.mobile.exception.ExceptionSupplier;
 import com.hs.mobile.screens.ios.AllStoresScreen;
 import com.hs.mobile.steps.AllStoresScreenSteps;
 import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.util.CustomConditions;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 
@@ -15,19 +16,17 @@ public class AllStoresScreenStepsIOS extends BaseSteps<AllStoresScreenStepsIOS>
     implements AllStoresScreenSteps {
 
   @NonNull private final AllStoresScreen allStoresScreen;
+  @NonNull private final AppiumDriver driver;
 
   public AllStoresScreenStepsIOS(@NonNull TestSettings testSettings) {
     super(testSettings);
     allStoresScreen = new AllStoresScreen(testSettings);
+    driver = testSettings.getDriver();
   }
 
   @Step("Select `{0}` restaurant")
   public void selectRestaurantByName(String name) {
-    allStoresScreen.getRestaurantList().stream()
-        .filter(mobileElement -> mobileElement.getText().contains(name))
-        .findFirst()
-        .orElseThrow(ExceptionSupplier.testException("Could not find desired restaurant"))
-        .click();
+    driver.findElement(MobileBy.iOSNsPredicateString("label CONTAINS '" + name + "'")).click();
   }
 
   @Override
@@ -117,5 +116,10 @@ public class AllStoresScreenStepsIOS extends BaseSteps<AllStoresScreenStepsIOS>
   @Step("Click on a store form the swimlane section")
   public void selectStoreFromSwimlane() {
     allStoresScreen.getLstSwimlane().get(1).click();
+  }
+
+  @Override
+  public void selectFirstStore() {
+
   }
 }
