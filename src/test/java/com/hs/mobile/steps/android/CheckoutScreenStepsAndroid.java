@@ -108,6 +108,56 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
         .isTrue();
   }
 
+  @Override
+  @Step("Click on Change payment")
+  public void clickChangePayment() {
+    checkoutScreen.getTxtChangePayment().click();
+  }
+
+  @Override
+  @Step("Click on cash payment option")
+  public void clickOnCashPayment() {
+    checkoutScreen.getBtnCashOnDeliveryOption();
+  }
+
+  @Override
+  @Step("verify wallet payment is disabled")
+  public void verifyWalletToggleIsDisabled() {
+    assertThat(checkoutScreen.getLblWalletDisabled().isDisplayed())
+        .as("Item total price does not match actual result")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify wallet toggle is enabled for CC payment")
+  public void verifyWalletToggleIsEnabled() {
+    assertThat(checkoutScreen.getBtnWalletToggle().isDisplayed())
+        .as("Item total price does not match actual result")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify order price without delivery fees")
+  public void verifyOrderPrice() {
+    assertThat(checkoutScreen.getTxtOrderTotal().isDisplayed())
+        .as("Total price is not displayed")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify delivery fee is displayed")
+  public void verifyDeliveryFee() {
+    assertThat(checkoutScreen.getTxtOrderTotal().isDisplayed())
+        .as("Total price is not displayed")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify total price including delivery fee")
+  public void verifyOrderTotalPrice() {
+    // todo: ID is not present
+  }
+
   @Step("Verify cross-sell section is displayed")
   public void verifyCrossSellSectionIsDisplayed() {
     assertThat(checkoutScreen.getLblCrossSellSection().isDisplayed())

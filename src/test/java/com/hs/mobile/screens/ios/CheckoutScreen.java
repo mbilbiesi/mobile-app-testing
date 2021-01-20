@@ -67,6 +67,15 @@ public class CheckoutScreen extends AbstractScreen<CheckoutScreen> {
   @iOSXCUITFindBy(accessibility = "quantity_label")
   private MobileElement lblItemQuantity;
 
+  @iOSXCUITFindBy(iOSNsPredicate = "label == 'Order total'")
+  private MobileElement lblOrderTotal;
+
+  @iOSXCUITFindBy(accessibility = "priceCell_1")
+  private MobileElement lblDeliveryFee;
+
+  @iOSXCUITFindBy(iOSNsPredicate = "label == 'Total'")
+  private MobileElement lblTotalAmount;
+
   public CheckoutScreen(@NonNull TestSettings settings) {
     super(settings);
   }

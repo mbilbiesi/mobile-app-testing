@@ -1,5 +1,7 @@
 package com.hs.mobile.tests.android.order;
 
+import static org.assertj.core.api.Assumptions.assumeThat;
+
 import com.hs.mobile.tests.BaseTestSteps;
 import com.hs.mobile.util.annotation.OrderAndTracking;
 import io.qameta.allure.Feature;
@@ -13,15 +15,8 @@ import org.testng.annotations.Test;
 @OrderAndTracking
 @Feature("Ordering")
 @Story("Create order using 'Mada'")
-@Issues({
-  @Issue("HSAP-492"),
-  @Issue("HSAP-493"),
-  @Issue("HSAP-465"),
-  @Issue("HSAP-496"),
-  @Issue("HSAP-494"),
-  @Issue("HSAP-500")
-})
-public class OrderCycleMadaITCase extends BaseTestSteps {
+@Issues({@Issue("HSAP-527")})
+public class OrderCycleCashPaymentITCase extends BaseTestSteps {
 
   @BeforeClass
   @Step("user is on restaurant screen")
@@ -39,8 +34,11 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
     selectLocationScreenSteps.clickOnDoneButton();
 
     // Then
-    verticalsScreenSteps.assertAllVerticals();
+    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+        .as("'All stores' vertical is not displayed")
+        .isTrue();
     verticalsScreenSteps.assertDistrictIsAppearedInSearchField();
+
     verticalsScreenSteps.clickOnAllStores();
   }
 
@@ -71,9 +69,10 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
   }
 
   @Test(
-      description = "Verify checkout screen items",
+      description = "Enter phone verification",
       dependsOnMethods = "searchForMenuItem_AddItemsToCart")
-  void loginPhoneNo_verifyCheckoutScreen() {
+  void enterPhoneVerification_verifyCheckoutScreen() {
+
     // When
     loginScreenSteps.enterPhoneNumber("501020010");
     loginScreenSteps.clickOnNext();
@@ -84,26 +83,18 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
     checkoutScreenSteps.verifyItemsTotalPrice("92.0");
     checkoutScreenSteps.verifyItemQuantity("4 x");
     checkoutScreenSteps.verifyItemName("Chicken 65");
-    checkoutScreenSteps.verifyWalletToggleIsEnabled();
-    checkoutScreenSteps.verifyOrderPrice();
-    checkoutScreenSteps.verifyDeliveryFee();
-    checkoutScreenSteps.verifyOrderTotalPrice();
   }
 
   @Test(
       description = "Place order and verify order submission",
-      dependsOnMethods = "verifyCheckoutScreen")
+      dependsOnMethods = "enterPhoneVerification_verifyCheckoutScreen")
   void placeOrder_verifyOrderSubmission() {
-    // When
-    checkoutScreenSteps.placeOrder();
-    checkoutScreenSteps.enterMadaSecurityCode("257");
-    checkoutScreenSteps.clickOnContinue();
-    checkoutScreenSteps.clickOnDone();
-    // todo: enable checkout simulator
-    // checkoutScreenSteps.typeVerificationCodeOnGatewaySimulator("Checkout1!");
-    // checkoutScreenSteps.clickOnContinueViaSimulator();
 
-    checkoutScreenSteps.clickOnDone();
+    // When
+    checkoutScreenSteps.clickChangePayment();
+    checkoutScreenSteps.clickOnCashPayment();
+    checkoutScreenSteps.verifyWalletToggleIsDisabled();
+    checkoutScreenSteps.placeOrder();
 
     // Then
     checkoutScreenSteps.verifyOrderIsSubmitted();

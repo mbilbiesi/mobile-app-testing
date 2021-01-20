@@ -33,4 +33,18 @@ public interface CheckoutScreenSteps {
   void verifyItemQuantity(String quantity);
 
   void verifyItemsTotalPrice(String price);
+
+  void clickChangePayment();
+
+  void clickOnCashPayment();
+
+  void verifyWalletToggleIsDisabled();
+
+  void verifyWalletToggleIsEnabled();
+
+  void verifyOrderPrice();
+
+  void verifyDeliveryFee();
+
+  void verifyOrderTotalPrice();
 }

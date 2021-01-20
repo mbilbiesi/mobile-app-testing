@@ -118,10 +118,50 @@ public class CheckoutScreenStepsIOS extends BaseSteps<CheckoutScreenStepsIOS>
   }
 
   @Override
+  @Step("Click on Change payment")
+  public void clickChangePayment() {}
+
+  @Override
+  @Step("Click on cash payment option")
+  public void clickOnCashPayment() {}
+
+  @Override
+  @Step("verify wallet payment is disabled")
+  public void verifyWalletToggleIsDisabled() {}
+
+  @Override
+  @Step("Verify wallet toggle is enabled for CC payment")
+  public void verifyWalletToggleIsEnabled() {}
+
+  @Override
   @Step("Verify cross-sell section is displayed")
   public void verifyCrossSellSectionIsDisplayed() {
     assertThat(checkoutScreen.getLblCrossSellSection().isDisplayed())
         .as("Cross-sell section is not displayed")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify order price without delivery fees")
+  public void verifyOrderPrice() {
+    assertThat(checkoutScreen.getLblTotalPrice().isDisplayed())
+        .as("Total price is not displayed")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify delivery fee is displayed")
+  public void verifyDeliveryFee() {
+    assertThat(checkoutScreen.getLblDeliveryFee().isDisplayed())
+        .as("Delivery fee is not present")
+        .isTrue();
+  }
+
+  @Override
+  @Step("Verify total price including delivery fee")
+  public void verifyOrderTotalPrice() {
+    assertThat(checkoutScreen.getLblTotalAmount().isDisplayed())
+        .as("Total amount is not displayed")
         .isTrue();
   }
 }

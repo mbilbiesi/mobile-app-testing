@@ -10,6 +10,7 @@ import com.hs.mobile.steps.LandingScreenSteps;
 import com.hs.mobile.steps.LoginScreenSteps;
 import com.hs.mobile.steps.MenuItemScreenSteps;
 import com.hs.mobile.steps.MoreScreenSteps;
+import com.hs.mobile.steps.OrderAnythingCheckoutScreenSteps;
 import com.hs.mobile.steps.OrderAnythingScreenSteps;
 import com.hs.mobile.steps.OrdersScreenSteps;
 import com.hs.mobile.steps.PaymentOptionsScreenSteps;
@@ -24,6 +25,7 @@ import com.hs.mobile.steps.ios.LandingScreenStepsIOS;
 import com.hs.mobile.steps.ios.LoginScreenStepsIOS;
 import com.hs.mobile.steps.ios.MenuItemStepsIOS;
 import com.hs.mobile.steps.ios.MoreScreenStepsIOS;
+import com.hs.mobile.steps.ios.OrderAnythingCheckoutScreenStepsIOS;
 import com.hs.mobile.steps.ios.OrderAnythingStepsIOS;
 import com.hs.mobile.steps.ios.OrdersScreenStepsIOS;
 import com.hs.mobile.steps.ios.PaymentOptionsScreenStepsIOS;
@@ -103,5 +105,10 @@ public class TestStepsIOSModule extends AbstractModule {
   @Provides
   public OrdersScreenSteps ordersScreenSteps(TestSettings settings) {
     return new OrdersScreenStepsIOS(settings);
+  }
+
+  @Provides
+  public OrderAnythingCheckoutScreenSteps orderAnythingCheckoutScreenSteps(TestSettings settings) {
+    return new OrderAnythingCheckoutScreenStepsIOS(settings);
   }
 }

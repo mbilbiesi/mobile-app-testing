@@ -20,7 +20,8 @@ import org.testng.annotations.Test;
   @Issue("HSAP-493"),
   @Issue("HSAP-465"),
   @Issue("HSAP-496"),
-  @Issue("HSAP-494")
+  @Issue("HSAP-494"),
+  @Issue("HSAP-500")
 })
 public class OrderCycleMadaITCase extends BaseTestSteps {
 
@@ -92,23 +93,14 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
   }
 
   @Test(
-      description = "Enter phone verification",
+      description = "Choose payment method and verify checkout screen",
       dependsOnMethods = {"orderFood_verifyItemsAdded"})
-  void enterPhoneVerification() {
+  void choosePaymentMethod_VerifyCheckoutScreen() {
+    // Given
     loginScreenSteps.enterPhoneNumber("501020010");
     loginScreenSteps.clickOnNext();
     loginScreenSteps.enterOtpCode("000000");
-  }
-
-  @Test(
-      description = "Choose payment method and verify checkout screen",
-      dependsOnMethods = {"enterPhoneVerification"})
-  void choosePaymentMethod_VerifyCheckoutScreen() {
-    // Given
-    var itemName = "Chicken 65";
-    var quantity = "x4";
-    var price = "92.00";
-
+    
     // When
     // checkoutScreenSteps.skipNoteHint(); //todo apply id on new version
     checkoutScreenSteps.verifyCrossSellSectionIsDisplayed();
@@ -116,9 +108,12 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
     paymentOptionsScreenSteps.clickOnMadaPaymentOption();
 
     // Then
-    checkoutScreenSteps.verifyItemName(itemName);
-    checkoutScreenSteps.verifyItemQuantity(quantity);
-    checkoutScreenSteps.verifyItemsTotalPrice(price);
+    checkoutScreenSteps.verifyItemName("Chicken 65");
+    checkoutScreenSteps.verifyItemQuantity("x4");
+    checkoutScreenSteps.verifyItemsTotalPrice("92.00");
+    checkoutScreenSteps.verifyOrderPrice();
+    checkoutScreenSteps.verifyDeliveryFee();
+    checkoutScreenSteps.verifyOrderTotalPrice();
   }
 
   @Test(

@@ -18,6 +18,18 @@ public class OrderAnythingScreen extends AbstractScreen<OrderAnythingScreen> {
   @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == 'Delivery Fees'`]")
   private MobileElement lblDeliveryFeesOA;
 
+  @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == 'Continue'`]")
+  private MobileElement btnContinue;
+
+  @iOSXCUITFindBy(iOSNsPredicate = "Makeup")
+  private MobileElement txtOrderItem; //todo: add locator
+
+  @iOSXCUITFindBy(iOSNsPredicate = "50-100 SR")
+  private MobileElement btnPriceEstimate;
+
+  @iOSXCUITFindBy(iOSNsPredicate = "Place Order")
+  private MobileElement btnPlaceOrder;
+
   public OrderAnythingScreen(@NonNull TestSettings settings) {
     super(settings);
   }

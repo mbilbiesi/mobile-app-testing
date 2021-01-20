@@ -38,10 +38,30 @@ public class OrderAnythingStepsIOS extends BaseSteps<OrderAnythingStepsIOS>
   public void verifyDeliveryFeeIsPresent() {
     assertThat(orderAnythingScreen.lblDeliveryFeesOA().isDisplayed())
         .as("Delivery fee is not present")
-        .isFalse();
+        .isTrue();
   }
 
   @Override
   // todo to be resumed in order and tracking test cases
-  public void clickOnContinue() {}
+  public void clickOnContinue() {
+    orderAnythingScreen.btnContinue().click();
+  }
+
+  @Override
+  @Step("Add order anything item")
+  public void addOrderItem(String item) {
+    orderAnythingScreen.txtOrderItem().sendKeys(item);
+  }
+
+  @Override
+  @Step("Click on price estimate")
+  public void clickOnPriceEstimate() {
+    orderAnythingScreen.btnPriceEstimate().click();
+  }
+
+  @Override
+  @Step("Click on place order")
+  public void clickOnPlaceOrder() {
+    orderAnythingScreen.btnPlaceOrder().click();
+  }
 }

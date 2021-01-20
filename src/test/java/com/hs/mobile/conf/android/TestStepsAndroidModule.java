@@ -10,6 +10,7 @@ import com.hs.mobile.steps.LandingScreenSteps;
 import com.hs.mobile.steps.LoginScreenSteps;
 import com.hs.mobile.steps.MenuItemScreenSteps;
 import com.hs.mobile.steps.MoreScreenSteps;
+import com.hs.mobile.steps.OrderAnythingCheckoutScreenSteps;
 import com.hs.mobile.steps.OrderAnythingScreenSteps;
 import com.hs.mobile.steps.PaymentOptionsScreenSteps;
 import com.hs.mobile.steps.QuickMarketScreenSteps;
@@ -23,6 +24,7 @@ import com.hs.mobile.steps.android.LandingScreenStepsAndroid;
 import com.hs.mobile.steps.android.LoginScreenStepsAndroid;
 import com.hs.mobile.steps.android.MenuItemStepsAndroid;
 import com.hs.mobile.steps.android.MoreScreenStepsAndroid;
+import com.hs.mobile.steps.android.OrderAnythingCheckoutScreenStepsAndroid;
 import com.hs.mobile.steps.android.OrderAnythingScreenStepsAndroid;
 import com.hs.mobile.steps.android.PaymentOptionsScreenStepsAndroid;
 import com.hs.mobile.steps.android.QuickMarketScreenStepsAndroid;
@@ -97,4 +99,11 @@ public class TestStepsAndroidModule extends AbstractModule {
   public QuickMarketScreenSteps quickMarketScreenSteps(TestSettings settings) {
     return new QuickMarketScreenStepsAndroid(settings);
   }
+
+  @Provides
+  public OrderAnythingCheckoutScreenSteps orderAnythingCheckoutScreenSteps(TestSettings settings) {
+    return new OrderAnythingCheckoutScreenStepsAndroid(settings);
+  }
+
+
 }

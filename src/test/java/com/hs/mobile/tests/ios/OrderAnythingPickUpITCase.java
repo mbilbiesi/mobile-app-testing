@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 @SearchAndDiscovery
 @Feature("Searching")
 @Story("Order anything pick up store ")
-@Issues({@Issue("HSAP-487"), @Issue("HSAP-481"), @Issue("HSAP-489")})
+@Issues({@Issue("HSAP-487"), @Issue("HSAP-481"), @Issue("HSAP-489"), @Issue("HSAP-506")})
 public class OrderAnythingPickUpITCase extends BaseTestSteps {
 
   @BeforeClass
@@ -52,5 +52,30 @@ public class OrderAnythingPickUpITCase extends BaseTestSteps {
 
     // Then
     orderAnythingScreenSteps.verifyDeliveryFeeIsPresent();
+
+    orderAnythingScreenSteps.clickOnContinue();
+
+    // orderAnythingScreenSteps.addOrderItem("Test"); //todo: Add locator
+    orderAnythingScreenSteps.clickOnPriceEstimate();
+    orderAnythingScreenSteps.clickOnPlaceOrder();
   }
+
+  @Test(
+      description = "Enter phone verification",
+      dependsOnMethods = {"navigateToOrderAnything_placePickUpLocation"})
+  void enterPhoneVerification() {
+    loginScreenSteps.enterPhoneNumber("501020010");
+    loginScreenSteps.clickOnNext();
+    loginScreenSteps.enterOtpCode("000000");
+  }
+
+  @Test(
+      description = "Verify order anything delivery",
+      dependsOnMethods = {"enterPhoneVerification"})
+  void placeOrder_VerifyDeliveryIsSubmitted() {
+    orderAnythingCheckoutScreenSteps.verifyPersonalShopperDelivery();
+    orderAnythingCheckoutScreenSteps.verifyDeliveryIsSubmitted();
+  }
+
+
 }

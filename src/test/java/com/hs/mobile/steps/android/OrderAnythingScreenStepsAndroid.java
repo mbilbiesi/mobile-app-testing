@@ -46,4 +46,22 @@ public class OrderAnythingScreenStepsAndroid extends BaseSteps<OrderAnythingScre
   public void clickOnContinue() {
     orderAnythingScreen.btnContinue().click();
   }
+
+  @Override
+  @Step("Add order anything item")
+  public void addOrderItem(String item) {
+    orderAnythingScreen.txtOrder().sendKeys(item);
+  }
+
+  @Override
+  @Step("Click on price estimate")
+  public void clickOnPriceEstimate() {
+    orderAnythingScreen.btnPriceEstimate().click();
+  }
+
+  @Override
+  @Step("Click on place order button")
+  public void clickOnPlaceOrder() {
+    orderAnythingScreen.btnPlaceOrder().click();
+  }
 }

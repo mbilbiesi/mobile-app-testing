@@ -9,4 +9,11 @@ public interface OrderAnythingScreenSteps {
   void verifyDeliveryFeeIsPresent();
 
   void clickOnContinue();
+
+  void addOrderItem(String item);
+
+  void clickOnPriceEstimate();
+
+  void clickOnPlaceOrder();
+
 }
