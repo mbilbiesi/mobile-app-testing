@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.android;
+package com.hs.mobile.tests.android.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -12,10 +12,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @SearchAndDiscovery
-@Feature("Top vendor promotion")
-@Story("Verify that the vendor promotion is shown if the vendor status is ready ")
-@Issue("HSAP-475")
-public class TopVendorPromotionITCase extends BaseTestSteps {
+@Feature("Searching")
+@Story("Search for a selected store from 'All-Stores' screen ")
+@Issue("HSAP-477")
+public class SearchForStoreITCase extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on 'All stores' screen")
@@ -35,14 +35,17 @@ public class TopVendorPromotionITCase extends BaseTestSteps {
         .isTrue();
   }
 
-  @Test(description = "Verify that the vendor promotion can be clicked")
-  public void navigateToAllStoresVertical_clickOnPromotedVendor() {
+  @Test(description = "Search for a selected store and verify it is displayed")
+  public void navigateToAllStoresVertical_searchForStore() {
+    // Given
+    var nonExistingStore = "Al Reef Al Hindi";
+
     // When
     verticalsScreenSteps.clickOnAllStores();
-    // todo: maintenance ID missing
-    allStoresScreenSteps.clickOnTopPromotedStore();
+    allStoresScreenSteps.clickOnSearch();
+    allStoresScreenSteps.typeSearchKeyword(nonExistingStore);
 
     // Then
-    quickMarketScreenSteps.verifyQuickMarketCartIsPresent();
+    allStoresScreenSteps.verifyStoreSelectedIsAppeared();
   }
 }

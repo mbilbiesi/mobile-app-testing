@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.ios;
+package com.hs.mobile.tests.android.searchdiscovery;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,14 +20,12 @@ public class AddressITCase extends BaseTestSteps {
   @Step("User is logged-in")
   public void testPrecondition() {
     // Given
-    landingScreenSteps.handleLocationPopup();
     landingScreenSteps.handlePromotionPopup();
     landingScreenSteps.clickOnMore();
     moreScreenSteps.clickOnLogin();
     loginScreenSteps.enterPhoneNumber("501020010");
     loginScreenSteps.clickOnNext();
     loginScreenSteps.enterOtpCode("000000");
-    moreScreenSteps.clickOnHome();
   }
 
   @Issue("HSAP-483")
@@ -55,13 +53,18 @@ public class AddressITCase extends BaseTestSteps {
       dependsOnMethods = "userSaveAddress_addressIsSavedForUser")
   public void userUpdateAddress_addressIsUpdated() {
     // Given
+    var cityToSearch = "SULEIMANIA";
     landingScreenSteps.selectNewAddress();
     var beforeUpdateAddress = landingScreenSteps.getAddressLabel();
 
     // When
     landingScreenSteps.clickOnMoreActions();
     landingScreenSteps.clickOnEditAddress();
-    selectLocationScreenSteps.moveMapPinToNewLocationPoint();
+    selectLocationScreenSteps.clickOnSearchIcon();
+    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
+    selectLocationScreenSteps.enterSearch();
+    selectLocationScreenSteps.selectCity(cityToSearch);
+    selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
     landingScreenSteps.selectNewAddress();
     var afterUpdateAddress = landingScreenSteps.getAddressLabel();
@@ -80,9 +83,8 @@ public class AddressITCase extends BaseTestSteps {
     // When
     landingScreenSteps.clickOnMoreActions();
     landingScreenSteps.clickOnDeleteAddress();
-    landingScreenSteps.confirmRemoveAddress();
 
     // Then
-    landingScreenSteps.verifySearchFieldValueIsEqualTo("Select");
+    landingScreenSteps.verifySearchFieldValueIsEqualTo("...");
   }
 }

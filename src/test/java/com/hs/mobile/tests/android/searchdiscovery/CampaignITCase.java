@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.ios;
+package com.hs.mobile.tests.android.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -12,16 +12,16 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @SearchAndDiscovery
-@Feature("All Stores vertical")
-@Story("Filters verification")
-public class AllStoresFilterSelectionITCase extends BaseTestSteps {
+@Feature("Campaign")
+@Story("Verify campaign banners are exist and clickable")
+@Issue("HSAP-472")
+public class CampaignITCase extends BaseTestSteps {
 
   @BeforeClass
-  @Step("User is on Restaurant screen")
+  @Step("User is on 'All stores' screen")
   public void testPrecondition() {
     // Given
     var cityToSearch = "Riyadh";
-    landingScreenSteps.handleLocationPopup();
     landingScreenSteps.handlePromotionPopup();
     landingScreenSteps.selectNewAddress();
     selectLocationScreenSteps.clickOnSearchIcon();
@@ -35,26 +35,34 @@ public class AllStoresFilterSelectionITCase extends BaseTestSteps {
         .isTrue();
   }
 
-  @Issue("HSAP-469")
-  @Test(description = "Verify filter that user can select filter")
-  public void userSelectFilter_filterIsSelected() {
+  @Test(description = "verify campaign banners are displayed in All Stores vertical")
+  public void navigateToAllStoresVertical_campaignBannersAreDisplayed() {
     // When
     verticalsScreenSteps.clickOnAllStores();
-    allStoresScreenSteps.clickOnFirstFilter();
 
     // Then
-    allStoresScreenSteps.assertFilterSelection();
+    allStoresScreenSteps.verifyCampaignBannersAreDisplayed();
   }
 
-  @Issue("HSAP-469")
   @Test(
-      description = "Verify filter that user can select filter",
-      dependsOnMethods = "userSelectFilter_filterIsSelected")
-  public void userDeselectFilter_filterIsDeselected() {
+      description = "verify navigating to banner screen",
+      dependsOnMethods = "navigateToAllStoresVertical_campaignBannersAreDisplayed")
+  public void clickOnBanner_bannerScreenIsDisplayed() {
     // When
-    allStoresScreenSteps.deselectFilter();
+    allStoresScreenSteps.clickOnCampaign();
 
     // Then
-    allStoresScreenSteps.assertFilterDeselected();
+    campaignScreenSteps.verifyCampaignScreenIsDisplayed();
+  }
+
+  @Test(
+      description = "verify closing banner screen will navigate back to `All Stores` vertical",
+      dependsOnMethods = "clickOnBanner_bannerScreenIsDisplayed")
+  public void closeBannerScreen_allStoresDisplayed() {
+    // When
+    campaignScreenSteps.closeCampaignScreen();
+
+    // Then
+    allStoresScreenSteps.verifyCampaignBannersAreDisplayed();
   }
 }

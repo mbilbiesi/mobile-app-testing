@@ -29,11 +29,18 @@ public class VerticalsScreen extends AbstractScreen<VerticalsScreen> {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/banner_image")
   private List<MobileElement> verticals;
 
+  @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Personal Shopper\")")
+  private AndroidElement personalShopper;
+
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/new_location_clickable_view")
   private AndroidElement btnNewLocation;
 
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/gradient_overlay")
   private AndroidElement btnAllStoresVertical;
+
+  @AndroidFindBy(
+      uiAutomator = "\"new UiSelector().className('android.widget.TextView').text('Groceries')\"")
+  private AndroidElement groceries;
 
   @AndroidFindBy(xpath = "//android.widget.Button[@text='Fast Food']")
   private AndroidElement filter;

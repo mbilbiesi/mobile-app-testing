@@ -1,11 +1,13 @@
-package com.hs.mobile.tests.android;
+package com.hs.mobile.tests.android.ordertracking;
 
 import com.hs.mobile.tests.BaseTestSteps;
+import com.hs.mobile.util.annotation.OrderAndTracking;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
+@OrderAndTracking
 @Feature("Payments")
 @Story("Check card charge verification while adding new card")
 @Issue("HSAP-552")

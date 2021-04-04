@@ -7,12 +7,12 @@
     </listeners>
     <test name="this name will be maintained automatically">
         <classes>
-            <class name="com.hs.mobile.tests.android.CardVerificationITCase"/>
+            <class name="com.hs.mobile.tests.android.ordertracking.CardVerificationITCase"/>
 <!--            <class name="com.hs.mobile.tests.android.VerticalsExistenceITCase"/>-->
 <!--            <class name="com.hs.mobile.tests.android.SwimlaneStoreSelectionITCase"/>-->
 <!--            <class name="com.hs.mobile.tests.android.OrderAnythingITCase"/>-->
 <!--            <class name="com.hs.mobile.tests.android.CampaignITCase"/>-->
-            <class name="com.hs.mobile.tests.android.AllStoresFilterSelectionITCase"/>
+            <class name="com.hs.mobile.tests.android.searchdiscovery.AllStoresFilterSelectionITCase"/>
 <!--            <class name="com.hs.mobile.tests.android.AddressITCase"/>-->
 <!--            <class name="com.hs.mobile.tests.android.groceries.GroceriesITCase"/>-->
 <!--            <class name="com.hs.mobile.tests.android.order.PlaceFailedPaymentITCase"/>-->

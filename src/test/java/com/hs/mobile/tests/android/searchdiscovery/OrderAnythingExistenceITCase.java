@@ -1,17 +1,21 @@
-package com.hs.mobile.tests.android;
+package com.hs.mobile.tests.android.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
 import com.hs.mobile.tests.BaseTestSteps;
+import com.hs.mobile.util.annotation.SearchAndDiscovery;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-@Feature("Search and discovery")
-@Issue("HSAP-469")
-public class AllStoresFilterSelectionITCase extends BaseTestSteps {
+@SearchAndDiscovery
+@Feature("OrderAnything")
+@Story("OrderAnything functionality verification")
+@Issue("HSAP-485")
+public class OrderAnythingExistenceITCase extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on 'All stores' screen")
@@ -26,31 +30,17 @@ public class AllStoresFilterSelectionITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isOrderAnythingVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }
 
-  @Issue("HSAP-469")
-  @Test(description = "Verify the user can select filter")
-  public void userSelectFilter_filterIsSelected() {
+  @Test(description = "Verify that the user is directed to 'order-anything' vertical")
+  public void navigateToOrderAnything() {
     // When
-    verticalsScreenSteps.clickOnAllStores();
-    allStoresScreenSteps.clickOnFirstFilter();
+    verticalsScreenSteps.clickOrderAnything();
 
     // Then
-    allStoresScreenSteps.assertFilterSelection();
-  }
-
-  @Issue("HSAP-469")
-  @Test(
-      description = "Verify the user can deselect filter",
-      dependsOnMethods = "userSelectFilter_filterIsSelected")
-  public void userDeselectFilter_filterIsDeselected() {
-    // When
-    allStoresScreenSteps.deselectFilter();
-
-    // Then
-    allStoresScreenSteps.assertFilterDeselected();
+    orderAnythingScreenSteps.verifyOrderAnythingVerticalIsAppeared();
   }
 }

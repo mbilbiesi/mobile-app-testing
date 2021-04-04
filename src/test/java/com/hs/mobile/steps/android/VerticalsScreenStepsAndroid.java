@@ -40,7 +40,7 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
   @Override
   @Step("verify 'OrderAnything' vertical is displayed")
   public boolean isOrderAnythingVerticalDisplayed() {
-    return verticalsScreen.verticals().get(2).isDisplayed();
+    return verticalsScreen.personalShopper().isDisplayed();
   }
 
   @Override
@@ -73,7 +73,7 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
   public void verifyAllStoresVertical() {
     assertThat(verticalsScreen.verticals().size())
         .as("Expected only 'All stores' vertical for the provided address")
-        .isEqualTo(1);
+        .isEqualTo(0);
   }
 
   @Override
@@ -85,7 +85,7 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
   @Override
   @Step("Click on 'Order Anything'")
   public void clickOrderAnything() {
-    verticalsScreen.verticals().get(2).click();
+    verticalsScreen.personalShopper().click();
   }
 
   @Override

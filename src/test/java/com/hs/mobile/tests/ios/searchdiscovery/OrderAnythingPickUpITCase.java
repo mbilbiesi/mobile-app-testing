@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.ios;
+package com.hs.mobile.tests.ios.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 

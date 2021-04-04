@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.ios;
+package com.hs.mobile.tests.ios.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -12,13 +12,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @SearchAndDiscovery
-@Feature("Swimlane Section")
-@Story("Select a store from swimlane ")
-@Issue("HSAP-474")
-public class SwimlaneStoreSelectionITCase extends BaseTestSteps {
+@Feature("OrderAnything")
+@Story("OrderAnything functionality verification")
+public class OrderAnythingITCase extends BaseTestSteps {
 
   @BeforeClass
-  @Step("User is on Restaurant screen")
+  @Step("User is on 'All stores' screen")
   public void testPrecondition() {
     // Given
     var cityToSearch = "Riyadh";
@@ -36,15 +35,21 @@ public class SwimlaneStoreSelectionITCase extends BaseTestSteps {
         .isTrue();
   }
 
-  @Test(description = "Verify that the a store can be selected from swimlane section")
-  public void navigateToAllStores_assertSwimlaneSection() {
+  @Issue("HSAP-521")
+  @Test(
+      description =
+          "Navigate to 'Order Anything' from empty search result in 'All stores' vertical")
+  public void orderFromNonExistingStore() {
     // Given
-    verticalsScreenSteps.clickOnAllStores();
+    var nonExistingStore = "xyz";
 
     // When
-    allStoresScreenSteps.selectStoreFromSwimlane();
+    verticalsScreenSteps.clickOnAllStores();
+    allStoresScreenSteps.clickOnSearch();
+    allStoresScreenSteps.typeSearchKeyword(nonExistingStore);
+    allStoresScreenSteps.clickOnTryOrderAnything();
 
     // Then
-    restaurantMenuScreenSteps.verifyThatCloseButtonExist();
+    orderAnythingScreenSteps.verifyOrderAnythingVerticalIsAppeared();
   }
 }

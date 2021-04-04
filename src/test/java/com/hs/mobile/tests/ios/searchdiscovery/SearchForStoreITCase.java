@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.android;
+package com.hs.mobile.tests.ios.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -12,15 +12,17 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @SearchAndDiscovery
-@Feature("OrderAnything")
-@Story("OrderAnything functionality verification")
-public class OrderAnythingITCase extends BaseTestSteps {
+@Feature("Searching")
+@Story("Search for a selected store from 'All-Stores' screen ")
+@Issue("HSAP-477")
+public class SearchForStoreITCase extends BaseTestSteps {
 
   @BeforeClass
-  @Step("User is on 'All stores' screen")
+  @Step("User is on Restaurant screen")
   public void testPrecondition() {
     // Given
     var cityToSearch = "Riyadh";
+    landingScreenSteps.handleLocationPopup();
     landingScreenSteps.handlePromotionPopup();
     landingScreenSteps.selectNewAddress();
     selectLocationScreenSteps.clickOnSearchIcon();
@@ -29,26 +31,22 @@ public class OrderAnythingITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isOrderAnythingVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }
 
-  @Issue("HSAP-521")
-  @Test(
-      description =
-          "Navigate to 'Order Anything' from empty search result in 'All stores' vertical")
-  void searchForNonExistingStore() {
+  @Test(description = "Search for a selected store and verify it is displayed")
+  public void navigateToAllStoresVertical_searchForStore() {
     // Given
-    var nonExistingStore = "xyz";
+    var nonExistingStore = "Al Reef Al Hindi";
 
     // When
     verticalsScreenSteps.clickOnAllStores();
     allStoresScreenSteps.clickOnSearch();
     allStoresScreenSteps.typeSearchKeyword(nonExistingStore);
-    allStoresScreenSteps.clickOnTryOrderAnything();
 
     // Then
-    orderAnythingScreenSteps.verifyOrderAnythingVerticalIsAppeared();
+    allStoresScreenSteps.verifyStoreSelectedIsAppeared();
   }
 }

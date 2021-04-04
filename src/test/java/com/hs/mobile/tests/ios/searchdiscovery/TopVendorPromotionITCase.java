@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.android;
+package com.hs.mobile.tests.ios.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -12,16 +12,17 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @SearchAndDiscovery
-@Feature("OrderAnything")
-@Story("OrderAnything functionality verification")
-@Issue("HSAP-485")
-public class OrderAnythingExistenceITCase extends BaseTestSteps {
+@Feature("Top vendor promotion")
+@Story("Verify that the vendor promotion is shown if the vendor status is ready ")
+@Issue("HSAP-475")
+public class TopVendorPromotionITCase extends BaseTestSteps {
 
   @BeforeClass
-  @Step("User is on 'All stores' screen")
+  @Step("User is on Restaurant screen")
   public void testPrecondition() {
     // Given
     var cityToSearch = "Riyadh";
+    landingScreenSteps.handleLocationPopup();
     landingScreenSteps.handlePromotionPopup();
     landingScreenSteps.selectNewAddress();
     selectLocationScreenSteps.clickOnSearchIcon();
@@ -30,17 +31,20 @@ public class OrderAnythingExistenceITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isOrderAnythingVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }
 
-  @Test(description = "Verify that the user is directed to 'order-anything' vertical")
-  public void navigateToOrderAnything() {
+  @Test(description = "Verify that the vendor promotion can be clicked")
+  public void navigateToAllStoresVertical_clickOnPromotedVendor() {
+    // Given
+    verticalsScreenSteps.clickOnAllStores();
+
     // When
-    verticalsScreenSteps.clickOrderAnything();
+    allStoresScreenSteps.clickOnTopPromotedStore();
 
     // Then
-    orderAnythingScreenSteps.verifyOrderAnythingVerticalIsAppeared();
+    quickMarketScreenSteps.verifyQuickMarketCartIsPresent();
   }
 }

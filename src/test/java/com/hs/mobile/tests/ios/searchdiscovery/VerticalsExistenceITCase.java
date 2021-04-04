@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.ios;
+package com.hs.mobile.tests.ios.searchdiscovery;
 
 import com.hs.mobile.tests.BaseTestSteps;
 import com.hs.mobile.util.annotation.SearchAndDiscovery;

@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.android;
+package com.hs.mobile.tests.android.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 

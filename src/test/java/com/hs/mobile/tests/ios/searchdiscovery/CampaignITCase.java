@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.ios;
+package com.hs.mobile.tests.ios.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -12,10 +12,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @SearchAndDiscovery
-@Feature("Top vendor promotion")
-@Story("Verify that the vendor promotion is shown if the vendor status is ready ")
-@Issue("HSAP-475")
-public class TopVendorPromotionITCase extends BaseTestSteps {
+@Feature("Campaign")
+@Story("Verify campaign banners are exist and clickable")
+@Issue("HSAP-472")
+public class CampaignITCase extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on Restaurant screen")
@@ -36,15 +36,34 @@ public class TopVendorPromotionITCase extends BaseTestSteps {
         .isTrue();
   }
 
-  @Test(description = "Verify that the vendor promotion can be clicked")
-  public void navigateToAllStoresVertical_clickOnPromotedVendor() {
-    // Given
+  @Test(description = "verify campaign banners are displayed in All Stores vertical")
+  public void navigateToAllStoresVertical_campaignBannersAreDisplayed() {
+    // When
     verticalsScreenSteps.clickOnAllStores();
 
+    // Then
+    allStoresScreenSteps.verifyCampaignBannersAreDisplayed();
+  }
+
+  @Test(
+      description = "verify navigating to banner screen",
+      dependsOnMethods = "navigateToAllStoresVertical_campaignBannersAreDisplayed")
+  public void clickOnBanner_bannerScreenIsDisplayed() {
     // When
-    allStoresScreenSteps.clickOnTopPromotedStore();
+    allStoresScreenSteps.clickOnCampaign();
 
     // Then
-    quickMarketScreenSteps.verifyQuickMarketCartIsPresent();
+    campaignScreenSteps.verifyCampaignScreenIsDisplayed();
+  }
+
+  @Test(
+      description = "verify closing banner screen will navigate back to `All Stores` vertical",
+      dependsOnMethods = "clickOnBanner_bannerScreenIsDisplayed")
+  public void closeBannerScreen_allStoresDisplayed() {
+    // When
+    campaignScreenSteps.closeCampaignScreen();
+
+    // Then
+    allStoresScreenSteps.verifyCampaignBannersAreDisplayed();
   }
 }

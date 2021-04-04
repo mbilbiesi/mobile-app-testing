@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.ios.order;
+package com.hs.mobile.tests.ios.ordertracking;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -13,8 +13,9 @@ import org.testng.annotations.Test;
 
 @OrderAndTracking
 @Feature("Ordering")
-@Story("Create order using 'Cash on Delivery'")
-public class OrderCycleCashITCase extends BaseTestSteps {
+@Story("Create order using 'Mada' failed payment")
+@Issue("HSAP-498")
+public class PlaceFailedPayment extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on Restaurant screen")
@@ -61,34 +62,33 @@ public class OrderCycleCashITCase extends BaseTestSteps {
 
   @Test(
       description = "Verify menu items are added to cart",
-      dependsOnMethods = {"clickOnRestaurant_verifyRestaurantMenuLoads"})
+      dependsOnMethods = "userNavigateToVendorScreen_verifyUserIsOnVendorScreen")
   void orderFood_verifyItemsAdded() {
     // When
-    restaurantMenuScreenSteps.selectMenuItemByName("Chicken 65");
+    menuItemScreenSteps.clickOnMenuSearchIcon();
+    menuItemScreenSteps.searchForMenuItem("Chicken 65");
+    menuItemScreenSteps.clickSearchResultItem();
     menuItemScreenSteps.addMoreItems(4);
     menuItemScreenSteps.addToCart();
-
-    // Then
-    menuItemScreenSteps.verifyViewCartButtonIsDisplayed();
+    menuItemScreenSteps.clickCancelSearch();
+    menuItemScreenSteps.clickOnCheckoutFromMenuScreen();
   }
 
   @Test(
-      description = "place order using cash on delivery",
-      dependsOnMethods = {"clickOnRestaurant_verifyRestaurantMenuLoads"})
-  void placeOrderUsingCashMethod_orderIsSubmitted() {
+      description = "place order using Mada credit card for a failed payment",
+      dependsOnMethods = {"orderFood_verifyItemsAdded"})
+  void orderViaMadaCreditCard() {
     // Given
-    menuItemScreenSteps.clickOnViewCart();
     loginScreenSteps.enterPhoneNumber("501020010");
     loginScreenSteps.clickOnNext();
     loginScreenSteps.enterOtpCode("000000");
 
     // When
-    checkoutScreenSteps.skipNoteHint();
-    checkoutScreenSteps.changePaymentMethod();
-    paymentOptionsScreenSteps.clickOnCashOnDeliveryPayment();
     checkoutScreenSteps.placeOrder();
-
-    // Then
-    checkoutScreenSteps.verifyOrderIsSubmitted();
+    checkoutScreenSteps.enterMadaSecurityCode("256");
+    checkoutScreenSteps.typeVerificationCodeOnGatewaySimulator("Ch");
+    checkoutScreenSteps.clickOnContinue();
+    checkoutScreenSteps.verifyCancelOrderButton();
+    checkoutScreenSteps.verifyChangePaymentButton();
   }
 }

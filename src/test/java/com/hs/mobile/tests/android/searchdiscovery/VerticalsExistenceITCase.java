@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.android;
+package com.hs.mobile.tests.android.searchdiscovery;
 
 import com.hs.mobile.tests.BaseTestSteps;
 import com.hs.mobile.util.annotation.SearchAndDiscovery;

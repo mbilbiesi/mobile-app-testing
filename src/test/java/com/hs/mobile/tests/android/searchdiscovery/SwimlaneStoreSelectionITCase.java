@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.android;
+package com.hs.mobile.tests.android.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -12,10 +12,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @SearchAndDiscovery
-@Feature("Searching")
-@Story("Search for a selected store from 'All-Stores' screen ")
-@Issue("HSAP-477")
-public class SearchForStoreITCase extends BaseTestSteps {
+@Feature("Swimlane Section")
+@Story("Select a store from swimlane ")
+@Issue("HSAP-474")
+public class SwimlaneStoreSelectionITCase extends BaseTestSteps {
 
   @BeforeClass
   @Step("User is on 'All stores' screen")
@@ -35,17 +35,13 @@ public class SearchForStoreITCase extends BaseTestSteps {
         .isTrue();
   }
 
-  @Test(description = "Search for a selected store and verify it is displayed")
-  public void navigateToAllStoresVertical_searchForStore() {
-    // Given
-    var nonExistingStore = "Al Reef Al Hindi";
-
+  @Test(description = "Verify that the a store can be selected from swimlane section")
+  public void navigateToAllStores_assertSwimlaneSection() {
     // When
     verticalsScreenSteps.clickOnAllStores();
-    allStoresScreenSteps.clickOnSearch();
-    allStoresScreenSteps.typeSearchKeyword(nonExistingStore);
+    allStoresScreenSteps.selectStoreFromSwimlane();
 
     // Then
-    allStoresScreenSteps.verifyStoreSelectedIsAppeared();
+    restaurantMenuScreenSteps.verifyThatCloseButtonExist();
   }
 }

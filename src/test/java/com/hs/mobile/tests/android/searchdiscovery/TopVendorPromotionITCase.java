@@ -1,4 +1,4 @@
-package com.hs.mobile.tests.ios;
+package com.hs.mobile.tests.android.searchdiscovery;
 
 import static org.assertj.core.api.Assumptions.assumeThat;
 
@@ -12,17 +12,16 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @SearchAndDiscovery
-@Feature("OrderAnything")
-@Story("OrderAnything functionality verification")
-@Issue("HSAP-485")
-public class OrderAnythingExistenceITCase extends BaseTestSteps {
+@Feature("Top vendor promotion")
+@Story("Verify that the vendor promotion is shown if the vendor status is ready ")
+@Issue("HSAP-475")
+public class TopVendorPromotionITCase extends BaseTestSteps {
 
   @BeforeClass
-  @Step("User is on Restaurant screen")
+  @Step("User is on 'All stores' screen")
   public void testPrecondition() {
     // Given
     var cityToSearch = "Riyadh";
-    landingScreenSteps.handleLocationPopup();
     landingScreenSteps.handlePromotionPopup();
     landingScreenSteps.selectNewAddress();
     selectLocationScreenSteps.clickOnSearchIcon();
@@ -36,12 +35,14 @@ public class OrderAnythingExistenceITCase extends BaseTestSteps {
         .isTrue();
   }
 
-  @Test(description = "Verify all verticals are displayed")
-  public void verifyOrderAnythingVertical() {
+  @Test(description = "Verify that the vendor promotion can be clicked")
+  public void navigateToAllStoresVertical_clickOnPromotedVendor() {
     // When
-    verticalsScreenSteps.clickOrderAnything();
+    verticalsScreenSteps.clickOnAllStores();
+    // todo: maintenance ID missing
+    allStoresScreenSteps.clickOnTopPromotedStore();
 
     // Then
-    orderAnythingScreenSteps.verifyOrderAnythingVerticalIsAppeared();
+    quickMarketScreenSteps.verifyQuickMarketCartIsPresent();
   }
 }
