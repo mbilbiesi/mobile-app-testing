@@ -14,107 +14,107 @@ import lombok.experimental.Accessors;
 public class Device {
 
   @JsonProperty("usage")
-	Object usage;
+  Object usage;
 
   @JsonProperty("channel")
-	String channel;
+  String channel;
 
   @JsonProperty("cpuPlatform")
-	String cpuPlatform;
+  String cpuPlatform;
 
   @JsonProperty("battery")
-	Battery battery;
+  Battery battery;
 
   @JsonProperty("operator")
-	Object operator;
+  Object operator;
 
   @JsonProperty("platform")
-	String platform;
+  String platform;
 
   @JsonProperty("manufacturer")
-	String manufacturer;
+  String manufacturer;
 
   @JsonProperty("network")
-	Network network;
+  Network network;
 
   @JsonProperty("createdAt")
-	String createdAt;
+  String createdAt;
 
   @JsonProperty("statusChangedAt")
-	String statusChangedAt;
+  String statusChangedAt;
 
   @JsonProperty("usageChangedAt")
-	String usageChangedAt;
+  String usageChangedAt;
 
   @JsonProperty("presenceChangedAt")
-	String presenceChangedAt;
+  String presenceChangedAt;
 
   @JsonProperty("provider")
-	Provider provider;
+  Provider provider;
 
   @JsonProperty("ready")
-	boolean ready;
+  boolean ready;
 
   @JsonProperty("browser")
-	Browser browser;
+  Browser browser;
 
   @JsonProperty("remoteConnectUrl")
-	Object remoteConnectUrl;
+  Object remoteConnectUrl;
 
   @JsonProperty("model")
-	String model;
+  String model;
 
   @JsonProperty("group")
-	Group group;
+  Group group;
 
   @JsonProperty("owner")
-	Object owner;
+  Object owner;
 
   @JsonProperty("product")
-	String product;
+  String product;
 
   @JsonProperty("using")
-	boolean using;
+  boolean using;
 
   @JsonProperty("display")
-	Display display;
+  Display display;
 
   @JsonProperty("abi")
-	String abi;
+  String abi;
 
   @JsonProperty("remoteConnect")
-	boolean remoteConnect;
+  boolean remoteConnect;
 
   @JsonProperty("version")
-	String version;
+  String version;
 
   @JsonProperty("marketName")
-	String marketName;
+  String marketName;
 
   @JsonProperty("airplaneMode")
-	boolean airplaneMode;
+  boolean airplaneMode;
 
   @JsonProperty("logs_enabled")
-	boolean logsEnabled;
+  boolean logsEnabled;
 
   @JsonProperty("openGLESVersion")
-	String openGLESVersion;
+  String openGLESVersion;
 
   @JsonProperty("phone")
-	Phone phone;
+  Phone phone;
 
   @JsonProperty("serial")
-	String serial;
+  String serial;
 
   @JsonProperty("sdk")
-	String sdk;
+  String sdk;
 
   @JsonProperty("present")
-	boolean present;
+  boolean present;
 
   @JsonProperty("reverseForwards")
-	List<Object> reverseForwards;
+  List<Object> reverseForwards;
 
   @JsonProperty("status")
-	int status;
+  int status;
 }

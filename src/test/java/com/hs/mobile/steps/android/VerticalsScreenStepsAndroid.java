@@ -57,7 +57,7 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
   public void assertAllVerticals() {
     assertThat(verticalsScreen.verticals().size())
         .as("Expected to fetch all verticals for the provided address")
-        .isEqualTo(3);
+        .isEqualTo(4);
   }
 
   @Override
@@ -79,12 +79,18 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
   @Override
   @Step("Click on 'All Stores'")
   public void clickOnAllStores() {
-    verticalsScreen.verticals().get(0).click();
+    verticalsScreen.btnAllRestaurants().click();
   }
 
   @Override
   @Step("Click on 'Order Anything'")
   public void clickOrderAnything() {
     verticalsScreen.verticals().get(2).click();
+  }
+
+  @Override
+  @Step("Click on groceries vertical")
+  public void clickOnGroceries() {
+    verticalsScreen.btnGroceriesVertical().click();
   }
 }

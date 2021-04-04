@@ -18,7 +18,6 @@ public class OrderAnythingCheckoutScreen extends AbstractScreen<OrderAnythingChe
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/order_anything")
   private MobileElement lblPersonalShopper;
 
-
   public OrderAnythingCheckoutScreen(@NonNull TestSettings settings) {
     super(settings);
   }

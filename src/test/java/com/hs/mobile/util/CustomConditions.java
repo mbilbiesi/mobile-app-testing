@@ -37,7 +37,7 @@ public final class CustomConditions {
         try {
           assert appiumDriver != null;
           appiumDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-          driver.findElement(byFromWebElement);
+          appiumDriver.findElement(byFromWebElement);
           return true;
         } catch (NoSuchElementException ignore) {
           try {
@@ -46,6 +46,24 @@ public final class CustomConditions {
           }
         }
         return false;
+      };
+    }
+  }
+
+  public static ExpectedCondition<Boolean> elementIsClicked(
+      WebElement elementToClickOn, ExpectedCondition<?> condition) {
+    {
+      return driver -> {
+        AppiumDriver<?> appiumDriver = (AppiumDriver<?>) driver;
+        try {
+          assert appiumDriver != null;
+          appiumDriver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+          elementToClickOn.click();
+          Object value = condition.apply(appiumDriver);
+          return value != null && (Boolean.class != value.getClass() || Boolean.TRUE.equals(value));
+        } catch (NoSuchElementException ignore) {
+          return false;
+        }
       };
     }
   }

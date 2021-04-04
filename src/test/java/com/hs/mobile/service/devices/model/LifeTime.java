@@ -13,8 +13,8 @@ import lombok.experimental.Accessors;
 public class LifeTime {
 
   @JsonProperty("stop")
-	String stop;
+  String stop;
 
   @JsonProperty("start")
-	String start;
+  String start;
 }

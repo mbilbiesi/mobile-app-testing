@@ -28,11 +28,8 @@ public class SelectLocationScreenStepsAndroid extends BaseSteps<SelectLocationSc
   public void clickOnSearchIcon() {
     var elementToClickOn = selectLocationScreen.searchBar();
     var expectedElementAfterClick = selectLocationScreen.searchTextField();
-    try {
-      wait.until(elementIsClicked(elementToClickOn, expectedElementAfterClick));
-    } catch (org.openqa.selenium.TimeoutException e) {
 
-    }
+    wait.until(elementIsClicked(elementToClickOn, expectedElementAfterClick));
   }
 
   @Step("Type {0} in search bar")

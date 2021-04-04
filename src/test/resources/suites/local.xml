@@ -2,15 +2,32 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="local" verbose="10" parallel="tests" thread-count="1" configfailurepolicy="continue">
+  <!--    <test name="Android">-->
+  <!--      <parameter name="deviceName" value="iPhone"/>-->
+  <!--      <parameter name="platformName" value="iOS"/>-->
+  <!--      <parameter name="platformVersion" value="14.3"/>-->
+  <!--      <parameter name="udid" value="FD1DBE59-821B-4FFE-8937-03BF6196A8C5"/>-->
+  <!--      <parameter name="uniquePort" value="8200"/>-->
+  <!--      <parameter name="assignedTestUserId" value="1"/>-->
+  <!--      <classes>-->
+  <!--        <class name="com.hs.mobile.tests.ios.order.OrderCycleMadaITCase"/>-->
+  <!--      </classes>-->
+  <!--    </test>-->
   <test name="Android">
-    <parameter name="deviceName" value="android phone"/>
-    <parameter name="platformName" value="iOS"/>
-    <parameter name="platformVersion" value="14.3"/>
-    <parameter name="udid" value="BC3D405B-808A-4C5A-A677-6F5566D54B99"/>
+    <parameter name="deviceName" value="iPhone"/>
+    <parameter name="platformName" value="Android"/>
+    <parameter name="platformVersion" value="11.0"/>
+    <parameter name="udid" value="emulator-5554"/>
     <parameter name="uniquePort" value="8200"/>
     <parameter name="assignedTestUserId" value="1"/>
     <classes>
-      <class name="com.hs.mobile.tests.ios.VerticalsExistenceITCase"/>
+      <class name="com.hs.mobile.tests.android.CardVerificationITCase"/>
+      <class name="com.hs.mobile.tests.android.VerticalsExistenceITCase"/>
+      <class name="com.hs.mobile.tests.android.SwimlaneStoreSelectionITCase"/>
+      <class name="com.hs.mobile.tests.android.OrderAnythingITCase"/>
+      <class name="com.hs.mobile.tests.android.CampaignITCase"/>
+      <class name="com.hs.mobile.tests.android.AllStoresFilterSelectionITCase"/>
+      <class name="com.hs.mobile.tests.android.AddressITCase"/>
     </classes>
   </test>
 </suite>

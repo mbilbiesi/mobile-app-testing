@@ -45,6 +45,6 @@ public class TopVendorPromotionITCase extends BaseTestSteps {
     allStoresScreenSteps.clickOnTopPromotedStore();
 
     // Then
-    quickMarketScreenSteps.verifyQuickMarketCarIsPresent();
+    quickMarketScreenSteps.verifyQuickMarketCartIsPresent();
   }
 }

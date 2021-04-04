@@ -6,6 +6,7 @@ import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.android.CheckoutScreen;
 import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.steps.CheckoutScreenSteps;
+import com.hs.mobile.util.CustomConditions;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 
@@ -117,14 +118,18 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   @Override
   @Step("Click on cash payment option")
   public void clickOnCashPayment() {
-    checkoutScreen.getBtnCashOnDeliveryOption();
+    wait.withMessage("could not click on cash on delivery")
+        .until(
+            CustomConditions.elementIsClicked(
+                checkoutScreen.getBtnCashOnDeliveryOption(),
+                checkoutScreen.getLblWalletDisabled()));
   }
 
   @Override
   @Step("verify wallet payment is disabled")
   public void verifyWalletToggleIsDisabled() {
     assertThat(checkoutScreen.getLblWalletDisabled().isDisplayed())
-        .as("Item total price does not match actual result")
+        .as("Wallet toggle is not disabled")
         .isTrue();
   }
 
@@ -132,7 +137,7 @@ public class CheckoutScreenStepsAndroid extends BaseSteps<CheckoutScreenStepsAnd
   @Step("Verify wallet toggle is enabled for CC payment")
   public void verifyWalletToggleIsEnabled() {
     assertThat(checkoutScreen.getBtnWalletToggle().isDisplayed())
-        .as("Item total price does not match actual result")
+        .as("Wallet toggle is disabled")
         .isTrue();
   }
 

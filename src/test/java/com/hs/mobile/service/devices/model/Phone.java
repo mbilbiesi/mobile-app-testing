@@ -13,17 +13,17 @@ import lombok.experimental.Accessors;
 public class Phone {
 
   @JsonProperty("iccid")
-	Object iccid;
+  Object iccid;
 
   @JsonProperty("phoneNumber")
-	Object phoneNumber;
+  Object phoneNumber;
 
   @JsonProperty("imei")
-	Object imei;
+  Object imei;
 
   @JsonProperty("imsi")
-	Object imsi;
+  Object imsi;
 
   @JsonProperty("network")
-	String network;
+  String network;
 }

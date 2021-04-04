@@ -76,6 +76,4 @@ public class OrderAnythingPickUpITCase extends BaseTestSteps {
     orderAnythingCheckoutScreenSteps.verifyPersonalShopperDelivery();
     orderAnythingCheckoutScreenSteps.verifyDeliveryIsSubmitted();
   }
-
-
 }

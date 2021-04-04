@@ -38,6 +38,12 @@ public class VerticalsScreen extends AbstractScreen<VerticalsScreen> {
   @AndroidFindBy(xpath = "//android.widget.Button[@text='Fast Food']")
   private AndroidElement filter;
 
+  @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Groceries\")")
+  private AndroidElement btnGroceriesVertical;
+
+  @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Restaurants\")")
+  private AndroidElement btnAllRestaurants;
+
   public VerticalsScreen(@NonNull TestSettings settings) {
     super(settings);
   }

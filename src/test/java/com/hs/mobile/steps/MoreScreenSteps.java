@@ -5,4 +5,6 @@ public interface MoreScreenSteps {
   void clickOnLogin();
 
   void clickOnHome();
+
+  void clickOnPaymentOptions();
 }

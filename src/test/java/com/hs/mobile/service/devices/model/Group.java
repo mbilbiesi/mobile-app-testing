@@ -13,29 +13,29 @@ import lombok.experimental.Accessors;
 public class Group {
 
   @JsonProperty("owner")
-	Owner owner;
+  Owner owner;
 
   @JsonProperty("origin")
-	String origin;
+  String origin;
 
   @JsonProperty("name")
-	String name;
+  String name;
 
   @JsonProperty("lock")
-	boolean lock;
+  boolean lock;
 
   @JsonProperty("id")
-	String id;
+  String id;
 
   @JsonProperty("lifeTime")
-	LifeTime lifeTime;
+  LifeTime lifeTime;
 
   @JsonProperty("class")
-	String jsonMemberClass;
+  String jsonMemberClass;
 
   @JsonProperty("repetitions")
-	int repetitions;
+  int repetitions;
 
   @JsonProperty("originName")
-	String originName;
+  String originName;
 }

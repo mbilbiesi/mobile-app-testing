@@ -27,8 +27,8 @@ public class DriverManager {
 
     if (platform.is(ANDROID)) {
       try {
-        log.debug("Android driver with following capabilities : {}", desiredCapabilities.asMap());
         driver = new AndroidDriver<>(new URL(appiumURL), desiredCapabilities);
+        log.debug("Android driver with following capabilities : {}", desiredCapabilities.asMap());
       } catch (Exception e) {
         log.error("unable to initiate Android driver", e);
       }

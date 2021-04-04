@@ -32,64 +32,64 @@ public class VerticalsExistenceITCase extends BaseTestSteps {
     verticalsScreenSteps.assertDistrictIsAppearedInSearchField();
   }
 
-  @Test(
-      description = "Verify specific verticals are displayed",
-      dependsOnMethods = {"verifyAllVerticalsAreDisplayed"})
-  public void verifySpecificVerticalsBasedOnLocations() {
-    // Given
-    var cityToSearch = "Jeddah";
-
-    // When
-    verticalsScreenSteps.clickOnAddress();
-    verticalsScreenSteps.clickOnAddNewLocation();
-    selectLocationScreenSteps.clickOnSearchIcon();
-    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
-    selectLocationScreenSteps.enterSearch();
-    selectLocationScreenSteps.selectCity(cityToSearch);
-    selectLocationScreenSteps.clickOnSelectAddressButton();
-    selectLocationScreenSteps.clickOnDoneButton();
-
-    // then
-    verticalsScreenSteps.assertTwoVerticalsAreDisplayed();
-  }
-
-  @Test(
-      description = "Verify only 'All Stores' vertical is displayed",
-      dependsOnMethods = {"verifySpecificVerticalsBasedOnLocations"})
-  public void verifyOnlyAllStoresVerticalIsDisplayed() {
-    // Given
-    var cityToSearch = "Khobar";
-
-    // When
-    verticalsScreenSteps.clickOnAddress();
-    verticalsScreenSteps.clickOnAddNewLocation();
-    selectLocationScreenSteps.clickOnSearchIcon();
-    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
-    selectLocationScreenSteps.enterSearch();
-    selectLocationScreenSteps.selectCity(cityToSearch);
-    selectLocationScreenSteps.clickOnSelectAddressButton();
-    selectLocationScreenSteps.clickOnDoneButton();
-
-    // then
-    verticalsScreenSteps.verifyAllStoresVertical();
-  }
-
-  @Test(
-      description = "Verify cities with uncovered verticals",
-      dependsOnMethods = {"verifyOnlyAllStoresVerticalIsDisplayed"})
-  public void verifyCityAreaIsNotCoveredBasedOnLocation() {
-    // Given
-    var cityToSearch = "Arar";
-
-    // When
-    verticalsScreenSteps.clickOnAddress();
-    verticalsScreenSteps.clickOnAddNewLocation();
-    selectLocationScreenSteps.clickOnSearchIcon();
-    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
-    selectLocationScreenSteps.enterSearch();
-    selectLocationScreenSteps.selectCity(cityToSearch);
-
-    // then
-    selectLocationScreenSteps.verifyNotCoveredArea();
-  }
+  //  @Test(
+  //      description = "Verify specific verticals are displayed",
+  //      dependsOnMethods = {"verifyAllVerticalsAreDisplayed"})
+  //  public void verifySpecificVerticalsBasedOnLocations() {
+  //    // Given
+  //    var cityToSearch = "Jeddah";
+  //
+  //    // When
+  //    verticalsScreenSteps.clickOnAddress();
+  //    verticalsScreenSteps.clickOnAddNewLocation();
+  //    selectLocationScreenSteps.clickOnSearchIcon();
+  //    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
+  //    selectLocationScreenSteps.enterSearch();
+  //    selectLocationScreenSteps.selectCity(cityToSearch);
+  //    selectLocationScreenSteps.clickOnSelectAddressButton();
+  //    selectLocationScreenSteps.clickOnDoneButton();
+  //
+  //    // then
+  //    verticalsScreenSteps.assertTwoVerticalsAreDisplayed();
+  //  }
+  //
+  //  @Test(
+  //      description = "Verify only 'All Stores' vertical is displayed",
+  //      dependsOnMethods = {"verifySpecificVerticalsBasedOnLocations"})
+  //  public void verifyOnlyAllStoresVerticalIsDisplayed() {
+  //    // Given
+  //    var cityToSearch = "Khobar";
+  //
+  //    // When
+  //    verticalsScreenSteps.clickOnAddress();
+  //    verticalsScreenSteps.clickOnAddNewLocation();
+  //    selectLocationScreenSteps.clickOnSearchIcon();
+  //    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
+  //    selectLocationScreenSteps.enterSearch();
+  //    selectLocationScreenSteps.selectCity(cityToSearch);
+  //    selectLocationScreenSteps.clickOnSelectAddressButton();
+  //    selectLocationScreenSteps.clickOnDoneButton();
+  //
+  //    // then
+  //    verticalsScreenSteps.verifyAllStoresVertical();
+  //  }
+  //
+  //  @Test(
+  //      description = "Verify cities with uncovered verticals",
+  //      dependsOnMethods = {"verifyOnlyAllStoresVerticalIsDisplayed"})
+  //  public void verifyCityAreaIsNotCoveredBasedOnLocation() {
+  //    // Given
+  //    var cityToSearch = "Arar";
+  //
+  //    // When
+  //    verticalsScreenSteps.clickOnAddress();
+  //    verticalsScreenSteps.clickOnAddNewLocation();
+  //    selectLocationScreenSteps.clickOnSearchIcon();
+  //    selectLocationScreenSteps.insertDesiredCity(cityToSearch);
+  //    selectLocationScreenSteps.enterSearch();
+  //    selectLocationScreenSteps.selectCity(cityToSearch);
+  //
+  //    // then
+  //    selectLocationScreenSteps.verifyNotCoveredArea();
+  //  }
 }

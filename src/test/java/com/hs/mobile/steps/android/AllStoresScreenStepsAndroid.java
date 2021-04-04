@@ -6,8 +6,11 @@ import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.android.AllStoresScreen;
 import com.hs.mobile.steps.AllStoresScreenSteps;
 import com.hs.mobile.steps.BaseSteps;
+import com.hs.mobile.util.CustomConditions;
 import io.qameta.allure.Step;
 import lombok.NonNull;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AllStoresScreenStepsAndroid extends BaseSteps<AllStoresScreenStepsAndroid>
     implements AllStoresScreenSteps {
@@ -25,11 +28,11 @@ public class AllStoresScreenStepsAndroid extends BaseSteps<AllStoresScreenStepsA
   @Override
   public void verifyLocationIsAppearedScreenHeader() {}
 
-
   @Step("Click on the first store")
-  public void selectFirstStore(){
+  public void selectFirstStore() {
     allStoresScreen.getBtnFirstStore().click();
   }
+
   @Override
   @Step("select first filter")
   public void clickOnFirstFilter() {
@@ -47,15 +50,20 @@ public class AllStoresScreenStepsAndroid extends BaseSteps<AllStoresScreenStepsA
   @Override
   @Step("deselect filter")
   public void deselectFilter() {
-    allStoresScreen.getLstFilters().get(0).click();
+    By filtersList = By.id("com.hungerstation.android.web.debug:id/filter_name");
+    wait.withMessage("Could not deselect filter")
+        .until(
+            CustomConditions.elementIsClicked(
+                allStoresScreen.getLstFilters().get(0),
+                ExpectedConditions.numberOfElementsToBeMoreThan(filtersList, 1)));
   }
 
   @Override
   @Step("verify filter is deselected")
   public void assertFilterDeselected() {
-    assertThat(allStoresScreen.getLstFilters().size())
-        .as("deselect filter button is not working")
-        .isGreaterThan(1);
+    By filtersList = By.id("com.hungerstation.android.web.debug:id/filter_name");
+    wait.withMessage("deselect filter button is not working")
+        .until(ExpectedConditions.numberOfElementsToBeMoreThan(filtersList, 1));
   }
 
   @Override

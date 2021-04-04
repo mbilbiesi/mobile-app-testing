@@ -40,10 +40,6 @@ public class DevicesClient extends BaseEndpoint<DevicesClient> {
     givenDeviceFarmer()
         .contentType(ContentType.JSON)
         .pathParam("deviceSerial", deviceSerial)
-        .delete(RELEASE_DEVICE_PATH)
-        .then()
-        .assertThat()
-        .statusCode(SC_OK)
-        .body("success", equalTo(true));
+        .delete(RELEASE_DEVICE_PATH);
   }
 }

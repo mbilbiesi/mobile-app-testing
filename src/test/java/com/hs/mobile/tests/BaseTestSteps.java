@@ -1,6 +1,7 @@
 package com.hs.mobile.tests;
 
 import com.google.inject.Inject;
+import com.hs.mobile.steps.AddNewCardScreenSteps;
 import com.hs.mobile.steps.AllStoresScreenSteps;
 import com.hs.mobile.steps.CampaignScreenSteps;
 import com.hs.mobile.steps.CheckoutScreenSteps;
@@ -31,4 +32,5 @@ public abstract class BaseTestSteps extends Base {
   @Inject protected OrderAnythingScreenSteps orderAnythingScreenSteps;
   @Inject protected QuickMarketScreenSteps quickMarketScreenSteps;
   @Inject protected OrderAnythingCheckoutScreenSteps orderAnythingCheckoutScreenSteps;
+  @Inject protected AddNewCardScreenSteps addNewCardScreenSteps;
 }

@@ -13,17 +13,17 @@ import lombok.experimental.Accessors;
 public class Network {
 
   @JsonProperty("connected")
-	boolean connected;
+  boolean connected;
 
   @JsonProperty("roaming")
-	boolean roaming;
+  boolean roaming;
 
   @JsonProperty("failover")
-	boolean failover;
+  boolean failover;
 
   @JsonProperty("subtype")
-	String subtype;
+  String subtype;
 
   @JsonProperty("type")
-	String type;
+  String type;
 }

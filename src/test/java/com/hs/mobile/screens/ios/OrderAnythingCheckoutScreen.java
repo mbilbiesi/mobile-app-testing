@@ -10,13 +10,13 @@ import lombok.NonNull;
 @Getter
 public class OrderAnythingCheckoutScreen extends AbstractScreen<OrderAnythingCheckoutScreen> {
 
-  public OrderAnythingCheckoutScreen(@NonNull TestSettings settings) {
-    super(settings);
-  }
-
   @iOSXCUITFindBy(iOSNsPredicate = "label == 'Order Sent'")
   private MobileElement lblOrderSent;
 
   @iOSXCUITFindBy(iOSNsPredicate = "label == 'Personal shopper'")
   private MobileElement lblPersonalShopper;
+
+  public OrderAnythingCheckoutScreen(@NonNull TestSettings settings) {
+    super(settings);
+  }
 }

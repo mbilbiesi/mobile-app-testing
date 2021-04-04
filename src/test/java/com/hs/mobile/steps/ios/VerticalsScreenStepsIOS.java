@@ -98,4 +98,8 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
   public void clickOrderAnything() {
     verticalsScreen.getLblOrderAnything().click();
   }
+
+  @Override
+  @Step("Click on groceries vertical")
+  public void clickOnGroceries() {}
 }

@@ -92,7 +92,7 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
 
   @Test(
       description = "Place order and verify order submission",
-      dependsOnMethods = "verifyCheckoutScreen")
+      dependsOnMethods = "loginPhoneNo_verifyCheckoutScreen")
   void placeOrder_verifyOrderSubmission() {
     // When
     checkoutScreenSteps.placeOrder();

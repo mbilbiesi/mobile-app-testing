@@ -8,14 +8,10 @@ import lombok.NonNull;
 public class OrdersScreenStepsIOS extends BaseSteps<OrdersScreenStepsIOS>
     implements OrdersScreenSteps {
 
-
-
   public OrdersScreenStepsIOS(@NonNull TestSettings settings) {
     super(settings);
   }
 
   @Override
-  public void clickOnLogin() {
-
-  }
+  public void clickOnLogin() {}
 }

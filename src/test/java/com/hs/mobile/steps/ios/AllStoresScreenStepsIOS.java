@@ -119,7 +119,5 @@ public class AllStoresScreenStepsIOS extends BaseSteps<AllStoresScreenStepsIOS>
   }
 
   @Override
-  public void selectFirstStore() {
-
-  }
+  public void selectFirstStore() {}
 }

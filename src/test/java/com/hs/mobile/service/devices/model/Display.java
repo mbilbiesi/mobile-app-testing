@@ -13,35 +13,35 @@ import lombok.experimental.Accessors;
 public class Display {
 
   @JsonProperty("density")
-	double density;
+  double density;
 
   @JsonProperty("size")
-	double size;
+  double size;
 
   @JsonProperty("rotation")
-	int rotation;
+  int rotation;
 
   @JsonProperty("fps")
-	double fps;
+  double fps;
 
   @JsonProperty("width")
-	int width;
+  int width;
 
   @JsonProperty("id")
-	int id;
+  int id;
 
   @JsonProperty("secure")
-	boolean secure;
+  boolean secure;
 
   @JsonProperty("ydpi")
-	double ydpi;
+  double ydpi;
 
   @JsonProperty("xdpi")
-	double xdpi;
+  double xdpi;
 
   @JsonProperty("url")
-	String url;
+  String url;
 
   @JsonProperty("height")
-	int height;
+  int height;
 }

@@ -21,4 +21,6 @@ public interface VerticalsScreenSteps {
   void clickOnAllStores();
 
   void clickOrderAnything();
+
+  void clickOnGroceries();
 }

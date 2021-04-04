@@ -15,5 +15,4 @@ public interface OrderAnythingScreenSteps {
   void clickOnPriceEstimate();
 
   void clickOnPlaceOrder();
-
 }

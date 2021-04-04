@@ -22,7 +22,7 @@ public class OrderAnythingScreen extends AbstractScreen<OrderAnythingScreen> {
   private MobileElement btnContinue;
 
   @iOSXCUITFindBy(iOSNsPredicate = "Makeup")
-  private MobileElement txtOrderItem; //todo: add locator
+  private MobileElement txtOrderItem; // todo: add locator
 
   @iOSXCUITFindBy(iOSNsPredicate = "50-100 SR")
   private MobileElement btnPriceEstimate;

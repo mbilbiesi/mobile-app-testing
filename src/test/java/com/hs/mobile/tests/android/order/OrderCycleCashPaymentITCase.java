@@ -37,7 +37,6 @@ public class OrderCycleCashPaymentITCase extends BaseTestSteps {
     assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
-    verticalsScreenSteps.assertDistrictIsAppearedInSearchField();
 
     verticalsScreenSteps.clickOnAllStores();
   }
@@ -79,7 +78,6 @@ public class OrderCycleCashPaymentITCase extends BaseTestSteps {
     loginScreenSteps.enterOtpCode("000000");
 
     // Then
-    checkoutScreenSteps.verifyCrossSellSectionIsDisplayed();
     checkoutScreenSteps.verifyItemsTotalPrice("92.0");
     checkoutScreenSteps.verifyItemQuantity("4 x");
     checkoutScreenSteps.verifyItemName("Chicken 65");

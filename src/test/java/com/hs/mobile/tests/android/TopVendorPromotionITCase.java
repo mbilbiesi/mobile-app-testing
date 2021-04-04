@@ -39,9 +39,10 @@ public class TopVendorPromotionITCase extends BaseTestSteps {
   public void navigateToAllStoresVertical_clickOnPromotedVendor() {
     // When
     verticalsScreenSteps.clickOnAllStores();
+    // todo: maintenance ID missing
     allStoresScreenSteps.clickOnTopPromotedStore();
 
     // Then
-    quickMarketScreenSteps.verifyQuickMarketCarIsPresent();
+    quickMarketScreenSteps.verifyQuickMarketCartIsPresent();
   }
 }

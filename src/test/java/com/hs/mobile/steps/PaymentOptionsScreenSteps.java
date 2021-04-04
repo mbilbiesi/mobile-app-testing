@@ -5,4 +5,6 @@ public interface PaymentOptionsScreenSteps {
   void clickOnCashOnDeliveryPayment();
 
   void clickOnMadaPaymentOption();
+
+  void clickOnAddCC();
 }

@@ -54,7 +54,7 @@ public class CheckoutScreen extends AbstractScreen {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/primary_label")
   private MobileElement btnContinueToFailedPaymentScreen;
 
-  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/payment_button")
+  @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/error_message")
   private MobileElement btnChangePayment;
 
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/productSuggestions")

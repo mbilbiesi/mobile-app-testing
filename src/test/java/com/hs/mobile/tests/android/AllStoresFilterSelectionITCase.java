@@ -3,11 +3,14 @@ package com.hs.mobile.tests.android;
 import static org.assertj.core.api.Assumptions.assumeThat;
 
 import com.hs.mobile.tests.BaseTestSteps;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Step;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+@Feature("Search and discovery")
+@Issue("HSAP-469")
 public class AllStoresFilterSelectionITCase extends BaseTestSteps {
 
   @BeforeClass
@@ -29,7 +32,7 @@ public class AllStoresFilterSelectionITCase extends BaseTestSteps {
   }
 
   @Issue("HSAP-469")
-  @Test(description = "Verify filter that user can select filter")
+  @Test(description = "Verify the user can select filter")
   public void userSelectFilter_filterIsSelected() {
     // When
     verticalsScreenSteps.clickOnAllStores();
@@ -41,7 +44,7 @@ public class AllStoresFilterSelectionITCase extends BaseTestSteps {
 
   @Issue("HSAP-469")
   @Test(
-      description = "Verify filter that user can select filter",
+      description = "Verify the user can deselect filter",
       dependsOnMethods = "userSelectFilter_filterIsSelected")
   public void userDeselectFilter_filterIsDeselected() {
     // When

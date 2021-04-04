@@ -22,4 +22,10 @@ public interface TestProperties extends Config {
 
   @Key("app.path")
   String getAppPath();
+
+  @Key("use.all.lab.devices")
+  boolean getUseAllLabDevices();
+
+  @Key("app.build.id")
+  String getAppBuildId();
 }

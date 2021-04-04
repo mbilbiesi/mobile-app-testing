@@ -7,7 +7,8 @@ import com.hs.mobile.steps.MoreScreenSteps;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 
-public class MoreScreenStepsAndroid extends BaseSteps<MoreScreenStepsAndroid> implements MoreScreenSteps {
+public class MoreScreenStepsAndroid extends BaseSteps<MoreScreenStepsAndroid>
+    implements MoreScreenSteps {
 
   @NonNull private final MoreScreen moreScreen;
 
@@ -17,15 +18,17 @@ public class MoreScreenStepsAndroid extends BaseSteps<MoreScreenStepsAndroid> im
   }
 
   @Override
-  @Step("click on 'Login'")
+  @Step("click on slide 'Login'")
   public void clickOnLogin() {
-    moreScreen.getBtnLogin().click();
+    moreScreen.getBtnSlideLogin().click();
   }
 
   @Override
-  @Step("click on 'Home'")
-  public void clickOnHome() {
-    moreScreen.getBtnHome().click();
-  }
+  public void clickOnHome() {}
 
+  @Override
+  @Step("Click on payment options")
+  public void clickOnPaymentOptions() {
+    moreScreen.getBtnSlidePaymentOptions().click();
+  }
 }

@@ -100,7 +100,7 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
     loginScreenSteps.enterPhoneNumber("501020010");
     loginScreenSteps.clickOnNext();
     loginScreenSteps.enterOtpCode("000000");
-    
+
     // When
     // checkoutScreenSteps.skipNoteHint(); //todo apply id on new version
     checkoutScreenSteps.verifyCrossSellSectionIsDisplayed();

@@ -55,7 +55,6 @@ public class BaseTestModule extends AbstractModule {
   }
 
   @Provides
-  @Singleton
   public TestParameters testParameters(TestProperties properties) {
     String deviceName = iTestContext.getCurrentXmlTest().getParameter("deviceName");
     String platformName = iTestContext.getCurrentXmlTest().getParameter("platformName");
@@ -76,7 +75,6 @@ public class BaseTestModule extends AbstractModule {
   }
 
   @Provides
-  @Singleton
   @AppFilePath
   public String appFilePath(
       AppCenterEndpoints appCenterEndpoints, TestParameters parameters, TestProperties properties) {

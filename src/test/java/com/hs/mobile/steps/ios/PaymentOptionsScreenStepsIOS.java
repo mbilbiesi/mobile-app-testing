@@ -28,4 +28,8 @@ public class PaymentOptionsScreenStepsIOS extends BaseSteps<PaymentOptionsScreen
   public void clickOnMadaPaymentOption() {
     paymentOptionsScreen.getMadaPaymentOption().click();
   }
+
+  @Override
+  @Step("Click on add new debit or credit card")
+  public void clickOnAddCC() {}
 }

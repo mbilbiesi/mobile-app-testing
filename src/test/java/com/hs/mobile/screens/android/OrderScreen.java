@@ -11,7 +11,7 @@ import lombok.NonNull;
 import org.openqa.selenium.WebElement;
 
 @Getter
-public class OrderScreen extends AbstractScreen{
+public class OrderScreen extends AbstractScreen {
 
   @AssertElementVisibility
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/header_component")

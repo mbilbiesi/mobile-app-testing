@@ -30,7 +30,6 @@ public class OrderAnythingScreen extends AbstractScreen<OrderAnythingScreen> {
   @AndroidFindBy(id = "com.hungerstation.android.web.debug:id/btnPlaceOrder")
   private MobileElement btnPlaceOrder;
 
-
   public OrderAnythingScreen(@NonNull TestSettings settings) {
     super(settings);
   }

@@ -13,23 +13,23 @@ import lombok.experimental.Accessors;
 public class Battery {
 
   @JsonProperty("temp")
-	double temp;
+  double temp;
 
   @JsonProperty("level")
-	int level;
+  int level;
 
   @JsonProperty("health")
-	String health;
+  String health;
 
   @JsonProperty("scale")
-	int scale;
+  int scale;
 
   @JsonProperty("source")
-	String source;
+  String source;
 
   @JsonProperty("status")
-	String status;
+  String status;
 
   @JsonProperty("voltage")
-	double voltage;
+  double voltage;
 }

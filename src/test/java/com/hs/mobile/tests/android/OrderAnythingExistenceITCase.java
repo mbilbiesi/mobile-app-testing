@@ -35,8 +35,7 @@ public class OrderAnythingExistenceITCase extends BaseTestSteps {
         .isTrue();
   }
 
-  @Test(
-      description = "Verify that the user is directed to 'order-anything' vertical")
+  @Test(description = "Verify that the user is directed to 'order-anything' vertical")
   public void navigateToOrderAnything() {
     // When
     verticalsScreenSteps.clickOrderAnything();

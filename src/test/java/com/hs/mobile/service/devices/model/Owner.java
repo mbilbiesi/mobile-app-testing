@@ -13,8 +13,8 @@ import lombok.experimental.Accessors;
 public class Owner {
 
   @JsonProperty("name")
-	String name;
+  String name;
 
   @JsonProperty("email")
-	String email;
+  String email;
 }

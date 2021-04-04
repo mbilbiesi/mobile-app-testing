@@ -3,6 +3,7 @@ package com.hs.mobile.conf.ios;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.hs.mobile.core.settings.TestSettings;
+import com.hs.mobile.steps.AddNewCardScreenSteps;
 import com.hs.mobile.steps.AllStoresScreenSteps;
 import com.hs.mobile.steps.CampaignScreenSteps;
 import com.hs.mobile.steps.CheckoutScreenSteps;
@@ -18,6 +19,7 @@ import com.hs.mobile.steps.QuickMarketScreenSteps;
 import com.hs.mobile.steps.RestaurantMenuScreenSteps;
 import com.hs.mobile.steps.SelectLocationScreenSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
+import com.hs.mobile.steps.ios.AddNewCardScreenStepsIOS;
 import com.hs.mobile.steps.ios.AllStoresScreenStepsIOS;
 import com.hs.mobile.steps.ios.CampaignScreenStepsIOS;
 import com.hs.mobile.steps.ios.CheckoutScreenStepsIOS;
@@ -110,5 +112,10 @@ public class TestStepsIOSModule extends AbstractModule {
   @Provides
   public OrderAnythingCheckoutScreenSteps orderAnythingCheckoutScreenSteps(TestSettings settings) {
     return new OrderAnythingCheckoutScreenStepsIOS(settings);
+  }
+
+  @Provides
+  public AddNewCardScreenSteps addNewCardScreenSteps(TestSettings settings) {
+    return new AddNewCardScreenStepsIOS(settings);
   }
 }

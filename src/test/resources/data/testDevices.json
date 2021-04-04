@@ -1,0 +1,14 @@
+[
+  {
+    "deviceName": "Galaxy Note9",
+    "serial": "281166b9e5217ece",
+    "port":"8200",
+    "platform": "android"
+  },
+  {
+    "deviceName": "Galaxy S20+",
+    "serial": "R58N21FXAVB",
+    "port": "8201",
+    "platform": "android"
+  }
+]

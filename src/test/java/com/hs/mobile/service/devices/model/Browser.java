@@ -14,8 +14,8 @@ import lombok.experimental.Accessors;
 public class Browser {
 
   @JsonProperty("selected")
-	boolean selected;
+  boolean selected;
 
   @JsonProperty("apps")
-	List<AppsItem> apps;
+  List<AppsItem> apps;
 }

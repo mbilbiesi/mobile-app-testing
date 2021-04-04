@@ -13,8 +13,8 @@ import lombok.experimental.Accessors;
 public class Provider {
 
   @JsonProperty("channel")
-	String channel;
+  String channel;
 
   @JsonProperty("name")
-	String name;
+  String name;
 }

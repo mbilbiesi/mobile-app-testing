@@ -28,4 +28,7 @@ public class MoreScreenStepsIOS extends BaseSteps<MoreScreenStepsIOS> implements
     moreScreen.getBtnHome().click();
   }
 
+  @Override
+  @Step("Click on payment options")
+  public void clickOnPaymentOptions() {}
 }

@@ -55,10 +55,10 @@ public class PlaceFailedPaymentITCase extends BaseTestSteps {
     checkoutScreenSteps.enterMadaSecurityCode("256");
     checkoutScreenSteps.clickOnContinue();
     checkoutScreenSteps.clickOnDone();
-    checkoutScreenSteps.typeVerificationCodeOnGatewaySimulator("Checkout");
-    checkoutScreenSteps.clickOnContinueViaSimulator();
-    checkoutScreenSteps.clickOnDone();
-    checkoutScreenSteps.clickOnContinueToFailedPayment();
+    // todo: verification simulator is disabled on STG
+    // checkoutScreenSteps.typeVerificationCodeOnGatewaySimulator("Checkout");
+    // checkoutScreenSteps.clickOnContinueViaSimulator();
+    // checkoutScreenSteps.clickOnDone();
 
     // Then
     checkoutScreenSteps.verifyChangePaymentButton();
