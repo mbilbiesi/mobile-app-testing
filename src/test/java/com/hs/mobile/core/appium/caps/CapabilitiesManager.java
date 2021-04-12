@@ -13,6 +13,7 @@ import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -28,11 +29,12 @@ public class CapabilitiesManager {
     String platformVersion = testParameters.getPlatformVersion();
     Platform platform = testParameters.getPlatform();
     String deviceName = testParameters.getDeviceName();
+    String resolvedName = StringUtils.joinWith("-", deviceName, deviceUDID);
 
     switch (platform) {
       case ANDROID:
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
-        capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, deviceName);
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, resolvedName);
+        capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, resolvedName);
         capabilities.setCapability(MobileCapabilityType.UDID, deviceUDID);
         capabilities.setCapability(MobileCapabilityType.APP, appFilePath);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, ANDROID_UIAUTOMATOR2);
