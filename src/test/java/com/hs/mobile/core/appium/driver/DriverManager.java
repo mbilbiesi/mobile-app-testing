@@ -8,13 +8,16 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
+import io.github.resilience4j.retry.Retry;
+import io.github.resilience4j.retry.RetryConfig;
 import java.net.URL;
 import java.util.Optional;
+import java.util.function.Supplier;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 @Slf4j
@@ -25,25 +28,29 @@ public class DriverManager {
   public AppiumDriver<MobileElement> getAppiumDriver(Platform platform, @NonNull String appiumURL) {
     AppiumDriver<MobileElement> driver = null;
 
-    if (platform.is(ANDROID)) {
-      try {
-        driver = new AndroidDriver<>(new URL(appiumURL), desiredCapabilities);
+    try {
+      URL remoteAddress = new URL(appiumURL);
+      if (platform.is(ANDROID)) {
         log.debug("Android driver with following capabilities : {}", desiredCapabilities.asMap());
-      } catch (Exception e) {
-        log.error("unable to initiate Android driver", e);
-      }
-    } else if (platform.is(IOS)) {
-      try {
+        driver = retry(() -> new AndroidDriver<>(remoteAddress, desiredCapabilities));
+      } else if (platform.is(IOS)) {
         log.debug("iOS driver with following capabilities : {}", desiredCapabilities.asMap());
-        driver = new IOSDriver<>(new URL(appiumURL), desiredCapabilities);
-      } catch (Exception e) {
-        log.error("unable to initiate iOS driver", e);
+        driver = retry(() -> new IOSDriver<>(remoteAddress, desiredCapabilities));
       }
+    } catch (Exception e) {
+      log.error("Error while instantiating driver: ", e);
     }
-    return Optional.ofNullable(driver)
-        .orElseThrow(
-            testException(
-                "failed to initiate drive for "
-                    + desiredCapabilities.getCapability(MobileCapabilityType.DEVICE_NAME)));
+    return Optional.ofNullable(driver).orElseThrow(testException("failed to initiate drive"));
+  }
+
+  private <T> T retry(Supplier<T> retrySupplier) {
+    RetryConfig tryAgain =
+        RetryConfig.<String>custom()
+            .retryExceptions(SessionNotCreatedException.class)
+            .maxAttempts(2)
+            .build();
+
+    Retry retry = Retry.of("retry", tryAgain);
+    return Retry.decorateSupplier(retry, retrySupplier).get();
   }
 }
