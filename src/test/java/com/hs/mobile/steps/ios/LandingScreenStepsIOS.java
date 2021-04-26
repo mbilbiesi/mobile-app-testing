@@ -38,18 +38,6 @@ public class LandingScreenStepsIOS extends BaseSteps<LandingScreenStepsIOS>
   }
 
   @Override
-  @Step("Handle promotion popup")
-  public void handlePromotionPopup() {
-    try {
-      driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-      driver.findElement(By.id("content information")).click();
-    } catch (NoSuchElementException ignored) {
-    } finally {
-      driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-    }
-  }
-
-  @Override
   @Step("click on 'Select' to choose new address")
   public void selectNewAddress() {
     MobileElement btnDeliver = landingScreen.getBtnDeliveryTo();

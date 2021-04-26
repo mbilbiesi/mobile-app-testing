@@ -22,7 +22,6 @@ public class OrderCycleCashITCase extends BaseTestSteps {
     // Given
     var cityToSearch = "Riyadh";
     landingScreenSteps.handleLocationPopup();
-    landingScreenSteps.handlePromotionPopup();
     landingScreenSteps.selectNewAddress();
     selectLocationScreenSteps.clickOnSearchIcon();
     selectLocationScreenSteps.insertDesiredCity(cityToSearch);

@@ -18,7 +18,6 @@ public class VerticalsExistenceITCase extends BaseTestSteps {
     // Given
     var cityToSearch = "Riyadh";
     landingScreenSteps.handleLocationPopup();
-    landingScreenSteps.handlePromotionPopup();
 
     // When
     landingScreenSteps.selectNewAddress();

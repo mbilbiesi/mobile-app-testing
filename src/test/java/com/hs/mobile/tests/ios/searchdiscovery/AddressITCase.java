@@ -21,7 +21,6 @@ public class AddressITCase extends BaseTestSteps {
   public void testPrecondition() {
     // Given
     landingScreenSteps.handleLocationPopup();
-    landingScreenSteps.handlePromotionPopup();
     landingScreenSteps.clickOnMore();
     moreScreenSteps.clickOnLogin();
     loginScreenSteps.enterPhoneNumber("501020010");
