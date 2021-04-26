@@ -23,7 +23,6 @@ public class OrderAnythingPickUpITCase extends BaseTestSteps {
   public void testPrecondition() {
     // Given
     var cityToSearch = "Hayat Mall";
-    landingScreenSteps.handlePromotionPopup();
     landingScreenSteps.selectNewAddress();
     selectLocationScreenSteps.clickOnSearchIcon();
     selectLocationScreenSteps.insertDesiredCity(cityToSearch);

@@ -28,7 +28,6 @@ public class GroceriesITCase extends BaseTestSteps {
   public void selectCity_NavigateToGroceries() {
     // Given
     var cityToSearch = "Riyadh";
-    landingScreenSteps.handlePromotionPopup();
 
     // When
     landingScreenSteps.selectNewAddress();

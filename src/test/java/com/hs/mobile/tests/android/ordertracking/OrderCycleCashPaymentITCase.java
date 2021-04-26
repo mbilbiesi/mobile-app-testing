@@ -23,7 +23,6 @@ public class OrderCycleCashPaymentITCase extends BaseTestSteps {
   public void verifyAllVerticalsAreDisplayed() {
     // Given
     var cityToSearch = "Riyadh";
-    landingScreenSteps.handlePromotionPopup();
 
     // When
     landingScreenSteps.selectNewAddress();

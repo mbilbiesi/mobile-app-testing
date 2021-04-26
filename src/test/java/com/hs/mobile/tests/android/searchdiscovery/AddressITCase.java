@@ -20,7 +20,6 @@ public class AddressITCase extends BaseTestSteps {
   @Step("User is logged-in")
   public void testPrecondition() {
     // Given
-    landingScreenSteps.handlePromotionPopup();
     landingScreenSteps.clickOnMore();
     moreScreenSteps.clickOnLogin();
     loginScreenSteps.enterPhoneNumber("501020010");
