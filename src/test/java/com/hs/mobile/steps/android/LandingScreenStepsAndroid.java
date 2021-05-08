@@ -8,8 +8,6 @@ import com.hs.mobile.screens.android.LandingScreen;
 import com.hs.mobile.screens.ios.MoreScreen;
 import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.steps.LandingScreenSteps;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 import lombok.NonNull;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,19 +16,16 @@ public class LandingScreenStepsAndroid extends BaseSteps<LandingScreenStepsAndro
     implements LandingScreenSteps {
 
   @NonNull private final LandingScreen landingScreen;
-  @NonNull private final AppiumDriver<MobileElement> driver;
   @NonNull private final MoreScreen moreScreen;
 
   public LandingScreenStepsAndroid(@NonNull TestSettings testSettings) {
     super(testSettings);
     landingScreen = new LandingScreen(testSettings);
     moreScreen = new MoreScreen(testSettings);
-    driver = testSettings.getDriver();
   }
 
   @Override
   public void handleLocationPopup() {}
-
 
   public void selectNewAddress() {
     tap(landingScreen.getLblDelivery());

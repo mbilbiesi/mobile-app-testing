@@ -22,7 +22,7 @@ public class SelectLocationScreenStepsIOS extends BaseSteps<SelectLocationScreen
     implements SelectLocationScreenSteps {
 
   @NonNull private final SelectLocationScreen selectLocationScreen;
-  @NonNull private final AppiumDriver<MobileElement> driver;
+  @NonNull private final AppiumDriver<?> driver;
 
   public SelectLocationScreenStepsIOS(@NonNull TestSettings testSettings) {
     super(testSettings);

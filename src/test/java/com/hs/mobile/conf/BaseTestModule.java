@@ -14,7 +14,6 @@ import com.hs.mobile.data.Language;
 import com.hs.mobile.data.user.TestUser;
 import com.hs.mobile.service.app.AppCenterEndpoints;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import javax.inject.Qualifier;
@@ -43,11 +42,12 @@ public class BaseTestModule extends AbstractModule {
     install(new DriverModule());
     install(new ServicesModule());
     install(new UtilsModule());
+    install(new LoggerModule());
   }
 
   @Provides
   @Singleton
-  public TestSettings testSettings(AppiumDriver<MobileElement> driver, TestUser testUser) {
+  public TestSettings testSettings(AppiumDriver<?> driver, TestUser testUser) {
     return TestSettings.builder()
         .driver(driver)
         .testLanguage(Language.fromString(testUser.getLanguage()))

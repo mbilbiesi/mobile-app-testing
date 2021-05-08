@@ -1,19 +1,20 @@
 package com.hs.mobile.tests;
 
+import static com.hs.mobile.core.settings.TestInjectors.INJECTORS;
+
 import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.hs.mobile.conf.BaseTestModule;
+import com.hs.mobile.conf.TestProperties;
 import com.hs.mobile.conf.android.TestStepsAndroidModule;
 import com.hs.mobile.conf.ios.TestStepsIOSModule;
 import com.hs.mobile.core.listener.TestListener;
+import com.hs.mobile.core.logger.LogsCollector;
 import com.hs.mobile.service.devices.DevicesClient;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Platform;
 import org.testng.ITestContext;
@@ -24,15 +25,16 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
 @Slf4j
-@Listeners(TestListener.class)
-abstract class Base {
-  private static ConcurrentMap<String, Injector> injectors = new ConcurrentHashMap<>();
+@Listeners({TestListener.class})
+public abstract class Base {
   @Inject protected DevicesClient devicesClient;
-  @Inject protected AppiumDriver<MobileElement> driver;
+  @Inject @Getter protected AppiumDriver<?> driver;
+  @Inject @Getter protected LogsCollector logsCollector;
+  @Inject @Getter protected TestProperties testProperties;
 
   @BeforeTest
   public void prepareTestRun(ITestContext context) {
-    injectors.putIfAbsent(
+    INJECTORS.addInjector(
         context.getName(),
         Guice.createInjector(new BaseTestModule(context), getStepsModule(context)));
     log.debug("Injector created for : {}", context.getCurrentXmlTest().getAllParameters());
@@ -40,7 +42,7 @@ abstract class Base {
 
   @BeforeClass
   public void beforeClass(ITestContext context) {
-    injectors.get(context.getName()).injectMembers(this);
+    INJECTORS.getInjector(context.getName()).injectMembers(this);
     driver.launchApp();
   }
 

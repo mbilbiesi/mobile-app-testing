@@ -17,7 +17,7 @@ public class LandingScreenStepsIOS extends BaseSteps<LandingScreenStepsIOS>
     implements LandingScreenSteps {
 
   @NonNull private final LandingScreen landingScreen;
-  @NonNull private final AppiumDriver<MobileElement> driver;
+  @NonNull private final AppiumDriver<?> driver;
 
   public LandingScreenStepsIOS(@NonNull TestSettings testSettings) {
     super(testSettings);

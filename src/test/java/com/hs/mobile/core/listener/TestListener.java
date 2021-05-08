@@ -1,53 +1,61 @@
 package com.hs.mobile.core.listener;
 
+import com.hs.mobile.core.logger.LogsCollector;
+import com.hs.mobile.tests.Base;
 import io.appium.java_client.AppiumDriver;
-import io.qameta.allure.Attachment;
+import io.qameta.allure.Allure;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.lang.reflect.Field;
+import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.imgscalr.Scalr;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.logging.LogEntry;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 @Slf4j
 public class TestListener implements ITestListener {
+  private boolean attachLogs;
+  private boolean attachLogsOnFailure;
 
   @Override
-  public void onTestStart(ITestResult iTestResult) {}
+  public void onTestStart(ITestResult iTestResult) {
+    if (iTestResult.getInstance() instanceof Base) {
+      Base baseTest = ((Base) iTestResult.getInstance());
+      attachLogs = baseTest.getTestProperties().isAttachLog();
+      attachLogsOnFailure = baseTest.getTestProperties().isAttachLogsOnlyOnFailure();
+
+      if (attachLogs) {
+        ((Base) iTestResult.getInstance()).getLogsCollector().startCollectingPhoneLogs();
+      }
+    }
+  }
 
   @Override
   public void onTestSuccess(ITestResult iTestResult) {
-    Class<?> clazz = iTestResult.getTestClass().getRealClass();
-    try {
-      Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
-      field.setAccessible(true);
+    if (iTestResult.getInstance() instanceof Base) {
+      attachScreenshotToTestReport(iTestResult);
 
-      AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
-      saveScreenshot(composeTestName(iTestResult), driver);
-    } catch (NoSuchFieldException | IllegalAccessException e) {
-      log.info("Error while taking screenshot: ", e);
+      if (attachLogs && !attachLogsOnFailure) {
+        attachLogs(iTestResult);
+      }
     }
   }
 
   @Override
   public void onTestFailure(ITestResult iTestResult) {
-    Class<?> clazz = iTestResult.getTestClass().getRealClass();
-    try {
-      Field field = clazz.getSuperclass().getSuperclass().getDeclaredField("driver");
-      field.setAccessible(true);
+    if (iTestResult.getInstance() instanceof Base) {
+      attachScreenshotToTestReport(iTestResult);
 
-      AppiumDriver<?> driver = (AppiumDriver<?>) field.get(iTestResult.getInstance());
-      saveScreenshot(composeTestName(iTestResult), driver);
-    } catch (NoSuchFieldException | IllegalAccessException e) {
-      log.info("Error while taking screenshot: ", e);
+      if (attachLogs) {
+        attachLogs(iTestResult);
+      }
     }
   }
 
@@ -66,9 +74,12 @@ public class TestListener implements ITestListener {
   private String composeTestName(ITestResult iTestResult) {
     StringBuilder completeFileName = new StringBuilder();
 
-    completeFileName.append(iTestResult.getTestClass().getRealClass().getSimpleName());
-    completeFileName.append("_");
-    completeFileName.append(iTestResult.getName() + "_" + RandomStringUtils.randomAlphanumeric(10));
+    completeFileName
+        .append(iTestResult.getTestClass().getRealClass().getSimpleName())
+        .append("_")
+        .append(iTestResult.getName())
+        .append("_")
+        .append(RandomStringUtils.randomAlphanumeric(10));
 
     Object[] parameters = iTestResult.getParameters();
     for (Object parameter : parameters) {
@@ -79,24 +90,40 @@ public class TestListener implements ITestListener {
     return completeFileName.toString().replace(":", "-");
   }
 
-  @Attachment(value = "{title}", type = "image/png")
-  private byte[] saveScreenshot(String title, AppiumDriver<?> driver) {
-    byte[] screenshotByteArray = driver.getScreenshotAs(OutputType.BYTES);
+  private void attachLogs(ITestResult iTestResult) {
+    LogsCollector logsCollector = ((Base) iTestResult.getInstance()).getLogsCollector();
+    AppiumDriver<?> driver = ((Base) iTestResult.getInstance()).getDriver();
+
+    String phoneLogs = String.join(System.lineSeparator(), logsCollector.getCollectedPhoneLogs());
+    String appiumServerLog =
+        driver.manage().logs().get("server").getAll().stream()
+            .map(LogEntry::toString)
+            .collect(Collectors.joining(System.lineSeparator()));
+
+    Allure.addAttachment("AppiumServerLog", "text/plain", appiumServerLog, ".log");
+    Allure.addAttachment("PhoneLog", "text/plain", phoneLogs, ".log");
+  }
+
+  private void attachScreenshotToTestReport(ITestResult iTestResult) {
+    String title = composeTestName(iTestResult);
+    AppiumDriver<?> driver = ((Base) iTestResult.getInstance()).getDriver();
 
     try {
-      return resizeImage(screenshotByteArray, 1200);
+      Allure.addAttachment(
+          title,
+          "image/png",
+          new ByteArrayInputStream(resizeImage(driver.getScreenshotAs(OutputType.BYTES))),
+          ".png");
     } catch (Exception e) {
       log.info("There was an issue in resizing screenshot :", e);
     }
-
-    return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
   }
 
-  private byte[] resizeImage(byte[] imageInByte, int targetWidth) throws Exception {
+  private byte[] resizeImage(byte[] imageInByte) throws Exception {
     InputStream inputStream = new ByteArrayInputStream(imageInByte);
     BufferedImage bufferedImageFromConvert = ImageIO.read(inputStream);
 
-    BufferedImage bufferedImageResized = Scalr.resize(bufferedImageFromConvert, targetWidth);
+    BufferedImage bufferedImageResized = Scalr.resize(bufferedImageFromConvert, 1200);
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     ImageIO.write(bufferedImageResized, "png", outputStream);
 

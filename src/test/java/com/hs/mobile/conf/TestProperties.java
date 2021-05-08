@@ -28,4 +28,10 @@ public interface TestProperties extends Config {
 
   @Key("app.build.id")
   String getAppBuildId();
+
+  @Key("attach.log")
+  boolean isAttachLog();
+
+  @Key("attach.log.only.on.failure")
+  boolean isAttachLogsOnlyOnFailure();
 }

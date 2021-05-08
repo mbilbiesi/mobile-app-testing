@@ -37,7 +37,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Slf4j
 public abstract class BaseSteps<T extends BaseSteps<T>> {
 
-  @NonNull private final AppiumDriver<MobileElement> driver;
+  @NonNull private final AppiumDriver<?> driver;
   protected TouchAction<?> touchAction;
   protected WebDriverWait wait;
 
@@ -51,7 +51,7 @@ public abstract class BaseSteps<T extends BaseSteps<T>> {
     if (isAndroid()) {
       driver.hideKeyboard();
     } else {
-      IOSDriver<MobileElement> iosDriver = (IOSDriver<MobileElement>) driver;
+      IOSDriver<?> iosDriver = (IOSDriver<?>) driver;
       iosDriver.hideKeyboard(HideKeyboardStrategy.PRESS_KEY, "Done");
     }
   }

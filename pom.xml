@@ -144,12 +144,27 @@
             <version>4.2</version>
         </dependency>
 
+        <!-- WebSocket client -->
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+
         <!-- Retry module -->
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-retry</artifactId>
             <version>1.7.0</version>
         </dependency>
+
+        <!-- Appium grid utility -->
+        <dependency>
+            <groupId>com.rationaleemotions</groupId>
+            <artifactId>talk2grid</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
