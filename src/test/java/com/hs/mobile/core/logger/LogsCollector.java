@@ -1,6 +1,8 @@
 package com.hs.mobile.core.logger;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import java.util.List;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -14,15 +16,23 @@ public class LogsCollector {
   public void startCollectingPhoneLogs() {
     loggerWebSocket.resetMessageList();
     if (!isStarted) {
-      driver.executeScript("mobile:startLogsBroadcast");
+      if (driver instanceof AndroidDriver) {
+        ((AndroidDriver<?>) driver).startLogcatBroadcast();
+      } else {
+        ((IOSDriver<?>) driver).startSyslogBroadcast();
+      }
       loggerWebSocket.connect();
       isStarted = true;
     }
   }
 
   public void stopCollectingPhoneLogs() {
-     driver.executeScript("mobile:stopLogsBroadcast");
-     loggerWebSocket.close();
+    if (driver instanceof AndroidDriver) {
+      ((AndroidDriver<?>) driver).stopLogcatBroadcast();
+    } else {
+      ((IOSDriver<?>) driver).stopSyslogBroadcast();
+    }
+    loggerWebSocket.close();
   }
 
   public List<String> getCollectedPhoneLogs() {

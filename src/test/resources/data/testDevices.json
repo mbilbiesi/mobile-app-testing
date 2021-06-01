@@ -10,5 +10,11 @@
     "serial": "R58N21FXAVB",
     "port": "8201",
     "platform": "android"
+  },
+  {
+    "deviceName": "iPhone 11 Pro Max",
+    "serial": "00008030-000C68A00C32802E",
+    "port": "8103",
+    "platform": "iOS"
   }
 ]

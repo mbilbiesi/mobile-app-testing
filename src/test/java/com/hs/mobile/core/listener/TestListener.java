@@ -14,6 +14,7 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.imgscalr.Scalr;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.logging.LogEntry;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -95,11 +96,16 @@ public class TestListener implements ITestListener {
     AppiumDriver<?> driver = ((Base) iTestResult.getInstance()).getDriver();
 
     String phoneLogs = String.join(System.lineSeparator(), logsCollector.getCollectedPhoneLogs());
-    String appiumServerLog =
-        driver.manage().logs().get("server").getAll().stream()
-            .map(LogEntry::toString)
-            .collect(Collectors.joining(System.lineSeparator()));
+    String appiumServerLog = "";
 
+    try {
+      appiumServerLog =
+          driver.manage().logs().get("server").getAll().stream()
+              .map(LogEntry::toString)
+              .collect(Collectors.joining(System.lineSeparator()));
+    } catch (WebDriverException e) {
+      log.error("Could not attach appium server logs", e);
+    }
     Allure.addAttachment("AppiumServerLog", "text/plain", appiumServerLog, ".log");
     Allure.addAttachment("PhoneLog", "text/plain", phoneLogs, ".log");
   }

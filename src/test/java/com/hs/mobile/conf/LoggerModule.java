@@ -13,8 +13,10 @@ import io.appium.java_client.android.AndroidDriver;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import lombok.extern.slf4j.Slf4j;
 
 @SuppressWarnings("unused")
+@Slf4j
 public class LoggerModule extends PrivateModule {
 
   @Override
@@ -43,16 +45,19 @@ public class LoggerModule extends PrivateModule {
 
   @Provides
   private URI getWebSocketUri(Host driverSessionHost, AppiumDriver<?> driver) {
-    String logType = driver instanceof AndroidDriver ? "logcat" : "syslog ";
+    String logType = driver instanceof AndroidDriver ? "logcat" : "syslog";
 
     try {
-      return new URI(
+      var resolvedUrlLink =
           String.format(
               "ws://%s:%s/ws/session/%s/appium/device/%s",
               driverSessionHost.getIpAddress(),
               driverSessionHost.getPort(),
-              driver.getSessionId(),
-              logType));
+              driver.getSessionId().toString(),
+              logType);
+
+      log.debug("Log WebSocket resolved url is : " + resolvedUrlLink);
+      return new URI(resolvedUrlLink);
     } catch (URISyntaxException e) {
       throw new TestInitializationException("Could not resolve WebSocket URL");
     }
