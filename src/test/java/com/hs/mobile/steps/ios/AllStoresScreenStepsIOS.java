@@ -11,6 +11,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.qameta.allure.Step;
 import lombok.NonNull;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AllStoresScreenStepsIOS extends BaseSteps<AllStoresScreenStepsIOS>
     implements AllStoresScreenSteps {
@@ -77,13 +78,18 @@ public class AllStoresScreenStepsIOS extends BaseSteps<AllStoresScreenStepsIOS>
   @Override
   @Step("Click on search for restaurant button")
   public void clickOnSearch() {
-    allStoresScreen.getBtnSearchIcon().click();
+    wait.withMessage("Could not click on search text field")
+        .until(
+            CustomConditions.elementIsClicked(
+                allStoresScreen.getBtnSearchTextField(),
+                ExpectedConditions.invisibilityOf(allStoresScreen.getBtnSearchTextField())));
   }
 
   @Override
   @Step("Type search keyword in the search bar")
   public void typeSearchKeyword(String searchKeyword) {
     allStoresScreen.getTxtSearch().sendKeys(searchKeyword);
+    driver.findElement(MobileBy.AccessibilityId("Search")).click();
   }
 
   @Override

@@ -30,7 +30,7 @@ public class SwimlaneStoreSelectionITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isRestaurantVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }
@@ -38,7 +38,7 @@ public class SwimlaneStoreSelectionITCase extends BaseTestSteps {
   @Test(description = "Verify that the a store can be selected from swimlane section")
   public void navigateToAllStores_assertSwimlaneSection() {
     // Given
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
 
     // When
     allStoresScreenSteps.selectStoreFromSwimlane();

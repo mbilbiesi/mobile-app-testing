@@ -14,7 +14,7 @@ public class SelectLocationScreen extends AbstractScreen<SelectLocationScreen> {
   @iOSXCUITFindBy(accessibility = "back_button")
   private MobileElement btnClose;
 
-  @iOSXCUITFindBy(accessibility = "Search")
+  @iOSXCUITFindBy(accessibility = "search_button")
   private MobileElement btnSearch;
 
   @iOSXCUITFindBy(accessibility = "searchBar")

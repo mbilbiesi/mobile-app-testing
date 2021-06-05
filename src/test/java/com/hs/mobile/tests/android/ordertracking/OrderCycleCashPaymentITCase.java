@@ -33,11 +33,11 @@ public class OrderCycleCashPaymentITCase extends BaseTestSteps {
     selectLocationScreenSteps.clickOnDoneButton();
 
     // Then
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isRestaurantVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
 
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
   }
 
   @Test(description = "Verify user can navigate to a restaurant and menu items load as expected")

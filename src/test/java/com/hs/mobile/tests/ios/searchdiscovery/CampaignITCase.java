@@ -31,7 +31,7 @@ public class CampaignITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isRestaurantVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }
@@ -39,7 +39,7 @@ public class CampaignITCase extends BaseTestSteps {
   @Test(description = "verify campaign banners are displayed in All Stores vertical")
   public void navigateToAllStoresVertical_campaignBannersAreDisplayed() {
     // When
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
 
     // Then
     allStoresScreenSteps.verifyCampaignBannersAreDisplayed();

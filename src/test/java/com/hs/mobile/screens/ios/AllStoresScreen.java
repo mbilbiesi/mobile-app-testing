@@ -61,10 +61,12 @@ public class AllStoresScreen extends AbstractScreen<AllStoresScreen> {
   @iOSXCUITFindBy(accessibility = "back button icon")
   private MobileElement btnBack;
 
-  @iOSXCUITFindBy(accessibility = "header_search_icon")
-  private MobileElement btnSearchIcon;
+  @iOSXCUITFindBy(iOSNsPredicate = "label == 'Search for a store, or an item..'")
+  @CacheLookup
+  private MobileElement btnSearchTextField;
 
   @iOSXCUITFindBy(accessibility = "header_search_text")
+  @CacheLookup
   private MobileElement txtSearch;
 
   @iOSXCUITFindBy(accessibility = "custom_button")

@@ -42,7 +42,7 @@ public class OrderAnythingITCase extends BaseTestSteps {
     var nonExistingStore = "xyz";
 
     // When
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
     allStoresScreenSteps.clickOnSearch();
     allStoresScreenSteps.typeSearchKeyword(nonExistingStore);
     allStoresScreenSteps.clickOnTryOrderAnything();

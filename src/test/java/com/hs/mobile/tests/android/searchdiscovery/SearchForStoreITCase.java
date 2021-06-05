@@ -40,7 +40,7 @@ public class SearchForStoreITCase extends BaseTestSteps {
     var nonExistingStore = "Al Reef Al Hindi";
 
     // When
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
     allStoresScreenSteps.clickOnSearch();
     allStoresScreenSteps.typeSearchKeyword(nonExistingStore);
 

@@ -31,7 +31,7 @@ public class OrderAnythingPickUpITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isRestaurantVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }

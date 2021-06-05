@@ -7,8 +7,10 @@ import com.hs.mobile.screens.ios.VerticalsScreen;
 import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.steps.VerticalsScreenSteps;
 import com.hs.mobile.util.CustomConditions;
+import io.appium.java_client.MobileBy;
 import io.qameta.allure.Step;
 import lombok.NonNull;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
@@ -35,9 +37,9 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
   }
 
   @Override
-  @Step("verify 'All Stores' vertical is displayed")
-  public boolean isAllStoresVerticalDisplayed() {
-    return verticalsScreen.getLblAllStores().isDisplayed();
+  @Step("verify 'Restaurant' vertical is displayed")
+  public boolean isRestaurantVerticalDisplayed() {
+    return verticalsScreen.getLblRestaurant().isEnabled();
   }
 
   @Override
@@ -59,7 +61,7 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
   @Step("verify all verticals are displayed")
   public void assertAllVerticals() {
     wait.withMessage("'All stores' vertical is not displayed")
-        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblAllStores()));
+        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblRestaurant()));
     wait.withMessage("Quick Market vertical is not displayed")
         .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblQuickMarket()));
     wait.withMessage("'Order Anything' vertical is not displayed")
@@ -70,7 +72,7 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
   @Step("Verify two verticals are displayed and order-anything verticals is not present")
   public void assertTwoVerticalsAreDisplayed() {
     wait.withMessage("'All stores' vertical is not displayed")
-        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblAllStores()));
+        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblRestaurant()));
     wait.withMessage("Quick Market vertical is not displayed")
         .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblQuickMarket()));
     wait.withMessage("'Order Anything' vertical expect not to be displayed")
@@ -81,7 +83,7 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
   @Step("Verify all-stores vertical is displayed")
   public void verifyAllStoresVertical() {
     wait.withMessage("'All stores' vertical is not displayed")
-        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblAllStores()));
+        .until(ExpectedConditions.visibilityOf(verticalsScreen.getLblRestaurant()));
     wait.withMessage("Quick Market vertical expect no to be displayed")
         .until(CustomConditions.elementIsNotDisplayed(verticalsScreen.getLblQuickMarket()));
     wait.withMessage("'Order Anything' vertical expect not to be displayed")
@@ -89,9 +91,14 @@ public class VerticalsScreenStepsIOS extends BaseSteps<VerticalsScreenStepsIOS>
   }
 
   @Override
-  @Step("click on all-stores vertical")
-  public void clickOnAllStores() {
-    verticalsScreen.getLblAllStores().click();
+  @Step("click on `Restaurant` vertical")
+  public void clickOnRestaurantVertical() {
+    By restaurantVertical = MobileBy.AccessibilityId("grid_item_0_Restaurants");
+    wait.withMessage("Could not click on Restaurant Vertical")
+        .until(
+        CustomConditions.elementIsClicked(
+            verticalsScreen.getLblRestaurant(),
+            ExpectedConditions.invisibilityOfElementLocated(restaurantVertical)));
   }
 
   @Override

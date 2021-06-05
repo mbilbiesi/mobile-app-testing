@@ -30,7 +30,7 @@ public class SearchForStoreITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isRestaurantVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }
@@ -41,7 +41,7 @@ public class SearchForStoreITCase extends BaseTestSteps {
     var nonExistingStore = "Al Reef Al Hindi";
 
     // When
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
     allStoresScreenSteps.clickOnSearch();
     allStoresScreenSteps.typeSearchKeyword(nonExistingStore);
 

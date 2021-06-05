@@ -7,12 +7,16 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
+import org.openqa.selenium.support.FindBy;
 
 @Getter
 @Accessors(fluent = true)
 public class OrderAnythingScreen extends AbstractScreen<OrderAnythingScreen> {
 
-  @iOSXCUITFindBy(accessibility = "Shop from")
+  @FindBy(name = "Deliver Anything")
+  private MobileElement orderAnythingHeader;
+
+  @iOSXCUITFindBy(accessibility = "shop_from")
   private MobileElement lblShopFrom;
 
   @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`label == 'Delivery Fees'`]")

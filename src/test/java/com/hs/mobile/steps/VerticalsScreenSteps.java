@@ -6,7 +6,7 @@ public interface VerticalsScreenSteps {
 
   void clickOnAddNewLocation();
 
-  boolean isAllStoresVerticalDisplayed();
+  boolean isRestaurantVerticalDisplayed();
 
   boolean isOrderAnythingVerticalDisplayed();
 
@@ -18,7 +18,7 @@ public interface VerticalsScreenSteps {
 
   void verifyAllStoresVertical();
 
-  void clickOnAllStores();
+  void clickOnRestaurantVertical();
 
   void clickOrderAnything();
 

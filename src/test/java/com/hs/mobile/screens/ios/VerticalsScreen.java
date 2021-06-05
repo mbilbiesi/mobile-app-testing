@@ -32,8 +32,8 @@ public class VerticalsScreen extends AbstractScreen<VerticalsScreen> {
   @iOSXCUITFindBy(accessibility = "new_location_label")
   private IOSElement lblNewLocation;
 
-  @iOSXCUITFindBy(accessibility = "homeRow_0")
-  private MobileElement lblAllStores;
+  @iOSXCUITFindBy(accessibility = "grid_item_0_Restaurants")
+  private MobileElement lblRestaurant;
 
   @iOSXCUITFindBy(accessibility = "homeRow_1")
   private MobileElement lblQuickMarket;

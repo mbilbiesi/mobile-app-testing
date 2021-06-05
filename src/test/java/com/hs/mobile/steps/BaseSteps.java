@@ -44,7 +44,7 @@ public abstract class BaseSteps<T extends BaseSteps<T>> {
   public BaseSteps(@NonNull TestSettings settings) {
     this.driver = settings.getDriver();
     touchAction = new TouchAction<>(driver);
-    wait = new WebDriverWait(driver, 10);
+    wait = new WebDriverWait(driver, 20);
   }
 
   public void hideKeyboard() {

@@ -32,6 +32,9 @@ public final class LocatorUtils {
       case "IosClassChain":
         by = MobileBy.iOSClassChain(locatorValue);
         break;
+      case "IosNsPredicate":
+        by = MobileBy.iOSNsPredicateString(locatorValue);
+        break;
       default:
         throw new IllegalStateException("locator : " + locatorSelector + " not found!!!");
     }

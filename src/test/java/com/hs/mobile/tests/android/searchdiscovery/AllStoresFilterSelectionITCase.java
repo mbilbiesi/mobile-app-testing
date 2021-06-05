@@ -29,7 +29,7 @@ public class AllStoresFilterSelectionITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isRestaurantVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }
@@ -38,7 +38,7 @@ public class AllStoresFilterSelectionITCase extends BaseTestSteps {
   @Test(description = "Verify the user can select filter")
   public void userSelectFilter_filterIsSelected() {
     // When
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
     allStoresScreenSteps.clickOnFirstFilter();
 
     // Then

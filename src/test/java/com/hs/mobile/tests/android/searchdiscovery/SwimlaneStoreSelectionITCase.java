@@ -37,7 +37,7 @@ public class SwimlaneStoreSelectionITCase extends BaseTestSteps {
   @Test(description = "Verify that the a store can be selected from swimlane section")
   public void navigateToAllStores_assertSwimlaneSection() {
     // When
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
     allStoresScreenSteps.selectStoreFromSwimlane();
 
     // Then

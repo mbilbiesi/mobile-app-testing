@@ -40,7 +40,7 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
     // Then
     verticalsScreenSteps.assertAllVerticals();
     verticalsScreenSteps.assertDistrictIsAppearedInSearchField();
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
   }
 
   @Test(description = "Verify user can navigate to a restaurant and menu items load as expected")

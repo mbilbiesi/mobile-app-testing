@@ -37,7 +37,7 @@ public class TopVendorPromotionITCase extends BaseTestSteps {
   @Test(description = "Verify that the vendor promotion can be clicked")
   public void navigateToAllStoresVertical_clickOnPromotedVendor() {
     // When
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
     // todo: maintenance ID missing
     allStoresScreenSteps.clickOnTopPromotedStore();
 

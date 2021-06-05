@@ -38,7 +38,7 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isRestaurantVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }
@@ -47,7 +47,7 @@ public class OrderCycleMadaITCase extends BaseTestSteps {
   @Test(description = "Verify that user is directed to vendor screen")
   void userNavigateToVendorScreen_verifyUserIsOnVendorScreen() {
     // When
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
 
     // Then
     allStoresScreenSteps.verifyLocationIsAppearedScreenHeader();

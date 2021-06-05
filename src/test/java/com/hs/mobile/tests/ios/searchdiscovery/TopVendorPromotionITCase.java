@@ -30,7 +30,7 @@ public class TopVendorPromotionITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
+    assumeThat(verticalsScreenSteps.isRestaurantVerticalDisplayed())
         .as("'All stores' vertical is not displayed")
         .isTrue();
   }
@@ -38,7 +38,7 @@ public class TopVendorPromotionITCase extends BaseTestSteps {
   @Test(description = "Verify that the vendor promotion can be clicked")
   public void navigateToAllStoresVertical_clickOnPromotedVendor() {
     // Given
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
 
     // When
     allStoresScreenSteps.clickOnTopPromotedStore();

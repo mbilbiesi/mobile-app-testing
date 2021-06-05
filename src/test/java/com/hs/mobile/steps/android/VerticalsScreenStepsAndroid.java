@@ -33,7 +33,7 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
 
   @Override
   @Step("verify 'All Stores' vertical is displayed")
-  public boolean isAllStoresVerticalDisplayed() {
+  public boolean isRestaurantVerticalDisplayed() {
     return verticalsScreen.verticals().size() > 0;
   }
 
@@ -78,7 +78,7 @@ public class VerticalsScreenStepsAndroid extends BaseSteps<VerticalsScreenStepsA
 
   @Override
   @Step("Click on 'All Stores'")
-  public void clickOnAllStores() {
+  public void clickOnRestaurantVertical() {
     verticalsScreen.btnAllRestaurants().click();
   }
 

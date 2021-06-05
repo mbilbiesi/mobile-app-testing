@@ -20,7 +20,7 @@ public class OrderAnythingITCase extends BaseTestSteps {
   @Step("User is on 'All stores' screen")
   public void testPrecondition() {
     // Given
-    var cityToSearch = "Riyadh";
+    var cityToSearch = "Al Aqiq";
     landingScreenSteps.handleLocationPopup();
     landingScreenSteps.selectNewAddress();
     selectLocationScreenSteps.clickOnSearchIcon();
@@ -29,8 +29,8 @@ public class OrderAnythingITCase extends BaseTestSteps {
     selectLocationScreenSteps.selectCity(cityToSearch);
     selectLocationScreenSteps.clickOnSelectAddressButton();
     selectLocationScreenSteps.clickOnDoneButton();
-    assumeThat(verticalsScreenSteps.isAllStoresVerticalDisplayed())
-        .as("'All stores' vertical is not displayed")
+    assumeThat(verticalsScreenSteps.isRestaurantVerticalDisplayed())
+        .as("'Restaurant' vertical is not displayed")
         .isTrue();
   }
 
@@ -40,10 +40,10 @@ public class OrderAnythingITCase extends BaseTestSteps {
           "Navigate to 'Order Anything' from empty search result in 'All stores' vertical")
   public void orderFromNonExistingStore() {
     // Given
-    var nonExistingStore = "xyz";
+    var nonExistingStore = "fffffff";
 
     // When
-    verticalsScreenSteps.clickOnAllStores();
+    verticalsScreenSteps.clickOnRestaurantVertical();
     allStoresScreenSteps.clickOnSearch();
     allStoresScreenSteps.typeSearchKeyword(nonExistingStore);
     allStoresScreenSteps.clickOnTryOrderAnything();
