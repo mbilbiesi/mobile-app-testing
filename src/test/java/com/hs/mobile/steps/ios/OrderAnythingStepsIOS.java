@@ -22,7 +22,7 @@ public class OrderAnythingStepsIOS extends BaseSteps<OrderAnythingStepsIOS>
   @Override
   @Step("verify user navigated to 'OrderAnything' vertical's screen")
   public void verifyOrderAnythingVerticalIsAppeared() {
-    assertThat(orderAnythingScreen.lblShopFrom().isDisplayed())
+    assertThat(orderAnythingScreen.btnConfirm().isDisplayed())
         .as("Order anything screen is not displayed")
         .isTrue();
   }

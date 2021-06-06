@@ -60,7 +60,7 @@ public class CapabilitiesManager {
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
     capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 3000);
     capabilities.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, TRUE);
-    capabilities.setCapability(MobileCapabilityType.FULL_RESET, TRUE);
+    //capabilities.setCapability(MobileCapabilityType.FULL_RESET, TRUE);
     return capabilities;
   }
 }

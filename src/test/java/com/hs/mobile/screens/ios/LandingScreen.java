@@ -14,8 +14,8 @@ public class LandingScreen extends AbstractScreen<LandingScreen> {
   @iOSXCUITFindBy(accessibility = "pin_icon")
   private MobileElement btnPinIcon;
 
-  @iOSXCUITFindBy(accessibility = "delivery_to")
-  private MobileElement btnDeliveryTo;
+  @iOSXCUITFindBy(accessibility = "Select")
+  private MobileElement btnSelect;
 
   @iOSXCUITFindBy(accessibility = "choose")
   private MobileElement btnChoose;

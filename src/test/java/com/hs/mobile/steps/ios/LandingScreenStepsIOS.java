@@ -2,10 +2,11 @@ package com.hs.mobile.steps.ios;
 
 import com.hs.mobile.core.settings.TestSettings;
 import com.hs.mobile.screens.ios.LandingScreen;
+import com.hs.mobile.screens.ios.SelectLocationScreen;
 import com.hs.mobile.steps.BaseSteps;
 import com.hs.mobile.steps.LandingScreenSteps;
+import com.hs.mobile.util.CustomConditions;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
@@ -17,11 +18,13 @@ public class LandingScreenStepsIOS extends BaseSteps<LandingScreenStepsIOS>
     implements LandingScreenSteps {
 
   @NonNull private final LandingScreen landingScreen;
+  @NonNull private final SelectLocationScreen selectLocationScreen;
   @NonNull private final AppiumDriver<?> driver;
 
   public LandingScreenStepsIOS(@NonNull TestSettings testSettings) {
     super(testSettings);
     landingScreen = new LandingScreen(testSettings);
+    selectLocationScreen = new SelectLocationScreen(testSettings);
     driver = testSettings.getDriver();
   }
 
@@ -40,10 +43,11 @@ public class LandingScreenStepsIOS extends BaseSteps<LandingScreenStepsIOS>
   @Override
   @Step("click on 'Select' to choose new address")
   public void selectNewAddress() {
-    MobileElement btnDeliver = landingScreen.getBtnDeliveryTo();
     wait.withMessage("select address button is not displayed")
-        .until(ExpectedConditions.visibilityOf(btnDeliver));
-    btnDeliver.click();
+        .until(
+            CustomConditions.elementIsClicked(
+                landingScreen.getBtnSelect(),
+                ExpectedConditions.visibilityOf(selectLocationScreen.getBtnSearch())));
   }
 
   @Override

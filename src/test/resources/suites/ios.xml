@@ -7,7 +7,7 @@
   </listeners>
   <test name="this name will be maintained automatically">
     <classes>
-      <class name="com.hs.mobile.tests.ios.searchdiscovery.OrderAnythingExistenceITCase"/>
+      <class name="com.hs.mobile.tests.ios.searchdiscovery.OrderAnythingITCase"/>
     </classes>
   </test>
 </suite>

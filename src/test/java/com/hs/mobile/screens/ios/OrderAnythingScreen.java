@@ -34,6 +34,9 @@ public class OrderAnythingScreen extends AbstractScreen<OrderAnythingScreen> {
   @iOSXCUITFindBy(iOSNsPredicate = "Place Order")
   private MobileElement btnPlaceOrder;
 
+  @iOSXCUITFindBy(accessibility = "confirmButton")
+  private MobileElement btnConfirm;
+
   public OrderAnythingScreen(@NonNull TestSettings settings) {
     super(settings);
   }
