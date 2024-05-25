@@ -1,12 +1,5 @@
 package com.hs.mobile.core.appium.caps;
 
-import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
-import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
-import static org.openqa.selenium.Platform.ANDROID;
-import static org.openqa.selenium.Platform.IOS;
-
 import com.hs.mobile.core.settings.TestParameters;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
@@ -16,6 +9,13 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import static io.appium.java_client.remote.AutomationName.ANDROID_UIAUTOMATOR2;
+import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static org.openqa.selenium.Platform.ANDROID;
+import static org.openqa.selenium.Platform.IOS;
 
 @RequiredArgsConstructor
 public class CapabilitiesManager {
@@ -41,7 +41,7 @@ public class CapabilitiesManager {
         capabilities.setCapability(AndroidMobileCapabilityType.SYSTEM_PORT, uniquePort);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, ANDROID.name());
         capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, TRUE);
-        capabilities.setCapability(AndroidMobileCapabilityType.AUTO_LAUNCH, FALSE);
+        //capabilities.setCapability(AndroidMobileCapabilityType.AUTO_LAUNCH, FALSE);
         break;
 
       case IOS:
@@ -59,6 +59,7 @@ public class CapabilitiesManager {
 
     capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
     capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 3000);
+    capabilities.setCapability("autoLaunch", FALSE);
     capabilities.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, TRUE);
     //capabilities.setCapability(MobileCapabilityType.FULL_RESET, TRUE);
     return capabilities;

@@ -13,15 +13,15 @@
   <!--        <class name="com.hs.mobile.tests.ios.order.OrderCycleMadaITCase"/>-->
   <!--      </classes>-->
   <!--    </test>-->
-  <test name="Android">
-    <parameter name="deviceName" value="iPhone"/>
-    <parameter name="platformName" value="Android"/>
-    <parameter name="platformVersion" value="11.0"/>
-    <parameter name="udid" value="emulator-5554"/>
-    <parameter name="uniquePort" value="8200"/>
+  <test name="iOS">
+    <parameter name="deviceName" value="iPhone 11 Pro Max"/>
+    <parameter name="platformName" value="iOS"/>
+    <parameter name="platformVersion" value="14.5"/>
+    <parameter name="udid" value="09DB68FC-013E-4DA8-ADCF-2949A3DF6827"/>
+    <parameter name="uniquePort" value="8100"/>
     <parameter name="assignedTestUserId" value="1"/>
     <classes>
-<!--      <class name="com.hs.mobile.tests.android.ordertracking.CardVerificationITCase"/>-->
+      <class name="com.hs.mobile.tests.ios.searchdiscovery.OrderAnythingITCase"/>
 <!--      <class name="com.hs.mobile.tests.android.VerticalsExistenceITCase"/>-->
 <!--      <class name="com.hs.mobile.tests.android.SwimlaneStoreSelectionITCase"/>-->
 <!--      <class name="com.hs.mobile.tests.android.OrderAnythingITCase"/>-->

@@ -1,14 +1,8 @@
 package com.hs.mobile.core.listener;
 
-import com.hs.mobile.core.logger.LogsCollector;
 import com.hs.mobile.tests.Base;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Allure;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.stream.Collectors;
-import javax.imageio.ImageIO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -19,6 +13,12 @@ import org.openqa.selenium.logging.LogEntry;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class TestListener implements ITestListener {
@@ -33,7 +33,7 @@ public class TestListener implements ITestListener {
       attachLogsOnFailure = baseTest.getTestProperties().isAttachLogsOnlyOnFailure();
 
       if (attachLogs) {
-        ((Base) iTestResult.getInstance()).getLogsCollector().startCollectingPhoneLogs();
+        //((Base) iTestResult.getInstance()).getLogsCollector().startCollectingPhoneLogs();
       }
     }
   }
@@ -92,10 +92,10 @@ public class TestListener implements ITestListener {
   }
 
   private void attachLogs(ITestResult iTestResult) {
-    LogsCollector logsCollector = ((Base) iTestResult.getInstance()).getLogsCollector();
+    //LogsCollector logsCollector = ((Base) iTestResult.getInstance()).getLogsCollector();
     AppiumDriver<?> driver = ((Base) iTestResult.getInstance()).getDriver();
 
-    String phoneLogs = String.join(System.lineSeparator(), logsCollector.getCollectedPhoneLogs());
+   // String phoneLogs = String.join(System.lineSeparator(), logsCollector.getCollectedPhoneLogs());
     String appiumServerLog = "";
 
     try {
@@ -107,7 +107,7 @@ public class TestListener implements ITestListener {
       log.error("Could not attach appium server logs", e);
     }
     Allure.addAttachment("AppiumServerLog", "text/plain", appiumServerLog, ".log");
-    Allure.addAttachment("PhoneLog", "text/plain", phoneLogs, ".log");
+    //Allure.addAttachment("PhoneLog", "text/plain", phoneLogs, ".log");
   }
 
   private void attachScreenshotToTestReport(ITestResult iTestResult) {
